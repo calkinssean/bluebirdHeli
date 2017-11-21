@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142347101FC4CA8200A129B0 /* AppDelegate.swift */; };
-		142347131FC4CA8200A129B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142347121FC4CA8200A129B0 /* ViewController.swift */; };
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
 		142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142347171FC4CA8200A129B0 /* Assets.xcassets */; };
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
@@ -25,7 +24,6 @@
 		04317FAAAB0F7737F09123C5 /* Pods-Bluebird Heli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.release.xcconfig"; sourceTree = "<group>"; };
 		1423470D1FC4CA8200A129B0 /* Bluebird Heli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluebird Heli.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		142347101FC4CA8200A129B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		142347121FC4CA8200A129B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		142347151FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		142347171FC4CA8200A129B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1423471A1FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -74,15 +72,14 @@
 			isa = PBXGroup;
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
-				142347121FC4CA8200A129B0 /* ViewController.swift */,
 				143A196E1FC4D87A00488927 /* SchedulingViewController.swift */,
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
-				142347141FC4CA8200A129B0 /* Main.storyboard */,
 				143A19731FC4DD1800488927 /* DateCell.swift */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 				142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */,
 				143A19791FC4E7A400488927 /* Login.storyboard */,
+				142347141FC4CA8200A129B0 /* Main.storyboard */,
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 			);
@@ -241,7 +238,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142347131FC4CA8200A129B0 /* ViewController.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
 				143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
