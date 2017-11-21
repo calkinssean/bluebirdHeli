@@ -21,16 +21,35 @@ class SchedulingViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+}
+
+extension SchedulingViewController: JTAppleCalendarViewDataSource {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+       
+        let startDate = Date().addingTimeInterval(-31536000)
+        let endDate = Date().addingTimeInterval(31536000)
+        
+        let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
+        
+        return parameters
+        
     }
-    */
+    
+}
 
+extension SchedulingViewController: JTAppleCalendarViewDelegate {
+    
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateCell
+        cell.dateLabel.text = cellState.text
+        
+        return cell
+    }
+
+    
 }
