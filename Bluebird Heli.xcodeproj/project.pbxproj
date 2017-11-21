@@ -12,6 +12,7 @@
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
 		142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142347171FC4CA8200A129B0 /* Assets.xcassets */; };
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
+		143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A196E1FC4D87A00488927 /* SchedulingViewController.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		1423471A1FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1423471C1FC4CA8200A129B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		143A196D1FC4D55A00488927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		143A196E1FC4D87A00488927 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebird_Heli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -64,6 +66,7 @@
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
 				142347121FC4CA8200A129B0 /* ViewController.swift */,
+				143A196E1FC4D87A00488927 /* SchedulingViewController.swift */,
 				142347141FC4CA8200A129B0 /* Main.storyboard */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 				142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */,
@@ -170,11 +173,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -222,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				142347131FC4CA8200A129B0 /* ViewController.swift in Sources */,
+				143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,6 +369,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 954HJ5Q475;
 				INFOPLIST_FILE = "Bluebird Heli/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudVeil.bluebirdHeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -379,6 +386,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 954HJ5Q475;
 				INFOPLIST_FILE = "Bluebird Heli/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudVeil.bluebirdHeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
