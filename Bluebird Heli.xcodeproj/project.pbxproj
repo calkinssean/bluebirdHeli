@@ -8,10 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142347101FC4CA8200A129B0 /* AppDelegate.swift */; };
-		142347131FC4CA8200A129B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142347121FC4CA8200A129B0 /* ViewController.swift */; };
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
 		142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142347171FC4CA8200A129B0 /* Assets.xcassets */; };
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
+		143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A196E1FC4D87A00488927 /* SchedulingViewController.swift */; };
+		143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143A19711FC4DAEF00488927 /* GoogleService-Info.plist */; };
+		143A19741FC4DD1800488927 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19731FC4DD1800488927 /* DateCell.swift */; };
+		143A19761FC4E67700488927 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19751FC4E67700488927 /* LoginViewController.swift */; };
+		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
+		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
@@ -19,11 +24,16 @@
 		04317FAAAB0F7737F09123C5 /* Pods-Bluebird Heli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.release.xcconfig"; sourceTree = "<group>"; };
 		1423470D1FC4CA8200A129B0 /* Bluebird Heli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluebird Heli.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		142347101FC4CA8200A129B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		142347121FC4CA8200A129B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		142347151FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		142347171FC4CA8200A129B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1423471A1FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1423471C1FC4CA8200A129B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		143A196E1FC4D87A00488927 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
+		143A19711FC4DAEF00488927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		143A19731FC4DD1800488927 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		143A19751FC4E67700488927 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebird_Heli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -62,11 +72,16 @@
 			isa = PBXGroup;
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
-				142347121FC4CA8200A129B0 /* ViewController.swift */,
-				142347141FC4CA8200A129B0 /* Main.storyboard */,
+				143A196E1FC4D87A00488927 /* SchedulingViewController.swift */,
+				143A19751FC4E67700488927 /* LoginViewController.swift */,
+				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
+				143A19731FC4DD1800488927 /* DateCell.swift */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 				142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */,
+				143A19791FC4E7A400488927 /* Login.storyboard */,
+				142347141FC4CA8200A129B0 /* Main.storyboard */,
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
+				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 			);
 			path = "Bluebird Heli";
 			sourceTree = "<group>";
@@ -151,7 +166,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */,
+				143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */,
 				142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */,
+				143A197A1FC4E7A400488927 /* Login.storyboard in Resources */,
 				142347161FC4CA8200A129B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,11 +185,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -219,8 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				142347131FC4CA8200A129B0 /* ViewController.swift in Sources */,
+				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
+				143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
+				143A19761FC4E67700488927 /* LoginViewController.swift in Sources */,
+				143A19741FC4DD1800488927 /* DateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +383,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 954HJ5Q475;
 				INFOPLIST_FILE = "Bluebird Heli/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudVeil.bluebirdHeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -377,6 +400,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 954HJ5Q475;
 				INFOPLIST_FILE = "Bluebird Heli/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloudVeil.bluebirdHeli;
 				PRODUCT_NAME = "$(TARGET_NAME)";
