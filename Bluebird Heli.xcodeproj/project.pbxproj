@@ -17,6 +17,7 @@
 		143A19741FC4DD1800488927 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19731FC4DD1800488927 /* DateCell.swift */; };
 		143A19761FC4E67700488927 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19751FC4E67700488927 /* LoginViewController.swift */; };
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
+		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
@@ -34,6 +35,7 @@
 		143A19731FC4DD1800488927 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		143A19751FC4E67700488927 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebird_Heli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -80,6 +82,7 @@
 				143A19731FC4DD1800488927 /* DateCell.swift */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 				142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */,
+				143A19791FC4E7A400488927 /* Login.storyboard */,
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 			);
@@ -168,6 +171,7 @@
 				1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */,
 				143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */,
 				142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */,
+				143A197A1FC4E7A400488927 /* Login.storyboard in Resources */,
 				142347161FC4CA8200A129B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
