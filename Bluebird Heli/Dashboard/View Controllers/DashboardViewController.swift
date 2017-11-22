@@ -12,13 +12,16 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
-    let rows = [
-    "Schedule A Trip",
-    "Photos/Videos"
-    ]
-    
+    let rows = ["Schedule A Trip", "Photos/Videos"]
     let imageNames = ["helicopter", "media"]
     
+    var parallaxOffsetSpeed: CGFloat = 200
+    var cellHeight: CGFloat = 420
+    var parallaxImageHeight: CGFloat {
+        let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.tableView.frame.height) - cellHeight) / 2
+        return maxOffset + cellHeight
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,6 +31,16 @@ class DashboardViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func parallaxOffset(newOffsetY: CGFloat, cell: UITableViewCell) -> CGFloat {
+        return (newOffsetY - cell.frame.origin.y) / parallaxImageHeight * parallaxOffsetSpeed
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        for cell in tableView.visibleCells as! [DashboardTableViewCell] {
+            cell.imageTopConstraint.constant = self.parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
+        }
     }
     
 }
@@ -59,6 +72,14 @@ extension DashboardViewController: UITableViewDelegate {
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 420
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
 }
