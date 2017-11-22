@@ -21,35 +21,32 @@ class SchedulingViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 }
 
 extension SchedulingViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-       
+        
         let startDate = Date().addingTimeInterval(-31536000)
         let endDate = Date().addingTimeInterval(31536000)
         
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
-        
         return parameters
-        
-    }
-    
-}
-
-extension SchedulingViewController: JTAppleCalendarViewDelegate {
-    
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
-        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateCell
-        cell.dateLabel.text = cellState.text
-        
+        let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "DateCell", for: indexPath) as! DateCell
+        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
         return cell
     }
+}
 
+extension SchedulingViewController: JTAppleCalendarViewDelegate {
+    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+        let dateCell = cell as! DateCell
+        dateCell.dateLabel.text = cellState.text
+    }
+    
     
 }

@@ -43,9 +43,8 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XFU-Bv-Bey" firstAttribute="centerY" secondItem="VyS-MD-slN" secondAttribute="centerY" id="3NA-XI-5Vb"/>
                                                 <constraint firstItem="XFU-Bv-Bey" firstAttribute="leading" secondItem="VyS-MD-slN" secondAttribute="leading" constant="8" id="Agw-LH-d4r"/>
-                                                <constraint firstItem="XFU-Bv-Bey" firstAttribute="centerX" secondItem="VyS-MD-slN" secondAttribute="centerX" id="CyK-nj-biv"/>
+                                                <constraint firstItem="XFU-Bv-Bey" firstAttribute="centerY" secondItem="VyS-MD-slN" secondAttribute="centerY" id="Ik1-8e-tWj"/>
                                                 <constraint firstItem="Vdw-9v-MYO" firstAttribute="leading" secondItem="VyS-MD-slN" secondAttribute="leading" id="UYT-xO-yvZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Vdw-9v-MYO" secondAttribute="trailing" id="Vhg-8O-52a"/>
                                                 <constraint firstAttribute="trailing" secondItem="XFU-Bv-Bey" secondAttribute="trailing" constant="8" id="jY9-l5-OLG"/>
@@ -74,16 +73,80 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="KEL-1p-BgN"/>
                     </view>
-                    <navigationItem key="navigationItem" id="qUq-OI-z0T"/>
+                    <navigationItem key="navigationItem" title="Home" id="qUq-OI-z0T"/>
                     <connections>
                         <outlet property="tableView" destination="wd8-Pb-yHF" id="zeH-9D-BV8"/>
-                        <segue destination="OLH-fK-cXA" kind="show" identifier="Show Scheduling Segue" id="kHi-hj-alN"/>
                         <segue destination="yy2-AE-Ldy" kind="show" identifier="Show Media Segue" id="OMQ-9I-TbG"/>
+                        <segue destination="nNq-db-Aor" kind="show" identifier="showSchedulingSegue" id="61y-Aq-dSM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqG-rF-Vk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1743.2" y="132.68365817091455"/>
+        </scene>
+        <!--Ib Calendar Data Source-->
+        <scene sceneID="5ut-ge-p3g">
+            <objects>
+                <viewController id="nNq-db-Aor" customClass="SchedulingViewController" customModule="Bluebird_Heli" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CfT-cQ-rSH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5UX-TK-xPb" customClass="JTAppleCalendarView" customModule="JTAppleCalendar">
+                                <rect key="frame" x="0.0" y="64" width="375" height="302"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="302" id="wLk-8k-kuU"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ijo-HL-GTG">
+                                    <size key="itemSize" width="84" height="89"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DateCell" id="igh-eU-Zxf" customClass="DateCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="84" height="89"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="84" height="89"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCE-mF-Y7d">
+                                                    <rect key="frame" x="21" y="34" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="DCg-Kq-VrJ"/>
+                                            <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="mTD-uR-o2i"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="cCE-mF-Y7d" id="8vX-d9-m1t"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="ibCalendarDataSource" destination="nNq-db-Aor" id="XZe-BP-2MF"/>
+                                    <outlet property="ibCalendarDelegate" destination="nNq-db-Aor" id="Rg6-oL-40Z"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5UX-TK-xPb" firstAttribute="trailing" secondItem="yv2-d7-moK" secondAttribute="trailing" id="QPZ-Nj-9q7"/>
+                            <constraint firstItem="5UX-TK-xPb" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="Z3s-yR-DdO"/>
+                            <constraint firstItem="5UX-TK-xPb" firstAttribute="top" secondItem="yv2-d7-moK" secondAttribute="top" id="vKE-th-JZV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yv2-d7-moK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xBe-DV-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2616.8000000000002" y="-251.42428785607197"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="JG2-Cd-RHG">
@@ -99,70 +162,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZW-Af-q40" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2616.8000000000002" y="450.22488755622192"/>
-        </scene>
-        <!--Scheduling View Controller-->
-        <scene sceneID="qw3-ww-Hnp">
-            <objects>
-                <viewController id="OLH-fK-cXA" customClass="SchedulingViewController" customModule="Bluebird_Heli" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xmp-H1-CQB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gG1-yb-HcZ" customClass="JTAppleCalendarView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="300"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="kRp-Du-Adh"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4WO-H1-Rrd">
-                                    <size key="itemSize" width="175" height="132"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="dateCell" id="K5M-dC-h1v" customClass="DateCell" customModule="Bluebird_Heli" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="175" height="132"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="175" height="132"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPA-1I-uNG">
-                                                    <rect key="frame" x="66" y="55.5" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="YPA-1I-uNG" firstAttribute="centerX" secondItem="K5M-dC-h1v" secondAttribute="centerX" id="USl-06-Zpf"/>
-                                            <constraint firstItem="YPA-1I-uNG" firstAttribute="centerY" secondItem="K5M-dC-h1v" secondAttribute="centerY" id="t4t-QS-qYl"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="dateLabel" destination="YPA-1I-uNG" id="LEk-Y2-hxI"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="OLH-fK-cXA" id="Svs-YW-YEo"/>
-                                    <outlet property="delegate" destination="OLH-fK-cXA" id="mVu-cA-YAb"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="gG1-yb-HcZ" firstAttribute="top" secondItem="Y3X-yq-Mtr" secondAttribute="top" id="2jN-E5-a2J"/>
-                            <constraint firstItem="Y3X-yq-Mtr" firstAttribute="trailing" secondItem="gG1-yb-HcZ" secondAttribute="trailing" id="Pkf-Qt-N31"/>
-                            <constraint firstItem="gG1-yb-HcZ" firstAttribute="leading" secondItem="Y3X-yq-Mtr" secondAttribute="leading" id="qgK-v8-67l"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Y3X-yq-Mtr"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6tf-Bz-E7B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2616.8000000000002" y="-251.42428785607197"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kj7-EW-Vu2">

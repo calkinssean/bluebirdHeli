@@ -24,7 +24,7 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Home"
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -65,7 +65,7 @@ extension DashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
-            break
+            self.performSegue(withIdentifier: "showSchedulingSegue", sender: self)
         case 1:
             break
         default:
