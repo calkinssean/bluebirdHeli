@@ -11,12 +11,13 @@
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
 		142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142347171FC4CA8200A129B0 /* Assets.xcassets */; };
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
-		143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A196E1FC4D87A00488927 /* SchedulingViewController.swift */; };
 		143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143A19711FC4DAEF00488927 /* GoogleService-Info.plist */; };
-		143A19741FC4DD1800488927 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19731FC4DD1800488927 /* DateCell.swift */; };
 		143A19761FC4E67700488927 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19751FC4E67700488927 /* LoginViewController.swift */; };
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
 		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
+		143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19841FC5123400488927 /* DashboardTableViewCell.swift */; };
+		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
+		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,12 +29,13 @@
 		142347171FC4CA8200A129B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1423471A1FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1423471C1FC4CA8200A129B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		143A196E1FC4D87A00488927 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		143A19711FC4DAEF00488927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		143A19731FC4DD1800488927 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		143A19751FC4E67700488927 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		143A19841FC5123400488927 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
+		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebird_Heli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -72,18 +74,99 @@
 			isa = PBXGroup;
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
-				143A196E1FC4D87A00488927 /* SchedulingViewController.swift */,
+				1423471C1FC4CA8200A129B0 /* Info.plist */,
+				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
+				143A197D1FC5102400488927 /* Dashboard */,
+				143A197C1FC5101E00488927 /* Login */,
+				143A197B1FC5101600488927 /* Scheduling */,
+				143A19831FC5106700488927 /* Supporting Files */,
+				143A19821FC5105600488927 /* Storyboards */,
+			);
+			path = "Bluebird Heli";
+			sourceTree = "<group>";
+		};
+		143A197B1FC5101600488927 /* Scheduling */ = {
+			isa = PBXGroup;
+			children = (
+				143A197E1FC5103400488927 /* Views */,
+				143A197F1FC5103A00488927 /* View Controllers */,
+			);
+			path = Scheduling;
+			sourceTree = "<group>";
+		};
+		143A197C1FC5101E00488927 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				143A19801FC5104400488927 /* View Controllers */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		143A197D1FC5102400488927 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				143A19811FC5104C00488927 /* View Controllers */,
+				143A19861FC5134200488927 /* Views */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		143A197E1FC5103400488927 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				147087B91FC5276F00B13273 /* DateCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		143A197F1FC5103A00488927 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		143A19801FC5104400488927 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		143A19811FC5104C00488927 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
-				143A19731FC4DD1800488927 /* DateCell.swift */,
-				142347171FC4CA8200A129B0 /* Assets.xcassets */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		143A19821FC5105600488927 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
 				142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */,
 				143A19791FC4E7A400488927 /* Login.storyboard */,
 				142347141FC4CA8200A129B0 /* Main.storyboard */,
-				1423471C1FC4CA8200A129B0 /* Info.plist */,
-				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 			);
-			path = "Bluebird Heli";
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		143A19831FC5106700488927 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				142347171FC4CA8200A129B0 /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		143A19861FC5134200488927 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D94FD85DABD7CBA4FBE89BBE /* Pods */ = {
@@ -238,11 +321,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
-				143A196F1FC4D87A00488927 /* SchedulingViewController.swift in Sources */,
+				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
+				147087BA1FC5276F00B13273 /* DateCell.swift in Sources */,
 				143A19761FC4E67700488927 /* LoginViewController.swift in Sources */,
-				143A19741FC4DD1800488927 /* DateCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@ target 'Bluebird Heli' do
 
   # Pods for Bluebird Heli
 pod 'Firebase/Core'
-pod 'JTAppleCalendar'
+pod 'JTAppleCalendar', '~> 7.0'
 
 
 end
