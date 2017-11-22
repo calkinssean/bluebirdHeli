@@ -74,6 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
+				1423471C1FC4CA8200A129B0 /* Info.plist */,
+				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 				143A197D1FC5102400488927 /* Dashboard */,
 				143A197C1FC5101E00488927 /* Login */,
 				143A197B1FC5101600488927 /* Scheduling */,
@@ -155,8 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
-				1423471C1FC4CA8200A129B0 /* Info.plist */,
-				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";

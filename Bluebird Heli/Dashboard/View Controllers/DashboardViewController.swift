@@ -16,7 +16,7 @@ class DashboardViewController: UIViewController {
     let imageNames = ["helicopter", "media"]
     
     var parallaxOffsetSpeed: CGFloat = 200
-    var cellHeight: CGFloat = 420
+    var cellHeight: CGFloat = 575
     var parallaxImageHeight: CGFloat {
         let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.tableView.frame.height) - cellHeight) / 2
         return maxOffset + cellHeight
@@ -24,8 +24,7 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.title = "Home"
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,7 +51,7 @@ extension DashboardViewController: UITableViewDataSource {
         if let image = UIImage(named: imageNames[indexPath.row]) {
             cell.configureCell(with: image, text: rows[indexPath.row])
         }
-        return UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,7 +74,7 @@ extension DashboardViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 420
+        return 575
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
