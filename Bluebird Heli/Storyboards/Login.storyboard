@@ -38,7 +38,6 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="B5g-zc-kAj" eventType="touchUpInside" id="7I7-uj-Lqf"/>
-                                    <segue destination="gJd-Gc-tMx" kind="show" id="puO-z7-NVO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -46,6 +45,9 @@
                         <viewLayoutGuide key="safeArea" id="rNr-rx-X4f"/>
                     </view>
                     <navigationItem key="navigationItem" id="q1u-Ng-DRE"/>
+                    <connections>
+                        <segue destination="gJd-Gc-tMx" kind="show" identifier="MainSegue" id="9Au-hx-eqp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zm7-9Q-Uiw" sceneMemberID="firstResponder"/>
             </objects>
