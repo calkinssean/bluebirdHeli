@@ -38,6 +38,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="loginTapped:" destination="B5g-zc-kAj" eventType="touchUpInside" id="7I7-uj-Lqf"/>
+                                    <segue destination="gJd-Gc-tMx" kind="show" id="puO-z7-NVO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -49,6 +50,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zm7-9Q-Uiw" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="164" y="132.68365817091455"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="9wf-5v-2C2">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="Main" storyboardName="Main" id="gJd-Gc-tMx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kOd-pk-Iii" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="770" y="94"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GL9-tz-NPq">
