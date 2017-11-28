@@ -21,9 +21,18 @@ class SchedulingViewController: UIViewController {
     let outsideMonthColor = UIColor.green
     let currentDateSelectedViewColor = UIColor.purple
     
+    var locationOne: Location {
+        var location = Location()
+        location.longitude = 1.0633566743
+        location.latitude = -0.0013451346
+        location.name = "Location 1"
+        return location
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCalendarView()
+        fetchWeatherData()
     }
     
     func setupCalendarView() {
@@ -73,9 +82,8 @@ class SchedulingViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func fetchWeatherData() {
+        WeatherAPI().fetchWeather(for: locationOne)
     }
     
 }
