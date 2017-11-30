@@ -8,12 +8,16 @@
 
 import Foundation
 
-struct Location {
+class Location {
     
     var name: String = ""
     var longitude: Double = 0.0
     var latitude: Double = 0.0
     
     var weather: Weather = Weather()
+    
+    func set(weather: Weather) {
+        self.weather = weather
+    }
     
 }
