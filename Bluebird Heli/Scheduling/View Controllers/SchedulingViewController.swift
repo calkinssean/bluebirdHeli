@@ -158,6 +158,7 @@ extension SchedulingViewController {
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
+            print(self.selectedLocation?.weather.hourly.count)
             self.collectionView.reloadData()
         }
         let southerAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in

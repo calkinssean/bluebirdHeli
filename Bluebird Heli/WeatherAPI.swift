@@ -16,10 +16,14 @@ class WeatherAPI {
 
     func fetchWeather(for location: Location) {
         // construct url
+        print(location.latitude)
+        print(location.longitude)
         
-        let urlString = "\(baseURL)/\(apiSecret)/\(location.longitude),\(location.latitude)?,\(exclusions)"
+        let urlString = "\(baseURL)/\(apiSecret)/\(location.latitude),\(location.longitude)?,\(exclusions)"
         APIController().get(urlString: urlString) { (dict) in
         
+            print(dict)
+            
             if let currently = dict["currently"] as? [String: Any] {
                 location.weather.currently = Conditions(dict: currently)
             }

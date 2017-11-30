@@ -16,8 +16,4 @@ class Location {
     
     var weather: Weather = Weather()
     
-    func set(weather: Weather) {
-        self.weather = weather
-    }
-    
 }
