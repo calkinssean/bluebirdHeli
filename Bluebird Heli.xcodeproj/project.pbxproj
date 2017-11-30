@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140CA4181FD0877F00B52AE9 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CA4171FD0877F00B52AE9 /* FirebaseController.swift */; };
 		141062E61FCB805F0007CED0 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141062E51FCB805F0007CED0 /* APIController.swift */; };
 		142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142347101FC4CA8200A129B0 /* AppDelegate.swift */; };
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
@@ -23,11 +24,15 @@
 		1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B31FCCAD5E00959AC7 /* Weather.swift */; };
 		1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B51FCCB3B500959AC7 /* Location.swift */; };
 		1481B9B81FCCC17600959AC7 /* Conditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B71FCCC17600959AC7 /* Conditions.swift */; };
+		1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B91FCCE87700959AC7 /* Day.swift */; };
+		1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BB1FCCEE2000959AC7 /* Reservation.swift */; };
+		1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BD1FCCEF8100959AC7 /* Group.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04317FAAAB0F7737F09123C5 /* Pods-Bluebird Heli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.release.xcconfig"; sourceTree = "<group>"; };
+		140CA4171FD0877F00B52AE9 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		141062E51FCB805F0007CED0 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		1423470D1FC4CA8200A129B0 /* Bluebird Heli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bluebird Heli.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		142347101FC4CA8200A129B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +51,9 @@
 		1481B9B31FCCAD5E00959AC7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		1481B9B51FCCB3B500959AC7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		1481B9B71FCCC17600959AC7 /* Conditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conditions.swift; sourceTree = "<group>"; };
+		1481B9B91FCCE87700959AC7 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		1481B9BB1FCCEE2000959AC7 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
+		1481B9BD1FCCEF8100959AC7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
 		DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bluebird_Heli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,6 +97,10 @@
 				141062E51FCB805F0007CED0 /* APIController.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
+				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
+				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
+				1481B9B91FCCE87700959AC7 /* Day.swift */,
+				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
 				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
 				1481B9B51FCCB3B500959AC7 /* Location.swift */,
 				143A197D1FC5102400488927 /* Dashboard */,
@@ -283,12 +295,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,14 +350,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140CA4181FD0877F00B52AE9 /* FirebaseController.swift in Sources */,
 				141062E61FCB805F0007CED0 /* APIController.swift in Sources */,
 				143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */,
 				1481B9B81FCCC17600959AC7 /* Conditions.swift in Sources */,
 				1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
+				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */,
+				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
+				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
 				1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */,
 				147087BA1FC5276F00B13273 /* DateCell.swift in Sources */,
 				143A19761FC4E67700488927 /* LoginViewController.swift in Sources */,
