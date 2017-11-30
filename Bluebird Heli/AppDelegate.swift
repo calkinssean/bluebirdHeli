@@ -53,19 +53,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let northernLocation = Location()
         northernLocation.latitude = 41.07786
-        northernLocation.longitude = 111.82708
+        northernLocation.longitude = -111.82708
         northernLocation.name = "Northern Operating Area"
         DataStore.shared.northerOperatingArea = northernLocation
         
         let centralLocation = Location()
         centralLocation.latitude = 40.85764
-        centralLocation.longitude = 111.05976
+        centralLocation.longitude = -111.05976
         centralLocation.name = "Central Operating Area"
         DataStore.shared.centralOperatingArea = centralLocation
         
         let southernLocation = Location()
         southernLocation.latitude = 40.53284
-        southernLocation.longitude = 111.64152
+        southernLocation.longitude = -111.64152
         southernLocation.name = "Southern Operating Area"
         DataStore.shared.southernOperatingArea = southernLocation
         

@@ -10,12 +10,16 @@ import UIKit
 import JTAppleCalendar
 
 class SchedulingViewController: UIViewController {
-
+    @IBOutlet var locationButton: UIButton!
+    @IBOutlet var summaryLabel: UILabel!
+    @IBOutlet var temperatureLabel: UILabel!
+    
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
-    
+
+    let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
     let selectedMonthColor = UIColor.red
     let monthColor = UIColor.blue
@@ -26,7 +30,9 @@ class SchedulingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedLocation = DataStore.shared.centralOperatingArea
         setupCalendarView()
+        updateCurrentWeatherForLocation()
     }
     
     func setupCalendarView() {
@@ -155,15 +161,17 @@ extension SchedulingViewController {
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.northerOperatingArea
             self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
-            print(self.selectedLocation?.weather.hourly.count)
             self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
         }
         let southerAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
             self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(northernAreaAction)
@@ -171,6 +179,18 @@ extension SchedulingViewController {
         alert.addAction(southerAreaAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateCurrentWeatherForLocation() {
+        numberFormatter.maximumFractionDigits = 0
+        if let temperature = selectedLocation?.weather.currently.apparentTemperature {
+            if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
+                self.temperatureLabel.text = "\(temperatureString)º"
+            }
+        }
+        self.locationButton.setTitle(self.selectedLocation?.name, for: .normal)
+        self.summaryLabel.text = self.selectedLocation?.weather.currently.summary
+        
     }
     
 }

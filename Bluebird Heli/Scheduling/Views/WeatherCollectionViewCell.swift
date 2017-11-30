@@ -10,6 +10,7 @@ import UIKit
 
 class WeatherCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet var amPmLabel: UILabel!
     @IBOutlet var timeLabel: UILabel!
     @IBOutlet var iconImage: UIImageView!
     @IBOutlet var temperatureLabel: UILabel!
@@ -19,12 +20,16 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     
     func configureCell(time: Double, iconString: String, temperature: Double) {
         
-        numberFormatter.maximumFractionDigits = 0
-        dateFormatter.dateFormat = "hha"
+        let date = Date(timeIntervalSince1970: time)
+    
+        dateFormatter.dateFormat = "h"
+        timeLabel.text = dateFormatter.string(from: date)
+        dateFormatter.dateFormat = "a"
+        amPmLabel.text = dateFormatter.string(from: date)
         if let icon = UIImage(named: iconString) {
             iconImage.image = icon
         }
-        timeLabel.text = dateFormatter.string(from: Date(timeIntervalSince1970: time))
+        numberFormatter.maximumFractionDigits = 0
         temperatureLabel.text = "\(numberFormatter.string(from: temperature as NSNumber) ?? "0")º"
     }
     
