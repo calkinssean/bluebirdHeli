@@ -8,9 +8,10 @@
 
 import Foundation
 import Firebase
+import FirebaseDatabase
 
 class FirebaseController {
     
-    let baseURL = FIRebase
+    let baseURL = Database.database().reference()
     
 }

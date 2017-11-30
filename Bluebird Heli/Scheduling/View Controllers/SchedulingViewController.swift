@@ -10,29 +10,29 @@ import UIKit
 import JTAppleCalendar
 
 class SchedulingViewController: UIViewController {
-
+    @IBOutlet var locationButton: UIButton!
+    @IBOutlet var summaryLabel: UILabel!
+    @IBOutlet var temperatureLabel: UILabel!
+    
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
+    @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
-    
+
+    let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
     let selectedMonthColor = UIColor.red
     let monthColor = UIColor.blue
     let outsideMonthColor = UIColor.green
     let currentDateSelectedViewColor = UIColor.purple
     
-    var locationOne: Location {
-        var location = Location()
-        location.longitude = 1.0633566743
-        location.latitude = -0.0013451346
-        location.name = "Location 1"
-        return location
-    }
+    var selectedLocation: Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedLocation = DataStore.shared.centralOperatingArea
         setupCalendarView()
-        fetchWeatherData()
+        updateCurrentWeatherForLocation()
     }
     
     func setupCalendarView() {
@@ -82,12 +82,16 @@ class SchedulingViewController: UIViewController {
         }
     }
     
-    func fetchWeatherData() {
-        WeatherAPI().fetchWeather(for: locationOne)
-    }
-    
 }
 
+// MARK: - IBAction
+extension SchedulingViewController {
+    @IBAction func locationTapped(_ sender: UIButton) {
+        selectLocationAlert()
+    }
+}
+
+// MARK: - JTappleCalendarViewDataSource
 extension SchedulingViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
@@ -104,6 +108,7 @@ extension SchedulingViewController: JTAppleCalendarViewDataSource {
     }
 }
 
+// MARK: - JTAppleCalendarViewDelegate
 extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
@@ -128,3 +133,66 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     }
     
 }
+
+// MARK: - UICollectionViewDataSource
+extension SchedulingViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let location = selectedLocation {
+            return location.weather.hourly.count
+        }
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCollectionViewCell
+        if let location = selectedLocation {
+            let conditions = location.weather.hourly[indexPath.item]
+            cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
+        }
+        
+        return cell
+    }
+}
+
+// MARK: - Helper
+extension SchedulingViewController {
+    
+    func selectLocationAlert() {
+        let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
+        let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
+            self.selectedLocation = DataStore.shared.northerOperatingArea
+            self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
+        }
+        let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
+            self.selectedLocation = DataStore.shared.centralOperatingArea
+            self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
+        }
+        let southerAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
+            self.selectedLocation = DataStore.shared.southernOperatingArea
+            self.collectionView.reloadData()
+            self.updateCurrentWeatherForLocation()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(northernAreaAction)
+        alert.addAction(centralAreaAction)
+        alert.addAction(southerAreaAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func updateCurrentWeatherForLocation() {
+        numberFormatter.maximumFractionDigits = 0
+        if let temperature = selectedLocation?.weather.currently.apparentTemperature {
+            if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
+                self.temperatureLabel.text = "\(temperatureString)º"
+            }
+        }
+        self.locationButton.setTitle(self.selectedLocation?.name, for: .normal)
+        self.summaryLabel.text = self.selectedLocation?.weather.currently.summary
+        
+    }
+    
+}
+
+

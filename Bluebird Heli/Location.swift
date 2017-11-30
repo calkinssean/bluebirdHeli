@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Location {
+class Location {
     
     var name: String = ""
     var longitude: Double = 0.0

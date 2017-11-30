@@ -25,4 +25,13 @@ struct Day {
         return true
     }
     
+    func urlDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let date = date {
+            return formatter.string(from: date)
+        }
+        return ""
+    }
+    
 }
