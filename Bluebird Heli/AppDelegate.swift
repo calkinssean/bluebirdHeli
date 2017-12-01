@@ -17,6 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        
+        var configuration = Configuration()
+        print(configuration.environment.baseURL)
+    
         checkForAuth { (user) in
             guard let user = user else { return }
             WeatherController().setUpLocations()

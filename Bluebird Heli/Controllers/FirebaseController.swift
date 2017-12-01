@@ -13,8 +13,7 @@ import FirebaseAuth
 
 class FirebaseController {
     
-    let baseURL = Database.database().reference()
-    let groupsURL = Database.database().reference().child("users")
+    
     
     func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -29,10 +28,10 @@ class FirebaseController {
     
     func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
         guard uid != "" else { return }
-        groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String: Any] else { return }
-            completion(Group(dict: dict))
-        }
+//        groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+//            guard let dict = snapshot.value as? [String: Any] else { return }
+//            completion(Group(dict: dict))
+//        }
     }
     
 }
