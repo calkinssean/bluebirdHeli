@@ -27,4 +27,12 @@ class FirebaseController {
         Database.database().reference(fromURL: refString).updateChildValues(dict)
     }
     
+    func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
+        guard uid != "" else { return }
+        groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            completion(Group(dict: dict))
+        }
+    }
+    
 }
