@@ -25,6 +25,11 @@ class LoginViewController: UIViewController {
        self.showDashboard()
     }
     
+    func userSignedIn() {
+        WeatherController().setUpLocations()
+        WeatherController().fetchWeather()
+    }
+    
     func showDashboard() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let rootViewController = storyboard.instantiateViewController(withIdentifier: "Dashboard") as! UINavigationController
