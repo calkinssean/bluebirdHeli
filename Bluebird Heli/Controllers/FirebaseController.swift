@@ -12,8 +12,16 @@ import FirebaseDatabase
 import FirebaseAuth
 
 class FirebaseController {
+   
+    var baseURL: DatabaseReference {
+        var configuration = Configuration()
+        return configuration.environment.baseURL
+    }
     
-    
+    var groupsURL: DatabaseReference {
+        return baseURL.child("users")
+    }
+
     
     func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -21,17 +29,21 @@ class FirebaseController {
         }
     }
     
-    func save(dict: [String: Any], refString: String) {
-        guard refString != "" else { return }
-        Database.database().reference(fromURL: refString).updateChildValues(dict)
+    func save(dict: [String: Any], headers: [String]) {
+        guard !headers.isEmpty else { return }
+        var ref = baseURL
+        for header in  headers {
+            ref = ref.child(header)
+        }
+        ref.updateChildValues(dict)
     }
     
     func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
         guard uid != "" else { return }
-//        groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-//            guard let dict = snapshot.value as? [String: Any] else { return }
-//            completion(Group(dict: dict))
-//        }
+        groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            completion(Group(dict: dict))
+        }
     }
     
 }

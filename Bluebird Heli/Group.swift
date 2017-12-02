@@ -38,7 +38,7 @@ struct Group {
             "package": membershipPackage.rawValue,
             "remainingTrips": remainingTrips
         ]
-        FirebaseController().save(dict: dict, refString: ref)
+        FirebaseController().save(dict: dict, headers: ["uid"])
     }
     
     func remainingTrips(from package: Package) -> Int {
