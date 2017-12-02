@@ -104,80 +104,15 @@
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
-				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
-				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
-				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
-				1481B9B91FCCE87700959AC7 /* Day.swift */,
-				14BBC9E71FD1D9DF0096BBF6 /* Controllers */,
-				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
-				1481B9B51FCCB3B500959AC7 /* Location.swift */,
-				143A197D1FC5102400488927 /* Dashboard */,
-				143A197C1FC5101E00488927 /* Login */,
-				143A197B1FC5101600488927 /* Scheduling */,
+				14C989CC1FD2621A0024724A /* Model */,
+				14C989CD1FD262770024724A /* View */,
+				14BBC9E71FD1D9DF0096BBF6 /* Controller */,
+				14C989CE1FD2628F0024724A /* View Controller */,
 				143A19831FC5106700488927 /* Supporting Files */,
 				143A19821FC5105600488927 /* Storyboards */,
 			);
 			path = "Bluebird Heli";
-			sourceTree = "<group>";
-		};
-		143A197B1FC5101600488927 /* Scheduling */ = {
-			isa = PBXGroup;
-			children = (
-				143A197E1FC5103400488927 /* Views */,
-				143A197F1FC5103A00488927 /* View Controllers */,
-			);
-			path = Scheduling;
-			sourceTree = "<group>";
-		};
-		143A197C1FC5101E00488927 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				143A19801FC5104400488927 /* View Controllers */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		143A197D1FC5102400488927 /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				143A19811FC5104C00488927 /* View Controllers */,
-				143A19861FC5134200488927 /* Views */,
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
-		143A197E1FC5103400488927 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				147087B91FC5276F00B13273 /* DateCell.swift */,
-				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		143A197F1FC5103A00488927 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		143A19801FC5104400488927 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				143A19751FC4E67700488927 /* LoginViewController.swift */,
-			);
-			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		143A19811FC5104C00488927 /* View Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
-			);
-			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		143A19821FC5105600488927 /* Storyboards */ = {
@@ -198,15 +133,7 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		143A19861FC5134200488927 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		14BBC9E71FD1D9DF0096BBF6 /* Controllers */ = {
+		14BBC9E71FD1D9DF0096BBF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				141062E51FCB805F0007CED0 /* APIController.swift */,
@@ -215,7 +142,40 @@
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
 				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
 			);
-			path = Controllers;
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		14C989CC1FD2621A0024724A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
+				1481B9B51FCCB3B500959AC7 /* Location.swift */,
+				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
+				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
+				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
+				1481B9B91FCCE87700959AC7 /* Day.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		14C989CD1FD262770024724A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
+				147087B91FC5276F00B13273 /* DateCell.swift */,
+				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		14C989CE1FD2628F0024724A /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
+				143A19751FC4E67700488927 /* LoginViewController.swift */,
+				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
+			);
+			path = "View Controller";
 			sourceTree = "<group>";
 		};
 		D94FD85DABD7CBA4FBE89BBE /* Pods */ = {

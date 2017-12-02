@@ -20,6 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         checkForAuth { (user) in
             guard let user = user else { return }
+            FirebaseController().fetchGroup(with: user.uid, completion: { (group) in
+                DataStore.shared.currentGroup = group
+            })
             WeatherController().setUpLocations()
             WeatherController().fetchWeather()
             showDashboard()

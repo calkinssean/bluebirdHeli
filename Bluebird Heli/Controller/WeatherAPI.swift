@@ -12,11 +12,12 @@ class WeatherAPI {
     
     fileprivate let apiSecret = "0548447fc763adaa4dd0fa565dd55e98"
     fileprivate let baseURL = "https://api.darksky.net/forecast"
-    fileprivate let exclusions = "exclude=minutely"
+    fileprivate let exclusions = "exclude=minutely,flags"
+    fileprivate let extend = "extend=hourly"
 
     func fetchWeather(for location: Location) {
         // construct url
-        let urlString = "\(baseURL)/\(apiSecret)/\(location.latitude),\(location.longitude)?,\(exclusions)"
+        let urlString = "\(baseURL)/\(apiSecret)/\(location.latitude),\(location.longitude)?,\(exclusions)&\(extend)"
         APIController().get(urlString: urlString) { (dict) in
             if let currently = dict["currently"] as? [String: Any] {
                 location.weather.currently = Conditions(dict: currently)
@@ -35,6 +36,7 @@ class WeatherAPI {
                     }
                 }
             }
+            print(location.weather.hourly.count)
         }
     }
     
