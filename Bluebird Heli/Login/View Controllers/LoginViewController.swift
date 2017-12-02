@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    
+    @IBOutlet var emailTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,7 +26,16 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTapped(_ sender: UIButton) {
-       FirebaseController().signInUser(email: <#T##String#>, password: <#T##String#>, completion: <#T##(User?, Error?) -> ()#>)
+        guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+        FirebaseController().signInUser(email: email, password: password) { (user, error) in
+            if let uid = user?.uid {
+                FirebaseController().fetchGroup(with: uid, completion: { (group) in
+                    DataStore.shared.currentGroup = group
+                    self.userSignedIn()
+                    self.showDashboard()
+                })
+            }
+        }
     }
     
     func userSignedIn() {

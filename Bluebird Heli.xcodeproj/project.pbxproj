@@ -107,7 +107,6 @@
 				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
 				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
 				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
-				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
 				1481B9B91FCCE87700959AC7 /* Day.swift */,
 				14BBC9E71FD1D9DF0096BBF6 /* Controllers */,
@@ -211,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				141062E51FCB805F0007CED0 /* APIController.swift */,
+				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
 				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,

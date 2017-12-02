@@ -12,6 +12,8 @@ class DataStore {
     
     static let shared = DataStore()
     
+    var currentGroup: Group?
+    
     var northerOperatingArea: Location = Location()
     var centralOperatingArea: Location = Location()
     var southernOperatingArea: Location = Location()
