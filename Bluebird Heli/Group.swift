@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 struct Group {
     
     var uid: String = ""
     var email: String = ""
-    var ref: String = ""
     var membershipPackage: Package
     var remainingTrips: Int = 0
     
@@ -25,7 +25,6 @@ struct Group {
     init(dict: [String: Any]) {
         uid = dict["uid"] as? String ?? ""
         email = dict["email"] as? String ?? ""
-        ref = dict["ref"] as? String ?? ""
         membershipPackage = Package(rawValue: dict["package"] as? String ?? "")!
         remainingTrips = dict["remainingTrips"] as? Int ?? remainingTrips(from: membershipPackage)
     }
@@ -34,11 +33,10 @@ struct Group {
         let dict: [String: Any] = [
             "uid": uid,
             "email": email,
-            "ref": ref,
             "package": membershipPackage.rawValue,
             "remainingTrips": remainingTrips
         ]
-        FirebaseController().save(dict: dict, headers: ["uid"])
+        FirebaseController().save(dict: dict, ref: FirebaseController().groupsURL.child(uid))
     }
     
     func remainingTrips(from package: Package) -> Int {

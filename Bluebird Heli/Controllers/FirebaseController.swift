@@ -29,12 +29,8 @@ class FirebaseController {
         }
     }
     
-    func save(dict: [String: Any], headers: [String]) {
-        guard !headers.isEmpty else { return }
-        var ref = baseURL
-        for header in  headers {
-            ref = ref.child(header)
-        }
+    func save(dict: [String: Any], ref: DatabaseReference) {
+        guard ref != baseURL else { return }
         ref.updateChildValues(dict)
     }
     
@@ -44,6 +40,10 @@ class FirebaseController {
             guard let dict = snapshot.value as? [String: Any] else { return }
             completion(Group(dict: dict))
         }
+    }
+    
+    func reference(for group: Group) -> DatabaseReference {
+        return groupsURL.child(group.uid)
     }
     
 }

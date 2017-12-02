@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginTapped(_ sender: UIButton) {
-       self.showDashboard()
+       FirebaseController().signInUser(email: <#T##String#>, password: <#T##String#>, completion: <#T##(User?, Error?) -> ()#>)
     }
     
     func userSignedIn() {
