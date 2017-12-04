@@ -38,4 +38,10 @@ class WeatherController {
         WeatherAPI().fetchWeather(for: DataStore.shared.southernOperatingArea)
     }
     
+    func fetchWeatherHourly() {
+        Timer.scheduledTimer(withTimeInterval: 3600, repeats: true) { (timer) in
+            self.fetchWeather()
+        }.fire()
+    }
+    
 }

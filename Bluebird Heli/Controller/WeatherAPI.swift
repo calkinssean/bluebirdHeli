@@ -24,6 +24,7 @@ class WeatherAPI {
             }
             if let hourlyDict = dict["hourly"] as? [String: Any] {
                 if let hourlyArray = hourlyDict["data"] as? [[String: Any]] {
+                    location.weather.hourly.removeAll()
                     for dict in hourlyArray {
                         location.weather.hourly.append(Conditions(dict: dict))
                     }
@@ -31,6 +32,7 @@ class WeatherAPI {
             }
             if let dailyDict = dict["daily"] as? [String: Any] {
                 if let dailyArray = dailyDict["data"] as? [[String: Any]] {
+                    location.weather.hourly.removeAll()
                     for dict in dailyArray {
                         location.weather.daily.append(Conditions(dict: dict))
                     }
