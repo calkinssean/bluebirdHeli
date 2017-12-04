@@ -214,18 +214,24 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
+        numberFormatter.maximumFractionDigits = 0
         if date.isToday() {
             temperatureLabel.textColor = .black
-            numberFormatter.maximumFractionDigits = 0
-            let temperature = selectedLocation.weather.currently.apparentTemperature
+            let temperature = location.weather.currently.apparentTemperature
             if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
                 self.temperatureLabel.text = "\(temperatureString)º"
             }
-            self.summaryLabel.text = self.selectedLocation.weather.currently.summary
+            self.summaryLabel.text = location.weather.currently.summary
         } else {
             temperatureLabel.textColor = .red
             if let dailyConditions = conditions(for: date, for: selectedLocation, conditionType: .daily).first {
-                
+                let highTemperature = dailyConditions.temperatureHigh
+                let lowTemperature = dailyConditions.temperatureLow
+                if let temperatureHighString = numberFormatter.string(from: highTemperature as NSNumber), let temperatureLowString = numberFormatter.string(from: lowTemperature as NSNumber) {
+                    self.temperatureLabel.text = "\(temperatureHighString)º"
+                    self.lowTemperatureLabel.text = "\(temperatureLowString)º"
+                    self.summaryLabel.text = dailyConditions.summary
+                }
             }
         }
     }
