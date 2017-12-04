@@ -111,6 +111,14 @@ extension SchedulingViewController: JTAppleCalendarViewDataSource {
 // MARK: - JTAppleCalendarViewDelegate
 extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        if cellState.dateBelongsTo == .thisMonth {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let dateCell = cell as! DateCell
         dateCell.dateLabel.text = cellState.text
