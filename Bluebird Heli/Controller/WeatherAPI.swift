@@ -16,6 +16,10 @@ class WeatherAPI {
     fileprivate let extend = "extend=hourly"
 
     func fetchWeather(for location: Location) {
+        
+        location.weather.daily.removeAll()
+        location.weather.hourly.removeAll()
+        
         // construct url
         let urlString = "\(baseURL)/\(apiSecret)/\(location.latitude),\(location.longitude)?,\(exclusions)&\(extend)"
         APIController().get(urlString: urlString) { (dict) in
@@ -24,7 +28,6 @@ class WeatherAPI {
             }
             if let hourlyDict = dict["hourly"] as? [String: Any] {
                 if let hourlyArray = hourlyDict["data"] as? [[String: Any]] {
-                    location.weather.hourly.removeAll()
                     for dict in hourlyArray {
                         location.weather.hourly.append(Conditions(dict: dict))
                     }
@@ -32,7 +35,6 @@ class WeatherAPI {
             }
             if let dailyDict = dict["daily"] as? [String: Any] {
                 if let dailyArray = dailyDict["data"] as? [[String: Any]] {
-                    location.weather.hourly.removeAll()
                     for dict in dailyArray {
                         location.weather.daily.append(Conditions(dict: dict))
                     }
