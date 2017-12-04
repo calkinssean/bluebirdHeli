@@ -13,26 +13,35 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var summaryLabel: UILabel!
     @IBOutlet var temperatureLabel: UILabel!
+    @IBOutlet var lowTemperatureLabel: UILabel!
     
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
+    var hourlyConditions = [Conditions]()
+    var dailyConditions = Conditions()
+    
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
-    let selectedMonthColor = UIColor.red
-    let monthColor = UIColor.blue
-    let outsideMonthColor = UIColor.green
+    
+    let weekendTextColor = UIColor.gray
+    let weekdayTextColor = UIColor.black
+    let currentDayTextColor = UIColor.red
+    let selectedDateTextColor = UIColor.blue
+    let outsideMonthColor = UIColor.clear
     let currentDateSelectedViewColor = UIColor.purple
     
-    var selectedLocation: Location?
-    
+    var selectedLocation = DataStore.shared.centralOperatingArea
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedLocation = DataStore.shared.centralOperatingArea
+       
+        hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
-        updateCurrentWeatherForLocation()
+        updateUIWeather(for: self.selectedLocation, for: Date())
+        
     }
     
     func setupCalendarView() {
@@ -53,11 +62,18 @@ class SchedulingViewController: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
+        
         if cellState.isSelected {
-            validCell.dateLabel.textColor = selectedMonthColor
+            validCell.dateLabel.textColor = selectedDateTextColor
         } else {
             if cellState.dateBelongsTo == .thisMonth {
-                validCell.dateLabel.textColor = monthColor
+                if cellState.date.isToday() {
+                    validCell.dateLabel.textColor = currentDayTextColor
+                } else if cellState.date.isWeekend() {
+                    validCell.dateLabel.textColor = weekendTextColor
+                } else {
+                    validCell.dateLabel.textColor = weekdayTextColor
+                }
             } else {
                 validCell.dateLabel.textColor = outsideMonthColor
             }
@@ -95,7 +111,7 @@ extension SchedulingViewController {
 extension SchedulingViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        let startDate = Date().addingTimeInterval(-31536000)
+        let startDate = Date()
         let endDate = Date().addingTimeInterval(31536000)
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
         return parameters
@@ -111,6 +127,18 @@ extension SchedulingViewController: JTAppleCalendarViewDataSource {
 // MARK: - JTAppleCalendarViewDelegate
 extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
+    func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        
+        if cellState.dateBelongsTo == .thisMonth {
+            if date > Date() || date.isToday() {
+                return true
+            }
+            return false
+        } else {
+            return false
+        }
+    }
+    
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let dateCell = cell as! DateCell
         dateCell.dateLabel.text = cellState.text
@@ -121,6 +149,9 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        updateUIWeather(for: selectedLocation, for: date)
+        self.collectionView.reloadData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -137,18 +168,13 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension SchedulingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let location = selectedLocation {
-            return location.weather.hourly.count
-        }
-        return 0
+        return self.hourlyConditions.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCollectionViewCell
-        if let location = selectedLocation {
-            let conditions = location.weather.hourly[indexPath.item]
-            cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
-        }
-        
+        let conditions = self.hourlyConditions[indexPath.item]
+        cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
         return cell
     }
 }
@@ -161,38 +187,69 @@ extension SchedulingViewController {
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.northerOperatingArea
             self.collectionView.reloadData()
-            self.updateCurrentWeatherForLocation()
+            if let date = self.calendarView.selectedDates.first {
+                self.updateUIWeather(for: self.selectedLocation, for: date)
+            }
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
             self.collectionView.reloadData()
-            self.updateCurrentWeatherForLocation()
+            if let date = self.calendarView.selectedDates.first {
+                self.updateUIWeather(for: self.selectedLocation, for: date)
+            }
         }
-        let southerAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
+        let southernAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
             self.collectionView.reloadData()
-            self.updateCurrentWeatherForLocation()
+            if let date = self.calendarView.selectedDates.first {
+                self.updateUIWeather(for: self.selectedLocation, for: date)
+            }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(northernAreaAction)
         alert.addAction(centralAreaAction)
-        alert.addAction(southerAreaAction)
+        alert.addAction(southernAreaAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
     }
     
-    func updateCurrentWeatherForLocation() {
+    func updateUIWeather(for location: Location, for date: Date) {
+        self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
         numberFormatter.maximumFractionDigits = 0
-        if let temperature = selectedLocation?.weather.currently.apparentTemperature {
+        if date.isToday() {
+            let temperature = location.weather.currently.apparentTemperature
             if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
                 self.temperatureLabel.text = "\(temperatureString)º"
             }
+            self.lowTemperatureLabel.text = ""
+            self.summaryLabel.text = location.weather.currently.summary
+        } else {
+            if let dailyConditions = conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+                let highTemperature = dailyConditions.temperatureHigh
+                let lowTemperature = dailyConditions.temperatureLow
+                if let temperatureHighString = numberFormatter.string(from: highTemperature as NSNumber), let temperatureLowString = numberFormatter.string(from: lowTemperature as NSNumber) {
+                    self.temperatureLabel.text = "\(temperatureHighString)º"
+                    self.lowTemperatureLabel.text = "\(temperatureLowString)º"
+                    self.summaryLabel.text = dailyConditions.summary
+                }
+            }
         }
-        self.locationButton.setTitle(self.selectedLocation?.name, for: .normal)
-        self.summaryLabel.text = self.selectedLocation?.weather.currently.summary
-        
     }
-    
+
+    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
+        var conditionsToFilter = [Conditions]()
+        switch conditionType {
+        case .daily:
+            conditionsToFilter = location.weather.daily
+        case .hourly:
+            conditionsToFilter = location.weather.hourly
+        default:
+            break
+        }
+        
+        return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
+    }
+
 }
 
 
