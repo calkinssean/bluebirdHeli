@@ -21,8 +21,11 @@ class SchedulingViewController: UIViewController {
 
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
-    let selectedMonthColor = UIColor.red
-    let monthColor = UIColor.blue
+    
+    let weekendTextColor = UIColor.gray
+    let weekdayTextColor = UIColor.black
+    let currentDayTextColor = UIColor.red
+    let selectedDateTextColor = UIColor.blue
     let outsideMonthColor = UIColor.clear
     let currentDateSelectedViewColor = UIColor.purple
     
@@ -53,11 +56,18 @@ class SchedulingViewController: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
+        
         if cellState.isSelected {
-            validCell.dateLabel.textColor = selectedMonthColor
+            validCell.dateLabel.textColor = selectedDateTextColor
         } else {
             if cellState.dateBelongsTo == .thisMonth {
-                validCell.dateLabel.textColor = monthColor
+                if cellState.date.isToday() {
+                    validCell.dateLabel.textColor = currentDayTextColor
+                } else if cellState.date.isWeekend() {
+                    validCell.dateLabel.textColor = weekendTextColor
+                } else {
+                    validCell.dateLabel.textColor = weekdayTextColor
+                }
             } else {
                 validCell.dateLabel.textColor = outsideMonthColor
             }
