@@ -23,7 +23,7 @@ class SchedulingViewController: UIViewController {
     let formatter = DateFormatter()
     let selectedMonthColor = UIColor.red
     let monthColor = UIColor.blue
-    let outsideMonthColor = UIColor.green
+    let outsideMonthColor = UIColor.clear
     let currentDateSelectedViewColor = UIColor.purple
     
     var selectedLocation: Location?
@@ -95,7 +95,7 @@ extension SchedulingViewController {
 extension SchedulingViewController: JTAppleCalendarViewDataSource {
     
     func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
-        let startDate = Date().addingTimeInterval(-31536000)
+        let startDate = Date()
         let endDate = Date().addingTimeInterval(31536000)
         let parameters = ConfigurationParameters(startDate: startDate, endDate: endDate)
         return parameters
@@ -119,6 +119,7 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
+        print(date)
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
