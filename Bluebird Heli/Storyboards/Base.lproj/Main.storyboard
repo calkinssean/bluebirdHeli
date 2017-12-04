@@ -222,7 +222,7 @@
                                     <constraint firstItem="Q9Z-Z1-OMO" firstAttribute="top" secondItem="lRi-qN-oYu" secondAttribute="top" id="uTu-CY-73A"/>
                                 </constraints>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbc-b9-tL5">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Summary" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zbc-b9-tL5">
                                 <rect key="frame" x="8" y="482" width="73" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -318,6 +318,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30º" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REh-bT-d8a">
+                                <rect key="frame" x="85" y="508" width="69.5" height="54"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -332,8 +338,10 @@
                             <constraint firstItem="L1i-a3-I3Z" firstAttribute="top" secondItem="Zbc-b9-tL5" secondAttribute="bottom" constant="8" id="WjT-LI-KPJ"/>
                             <constraint firstItem="uC0-hN-uqn" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="aYF-5l-2vD"/>
                             <constraint firstItem="yrk-GF-Gfb" firstAttribute="top" secondItem="yv2-d7-moK" secondAttribute="top" id="adO-a5-E9s"/>
+                            <constraint firstItem="REh-bT-d8a" firstAttribute="centerY" secondItem="L1i-a3-I3Z" secondAttribute="centerY" id="fEm-DU-Cfj"/>
                             <constraint firstItem="bQC-4Y-fvf" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" constant="8" id="fsO-Aq-9FH"/>
                             <constraint firstItem="uC0-hN-uqn" firstAttribute="top" secondItem="L1i-a3-I3Z" secondAttribute="bottom" constant="8" id="hPd-rK-RL2"/>
+                            <constraint firstItem="REh-bT-d8a" firstAttribute="leading" secondItem="L1i-a3-I3Z" secondAttribute="trailing" constant="8" id="hXw-5i-HU7"/>
                             <constraint firstItem="lRi-qN-oYu" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="hsW-eA-t5H"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="L1i-a3-I3Z" secondAttribute="trailing" constant="20" symbolic="YES" id="kaa-UB-fvp"/>
                             <constraint firstItem="Zbc-b9-tL5" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" constant="8" id="unQ-Mg-UGI"/>
@@ -346,6 +354,7 @@
                         <outlet property="calendarView" destination="5UX-TK-xPb" id="08p-so-Fln"/>
                         <outlet property="collectionView" destination="uC0-hN-uqn" id="PNW-Zq-UkG"/>
                         <outlet property="locationButton" destination="bQC-4Y-fvf" id="7Ww-9S-hOI"/>
+                        <outlet property="lowTemperatureLabel" destination="REh-bT-d8a" id="wI1-B1-6eF"/>
                         <outlet property="monthLabel" destination="YIE-S3-G31" id="zgH-e3-W9z"/>
                         <outlet property="summaryLabel" destination="Zbc-b9-tL5" id="xrk-bY-Zz3"/>
                         <outlet property="temperatureLabel" destination="L1i-a3-I3Z" id="zYw-X8-gRs"/>
@@ -354,7 +363,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBe-DV-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2615" y="-245"/>
+            <point key="canvasLocation" x="2613.5999999999999" y="-245.12743628185908"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="JG2-Cd-RHG">

@@ -16,6 +16,8 @@ struct Conditions {
     var precipProbability: Double = 0.0
     var precipType: String = ""
     var temperature: Double = 0.0
+    var temperatureHigh: Double = 0.0
+    var temperatureLow: Double = 0.0
     var apparentTemperature: Double = 0.0
     var humidity: Double = 0.0
     var pressure: Double = 0.0
@@ -35,6 +37,8 @@ struct Conditions {
         precipProbability = dict["precipProbability"] as? Double ?? 0.0
         precipType = dict["precipType"] as? String ?? ""
         temperature = dict["temperature"] as? Double ?? 0.0
+        temperatureHigh = dict["temperatureHigh"] as? Double ?? 0.0
+        temperatureLow = dict["temperatureLow"] as? Double ?? 0.0
         apparentTemperature = dict["apparentTemperature"] as? Double ?? 0.0
         humidity = dict["humidity"] as? Double ?? 0.0
         pressure = dict["pressure"] as? Double ?? 0.0
@@ -51,4 +55,5 @@ struct Conditions {
 enum ConditionType: String {
     case hourly = "Hourly"
     case daily = "Daily"
+    case currently = "Currently"
 }
