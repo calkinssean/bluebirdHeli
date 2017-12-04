@@ -47,3 +47,8 @@ struct Conditions {
     }
     
 }
+
+enum ConditionType: String {
+    case hourly = "Hourly"
+    case daily = "Daily"
+}

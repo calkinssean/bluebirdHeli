@@ -24,4 +24,14 @@ extension Date {
         return (min(date1, date2) ... max(date1, date2)).contains(self)
     }
     
+    func startInterval() -> Double {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: self)!.timeIntervalSince1970
+    }
+    
+    func endInterval() -> Double {
+        let calendar = Calendar.current
+        return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!.timeIntervalSince1970
+    }
+    
 }

@@ -19,6 +19,9 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
+    var hourlyConditions = [Conditions]()
+    var dailyConditions = Conditions()
+    
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
     
@@ -34,6 +37,7 @@ class SchedulingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedLocation = DataStore.shared.centralOperatingArea
+        hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateCurrentWeatherForLocation()
     }
@@ -123,11 +127,11 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
         
-        if date > Date() || date.isToday() {
-            return true
-        }
         if cellState.dateBelongsTo == .thisMonth {
-            return true
+            if date > Date() || date.isToday() {
+                return true
+            }
+            return false
         } else {
             return false
         }
@@ -141,9 +145,11 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        guard let location = self.selectedLocation else { return }
+        self.hourlyConditions = conditions(for: date, for: location, conditionType: .hourly)
+        self.collectionView.reloadData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -160,18 +166,13 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
 // MARK: - UICollectionViewDataSource
 extension SchedulingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let location = selectedLocation {
-            return location.weather.hourly.count
-        }
-        return 0
+        return self.hourlyConditions.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCollectionViewCell
-        if let location = selectedLocation {
-            let conditions = location.weather.hourly[indexPath.item]
-            cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
-        }
-        
+        let conditions = self.hourlyConditions[indexPath.item]
+        cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
         return cell
     }
 }
@@ -214,6 +215,24 @@ extension SchedulingViewController {
         self.locationButton.setTitle(self.selectedLocation?.name, for: .normal)
         self.summaryLabel.text = self.selectedLocation?.weather.currently.summary
         
+    }
+    
+    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
+        var conditionsToFilter = [Conditions]()
+        switch conditionType {
+        case .daily:
+            conditionsToFilter = location.weather.daily
+            break
+        case .hourly:
+            conditionsToFilter = location.weather.hourly
+            break
+        }
+        
+        return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
+    }
+    
+    func debugPrint(conditions: Conditions) {
+        print(conditions)
     }
     
 }
