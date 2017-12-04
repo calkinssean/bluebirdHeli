@@ -150,6 +150,7 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
         self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        updateUIWeather(for: selectedLocation, for: date)
         self.collectionView.reloadData()
     }
     
@@ -216,14 +217,13 @@ extension SchedulingViewController {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
         numberFormatter.maximumFractionDigits = 0
         if date.isToday() {
-            temperatureLabel.textColor = .black
             let temperature = location.weather.currently.apparentTemperature
             if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
                 self.temperatureLabel.text = "\(temperatureString)º"
             }
+            self.lowTemperatureLabel.text = ""
             self.summaryLabel.text = location.weather.currently.summary
         } else {
-            temperatureLabel.textColor = .red
             if let dailyConditions = conditions(for: date, for: selectedLocation, conditionType: .daily).first {
                 let highTemperature = dailyConditions.temperatureHigh
                 let lowTemperature = dailyConditions.temperatureLow
@@ -249,11 +249,7 @@ extension SchedulingViewController {
         
         return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
     }
-    
-    func debugPrint(conditions: Conditions) {
-        print(conditions)
-    }
-    
+
 }
 
 
