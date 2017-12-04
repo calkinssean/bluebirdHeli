@@ -17,7 +17,11 @@ extension Date {
     
     func isToday() -> Bool {
         let calendar = Calendar.current
-        return calendar.dateComponents([.month, .day], from: self) == calendar.dateComponents([.month, .day], from: Date())
+        return calendar.date(self, matchesComponents: calendar.dateComponents([.month, .day], from: Date()))
+    }
+  
+    func isBetween(_ date1: Date, and date2: Date) -> Bool {
+        return (min(date1, date2) ... max(date1, date2)).contains(self)
     }
     
 }

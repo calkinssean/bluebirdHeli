@@ -30,7 +30,7 @@ class SchedulingViewController: UIViewController {
     let currentDateSelectedViewColor = UIColor.purple
     
     var selectedLocation: Location?
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         selectedLocation = DataStore.shared.centralOperatingArea
@@ -122,6 +122,10 @@ extension SchedulingViewController: JTAppleCalendarViewDataSource {
 extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
+        
+        if date > Date() || date.isToday() {
+            return true
+        }
         if cellState.dateBelongsTo == .thisMonth {
             return true
         } else {
@@ -137,7 +141,7 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        print(date)
+        
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
     }
