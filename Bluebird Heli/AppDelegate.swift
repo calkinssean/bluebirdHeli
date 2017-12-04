@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DataStore.shared.currentGroup = group
             })
             WeatherController().setUpLocations()
-            WeatherController().fetchWeather()
+            WeatherController().fetchWeatherHourly()
             showDashboard()
         }
         

@@ -40,7 +40,7 @@ class LoginViewController: UIViewController {
     
     func userSignedIn() {
         WeatherController().setUpLocations()
-        WeatherController().fetchWeather()
+        WeatherController().fetchWeatherHourly()
     }
     
     func showDashboard() {
