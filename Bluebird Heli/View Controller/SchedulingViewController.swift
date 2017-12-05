@@ -32,6 +32,7 @@ class SchedulingViewController: UIViewController {
     
     let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
     
+    var headers = [["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"],["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]]
     var leftHeaders = ["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"]
     var rightHeaders = ["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]
     var leftSubtext = ["Snow showers conditions with low visibility", "7:37 AM", "0%", "w 0 mph", "0.3 in", "10 mi"]
@@ -256,6 +257,5 @@ extension SchedulingViewController {
     @objc func reserveTapped() {
         
     }
-
 }
 

@@ -11,6 +11,8 @@ import Foundation
 struct Conditions {
     
     var time: Double = 0.0
+    var sunriseTime: Double = 0.0
+    var sunsetTime: Double = 0.0
     var summary: String = ""
     var icon: String = ""
     var precipProbability: Double = 0.0
@@ -31,7 +33,10 @@ struct Conditions {
     init(){}
     
     init(dict: [String: Any]) {
+  
         time = dict["time"] as? Double ?? 0.0
+        sunriseTime = dict["sunriseTime"] as? Double ?? 0.0
+        sunsetTime = dict["sunsetTime"] as? Double ?? 0.0
         summary = dict["summary"] as? String ?? ""
         icon = dict["icon"] as? String ?? ""
         precipProbability = dict["precipProbability"] as? Double ?? 0.0

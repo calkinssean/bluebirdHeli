@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1406189C1FD7293C00BC8D58 /* ConversionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1406189B1FD7293C00BC8D58 /* ConversionController.swift */; };
 		140CA4181FD0877F00B52AE9 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CA4171FD0877F00B52AE9 /* FirebaseController.swift */; };
 		140EAE991FD5E570003E8C41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140EAE981FD5E570003E8C41 /* Extensions.swift */; };
 		141062E61FCB805F0007CED0 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141062E51FCB805F0007CED0 /* APIController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		04317FAAAB0F7737F09123C5 /* Pods-Bluebird Heli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.release.xcconfig"; sourceTree = "<group>"; };
+		1406189B1FD7293C00BC8D58 /* ConversionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionController.swift; sourceTree = "<group>"; };
 		140CA4171FD0877F00B52AE9 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
 		140EAE981FD5E570003E8C41 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		141062E51FCB805F0007CED0 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				141062E51FCB805F0007CED0 /* APIController.swift */,
 				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
+				1406189B1FD7293C00BC8D58 /* ConversionController.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
 				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
@@ -361,6 +364,7 @@
 				140EAE991FD5E570003E8C41 /* Extensions.swift in Sources */,
 				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
 				1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */,
+				1406189C1FD7293C00BC8D58 /* ConversionController.swift in Sources */,
 				147087BA1FC5276F00B13273 /* DateCell.swift in Sources */,
 				143A19761FC4E67700488927 /* LoginViewController.swift in Sources */,
 			);
