@@ -219,6 +219,7 @@ extension SchedulingViewController {
         formatter.dateFormat = "h:mm a"
         numberFormatter.maximumFractionDigits = 0
         measurementFormatter.numberFormatter = numberFormatter
+        measurementFormatter.unitOptions = .providedUnit
         switch header {
         case "SUMMARY":
             return conditions.summary
@@ -238,7 +239,6 @@ extension SchedulingViewController {
             }
             return conditions.precipType
         case "PRECIPITATION":
-            
             return measurementFormatter.string(from: conditions.precipAccumulation)
         case "HUMIDITY":
             return "\(formattedNumberString(from: conditions.humidity))%"
