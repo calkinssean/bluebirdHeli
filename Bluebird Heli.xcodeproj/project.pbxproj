@@ -30,6 +30,7 @@
 		1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BD1FCCEF8100959AC7 /* Group.swift */; };
 		14BBC9E41FD08ACB0096BBF6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */; };
 		14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */; };
+		14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */; };
 		14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989C41FD1E1B10024724A /* WeatherController.swift */; };
 		14C989CB1FD1F1C50024724A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989CA1FD1F1C50024724A /* Configuration.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
@@ -62,6 +63,7 @@
 		1481B9BD1FCCEF8100959AC7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
 		14C989C41FD1E1B10024724A /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		14C989CA1FD1F1C50024724A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		50A0BF17C7AF70CB22677329 /* Pods-Bluebird Heli.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug (production).xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug (production).xcconfig"; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
+				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */,
 				14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
+				14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */,
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
