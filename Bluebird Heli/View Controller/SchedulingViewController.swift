@@ -22,6 +22,8 @@ class SchedulingViewController: UIViewController {
     
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
+    let measurementFormatter = MeasurementFormatter()
+    let 🇺🇸 = Locale(identifier: "en_US")
     
     let weekendTextColor = UIColor.gray
     let weekdayTextColor = UIColor.black
@@ -38,7 +40,8 @@ class SchedulingViewController: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        formatter.locale = 🇺🇸
         hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
@@ -213,6 +216,12 @@ extension SchedulingViewController {
         case "SUNRISE":
             formatter.dateFormat = "h:mm a"
             return formatter.string(from: conditions.sunriseTime)
+        case "TEMPERATURE HIGH":
+            numberFormatter.maximumFractionDigits = 0
+            guard let tempHigh = numberFormatter.string(from: NSNumber(value: conditions.temperatureHigh)) else { return "" }
+            return "\(tempHigh)º"
+        case "CHANCE OF PRECIP":
+            return
         default:
             <#code#>
         }
@@ -223,6 +232,7 @@ extension SchedulingViewController {
  */
     }
     
+
     func selectLocationAlert() {
         let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
