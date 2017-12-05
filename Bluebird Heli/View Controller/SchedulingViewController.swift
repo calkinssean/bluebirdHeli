@@ -32,11 +32,7 @@ class SchedulingViewController: UIViewController {
     
     let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
     
-    var headers = [["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"],["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]]
-    var leftHeaders = ["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"]
-    var rightHeaders = ["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]
-    var leftSubtext = ["Snow showers conditions with low visibility", "7:37 AM", "0%", "w 0 mph", "0.3 in", "10 mi"]
-    var rightSubtext = ["", "5:00 PM", "71%", "32º", "30.4 inHg", "0"]
+    var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
     var selectedLocation = DataStore.shared.centralOperatingArea
   
@@ -189,20 +185,43 @@ extension SchedulingViewController: UICollectionViewDataSource {
 extension SchedulingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leftHeaders.count
+        return weatherDetailHeaders[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
-        cell.setUpCell(leftHeader: leftHeaders[indexPath.row], leftSubtext: leftSubtext[indexPath.row], rightHeader: rightHeaders[indexPath.row], rightSubtext: rightSubtext[indexPath.row])
+      
         return cell
     }
     
-    
+}
+
+// MARK: - UITableViewDelegate
+extension SchedulingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 }
 
 // MARK: - Helper
 extension SchedulingViewController {
+    
+    func weatherDetailString(from header: String, using conditions: Conditions) -> String {
+        switch header {
+        case "SUMMARY":
+            return conditions.summary
+        case "SUNRISE":
+            formatter.dateFormat = "h:mm a"
+            return formatter.string(from: conditions.sunriseTime)
+        default:
+            <#code#>
+        }
+        
+        /*
+ ["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]
+ 
+ */
+    }
     
     func selectLocationAlert() {
         let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
@@ -251,7 +270,7 @@ extension SchedulingViewController {
             break
         }
         
-        return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
+        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
     @objc func reserveTapped() {

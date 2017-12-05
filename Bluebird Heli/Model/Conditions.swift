@@ -10,13 +10,15 @@ import Foundation
 
 struct Conditions {
     
-    var time: Double = 0.0
-    var sunriseTime: Double = 0.0
-    var sunsetTime: Double = 0.0
+    var time: Date = Date()
+    var temperatureMaxTime: Date = Date()
+    var temperatureMinTime: Date = Date()
+    var sunriseTime: Date = Date()
+    var sunsetTime: Date = Date()
     var summary: String = ""
     var icon: String = ""
-    var precipProbability: Double = 0.0
     var precipType: String = ""
+    var precipProbability: Double = 0.0
     var temperature: Double = 0.0
     var temperatureHigh: Double = 0.0
     var temperatureLow: Double = 0.0
@@ -34,9 +36,9 @@ struct Conditions {
     
     init(dict: [String: Any]) {
   
-        time = dict["time"] as? Double ?? 0.0
-        sunriseTime = dict["sunriseTime"] as? Double ?? 0.0
-        sunsetTime = dict["sunsetTime"] as? Double ?? 0.0
+        time = Date(timeIntervalSince1970: dict["time"] as? Double ?? 0.0)
+        sunriseTime = Date(timeIntervalSince1970: dict["sunriseTime"] as? Double ?? 0.0)
+        sunsetTime = Date(timeIntervalSince1970: dict["sunsetTime"] as? Double ?? 0.0)
         summary = dict["summary"] as? String ?? ""
         icon = dict["icon"] as? String ?? ""
         precipProbability = dict["precipProbability"] as? Double ?? 0.0
@@ -44,6 +46,8 @@ struct Conditions {
         temperature = dict["temperature"] as? Double ?? 0.0
         temperatureHigh = dict["temperatureHigh"] as? Double ?? 0.0
         temperatureLow = dict["temperatureLow"] as? Double ?? 0.0
+        temperatureMaxTime = Date(timeIntervalSince1970: dict["temperatureMaxTime"] as? Double ?? 0.0)
+        temperatureMinTime = Date(timeIntervalSince1970: dict["temperatureMinTime"] as? Double ?? 0.0)
         apparentTemperature = dict["apparentTemperature"] as? Double ?? 0.0
         humidity = dict["humidity"] as? Double ?? 0.0
         pressure = dict["pressure"] as? Double ?? 0.0

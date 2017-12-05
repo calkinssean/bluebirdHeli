@@ -25,7 +25,7 @@ class Converter {
         return metersPerSecond.converted(to: UnitSpeed.milesPerHour)
     }
 
-    func fahrenheit(from celsius: Double) {
+    func fahrenheit(from celsius: Double) -> Measurement<UnitTemperature> {
         let temperatureCelsius = Measurement(value: celsius, unit: UnitTemperature.celsius)
         return temperatureCelsius.converted(to: UnitTemperature.fahrenheit)
     }

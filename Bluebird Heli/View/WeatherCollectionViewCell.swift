@@ -18,14 +18,12 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     let numberFormatter = NumberFormatter()
     let dateFormatter = DateFormatter()
     
-    func configureCell(time: Double, iconString: String, temperature: Double) {
-        
-        let date = Date(timeIntervalSince1970: time)
-    
+    func configureCell(time: Date, iconString: String, temperature: Double) {
+       
         dateFormatter.dateFormat = "h"
-        timeLabel.text = dateFormatter.string(from: date)
+        timeLabel.text = dateFormatter.string(from: time)
         dateFormatter.dateFormat = "a"
-        amPmLabel.text = dateFormatter.string(from: date)
+        amPmLabel.text = dateFormatter.string(from: time)
         if let icon = UIImage(named: iconString) {
             iconImage.image = icon
         }
