@@ -11,10 +11,7 @@ import JTAppleCalendar
 
 class SchedulingViewController: UIViewController {
     @IBOutlet var locationButton: UIButton!
-    @IBOutlet var summaryLabel: UILabel!
-    @IBOutlet var temperatureLabel: UILabel!
-    @IBOutlet var lowTemperatureLabel: UILabel!
-    
+    @IBOutlet var tableView: UITableView!
     @IBOutlet var monthLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
@@ -33,6 +30,13 @@ class SchedulingViewController: UIViewController {
     let outsideMonthColor = UIColor.clear
     let currentDateSelectedViewColor = UIColor.purple
     
+    let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
+    
+    var leftHeaders = ["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"]
+    var rightHeaders = ["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]
+    var leftSubtext = ["Snow showers conditions with low visibility", "7:37 AM", "0%", "w 0 mph", "0.3 in", "10 mi"]
+    var rightSubtext = ["", "5:00 PM", "71%", "32º", "30.4 inHg", "0"]
+    
     var selectedLocation = DataStore.shared.centralOperatingArea
   
     override func viewDidLoad() {
@@ -41,6 +45,7 @@ class SchedulingViewController: UIViewController {
         hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
+        self.navigationItem.rightBarButtonItem = reserveButton
         
     }
     
@@ -179,6 +184,22 @@ extension SchedulingViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UITableViewDataSource
+extension SchedulingViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return leftHeaders.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
+        cell.setUpCell(leftHeader: leftHeaders[indexPath.row], leftSubtext: leftSubtext[indexPath.row], rightHeader: rightHeaders[indexPath.row], rightSubtext: rightSubtext[indexPath.row])
+        return cell
+    }
+    
+    
+}
+
 // MARK: - Helper
 extension SchedulingViewController {
     
@@ -215,25 +236,7 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
-        numberFormatter.maximumFractionDigits = 0
-        if date.isToday() {
-            let temperature = location.weather.currently.apparentTemperature
-            if let temperatureString = numberFormatter.string(from: temperature as NSNumber) {
-                self.temperatureLabel.text = "\(temperatureString)º"
-            }
-            self.lowTemperatureLabel.text = ""
-            self.summaryLabel.text = location.weather.currently.summary
-        } else {
-            if let dailyConditions = conditions(for: date, for: selectedLocation, conditionType: .daily).first {
-                let highTemperature = dailyConditions.temperatureHigh
-                let lowTemperature = dailyConditions.temperatureLow
-                if let temperatureHighString = numberFormatter.string(from: highTemperature as NSNumber), let temperatureLowString = numberFormatter.string(from: lowTemperature as NSNumber) {
-                    self.temperatureLabel.text = "\(temperatureHighString)º"
-                    self.lowTemperatureLabel.text = "\(temperatureLowString)º"
-                    self.summaryLabel.text = dailyConditions.summary
-                }
-            }
-        }
+     
     }
 
     func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
@@ -249,7 +252,10 @@ extension SchedulingViewController {
         
         return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
     }
+    
+    @objc func reserveTapped() {
+        
+    }
 
 }
-
 
