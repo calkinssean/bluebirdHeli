@@ -193,7 +193,13 @@ extension SchedulingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
-      
+        
+        let leftHeader = weatherDetailHeaders[0][indexPath.row]
+        let rightHeader = weatherDetailHeaders[1][indexPath.row]
+        let leftSubtext = weatherDetailString(from: leftHeader, using: dailyConditions)
+        let rightSubtext = weatherDetailString(from: rightHeader, using: dailyConditions)
+        cell.setUpCell(leftHeader: leftHeader, leftSubtext: leftSubtext, rightHeader: rightHeader, rightSubtext: rightSubtext)
+        
         return cell
     }
     
@@ -210,48 +216,66 @@ extension SchedulingViewController: UITableViewDelegate {
 extension SchedulingViewController {
     
     func weatherDetailString(from header: String, using conditions: Conditions) -> String {
+        formatter.dateFormat = "h:mm a"
+        numberFormatter.maximumFractionDigits = 0
+        measurementFormatter.numberFormatter = numberFormatter
         switch header {
         case "SUMMARY":
             return conditions.summary
         case "SUNRISE":
-            formatter.dateFormat = "h:mm a"
             return formatter.string(from: conditions.sunriseTime)
+        case "SUNSET":
+            return formatter.string(from: conditions.sunsetTime)
         case "TEMPERATURE HIGH":
-            numberFormatter.maximumFractionDigits = 0
-            guard let tempHigh = numberFormatter.string(from: NSNumber(value: conditions.temperatureHigh)) else { return "" }
-            return "\(tempHigh)º"
+            return measurementFormatter.string(from: conditions.temperatureHigh)
+        case "TEMPERATURE LOW":
+            return measurementFormatter.string(from: conditions.temperatureLow)
         case "CHANCE OF PRECIP":
-            return
+            return "\(formattedNumberString(from: conditions.precipProbability))%"
+        case "TYPE":
+            if conditions.precipType == "" {
+                return "--"
+            }
+            return conditions.precipType
+        case "PRECIPITATION":
+            
+            return measurementFormatter.string(from: conditions.precipAccumulation)
+        case "HUMIDITY":
+            return "\(formattedNumberString(from: conditions.humidity))%"
+        case "WIND":
+            return "\(Converter().direction(from: conditions.windBearing)) \(measurementFormatter.string(from: conditions.windSpeed))"
+        case "GUSTS":
+            return measurementFormatter.string(from: conditions.windGust)
+        case "VISIBILITY":
+            return measurementFormatter.string(from: conditions.visibility)
+        case "UV INDEX":
+            return "\(formattedNumberString(from: conditions.uvIndex))"
         default:
-            <#code#>
+            return ""
         }
-        
-        /*
- ["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]
- 
- */
     }
     
+    func formattedNumberString(from double: Double) -> String {
+        guard let unwrappedFormattedNumberString = numberFormatter.string(from: NSNumber(value: double)) else { return "" }
+        return unwrappedFormattedNumberString
+    }
 
     func selectLocationAlert() {
         let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.northerOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
         }
         let southernAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
@@ -266,7 +290,10 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
-     
+        guard let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first else { return }
+        self.dailyConditions = dailyConditions
+        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
 
     func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
