@@ -15,22 +15,24 @@ class WeatherCollectionViewCell: UICollectionViewCell {
     @IBOutlet var iconImage: UIImageView!
     @IBOutlet var temperatureLabel: UILabel!
     
-    let numberFormatter = NumberFormatter()
-    let dateFormatter = DateFormatter()
-    
-    func configureCell(time: Double, iconString: String, temperature: Double) {
+    func configureCell(time: Date, iconString: String, temperature: Measurement<UnitTemperature>) {
         
-        let date = Date(timeIntervalSince1970: time)
-    
+        let dateFormatter = DateFormatter()
+        let measurementFormatter = MeasurementFormatter()
+        let numberFormatter = NumberFormatter()
+        let 🇺🇸 = Locale(identifier: "en_US")
+       
+        numberFormatter.maximumFractionDigits = 0
+        measurementFormatter.locale = 🇺🇸
+        measurementFormatter.numberFormatter = numberFormatter
         dateFormatter.dateFormat = "h"
-        timeLabel.text = dateFormatter.string(from: date)
+        timeLabel.text = dateFormatter.string(from: time)
         dateFormatter.dateFormat = "a"
-        amPmLabel.text = dateFormatter.string(from: date)
+        amPmLabel.text = dateFormatter.string(from: time)
         if let icon = UIImage(named: iconString) {
             iconImage.image = icon
         }
-        numberFormatter.maximumFractionDigits = 0
-        temperatureLabel.text = "\(numberFormatter.string(from: temperature as NSNumber) ?? "0")º"
+        temperatureLabel.text = measurementFormatter.string(from: temperature)
     }
     
 }

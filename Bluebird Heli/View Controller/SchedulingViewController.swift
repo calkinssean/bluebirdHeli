@@ -13,15 +13,18 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var monthLabel: UILabel!
+    @IBOutlet var noDataLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
     var hourlyConditions = [Conditions]()
-    var dailyConditions = Conditions()
+    var dailyConditions: Conditions?
     
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
+    let measurementFormatter = MeasurementFormatter()
+    let 🇺🇸 = Locale(identifier: "en_US")
     
     let weekendTextColor = UIColor.gray
     let weekdayTextColor = UIColor.black
@@ -32,16 +35,14 @@ class SchedulingViewController: UIViewController {
     
     let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
     
-    var leftHeaders = ["SUMMARY", "SUNRISE", "CHANCE OF SNOW", "WIND", "PRECIPITATION", "VISIBILITY"]
-    var rightHeaders = ["", "SUNSET", "HUMIDITY", "FEELS LIKE", "PRESSURE", "UV INDEX"]
-    var leftSubtext = ["Snow showers conditions with low visibility", "7:37 AM", "0%", "w 0 mph", "0.3 in", "10 mi"]
-    var rightSubtext = ["", "5:00 PM", "71%", "32º", "30.4 inHg", "0"]
+    var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
     var selectedLocation = DataStore.shared.centralOperatingArea
   
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
+        formatter.locale = 🇺🇸
         hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
@@ -154,7 +155,6 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
-        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
         updateUIWeather(for: selectedLocation, for: date)
         self.collectionView.reloadData()
     }
@@ -188,40 +188,95 @@ extension SchedulingViewController: UICollectionViewDataSource {
 extension SchedulingViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return leftHeaders.count
+        return weatherDetailHeaders[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
-        cell.setUpCell(leftHeader: leftHeaders[indexPath.row], leftSubtext: leftSubtext[indexPath.row], rightHeader: rightHeaders[indexPath.row], rightSubtext: rightSubtext[indexPath.row])
+        
+        let leftHeader = weatherDetailHeaders[0][indexPath.row]
+        let rightHeader = weatherDetailHeaders[1][indexPath.row]
+        let leftSubtext = weatherDetailString(from: leftHeader, using: dailyConditions)
+        let rightSubtext = weatherDetailString(from: rightHeader, using: dailyConditions)
+        cell.setUpCell(leftHeader: leftHeader, leftSubtext: leftSubtext, rightHeader: rightHeader, rightSubtext: rightSubtext)
+        
         return cell
     }
     
-    
+}
+
+// MARK: - UITableViewDelegate
+extension SchedulingViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 }
 
 // MARK: - Helper
 extension SchedulingViewController {
     
+    func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
+        guard let conditions = conditions else { return "--" }
+        formatter.dateFormat = "h:mm a"
+        numberFormatter.maximumFractionDigits = 0
+        measurementFormatter.numberFormatter = numberFormatter
+        measurementFormatter.unitOptions = .providedUnit
+        switch header {
+        case "SUMMARY":
+            return conditions.summary
+        case "SUNRISE":
+            return formatter.string(from: conditions.sunriseTime)
+        case "SUNSET":
+            return formatter.string(from: conditions.sunsetTime)
+        case "TEMPERATURE HIGH":
+            return measurementFormatter.string(from: conditions.temperatureHigh)
+        case "TEMPERATURE LOW":
+            return measurementFormatter.string(from: conditions.temperatureLow)
+        case "CHANCE OF PRECIP":
+            return "\(formattedNumberString(from: conditions.precipProbability))%"
+        case "TYPE":
+            if conditions.precipType == "" {
+                return "--"
+            }
+            return conditions.precipType
+        case "PRECIPITATION":
+            return measurementFormatter.string(from: conditions.precipAccumulation)
+        case "HUMIDITY":
+            return "\(formattedNumberString(from: conditions.humidity))%"
+        case "WIND":
+            return "\(Converter().direction(from: conditions.windBearing)) \(measurementFormatter.string(from: conditions.windSpeed))"
+        case "GUSTS":
+            return measurementFormatter.string(from: conditions.windGust)
+        case "VISIBILITY":
+            return measurementFormatter.string(from: conditions.visibility)
+        case "UV INDEX":
+            return "\(formattedNumberString(from: conditions.uvIndex))"
+        default:
+            return ""
+        }
+    }
+    
+    func formattedNumberString(from double: Double) -> String {
+        guard let unwrappedFormattedNumberString = numberFormatter.string(from: NSNumber(value: double)) else { return "" }
+        return unwrappedFormattedNumberString
+    }
+
     func selectLocationAlert() {
         let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.northerOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
         }
         let southernAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
-            self.collectionView.reloadData()
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
@@ -236,7 +291,16 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
-     
+        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        if let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+            self.noDataLabel.isHidden = true
+            self.dailyConditions = dailyConditions
+        } else {
+            self.noDataLabel.isHidden = false
+            self.dailyConditions = nil
+        }
+        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
 
     func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
@@ -250,12 +314,11 @@ extension SchedulingViewController {
             break
         }
         
-        return conditionsToFilter.filter({$0.time >= date.startInterval() && $0.time <= date.endInterval()})
+        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
     @objc func reserveTapped() {
         
     }
-
 }
 
