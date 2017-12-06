@@ -13,12 +13,13 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var monthLabel: UILabel!
+    @IBOutlet var noDataLabel: UILabel!
     @IBOutlet var yearLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
     var hourlyConditions = [Conditions]()
-    var dailyConditions = Conditions()
+    var dailyConditions: Conditions?
     
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
@@ -154,7 +155,6 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
         handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
-        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
         updateUIWeather(for: selectedLocation, for: date)
         self.collectionView.reloadData()
     }
@@ -215,7 +215,8 @@ extension SchedulingViewController: UITableViewDelegate {
 // MARK: - Helper
 extension SchedulingViewController {
     
-    func weatherDetailString(from header: String, using conditions: Conditions) -> String {
+    func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
+        guard let conditions = conditions else { return "--" }
         formatter.dateFormat = "h:mm a"
         numberFormatter.maximumFractionDigits = 0
         measurementFormatter.numberFormatter = numberFormatter
@@ -290,8 +291,14 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
-        guard let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first else { return }
-        self.dailyConditions = dailyConditions
+        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        if let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+            self.noDataLabel.isHidden = true
+            self.dailyConditions = dailyConditions
+        } else {
+            self.noDataLabel.isHidden = false
+            self.dailyConditions = nil
+        }
         self.collectionView.reloadData()
         self.tableView.reloadData()
     }

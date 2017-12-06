@@ -286,6 +286,12 @@
                                     <outlet property="delegate" destination="nNq-db-Aor" id="a4c-2s-1jx"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO WEATHER DATA AVAILABLE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBp-TJ-wUV">
+                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RNR-3T-bPv">
                                 <rect key="frame" x="97.5" y="72.5" width="34" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -382,6 +388,7 @@
                             <constraint firstItem="uC0-hN-uqn" firstAttribute="top" secondItem="V5w-gn-ON8" secondAttribute="bottom" id="41J-Hc-0Mg"/>
                             <constraint firstItem="YIE-S3-G31" firstAttribute="top" secondItem="yv2-d7-moK" secondAttribute="top" id="6QY-9C-JWY"/>
                             <constraint firstItem="5UX-TK-xPb" firstAttribute="height" secondItem="yv2-d7-moK" secondAttribute="height" multiplier="0.4" id="81N-YH-mZu"/>
+                            <constraint firstItem="dBp-TJ-wUV" firstAttribute="width" secondItem="uC0-hN-uqn" secondAttribute="width" id="8oh-NT-muB"/>
                             <constraint firstItem="yv2-d7-moK" firstAttribute="trailing" secondItem="uC0-hN-uqn" secondAttribute="trailing" id="Dh3-5T-4jZ"/>
                             <constraint firstItem="YIE-S3-G31" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" constant="22" id="H2P-kM-W3D"/>
                             <constraint firstItem="V5w-gn-ON8" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="HkL-cW-mjs"/>
@@ -389,9 +396,12 @@
                             <constraint firstItem="lRi-qN-oYu" firstAttribute="top" secondItem="RNR-3T-bPv" secondAttribute="bottom" id="WDu-H9-Gel"/>
                             <constraint firstItem="yv2-d7-moK" firstAttribute="trailing" secondItem="V5w-gn-ON8" secondAttribute="trailing" id="aHx-Oz-LTE"/>
                             <constraint firstItem="uC0-hN-uqn" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="aYF-5l-2vD"/>
+                            <constraint firstItem="dBp-TJ-wUV" firstAttribute="centerX" secondItem="uC0-hN-uqn" secondAttribute="centerX" id="aZl-Ew-2fZ"/>
+                            <constraint firstItem="dBp-TJ-wUV" firstAttribute="centerY" secondItem="uC0-hN-uqn" secondAttribute="centerY" id="fJd-MI-ayi"/>
                             <constraint firstItem="bQC-4Y-fvf" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" constant="8" id="fsO-Aq-9FH"/>
                             <constraint firstItem="lRi-qN-oYu" firstAttribute="leading" secondItem="yv2-d7-moK" secondAttribute="leading" id="hsW-eA-t5H"/>
                             <constraint firstItem="lRi-qN-oYu" firstAttribute="top" secondItem="YIE-S3-G31" secondAttribute="bottom" id="oJz-kv-fLq"/>
+                            <constraint firstItem="dBp-TJ-wUV" firstAttribute="height" secondItem="uC0-hN-uqn" secondAttribute="height" id="rm7-o4-9hy"/>
                             <constraint firstItem="V5w-gn-ON8" firstAttribute="top" secondItem="bQC-4Y-fvf" secondAttribute="bottom" constant="8" id="v9N-fj-Q9p"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bQC-4Y-fvf" secondAttribute="trailing" constant="20" symbolic="YES" id="wUv-P3-Z49"/>
                             <constraint firstItem="uC0-hN-uqn" firstAttribute="bottom" secondItem="yv2-d7-moK" secondAttribute="bottom" id="zKO-NL-18E"/>
@@ -403,6 +413,7 @@
                         <outlet property="collectionView" destination="uC0-hN-uqn" id="PNW-Zq-UkG"/>
                         <outlet property="locationButton" destination="bQC-4Y-fvf" id="7Ww-9S-hOI"/>
                         <outlet property="monthLabel" destination="YIE-S3-G31" id="zgH-e3-W9z"/>
+                        <outlet property="noDataLabel" destination="dBp-TJ-wUV" id="eiK-iA-lQ2"/>
                         <outlet property="tableView" destination="V5w-gn-ON8" id="79G-8O-flD"/>
                         <outlet property="yearLabel" destination="RNR-3T-bPv" id="0jb-DF-5ig"/>
                     </connections>
