@@ -248,7 +248,10 @@ extension SchedulingViewController {
         case "GUSTS":
             return measurementFormatter.string(from: conditions.windGust)
         case "VISIBILITY":
-            return measurementFormatter.string(from: conditions.visibility)
+            if let visibility = conditions.visibility {
+                return measurementFormatter.string(from: visibility)
+            }
+            return "--"
         case "UV INDEX":
             return "\(formattedNumberString(from: conditions.uvIndex))"
         default:

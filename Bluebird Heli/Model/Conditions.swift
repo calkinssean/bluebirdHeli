@@ -20,7 +20,7 @@ struct Conditions {
     var precipType: String = ""
     var precipProbability: Double = 0.0
     var precipAccumulation = Measurement<UnitLength>(value: 0.0, unit: .inches)
-    var visibility = Measurement<UnitLength>(value: 0.0, unit: .miles)
+    var visibility: Measurement<UnitLength>?
     var temperature = Measurement<UnitTemperature>(value: 0.0, unit: .fahrenheit)
     var temperatureHigh = Measurement<UnitTemperature>(value: 0.0, unit: .fahrenheit)
     var temperatureLow = Measurement<UnitTemperature>(value: 0.0, unit: .fahrenheit)
@@ -37,6 +37,10 @@ struct Conditions {
     init(){}
     
     init(dict: [String: Any]) {
+        
+        if let visibility = dict["visibility"] as? Double {
+            self.visibility = Measurement<UnitLength>(value: visibility, unit: .miles)
+        }
   
         time = Date(timeIntervalSince1970: dict["time"] as? Double ?? 0.0)
         sunriseTime = Date(timeIntervalSince1970: dict["sunriseTime"] as? Double ?? 0.0)
@@ -46,7 +50,6 @@ struct Conditions {
         precipProbability = dict["precipProbability"] as? Double ?? 0.0
         precipType = dict["precipType"] as? String ?? ""
         precipAccumulation = Measurement<UnitLength>(value: dict["precipAccumulation"] as? Double ?? 0.0, unit: .inches)
-        visibility = Measurement<UnitLength>(value: dict["visibility"] as? Double ?? 0.0, unit: .miles)
         temperature = Measurement<UnitTemperature>(value: dict["temperature"] as? Double ?? 0.0, unit: .fahrenheit)
         temperatureHigh = Measurement<UnitTemperature>(value: dict["temperatureHigh"] as? Double ?? 0.0, unit: .fahrenheit)
         temperatureLow = Measurement<UnitTemperature>(value: dict["temperatureLow"] as? Double ?? 0.0, unit: .fahrenheit)
