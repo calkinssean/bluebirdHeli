@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ycs-D3-kTV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ycs-D3-kTV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -79,6 +79,7 @@
                         <outlet property="tableView" destination="wd8-Pb-yHF" id="zeH-9D-BV8"/>
                         <segue destination="yy2-AE-Ldy" kind="show" identifier="Show Media Segue" id="OMQ-9I-TbG"/>
                         <segue destination="nNq-db-Aor" kind="show" identifier="showSchedulingSegue" id="61y-Aq-dSM"/>
+                        <segue destination="Xf4-lp-dXg" kind="show" identifier="upcomingTripsSegue" id="8vb-PB-xQy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqG-rF-Vk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -416,16 +417,86 @@
                         <outlet property="noDataLabel" destination="dBp-TJ-wUV" id="eiK-iA-lQ2"/>
                         <outlet property="tableView" destination="V5w-gn-ON8" id="79G-8O-flD"/>
                         <outlet property="yearLabel" destination="RNR-3T-bPv" id="0jb-DF-5ig"/>
+                        <segue destination="AJd-vL-7nX" kind="presentation" identifier="showReservationSegue" id="jiv-fC-3D2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBe-DV-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2613.5999999999999" y="-245.12743628185908"/>
+            <point key="canvasLocation" x="2614" y="-558"/>
         </scene>
-        <!--View Controller-->
+        <!--Reservation View Controller-->
+        <scene sceneID="ibn-dE-Zuj">
+            <objects>
+                <viewController id="AJd-vL-7nX" customClass="ReservationViewController" customModule="Bluebird_Heli" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gW3-6w-V0x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VeE-5t-fne">
+                                <rect key="frame" x="170" y="615" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backTapped:" destination="AJd-vL-7nX" eventType="touchUpInside" id="jra-AY-ByS"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pickup Location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZHH-An-oRi">
+                                <rect key="frame" x="37.5" y="42" width="300" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AJd-vL-7nX" id="ZoF-sX-idr"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pickup Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ESg-j4-S9f">
+                                <rect key="frame" x="37.5" y="94" width="300" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AJd-vL-7nX" id="XGI-kM-Uuo"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="# Of People" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mdW-Gi-ffW">
+                                <rect key="frame" x="37.5" y="146" width="300" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="AJd-vL-7nX" id="D53-qc-0vH"/>
+                                </connections>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mdW-Gi-ffW" firstAttribute="top" secondItem="ESg-j4-S9f" secondAttribute="bottom" constant="22" id="0hN-Fa-E6j"/>
+                            <constraint firstItem="mdW-Gi-ffW" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="BPq-PN-nwA"/>
+                            <constraint firstItem="ESg-j4-S9f" firstAttribute="width" secondItem="ZHH-An-oRi" secondAttribute="width" id="Wak-UU-63O"/>
+                            <constraint firstItem="mdW-Gi-ffW" firstAttribute="width" secondItem="ZHH-An-oRi" secondAttribute="width" id="afZ-mB-Uxr"/>
+                            <constraint firstItem="VeE-5t-fne" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="fo6-sC-zwO"/>
+                            <constraint firstItem="IpH-SN-JqJ" firstAttribute="bottom" secondItem="VeE-5t-fne" secondAttribute="bottom" constant="22" id="iYk-xH-bYW"/>
+                            <constraint firstItem="ZHH-An-oRi" firstAttribute="top" secondItem="IpH-SN-JqJ" secondAttribute="top" constant="22" id="ipO-00-7tY"/>
+                            <constraint firstItem="ZHH-An-oRi" firstAttribute="width" secondItem="gW3-6w-V0x" secondAttribute="width" multiplier="0.8" id="kDr-4u-C7k"/>
+                            <constraint firstItem="ESg-j4-S9f" firstAttribute="top" secondItem="ZHH-An-oRi" secondAttribute="bottom" constant="22" id="oxH-9B-qfc"/>
+                            <constraint firstItem="ESg-j4-S9f" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="q7C-Li-8Uk"/>
+                            <constraint firstItem="ZHH-An-oRi" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="qxa-Aw-aUF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IpH-SN-JqJ"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationTextField" destination="ZHH-An-oRi" id="ozF-nf-TeN"/>
+                        <outlet property="numberOfPeopleTextField" destination="mdW-Gi-ffW" id="QfU-vT-mKi"/>
+                        <outlet property="pickupTimeTextField" destination="ESg-j4-S9f" id="Epy-gy-Qta"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8I-N5-KT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3370" y="-558"/>
+        </scene>
+        <!--Photos/Videos-->
         <scene sceneID="JG2-Cd-RHG">
             <objects>
-                <viewController id="yy2-AE-Ldy" sceneMemberID="viewController">
+                <viewController title="Photos/Videos" id="yy2-AE-Ldy" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vuf-lg-xwG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -435,7 +506,40 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZW-Af-q40" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2615" y="550"/>
+            <point key="canvasLocation" x="2614" y="133"/>
+        </scene>
+        <!--Upcoming Trips-->
+        <scene sceneID="p1m-ks-d9b">
+            <objects>
+                <viewController title="Upcoming Trips" id="Xf4-lp-dXg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F86-nw-yQQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="vAz-XJ-QV1"/>
+                    </view>
+                    <connections>
+                        <segue destination="J72-tI-nzP" kind="show" identifier="tripDetailsSegue" id="sEy-DE-esu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pSk-ot-aTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2614" y="842"/>
+        </scene>
+        <!--Trip Details-->
+        <scene sceneID="XnX-Sl-rid">
+            <objects>
+                <viewController title="Trip Details" id="J72-tI-nzP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g5n-Yb-pBs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="mci-mP-6XI"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5lg-3w-Z0b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3343" y="842"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kj7-EW-Vu2">

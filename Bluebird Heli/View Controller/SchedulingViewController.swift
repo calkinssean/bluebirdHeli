@@ -33,8 +33,6 @@ class SchedulingViewController: UIViewController {
     let outsideMonthColor = UIColor.clear
     let currentDateSelectedViewColor = UIColor.purple
     
-    let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
-    
     var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
     var selectedLocation = DataStore.shared.centralOperatingArea
@@ -46,6 +44,8 @@ class SchedulingViewController: UIViewController {
         hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
+        
+        let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
         
     }
@@ -321,7 +321,7 @@ extension SchedulingViewController {
     }
     
     @objc func reserveTapped() {
-        
+        self.performSegue(withIdentifier: "showReservationSegue", sender: self)
     }
 }
 

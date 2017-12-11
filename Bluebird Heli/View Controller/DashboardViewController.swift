@@ -12,8 +12,8 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet var tableView: UITableView!
     
-    let rows = ["Schedule A Trip", "Photos/Videos"]
-    let imageNames = ["helicopter", "media"]
+    let rows = ["Schedule A Trip", "Photos/Videos", "Upcoming Trips"]
+    let imageNames = ["helicopter", "media", "upcomingTrips"]
     
     var parallaxOffsetSpeed: CGFloat = 200
     var cellHeight: CGFloat = 575

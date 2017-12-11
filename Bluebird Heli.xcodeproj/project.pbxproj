@@ -15,6 +15,7 @@
 		142347161FC4CA8200A129B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347141FC4CA8200A129B0 /* Main.storyboard */; };
 		142347181FC4CA8200A129B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 142347171FC4CA8200A129B0 /* Assets.xcassets */; };
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
+		1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */; };
 		143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143A19711FC4DAEF00488927 /* GoogleService-Info.plist */; };
 		143A19761FC4E67700488927 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19751FC4E67700488927 /* LoginViewController.swift */; };
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
@@ -49,6 +50,7 @@
 		142347171FC4CA8200A129B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1423471A1FC4CA8200A129B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1423471C1FC4CA8200A129B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		143A19711FC4DAEF00488927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		143A19751FC4E67700488927 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
+				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */,
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
+				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
 				140EAE991FD5E570003E8C41 /* Extensions.swift in Sources */,
 				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
