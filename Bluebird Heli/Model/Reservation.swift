@@ -10,7 +10,8 @@ import Foundation
 
 struct Reservation {
 
-    var group: Group?
-    var location: Location?
+    var groupUID: String?
+    var location: OperatingArea?
+    var pickupTime: Date?
     
 }

@@ -293,7 +293,7 @@ extension SchedulingViewController {
     }
     
     func updateUIWeather(for location: Location, for date: Date) {
-        self.locationButton.setTitle(self.selectedLocation.name, for: .normal)
+        self.locationButton.setTitle(self.selectedLocation.operatingArea?.rawValue, for: .normal)
         self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
         if let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first {
             self.noDataLabel.isHidden = true

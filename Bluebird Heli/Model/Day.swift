@@ -10,7 +10,7 @@ import Foundation
 
 struct Day {
     
-    var date: Date?
+    var date = Date()
     var reservationOne: Reservation?
     var reservationTwo: Reservation?
     
@@ -24,10 +24,7 @@ struct Day {
     func urlDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        if let date = date {
-            return formatter.string(from: date)
-        }
-        return ""
+        return formatter.string(from: date)
     }
     
 }

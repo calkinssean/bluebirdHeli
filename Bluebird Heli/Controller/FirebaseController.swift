@@ -44,16 +44,20 @@ class FirebaseController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateKey = dateFormatter.string(from: Date())
 
-        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observeSingleEvent(of: .value) { (snapshot) in
-            if snapshot.value is NSNull {
-                
-            } else {
-                print("ordered by key date string")
-                print(snapshot)
-            }
+        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
+            print("child added")
+            print(snapshot)
         }
         
-        datesURL.child("2017-12-15").child("date").setValue("prius")
+        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
+            print("child changed")
+            print(snapshot)
+        }
+        
+        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
+            print("child removed")
+            print(snapshot)
+        }
    
     }
     
