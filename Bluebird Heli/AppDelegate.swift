@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WeatherController().setUpLocations()
             WeatherController().fetchWeatherHourly()
             showDashboard()
+            FirebaseController().observeDates()
         }
         
         return true

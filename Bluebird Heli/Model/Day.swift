@@ -21,10 +21,6 @@ struct Day {
         return false
     }
     
-    func isToday() -> Bool {
-        return true
-    }
-    
     func urlDate() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
