@@ -15,12 +15,15 @@ class ReservationViewController: UIViewController {
     @IBOutlet var numberOfPeopleTextField: UITextField!
     
     var currentTextField = UITextField()
-    var pickerViewData = ["Heber", "Other One"]
+    var pickerViewData: [String] = []
     var pickerView = UIPickerView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpPickerView()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
 
@@ -37,7 +40,6 @@ class ReservationViewController: UIViewController {
     func setUpPickerView() {
         pickerView.delegate = self
         pickerView.dataSource = self
-        locationTextField.inputView = pickerView
     }
    
 }
@@ -61,9 +63,7 @@ extension ReservationViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        
-        
+        self.currentTextField.text = pickerViewData[row]
     }
     
 }
@@ -72,11 +72,21 @@ extension ReservationViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
+        case locationTextField:
+            self.pickerViewData = ["Heber Hangar", "North Salt Lake Hangar"]
+            self.pickerView.reloadAllComponents()
+            textField.inputView = pickerView
+            currentTextField = textField
         case pickupTimeTextField:
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .time
             textField.inputView = datePicker
             datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+        case numberOfPeopleTextField:
+            self.pickerViewData = ["1", "2", "3", "4", "5", "6", "7", "8"]
+            self.pickerView.reloadAllComponents()
+            textField.inputView = pickerView
+            currentTextField = textField
         default:
             break
             
@@ -90,7 +100,16 @@ extension ReservationViewController: UITextFieldDelegate {
 
 // MARK: - Helper
 extension ReservationViewController {
+    
     @objc func datePickerChanged(sender: UIDatePicker) {
-        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE, MMM dd - hh:mm a"
+        self.pickupTimeTextField.text = dateFormatter.string(from: sender.date)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.locationTextField.resignFirstResponder()
+        self.pickupTimeTextField.resignFirstResponder()
+        self.numberOfPeopleTextField.resignFirstResponder()
     }
 }
