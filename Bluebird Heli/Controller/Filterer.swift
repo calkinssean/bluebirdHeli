@@ -13,14 +13,15 @@ class Filterer {
     func day(for date: Date) -> Day {
         let calendar = Calendar.current
         let comps1 = calendar.dateComponents([.year, .month, .day], from: date)
-        let defaultValue = Day()
         for day in DataStore.shared.days {
             let comps2 = calendar.dateComponents([.year, .month, .day], from: day.date)
             if comps1 == comps2 {
                 return day
             }
         }
-        return defaultValue
+        var day = Day()
+        day.date = date
+        return day
     }
     
 }

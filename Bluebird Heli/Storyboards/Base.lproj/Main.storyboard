@@ -161,7 +161,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="84" height="89"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-i5-Rbp">
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-i5-Rbp">
                                                             <rect key="frame" x="22" y="24.5" width="40" height="40"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
@@ -180,17 +180,33 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tof-It-yLe">
+                                                            <rect key="frame" x="39" y="57" width="6" height="6"/>
+                                                            <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="6" id="czp-V1-EDw"/>
+                                                                <constraint firstAttribute="width" constant="6" id="qrh-26-PpI"/>
+                                                            </constraints>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </view>
                                                     </subviews>
                                                 </view>
                                                 <constraints>
                                                     <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="DCg-Kq-VrJ"/>
+                                                    <constraint firstItem="Tof-It-yLe" firstAttribute="centerX" secondItem="bdE-i5-Rbp" secondAttribute="centerX" id="Ub8-fT-34Q"/>
                                                     <constraint firstItem="bdE-i5-Rbp" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="WKY-tH-fBh"/>
+                                                    <constraint firstItem="Tof-It-yLe" firstAttribute="top" secondItem="cCE-mF-Y7d" secondAttribute="bottom" constant="2" id="aHp-YS-mY0"/>
                                                     <constraint firstItem="bdE-i5-Rbp" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="gIv-G2-z3O"/>
                                                     <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="mTD-uR-o2i"/>
                                                 </constraints>
                                                 <connections>
+                                                    <outlet property="availabilityView" destination="bdE-i5-Rbp" id="Sb3-nr-61E"/>
                                                     <outlet property="dateLabel" destination="cCE-mF-Y7d" id="8vX-d9-m1t"/>
-                                                    <outlet property="selectedView" destination="bdE-i5-Rbp" id="R7w-k7-t25"/>
+                                                    <outlet property="selectedView" destination="Tof-It-yLe" id="F6B-9f-FZ2"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -422,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBe-DV-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2614" y="-558"/>
+            <point key="canvasLocation" x="2613.5999999999999" y="-558.17091454272872"/>
         </scene>
         <!--Reservation View Controller-->
         <scene sceneID="ibn-dE-Zuj">

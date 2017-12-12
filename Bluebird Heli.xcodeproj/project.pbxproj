@@ -17,6 +17,7 @@
 		1423471B1FC4CA8200A129B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142347191FC4CA8200A129B0 /* LaunchScreen.storyboard */; };
 		1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */; };
 		14341F061FDF4E5D000D9E60 /* Filterer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14341F051FDF4E5D000D9E60 /* Filterer.swift */; };
+		14341F081FDF51CE000D9E60 /* DateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14341F071FDF51CE000D9E60 /* DateController.swift */; };
 		143A19721FC4DB6600488927 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143A19711FC4DAEF00488927 /* GoogleService-Info.plist */; };
 		143A19761FC4E67700488927 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19751FC4E67700488927 /* LoginViewController.swift */; };
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
@@ -53,6 +54,7 @@
 		1423471C1FC4CA8200A129B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
 		14341F051FDF4E5D000D9E60 /* Filterer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filterer.swift; sourceTree = "<group>"; };
+		14341F071FDF51CE000D9E60 /* DateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateController.swift; sourceTree = "<group>"; };
 		143A19711FC4DAEF00488927 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		143A19751FC4E67700488927 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				141062E51FCB805F0007CED0 /* APIController.swift */,
 				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				1406189B1FD7293C00BC8D58 /* Converter.swift */,
+				14341F071FDF51CE000D9E60 /* DateController.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				14341F051FDF4E5D000D9E60 /* Filterer.swift */,
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
@@ -369,6 +372,7 @@
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
 				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
+				14341F081FDF51CE000D9E60 /* DateController.swift in Sources */,
 				140EAE991FD5E570003E8C41 /* Extensions.swift in Sources */,
 				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
 				1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */,

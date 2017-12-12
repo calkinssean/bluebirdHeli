@@ -15,7 +15,7 @@ struct Day {
     var reservationTwo: Reservation?
     
     func available() -> Bool {
-        if reservationOne != nil || reservationTwo != nil {
+        if reservationOne == nil || reservationTwo == nil {
             return true
         }
         return false

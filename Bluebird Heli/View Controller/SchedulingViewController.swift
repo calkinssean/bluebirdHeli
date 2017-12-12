@@ -30,7 +30,11 @@ class SchedulingViewController: UIViewController {
     let weekdayTextColor = UIColor.black
     let currentDayTextColor = UIColor.red
     let selectedDateTextColor = UIColor.blue
-    let outsideMonthColor = UIColor.clear
+    let outsideMonthTextColor = UIColor.clear
+    
+    let availableViewColor = UIColor.green
+    let unavailableViewColor = UIColor.red
+    let standbyViewColor = UIColor.yellow
     let currentDateSelectedViewColor = UIColor.purple
     
     var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
@@ -81,9 +85,15 @@ class SchedulingViewController: UIViewController {
                     validCell.dateLabel.textColor = weekdayTextColor
                 }
             } else {
-                validCell.dateLabel.textColor = outsideMonthColor
+                validCell.dateLabel.textColor = outsideMonthTextColor
             }
         }
+    }
+    
+    func handleCellViewColor(view: JTAppleCell?, cellState: CellState) {
+        guard let validCell = view as? DateCell else { return }
+        let day = Filterer().day(for: cellState.date)
+        validCell.availabilityView.backgroundColor = self.color(for: day)
     }
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
@@ -148,20 +158,23 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let dateCell = cell as! DateCell
         dateCell.dateLabel.text = cellState.text
-        handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellViewColor(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelected(view: cell, cellState: cellState)
         updateUIWeather(for: selectedLocation, for: date)
+        handleCellViewColor(view: cell, cellState: cellState)
         self.collectionView.reloadData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellSelected(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+        handleCellSelected(view: cell, cellState: cellState)
+        handleCellViewColor(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
@@ -318,6 +331,35 @@ extension SchedulingViewController {
         }
         
         return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
+    }
+    
+    func color(for day: Day) -> UIColor {
+    
+        let calendar = Calendar.current
+        
+        switch calendar.compare(day.date, to: Date(), toGranularity: .month) {
+        case .orderedAscending:
+            return UIColor.clear
+        case .orderedSame:
+            if day.available() {
+                return availableViewColor
+            }
+            return unavailableViewColor
+        case .orderedDescending:
+            guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
+                    return UIColor.clear
+            }
+            if day.available() {
+                if dayComp1 <= (dayComp2 + 3) {
+                    return availableViewColor
+                } else {
+                    return standbyViewColor
+                }
+            } else {
+                return unavailableViewColor
+            }
+            
+        }
     }
     
     @objc func reserveTapped() {

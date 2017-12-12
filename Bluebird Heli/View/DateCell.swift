@@ -12,6 +12,7 @@ import JTAppleCalendar
 class DateCell: JTAppleCell {
     
     @IBOutlet var selectedView: UIView!
+    @IBOutlet var availabilityView: UIView!
     @IBOutlet var dateLabel: UILabel!
     
 }
