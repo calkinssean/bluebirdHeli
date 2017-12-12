@@ -27,14 +27,12 @@ class SchedulingViewController: UIViewController {
     let 🇺🇸 = Locale(identifier: "en_US")
     
     let weekendTextColor = UIColor.gray
-    let weekdayTextColor = UIColor.black
-    let currentDayTextColor = UIColor.red
-    let selectedDateTextColor = UIColor.blue
+    let weekdayTextColor = UIColor.white
     let outsideMonthTextColor = UIColor.clear
     
-    let availableViewColor = UIColor.green
-    let unavailableViewColor = UIColor.red
-    let standbyViewColor = UIColor.yellow
+    let availableViewColor = UIColor(red:0.51, green:0.62, blue:0.39, alpha:1.00)
+    let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
+    let standbyViewColor = UIColor(red:0.76, green:0.72, blue:0.12, alpha:1.00)
     let currentDateSelectedViewColor = UIColor.purple
     
     var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
@@ -72,28 +70,25 @@ class SchedulingViewController: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
-        
-        if cellState.isSelected {
-            validCell.dateLabel.textColor = selectedDateTextColor
-        } else {
-            if cellState.dateBelongsTo == .thisMonth {
-                if cellState.date.isToday() {
-                    validCell.dateLabel.textColor = currentDayTextColor
-                } else if cellState.date.isWeekend() {
-                    validCell.dateLabel.textColor = weekendTextColor
-                } else {
-                    validCell.dateLabel.textColor = weekdayTextColor
-                }
+        if cellState.dateBelongsTo == .thisMonth {
+            if cellState.date.isWeekend() {
+                validCell.dateLabel.textColor = weekendTextColor
             } else {
-                validCell.dateLabel.textColor = outsideMonthTextColor
+                validCell.dateLabel.textColor = weekdayTextColor
             }
+        } else {
+            validCell.dateLabel.textColor = outsideMonthTextColor
         }
     }
     
     func handleCellViewColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
-        let day = Filterer().day(for: cellState.date)
-        validCell.availabilityView.backgroundColor = self.color(for: day)
+        if cellState.dateBelongsTo == .thisMonth {
+            let day = Filterer().day(for: cellState.date)
+            validCell.availabilityView.backgroundColor = self.color(for: day, cellState: cellState)
+        } else {
+            validCell.availabilityView.backgroundColor = outsideMonthTextColor
+        }
     }
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
@@ -333,32 +328,44 @@ extension SchedulingViewController {
         return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
-    func color(for day: Day) -> UIColor {
+    func color(for day: Day, cellState: CellState) -> UIColor {
     
         let calendar = Calendar.current
+        
+        if cellState.dateBelongsTo != .thisMonth {
+            return UIColor.clear
+        }
         
         switch calendar.compare(day.date, to: Date(), toGranularity: .month) {
         case .orderedAscending:
             return UIColor.clear
         case .orderedSame:
-            if day.available() {
-                return availableViewColor
+            switch calendar.compare(day.date, to: Date(), toGranularity: .day) {
+            case .orderedAscending:
+                return UIColor.clear
+            case .orderedSame:
+                if day.available() {
+                    return availableViewColor
+                }
+            case .orderedDescending:
+                guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
+                    return UIColor.clear
+                }
+                if day.available() {
+                    if dayComp1 <= (dayComp2 + 3) {
+                        return availableViewColor
+                    } else {
+                        return standbyViewColor
+                    }
+                }
             }
             return unavailableViewColor
         case .orderedDescending:
-            guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
-                    return UIColor.clear
-            }
-            if day.available() {
-                if dayComp1 <= (dayComp2 + 3) {
-                    return availableViewColor
-                } else {
-                    return standbyViewColor
-                }
-            } else {
-                return unavailableViewColor
-            }
             
+            if day.available() {
+                return standbyViewColor
+            }
+            return unavailableViewColor
         }
     }
     
