@@ -29,6 +29,7 @@ class SchedulingViewController: UIViewController {
     let weekendTextColor = UIColor.gray
     let weekdayTextColor = UIColor.white
     let outsideMonthTextColor = UIColor.clear
+    let selectedDayTextColor = UIColor.black
     
     let availableViewColor = UIColor(red:0.51, green:0.62, blue:0.39, alpha:1.00)
     let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
@@ -70,14 +71,18 @@ class SchedulingViewController: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
-        if cellState.dateBelongsTo == .thisMonth {
-            if cellState.date.isWeekend() {
-                validCell.dateLabel.textColor = weekendTextColor
-            } else {
-                validCell.dateLabel.textColor = weekdayTextColor
-            }
+        if cellState.isSelected {
+            validCell.dateLabel.textColor = selectedDayTextColor
         } else {
-            validCell.dateLabel.textColor = outsideMonthTextColor
+            if cellState.dateBelongsTo == .thisMonth {
+                if cellState.date.isWeekend() {
+                    validCell.dateLabel.textColor = weekendTextColor
+                } else {
+                    validCell.dateLabel.textColor = weekdayTextColor
+                }
+            } else {
+                validCell.dateLabel.textColor = outsideMonthTextColor
+            }
         }
     }
     
@@ -85,9 +90,9 @@ class SchedulingViewController: UIViewController {
         guard let validCell = view as? DateCell else { return }
         if cellState.dateBelongsTo == .thisMonth {
             let day = Filterer().day(for: cellState.date)
-            validCell.availabilityView.backgroundColor = self.color(for: day, cellState: cellState)
+            validCell.availabilityView.borderColor = self.color(for: day, cellState: cellState)
         } else {
-            validCell.availabilityView.backgroundColor = outsideMonthTextColor
+            validCell.availabilityView.borderColor = outsideMonthTextColor
         }
     }
     
@@ -334,6 +339,10 @@ extension SchedulingViewController {
         
         if cellState.dateBelongsTo != .thisMonth {
             return UIColor.clear
+        }
+        
+        if cellState.date.isToday() {
+            return unavailableViewColor
         }
         
         switch calendar.compare(day.date, to: Date(), toGranularity: .month) {
