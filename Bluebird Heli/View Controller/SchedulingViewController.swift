@@ -10,6 +10,7 @@ import UIKit
 import JTAppleCalendar
 
 class SchedulingViewController: UIViewController {
+    
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var monthLabel: UILabel!
@@ -18,6 +19,7 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
+    var days = [Day]()
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
     
@@ -28,13 +30,13 @@ class SchedulingViewController: UIViewController {
     
     let weekendTextColor = UIColor.gray
     let weekdayTextColor = UIColor.white
-    let outsideMonthTextColor = UIColor.clear
-    let selectedDayTextColor = UIColor.black
     
+    let outsideMonthTextColor = UIColor.clear
+    let selectedDayViewColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
+
     let availableViewColor = UIColor(red:0.51, green:0.62, blue:0.39, alpha:1.00)
     let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
     let standbyViewColor = UIColor(red:0.76, green:0.72, blue:0.12, alpha:1.00)
-    let currentDateSelectedViewColor = UIColor.purple
     
     var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
@@ -71,37 +73,37 @@ class SchedulingViewController: UIViewController {
     
     func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
-        if cellState.isSelected {
-            validCell.dateLabel.textColor = selectedDayTextColor
-        } else {
-            if cellState.dateBelongsTo == .thisMonth {
-                if cellState.date.isWeekend() {
-                    validCell.dateLabel.textColor = weekendTextColor
-                } else {
-                    validCell.dateLabel.textColor = weekdayTextColor
-                }
+        if cellState.dateBelongsTo == .thisMonth {
+            if cellState.date.isWeekend() {
+                validCell.dateLabel.textColor = weekendTextColor
             } else {
-                validCell.dateLabel.textColor = outsideMonthTextColor
+                validCell.dateLabel.textColor = weekdayTextColor
             }
+        } else {
+            validCell.dateLabel.textColor = outsideMonthTextColor
         }
     }
     
-    func handleCellViewColor(view: JTAppleCell?, cellState: CellState) {
+    func handleCellBorderColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
+       
         if cellState.dateBelongsTo == .thisMonth {
-            let day = Filterer().day(for: cellState.date)
-            validCell.availabilityView.borderColor = self.color(for: day, cellState: cellState)
+            print(cellState.column())
+            print(cellState.row())
+            validCell.availabilityView.layer.borderWidth = 2
+            validCell.availabilityView.layer.borderColor = color(for: Day(), cellState: cellState)
         } else {
-            validCell.availabilityView.borderColor = outsideMonthTextColor
+            validCell.availabilityView.layer.borderWidth = 0
+            validCell.availabilityView.layer.borderColor = UIColor.clear.cgColor
         }
     }
     
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
         if validCell.isSelected {
-            validCell.selectedView.isHidden = false
+            validCell.availabilityView.backgroundColor = selectedDayViewColor
         } else {
-            validCell.selectedView.isHidden = true
+            validCell.availabilityView.backgroundColor = UIColor.clear
         }
     }
 
@@ -144,7 +146,6 @@ extension SchedulingViewController: JTAppleCalendarViewDataSource {
 extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, shouldSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) -> Bool {
-        
         if cellState.dateBelongsTo == .thisMonth {
             if date > Date() || date.isToday() {
                 return true
@@ -158,27 +159,28 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         let dateCell = cell as! DateCell
         dateCell.dateLabel.text = cellState.text
-        handleCellTextColor(view: cell, cellState: cellState)
         handleCellSelected(view: cell, cellState: cellState)
-        handleCellViewColor(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+        handleCellBorderColor(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellTextColor(view: cell, cellState: cellState)
         handleCellSelected(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+        handleCellBorderColor(view: cell, cellState: cellState)
         updateUIWeather(for: selectedLocation, for: date)
-        handleCellViewColor(view: cell, cellState: cellState)
         self.collectionView.reloadData()
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
-        handleCellTextColor(view: cell, cellState: cellState)
         handleCellSelected(view: cell, cellState: cellState)
-        handleCellViewColor(view: cell, cellState: cellState)
+        handleCellTextColor(view: cell, cellState: cellState)
+        handleCellBorderColor(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         setupViewOfCalendar(from: visibleDates)
+        print(visibleDates.monthDates)
     }
     
 }
@@ -333,48 +335,48 @@ extension SchedulingViewController {
         return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
-    func color(for day: Day, cellState: CellState) -> UIColor {
+    func color(for day: Day, cellState: CellState) -> CGColor {
     
         let calendar = Calendar.current
         
         if cellState.dateBelongsTo != .thisMonth {
-            return UIColor.clear
+            return UIColor.clear.cgColor
         }
         
         if cellState.date.isToday() {
-            return unavailableViewColor
+            return unavailableViewColor.cgColor
         }
         
         switch calendar.compare(day.date, to: Date(), toGranularity: .month) {
         case .orderedAscending:
-            return UIColor.clear
+            return UIColor.clear.cgColor
         case .orderedSame:
             switch calendar.compare(day.date, to: Date(), toGranularity: .day) {
             case .orderedAscending:
-                return UIColor.clear
+                return UIColor.clear.cgColor
             case .orderedSame:
                 if day.available() {
-                    return availableViewColor
+                    return availableViewColor.cgColor
                 }
             case .orderedDescending:
                 guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
-                    return UIColor.clear
+                    return UIColor.clear.cgColor
                 }
                 if day.available() {
                     if dayComp1 <= (dayComp2 + 3) {
-                        return availableViewColor
+                        return availableViewColor.cgColor
                     } else {
-                        return standbyViewColor
+                        return standbyViewColor.cgColor
                     }
                 }
             }
-            return unavailableViewColor
+            return unavailableViewColor.cgColor
         case .orderedDescending:
             
             if day.available() {
-                return standbyViewColor
+                return standbyViewColor.cgColor
             }
-            return unavailableViewColor
+            return unavailableViewColor.cgColor
         }
     }
     

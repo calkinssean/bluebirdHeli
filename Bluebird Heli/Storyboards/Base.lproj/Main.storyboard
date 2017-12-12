@@ -180,33 +180,14 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="84" height="89"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzh-yv-EUs" customClass="BorderView" customModule="Bluebird_Heli" customModuleProvider="target">
-                                                                    <rect key="frame" x="24.5" y="27" width="34" height="34"/>
-                                                                    <color key="backgroundColor" white="1" alpha="0.50468214897260277" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="34" id="0DP-SS-CRf"/>
-                                                                        <constraint firstAttribute="width" constant="34" id="A4X-Eh-c5D"/>
-                                                                    </constraints>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="17"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="0.0"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </view>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-i5-Rbp" customClass="BorderView" customModule="Bluebird_Heli" customModuleProvider="target">
-                                                                    <rect key="frame" x="24.5" y="27" width="35" height="35"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-i5-Rbp">
+                                                                    <rect key="frame" x="24" y="26.5" width="35" height="35"/>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="35" id="USN-cP-0d7"/>
                                                                         <constraint firstAttribute="height" constant="35" id="n73-Tk-zhT"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                                            <real key="value" value="17.5"/>
-                                                                        </userDefinedRuntimeAttribute>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                                             <real key="value" value="2"/>
                                                                         </userDefinedRuntimeAttribute>
@@ -224,17 +205,14 @@
                                                             </subviews>
                                                         </view>
                                                         <constraints>
-                                                            <constraint firstItem="hzh-yv-EUs" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="BBi-JA-y66"/>
                                                             <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="DCg-Kq-VrJ"/>
                                                             <constraint firstItem="bdE-i5-Rbp" firstAttribute="centerX" secondItem="igh-eU-Zxf" secondAttribute="centerX" id="WKY-tH-fBh"/>
                                                             <constraint firstItem="bdE-i5-Rbp" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="gIv-G2-z3O"/>
-                                                            <constraint firstItem="hzh-yv-EUs" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="gM2-ac-bg6"/>
                                                             <constraint firstItem="cCE-mF-Y7d" firstAttribute="centerY" secondItem="igh-eU-Zxf" secondAttribute="centerY" id="mTD-uR-o2i"/>
                                                         </constraints>
                                                         <connections>
-                                                            <outlet property="availabilityView" destination="bdE-i5-Rbp" id="Sb3-nr-61E"/>
+                                                            <outlet property="availabilityView" destination="bdE-i5-Rbp" id="bWl-ez-x6Z"/>
                                                             <outlet property="dateLabel" destination="cCE-mF-Y7d" id="8vX-d9-m1t"/>
-                                                            <outlet property="selectedView" destination="hzh-yv-EUs" id="a7r-fJ-ui8"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>

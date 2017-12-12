@@ -10,9 +10,8 @@ import UIKit
 import JTAppleCalendar
 
 class DateCell: JTAppleCell {
-    
-    @IBOutlet var selectedView: UIView!
-    @IBOutlet var availabilityView: BorderView!
+
+    @IBOutlet var availabilityView: UIView!
     @IBOutlet var dateLabel: UILabel!
     
 }

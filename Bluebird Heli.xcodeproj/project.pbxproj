@@ -181,10 +181,10 @@
 		14C989CD1FD262770024724A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */,
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
 				14B3E7FA1FDF7A2300411AF8 /* GradientView.swift */,
-				14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 			);
