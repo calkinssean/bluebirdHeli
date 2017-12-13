@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseDatabase
 
-struct Day {
+class Day {
     
     var date = Date()
     var reservationOne: Reservation?
@@ -26,9 +26,6 @@ struct Day {
         if reservationOne != nil && reservationTwo != nil {
             return false
         }
-        print(reservationOne?.operatingArea)
-        print(reservationTwo?.operatingArea)
-        print(location.operatingArea)
         if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
             return false
         }
@@ -42,7 +39,7 @@ struct Day {
         return true
     }
     
-    mutating func parseData(dict: [String: Any]) {
+    func parseData(dict: [String: Any]) {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -64,7 +61,7 @@ struct Day {
         return formatter.string(from: date)
     }
     
-    mutating func save() {
+    func save() {
         
         let ref = FirebaseController().daysURL.child(urlDateString())
         self.ref = ref
@@ -83,7 +80,7 @@ struct Day {
         }
     }
     
-    mutating func saveReservationOne() {
+    func saveReservationOne() {
         guard let ref = ref else {
             print("Reservation not saved, nil ref day model")
             return
@@ -92,7 +89,7 @@ struct Day {
         reservationOne?.save(ref: reservationOneRef)
     }
     
-    mutating func saveReservationTwo() {
+    func saveReservationTwo() {
         guard let ref = ref else {
             print("Reservation not saved, nil ref day model")
             return

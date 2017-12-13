@@ -89,6 +89,7 @@ extension ReservationViewController: UITextFieldDelegate {
             propertyBeingChanged = "Pickup Location"
         case pickupTimeTextField:
             let datePicker = UIDatePicker()
+            datePicker.setDate(selectedDay.date, animated: false)
             datePicker.datePickerMode = .time
             datePicker.minuteInterval = 15
             textField.inputView = datePicker
@@ -143,12 +144,17 @@ extension ReservationViewController {
         }
         if selectedDay.reservationOne == nil {
             selectedDay.reservationOne = reservation
+            print(reservation.operatingArea)
         } else if selectedDay.reservationTwo == nil {
             selectedDay.reservationTwo = reservation
+            print(reservation.operatingArea)
         } else {
             print("Reservation not saved, Selected Day full")
             return
         }
         selectedDay.save()
+        dismiss(animated: true, completion: nil)
     }
+    
+    
 }

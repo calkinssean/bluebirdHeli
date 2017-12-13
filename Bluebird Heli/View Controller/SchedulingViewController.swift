@@ -51,7 +51,14 @@ class SchedulingViewController: UIViewController {
     
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
-        
+    }
+ 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateReserveButton(with: selectedLocation)
+        if selectedLocation != nil {
+            self.calendarView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -296,6 +303,7 @@ extension SchedulingViewController {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
             self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
@@ -303,6 +311,7 @@ extension SchedulingViewController {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
             self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let southernAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
@@ -310,6 +319,7 @@ extension SchedulingViewController {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
             self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(northernAreaAction)
@@ -378,6 +388,12 @@ extension SchedulingViewController {
                 return standbyViewColor.cgColor
             }
             return unavailableViewColor.cgColor
+        }
+    }
+    
+    func updateReserveButton(with location: Location?) {
+        if let location = location {
+            self.setReserveButtonEnabled(enabled: selectedDay.available(with: location))
         }
     }
     
