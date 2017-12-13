@@ -19,14 +19,7 @@ struct Day {
     init(){}
     
     init(dict: [String: Any]) {
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        if let date = dateFormatter.date(from: dict["date"] as? String ?? "") {
-            self.date = date
-        }
-        ref = Database.database().reference(fromURL: dict["ref"] as? String ?? "")
-        
+        parseData(dict: dict)
     }
     
     func available(with location: Location) -> Bool {
@@ -44,6 +37,22 @@ struct Day {
             return false
         }
         return true
+    }
+    
+    mutating func parseData(dict: [String: Any]) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dict["date"] as? String ?? "") {
+            self.date = date
+        }
+        ref = Database.database().reference(fromURL: dict["ref"] as? String ?? "")
+        if let reservationOneDict = dict["reservationOne"] as? [String: Any] {
+            
+        }
+        if let reservationTwoDict = dict["reservationTwo"] as? [String: Any] {
+            
+        }
     }
     
     func urlDateString() -> String {

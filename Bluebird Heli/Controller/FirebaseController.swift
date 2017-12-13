@@ -46,18 +46,23 @@ class FirebaseController {
 
         daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
             if let dayDict = snapshot.value as? [String: Any] {
-                
+                let day = Day(dict: dayDict)
+                DataStore.shared.daysDict[day.urlDateString()] = day
             }
         }
         
         daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
-            print("child changed")
-            print(snapshot)
+            if let dayDict = snapshot.value as? [String: Any] {
+                let day = Day(dict: dayDict)
+                DataStore.shared.daysDict[day.urlDateString()] = day
+            }
         }
         
         daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
-            print("child removed")
-            print(snapshot)
+            if let dayDict = snapshot.value as? [String: Any] {
+                let day = Day(dict: dayDict)
+                DataStore.shared.daysDict[day.urlDateString()] = nil
+            }
         }
    
     }
