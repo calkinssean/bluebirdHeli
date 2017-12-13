@@ -116,6 +116,7 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
         handleCellTextColor(view: cell, cellState: cellState)
         handleCellBorderColor(view: cell, cellState: cellState)
         updateUIWeather(for: selectedLocation, for: date)
+        self.setReserveButtonEnabled(enabled: selectedDay.available(with: selectedLocation))
         self.collectionView.reloadData()
     }
     
@@ -220,11 +221,10 @@ extension SchedulingViewController {
         guard let validCell = view as? DateCell else { return }
         if validCell.isSelected {
             validCell.availabilityView.backgroundColor = selectedDayViewColor
+            self.selectedDay = DateController().day(from: cellState.date)
         } else {
             validCell.availabilityView.backgroundColor = UIColor.clear
         }
-        self.selectedDay = DateController().day(from: cellState.date)
-        self.setReserveButtonEnabled(enabled: selectedDay.available(with: selectedLocation))
     }
     
     func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
