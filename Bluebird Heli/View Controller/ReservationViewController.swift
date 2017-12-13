@@ -90,6 +90,7 @@ extension ReservationViewController: UITextFieldDelegate {
         case pickupTimeTextField:
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .time
+            datePicker.minuteInterval = 15
             textField.inputView = datePicker
             datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
         case numberOfPeopleTextField:
