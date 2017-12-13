@@ -19,7 +19,6 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
-    var daysDict = [String: Day]()
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
     
@@ -56,62 +55,10 @@ class SchedulingViewController: UIViewController {
         
     }
     
-    func setupCalendarView() {
-        
-        // Scroll to current date and select it
-        calendarView.scrollToDate(Date(), animateScroll: false)
-        calendarView.selectDates([Date()])
-        
-        // Set up spacing
-        calendarView.minimumLineSpacing = 0
-        calendarView.minimumInteritemSpacing = 0
-        
-        // Set up labels
-        calendarView.visibleDates { (visibleDates) in
-            self.setupViewOfCalendar(from: visibleDates)
-        }
-    }
-    
-    func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? DateCell else { return }
-        if cellState.dateBelongsTo == .thisMonth {
-            if cellState.date.isWeekend() {
-                validCell.dateLabel.textColor = weekendTextColor
-            } else {
-                validCell.dateLabel.textColor = weekdayTextColor
-            }
-        } else {
-            validCell.dateLabel.textColor = outsideMonthTextColor
-        }
-    }
-    
-    func handleCellBorderColor(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? DateCell else { return }
-        formatter.dateFormat = "yyyy-MM-dd"
-        validCell.availabilityView.layer.borderColor = outsideMonthTextColor.cgColor
-        let day = DateController().day(from: cellState.date)
-        if cellState.dateBelongsTo == .thisMonth {
-            validCell.availabilityView.layer.borderWidth = 2
-            validCell.availabilityView.layer.borderColor = color(for: day, cellState: cellState)
-        }
-    }
-    
-    func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
-        guard let validCell = view as? DateCell else { return }
-        if validCell.isSelected {
-            validCell.availabilityView.backgroundColor = selectedDayViewColor
-        } else {
-            validCell.availabilityView.backgroundColor = UIColor.clear
-        }
-        self.selectedDay = DateController().day(from: cellState.date)
-    }
-
-    func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
-        if let date = visibleDates.monthDates.first?.date {
-            formatter.dateFormat = "yyyy"
-            self.yearLabel.text = formatter.string(from: date)
-            formatter.dateFormat = "MMMM"
-            self.monthLabel.text = formatter.string(from: date)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showReservationSegue" {
+            let destination = segue.destination as! ReservationViewController
+            destination.selectedDay = self.selectedDay
         }
     }
     
@@ -228,6 +175,65 @@ extension SchedulingViewController: UITableViewDelegate {
 // MARK: - Helper
 extension SchedulingViewController {
     
+    func setupCalendarView() {
+        
+        // Scroll to current date and select it
+        calendarView.scrollToDate(Date(), animateScroll: false)
+        calendarView.selectDates([Date()])
+        
+        // Set up spacing
+        calendarView.minimumLineSpacing = 0
+        calendarView.minimumInteritemSpacing = 0
+        
+        // Set up labels
+        calendarView.visibleDates { (visibleDates) in
+            self.setupViewOfCalendar(from: visibleDates)
+        }
+    }
+    
+    func handleCellTextColor(view: JTAppleCell?, cellState: CellState) {
+        guard let validCell = view as? DateCell else { return }
+        if cellState.dateBelongsTo == .thisMonth {
+            if cellState.date.isWeekend() {
+                validCell.dateLabel.textColor = weekendTextColor
+            } else {
+                validCell.dateLabel.textColor = weekdayTextColor
+            }
+        } else {
+            validCell.dateLabel.textColor = outsideMonthTextColor
+        }
+    }
+    
+    func handleCellBorderColor(view: JTAppleCell?, cellState: CellState) {
+        guard let validCell = view as? DateCell else { return }
+        formatter.dateFormat = "yyyy-MM-dd"
+        validCell.availabilityView.layer.borderColor = outsideMonthTextColor.cgColor
+        let day = DateController().day(from: cellState.date)
+        if cellState.dateBelongsTo == .thisMonth {
+            validCell.availabilityView.layer.borderWidth = 2
+            validCell.availabilityView.layer.borderColor = color(for: day, cellState: cellState)
+        }
+    }
+    
+    func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
+        guard let validCell = view as? DateCell else { return }
+        if validCell.isSelected {
+            validCell.availabilityView.backgroundColor = selectedDayViewColor
+        } else {
+            validCell.availabilityView.backgroundColor = UIColor.clear
+        }
+        self.selectedDay = DateController().day(from: cellState.date)
+    }
+    
+    func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
+        if let date = visibleDates.monthDates.first?.date {
+            formatter.dateFormat = "yyyy"
+            self.yearLabel.text = formatter.string(from: date)
+            formatter.dateFormat = "MMMM"
+            self.monthLabel.text = formatter.string(from: date)
+        }
+    }
+    
     func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
         guard let conditions = conditions else { return "--" }
         formatter.dateFormat = "h:mm a"
@@ -329,7 +335,6 @@ extension SchedulingViewController {
         default:
             break
         }
-        
         return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     

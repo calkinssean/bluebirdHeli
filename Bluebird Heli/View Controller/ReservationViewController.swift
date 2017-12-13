@@ -18,6 +18,8 @@ class ReservationViewController: UIViewController {
     var pickerViewData: [String] = []
     var pickerView = UIPickerView()
     
+    var selectedDay = Day()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpPickerView()
