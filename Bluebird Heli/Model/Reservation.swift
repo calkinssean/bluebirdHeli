@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 struct Reservation {
 
@@ -18,6 +19,19 @@ struct Reservation {
     
     func initialized() -> Bool {
         return groupUID != nil && location != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
+    }
+    
+    func save(ref: DatabaseReference) {
+        if initialized() {
+            let dict: [String: Any] = [
+                "groupUID": groupUID!,
+                "location": location!.rawValue,
+                "pickupTime": pickupTime!.timeIntervalSince1970,
+                "pickupLocation": pickupLocation!.rawValue,
+                "numberOfAttendees": numberOfAttendees!
+            ]
+            FirebaseController().save(dict: dict, ref: ref)
+        }
     }
     
 }
