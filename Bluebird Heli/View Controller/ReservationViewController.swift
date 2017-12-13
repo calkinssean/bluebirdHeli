@@ -26,6 +26,8 @@ class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setUpPickerView()
         
+        reservation.groupUID = DataStore.shared.currentGroup?.uid
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
@@ -34,11 +36,6 @@ class ReservationViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
- 
-    @IBAction func backTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func setUpPickerView() {
@@ -109,6 +106,19 @@ extension ReservationViewController: UITextFieldDelegate {
     }
 }
 
+// MARK: - @IBAction
+extension ReservationViewController {
+    
+    @IBAction func saveTapped(_ sender: UIButton) {
+        saveReservation()
+    }
+    
+    @IBAction func backTapped(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
 // MARK: - Helper
 extension ReservationViewController {
     
@@ -126,13 +136,15 @@ extension ReservationViewController {
     }
     
     func saveReservation() {
-        
-        guard reservation.initialized() else { return }
+        guard reservation.initialized() else {
+            print("Reservation not saved, Reservation not initialized RVC")
+            return }
         if selectedDay.reservationOne == nil {
             selectedDay.reservationOne = reservation
         } else if selectedDay.reservationTwo == nil {
             selectedDay.reservationTwo = reservation
         } else {
+            print("Reservation not saved, Selected Day full")
             return
         }
         selectedDay.save()

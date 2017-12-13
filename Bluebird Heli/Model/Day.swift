@@ -49,13 +49,19 @@ struct Day {
     }
     
     mutating func saveReservationOne() {
-        guard let ref = ref else { return }
+        guard let ref = ref else {
+            print("Reservation not saved, nil ref day model")
+            return
+        }
         let reservationOneRef = ref.child("reservationOne")
         reservationOne?.save(ref: reservationOneRef)
     }
     
     mutating func saveReservationTwo() {
-        guard let ref = ref else { return }
+        guard let ref = ref else {
+            print("Reservation not saved, nil ref day model")
+            return
+        }
         let reservationOneRef = ref.child("reservationTwo")
         reservationOne?.save(ref: reservationOneRef)
     }

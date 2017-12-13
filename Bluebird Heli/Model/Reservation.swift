@@ -24,17 +24,20 @@ struct Reservation {
     
     mutating func save(ref: DatabaseReference) {
         self.ref = ref
-        if initialized() {
-            let dict: [String: Any] = [
-                "groupUID": groupUID!,
-                "location": location!.rawValue,
-                "pickupTime": pickupTime!.timeIntervalSince1970,
-                "pickupLocation": pickupLocation!.rawValue,
-                "numberOfAttendees": numberOfAttendees!,
-                "ref": "\(ref)"
-            ]
-            FirebaseController().save(dict: dict, ref: ref)
+        guard initialized() else {
+            print("Reservation not saved, not initialized reservation model")
+            return
         }
+        let dict: [String: Any] = [
+            "groupUID": groupUID!,
+            "location": location!.rawValue,
+            "pickupTime": pickupTime!.timeIntervalSince1970,
+            "pickupLocation": pickupLocation!.rawValue,
+            "numberOfAttendees": numberOfAttendees!,
+            "ref": "\(ref)"
+        ]
+        FirebaseController().save(dict: dict, ref: ref)
+        
     }
     
 }
