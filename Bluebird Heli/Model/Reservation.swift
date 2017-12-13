@@ -12,13 +12,28 @@ import FirebaseDatabase
 struct Reservation {
 
     var groupUID: String?
-    var location: OperatingArea?
+    var operatingArea: OperatingArea?
     var pickupTime: Date?
     var pickupLocation: PickupLocation?
     var numberOfAttendees: Int?
     var ref: DatabaseReference?
     
     func initialized() -> Bool {
+        if groupUID == nil {
+            print("groupUID not initialized")
+        }
+        if operatingArea == nil {
+            print("operating area not initialized")
+        }
+        if pickupTime == nil {
+            print("pickup time not initialized")
+        }
+        if pickupLocation == nil {
+            print("pickup location not initialized")
+        }
+        if numberOfAttendees == nil {
+            print("nuber of attendees not initialized")
+        }
         return groupUID != nil && location != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
     }
     
