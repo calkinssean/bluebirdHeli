@@ -17,12 +17,18 @@ struct Day {
     var ref: DatabaseReference?
     
     func available(with location: Location) -> Bool {
-        // false conditions:
-        // location taken
-        // location weather is bad
-        // within 48 hours
-        if reservationOne == nil || reservationTwo == nil {
-            return true
+        if reservationOne != nil && reservationTwo != nil {
+            return false
+        }
+        if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
+            return false
+        }
+        let conditionsForDay = WeatherController().conditions(for: date, for: location, conditionType: .daily)
+        if WeatherController().badWeather(conditions: conditionsForDay) {
+            return false
+        }
+        if date.isToday() || date.isTomorrow() {
+            return false
         }
         return false
     }

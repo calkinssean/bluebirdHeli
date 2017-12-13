@@ -46,7 +46,7 @@ class SchedulingViewController: UIViewController {
         super.viewDidLoad()
         
         formatter.locale = 🇺🇸
-        hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
+        hourlyConditions = WeatherController().conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
         
@@ -315,8 +315,8 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.operatingArea?.rawValue, for: .normal)
-        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
-        if let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+        self.hourlyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        if let dailyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .daily).first {
             self.noDataLabel.isHidden = true
             self.dailyConditions = dailyConditions
         } else {
@@ -325,19 +325,6 @@ extension SchedulingViewController {
         }
         self.collectionView.reloadData()
         self.tableView.reloadData()
-    }
-
-    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
-        var conditionsToFilter = [Conditions]()
-        switch conditionType {
-        case .daily:
-            conditionsToFilter = location.weather.daily
-        case .hourly:
-            conditionsToFilter = location.weather.hourly
-        default:
-            break
-        }
-        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
     func color(for day: Day, cellState: CellState) -> CGColor {

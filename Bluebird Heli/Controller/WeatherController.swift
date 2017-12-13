@@ -44,5 +44,24 @@ class WeatherController {
         }.fire()
     }
     
+    func badWeather(conditions: [Conditions]) -> Bool {
+        // TODO:
+        print(conditions.count)
+        return false
+    }
+    
+    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
+        var conditionsToFilter = [Conditions]()
+        switch conditionType {
+        case .daily:
+            conditionsToFilter = location.weather.daily
+        case .hourly:
+            conditionsToFilter = location.weather.hourly
+        default:
+            break
+        }
+        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
+    }
+    
     
 }
