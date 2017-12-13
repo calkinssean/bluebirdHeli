@@ -46,7 +46,7 @@ class WeatherController {
     
     func badWeather(conditions: [Conditions]) -> Bool {
         // TODO:
-        print(conditions.count)
+   //     print(conditions.count)
         return false
     }
     

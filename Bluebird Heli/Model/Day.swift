@@ -30,7 +30,7 @@ struct Day {
         if date.isToday() || date.isTomorrow() {
             return false
         }
-        return false
+        return true
     }
     
     func urlDateString() -> String {

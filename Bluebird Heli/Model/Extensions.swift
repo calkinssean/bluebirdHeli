@@ -22,8 +22,12 @@ extension Date {
   
     func isTomorrow() -> Bool {
         let calendar = Calendar.current
-        let tomorrowComps = calendar.dateComponents([.day], from: self)
-        return calendar.date(self, matchesComponents: tomorrowComps)
+        var tomorrowComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+        if let day = tomorrowComponents.day {
+            tomorrowComponents.day = day + 1
+            return calendar.date(self, matchesComponents: tomorrowComponents)
+        }
+        return true
     }
     
     func startInterval() -> Double {
