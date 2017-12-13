@@ -82,7 +82,7 @@ extension ReservationViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         switch textField {
         case locationTextField:
-            self.pickerViewData = ["Heber Hangar", "North Salt Lake Hangar"]
+            self.pickerViewData = [PickupLocation.heber.rawValue, PickupLocation.northSaltLake.rawValue]
             self.pickerView.reloadAllComponents()
             textField.inputView = pickerView
             currentTextField = textField
@@ -138,7 +138,8 @@ extension ReservationViewController {
     func saveReservation() {
         guard reservation.initialized() else {
             print("Reservation not saved, Reservation not initialized RVC")
-            return }
+            return
+        }
         if selectedDay.reservationOne == nil {
             selectedDay.reservationOne = reservation
         } else if selectedDay.reservationTwo == nil {

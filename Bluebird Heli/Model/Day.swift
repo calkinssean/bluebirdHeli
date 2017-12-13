@@ -35,7 +35,7 @@ struct Day {
         self.ref = ref
         
         let dict: [String: Any] = [
-            "date": date.timeIntervalSince1970,
+            "date": urlDateString(),
             "ref": "\(ref)"
         ]
         FirebaseController().save(dict: dict, ref: ref)

@@ -34,7 +34,7 @@ struct Reservation {
         if numberOfAttendees == nil {
             print("nuber of attendees not initialized")
         }
-        return groupUID != nil && location != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
+        return groupUID != nil && operatingArea != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
     }
     
     mutating func save(ref: DatabaseReference) {
@@ -45,7 +45,7 @@ struct Reservation {
         }
         let dict: [String: Any] = [
             "groupUID": groupUID!,
-            "location": location!.rawValue,
+            "location": operatingArea!.rawValue,
             "pickupTime": pickupTime!.timeIntervalSince1970,
             "pickupLocation": pickupLocation!.rawValue,
             "numberOfAttendees": numberOfAttendees!,
