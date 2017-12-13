@@ -224,6 +224,7 @@ extension SchedulingViewController {
             validCell.availabilityView.backgroundColor = UIColor.clear
         }
         self.selectedDay = DateController().day(from: cellState.date)
+        self.setReserveButtonEnabled(enabled: selectedDay.available(with: selectedLocation))
     }
     
     func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
@@ -359,14 +360,14 @@ extension SchedulingViewController {
             case .orderedAscending:
                 return UIColor.clear.cgColor
             case .orderedSame:
-                if day.available() {
+                if day.available(with: selectedLocation) {
                     return availableViewColor.cgColor
                 }
             case .orderedDescending:
                 guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
                     return UIColor.clear.cgColor
                 }
-                if day.available() {
+                if day.available(with: selectedLocation) {
                     if dayComp1 <= (dayComp2 + 3) {
                         return availableViewColor.cgColor
                     } else {
@@ -377,11 +378,15 @@ extension SchedulingViewController {
             return unavailableViewColor.cgColor
         case .orderedDescending:
             
-            if day.available() {
+            if day.available(with: selectedLocation) {
                 return standbyViewColor.cgColor
             }
             return unavailableViewColor.cgColor
         }
+    }
+    
+    func setReserveButtonEnabled(enabled: Bool) {
+       navigationItem.rightBarButtonItem?.isEnabled = enabled
     }
     
     @objc func reserveTapped() {

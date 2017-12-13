@@ -16,7 +16,11 @@ struct Day {
     var reservationTwo: Reservation?
     var ref: DatabaseReference?
     
-    func available() -> Bool {
+    func available(with location: Location) -> Bool {
+        // false conditions:
+        // location taken
+        // location weather is bad
+        // within 48 hours
         if reservationOne == nil || reservationTwo == nil {
             return true
         }
