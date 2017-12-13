@@ -44,5 +44,31 @@ class WeatherController {
         }.fire()
     }
     
+    func badWeather(conditions: [Conditions]) -> Bool {
+        guard let dailyConditions = conditions.first else { return false }
+        if dailyConditions.windGust > Measurement<UnitSpeed>(value: 35, unit: .milesPerHour) {
+            return true
+        }
+        if let visibility = dailyConditions.visibility {
+            if visibility < Measurement<UnitLength>(value: 1, unit: .miles) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
+        var conditionsToFilter = [Conditions]()
+        switch conditionType {
+        case .daily:
+            conditionsToFilter = location.weather.daily
+        case .hourly:
+            conditionsToFilter = location.weather.hourly
+        default:
+            break
+        }
+        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
+    }
+    
     
 }

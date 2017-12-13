@@ -20,6 +20,16 @@ extension Date {
         return calendar.date(self, matchesComponents: calendar.dateComponents([.month, .day], from: Date()))
     }
   
+    func isTomorrow() -> Bool {
+        let calendar = Calendar.current
+        var tomorrowComponents = calendar.dateComponents([.year, .month, .day], from: Date())
+        if let day = tomorrowComponents.day {
+            tomorrowComponents.day = day + 1
+            return calendar.date(self, matchesComponents: tomorrowComponents)
+        }
+        return true
+    }
+    
     func startInterval() -> Double {
         let calendar = Calendar.current
         return calendar.date(bySettingHour: 0, minute: 0, second: 0, of: self)!.timeIntervalSince1970

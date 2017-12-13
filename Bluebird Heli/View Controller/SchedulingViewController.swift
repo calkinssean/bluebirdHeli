@@ -46,7 +46,7 @@ class SchedulingViewController: UIViewController {
         super.viewDidLoad()
         
         formatter.locale = 🇺🇸
-        hourlyConditions = conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
+        hourlyConditions = WeatherController().conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
         updateUIWeather(for: self.selectedLocation, for: Date())
         
@@ -116,6 +116,8 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
         handleCellTextColor(view: cell, cellState: cellState)
         handleCellBorderColor(view: cell, cellState: cellState)
         updateUIWeather(for: selectedLocation, for: date)
+        self.selectedDay = DateController().day(from: cellState.date)
+        self.setReserveButtonEnabled(enabled: selectedDay.available(with: selectedLocation))
         self.collectionView.reloadData()
     }
     
@@ -223,7 +225,6 @@ extension SchedulingViewController {
         } else {
             validCell.availabilityView.backgroundColor = UIColor.clear
         }
-        self.selectedDay = DateController().day(from: cellState.date)
     }
     
     func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
@@ -314,8 +315,8 @@ extension SchedulingViewController {
     
     func updateUIWeather(for location: Location, for date: Date) {
         self.locationButton.setTitle(self.selectedLocation.operatingArea?.rawValue, for: .normal)
-        self.hourlyConditions = conditions(for: date, for: selectedLocation, conditionType: .hourly)
-        if let dailyConditions = self.conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+        self.hourlyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .hourly)
+        if let dailyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .daily).first {
             self.noDataLabel.isHidden = true
             self.dailyConditions = dailyConditions
         } else {
@@ -324,19 +325,6 @@ extension SchedulingViewController {
         }
         self.collectionView.reloadData()
         self.tableView.reloadData()
-    }
-
-    func conditions(for date: Date, for location: Location, conditionType: ConditionType) -> [Conditions] {
-        var conditionsToFilter = [Conditions]()
-        switch conditionType {
-        case .daily:
-            conditionsToFilter = location.weather.daily
-        case .hourly:
-            conditionsToFilter = location.weather.hourly
-        default:
-            break
-        }
-        return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
     
     func color(for day: Day, cellState: CellState) -> CGColor {
@@ -359,14 +347,14 @@ extension SchedulingViewController {
             case .orderedAscending:
                 return UIColor.clear.cgColor
             case .orderedSame:
-                if day.available() {
+                if day.available(with: selectedLocation) {
                     return availableViewColor.cgColor
                 }
             case .orderedDescending:
                 guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
                     return UIColor.clear.cgColor
                 }
-                if day.available() {
+                if day.available(with: selectedLocation) {
                     if dayComp1 <= (dayComp2 + 3) {
                         return availableViewColor.cgColor
                     } else {
@@ -377,11 +365,15 @@ extension SchedulingViewController {
             return unavailableViewColor.cgColor
         case .orderedDescending:
             
-            if day.available() {
+            if day.available(with: selectedLocation) {
                 return standbyViewColor.cgColor
             }
             return unavailableViewColor.cgColor
         }
+    }
+    
+    func setReserveButtonEnabled(enabled: Bool) {
+       navigationItem.rightBarButtonItem?.isEnabled = enabled
     }
     
     @objc func reserveTapped() {

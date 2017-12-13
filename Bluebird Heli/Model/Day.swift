@@ -16,11 +16,21 @@ struct Day {
     var reservationTwo: Reservation?
     var ref: DatabaseReference?
     
-    func available() -> Bool {
-        if reservationOne == nil || reservationTwo == nil {
-            return true
+    func available(with location: Location) -> Bool {
+        if reservationOne != nil && reservationTwo != nil {
+            return false
         }
-        return false
+        if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
+            return false
+        }
+        let conditionsForDay = WeatherController().conditions(for: date, for: location, conditionType: .daily)
+        if WeatherController().badWeather(conditions: conditionsForDay) {
+            return false
+        }
+        if date.isToday() || date.isTomorrow() {
+            return false
+        }
+        return true
     }
     
     func urlDateString() -> String {
