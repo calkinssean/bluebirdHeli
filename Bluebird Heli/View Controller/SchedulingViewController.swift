@@ -19,7 +19,7 @@ class SchedulingViewController: UIViewController {
     @IBOutlet var collectionView: UICollectionView!
     @IBOutlet var calendarView: JTAppleCalendarView!
 
-    var days = [Day]()
+    var daysDict = [String: Day]()
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
     
@@ -86,15 +86,12 @@ class SchedulingViewController: UIViewController {
     
     func handleCellBorderColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
-       
+        formatter.dateFormat = "yyyy-MM-dd"
+        validCell.availabilityView.layer.borderColor = outsideMonthTextColor.cgColor
+        let day = DateController().day(from: cellState.date)
         if cellState.dateBelongsTo == .thisMonth {
-            print(cellState.column())
-            print(cellState.row())
             validCell.availabilityView.layer.borderWidth = 2
-            validCell.availabilityView.layer.borderColor = color(for: Day(), cellState: cellState)
-        } else {
-            validCell.availabilityView.layer.borderWidth = 0
-            validCell.availabilityView.layer.borderColor = UIColor.clear.cgColor
+            validCell.availabilityView.layer.borderColor = color(for: day, cellState: cellState)
         }
     }
     
@@ -180,7 +177,6 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
     
     func calendar(_ calendar: JTAppleCalendarView, didScrollToDateSegmentWith visibleDates: DateSegmentInfo) {
         setupViewOfCalendar(from: visibleDates)
-        print(visibleDates.monthDates)
     }
     
 }
@@ -383,5 +379,6 @@ extension SchedulingViewController {
     @objc func reserveTapped() {
         self.performSegue(withIdentifier: "showReservationSegue", sender: self)
     }
+    
 }
 

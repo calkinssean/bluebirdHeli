@@ -38,7 +38,7 @@ class FirebaseController {
         ref.updateChildValues(dict)
     }
     
-    func observeDates() {
+    func observeDays() {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
