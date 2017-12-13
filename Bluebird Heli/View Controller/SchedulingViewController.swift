@@ -23,6 +23,9 @@ class SchedulingViewController: UIViewController {
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
     
+    var selectedLocation = DataStore.shared.centralOperatingArea
+    var selectedDay = Day()
+    
     let numberFormatter = NumberFormatter()
     let formatter = DateFormatter()
     let measurementFormatter = MeasurementFormatter()
@@ -38,10 +41,8 @@ class SchedulingViewController: UIViewController {
     let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
     let standbyViewColor = UIColor(red:0.76, green:0.72, blue:0.12, alpha:1.00)
     
-    var weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
+    let weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
-    var selectedLocation = DataStore.shared.centralOperatingArea
-  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,6 +103,7 @@ class SchedulingViewController: UIViewController {
         } else {
             validCell.availabilityView.backgroundColor = UIColor.clear
         }
+        self.selectedDay = DateController().day(from: cellState.date)
     }
 
     func setupViewOfCalendar(from visibleDates: DateSegmentInfo) {
