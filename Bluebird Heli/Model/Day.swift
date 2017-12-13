@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 struct Day {
     
     var date = Date()
     var reservationOne: Reservation?
     var reservationTwo: Reservation?
+    var ref: DatabaseReference?
     
     func available() -> Bool {
         if reservationOne == nil || reservationTwo == nil {
@@ -27,11 +29,15 @@ struct Day {
         return formatter.string(from: date)
     }
     
-    func save() {
-        let dict: [String: Any] = [
-            "date": date.timeIntervalSince1970
-        ]
+    mutating func save() {
+        
         let ref = FirebaseController().daysURL.child(urlDateString())
+        self.ref = ref
+        
+        let dict: [String: Any] = [
+            "date": date.timeIntervalSince1970,
+            "ref": "\(ref)"
+        ]
         FirebaseController().save(dict: dict, ref: ref)
         
         if reservationOne != nil {
@@ -42,12 +48,16 @@ struct Day {
         }
     }
     
-    func saveReservationOne() {
-        
+    mutating func saveReservationOne() {
+        guard let ref = ref else { return }
+        let reservationOneRef = ref.child("reservationOne")
+        reservationOne?.save(ref: reservationOneRef)
     }
     
-    func saveReservationTwo() {
-        
+    mutating func saveReservationTwo() {
+        guard let ref = ref else { return }
+        let reservationOneRef = ref.child("reservationTwo")
+        reservationOne?.save(ref: reservationOneRef)
     }
     
 }

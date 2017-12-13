@@ -16,19 +16,22 @@ struct Reservation {
     var pickupTime: Date?
     var pickupLocation: PickupLocation?
     var numberOfAttendees: Int?
+    var ref: DatabaseReference?
     
     func initialized() -> Bool {
         return groupUID != nil && location != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
     }
     
-    func save(ref: DatabaseReference) {
+    mutating func save(ref: DatabaseReference) {
+        self.ref = ref
         if initialized() {
             let dict: [String: Any] = [
                 "groupUID": groupUID!,
                 "location": location!.rawValue,
                 "pickupTime": pickupTime!.timeIntervalSince1970,
                 "pickupLocation": pickupLocation!.rawValue,
-                "numberOfAttendees": numberOfAttendees!
+                "numberOfAttendees": numberOfAttendees!,
+                "ref": "\(ref)"
             ]
             FirebaseController().save(dict: dict, ref: ref)
         }
