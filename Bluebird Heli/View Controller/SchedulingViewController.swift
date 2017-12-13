@@ -59,6 +59,7 @@ class SchedulingViewController: UIViewController {
         if segue.identifier == "showReservationSegue" {
             let destination = segue.destination as! ReservationViewController
             destination.selectedDay = self.selectedDay
+            destination.reservation.location = selectedLocation.operatingArea
         }
     }
     
