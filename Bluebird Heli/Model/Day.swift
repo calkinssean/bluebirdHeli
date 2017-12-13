@@ -16,6 +16,19 @@ struct Day {
     var reservationTwo: Reservation?
     var ref: DatabaseReference?
     
+    init(){}
+    
+    init(dict: [String: Any]) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dict["date"] as? String ?? "") {
+            self.date = date
+        }
+        ref = Database.database().reference(fromURL: dict["ref"] as? String ?? "")
+        
+    }
+    
     func available(with location: Location) -> Bool {
         if reservationOne != nil && reservationTwo != nil {
             return false

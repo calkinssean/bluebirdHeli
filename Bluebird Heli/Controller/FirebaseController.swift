@@ -45,8 +45,9 @@ class FirebaseController {
         let dateKey = dateFormatter.string(from: Date())
 
         daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
-            print("child added")
-            print(snapshot)
+            if let dayDict = snapshot.value as? [String: Any] {
+                
+            }
         }
         
         daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
