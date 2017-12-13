@@ -19,6 +19,7 @@ class ReservationViewController: UIViewController {
     var pickerView = UIPickerView()
     
     var selectedDay = Day()
+    var reservation = Reservation()
     
     override func viewDidLoad() {
         super.viewDidLoad()

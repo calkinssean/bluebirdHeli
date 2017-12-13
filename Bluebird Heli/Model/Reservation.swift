@@ -13,5 +13,6 @@ struct Reservation {
     var groupUID: String?
     var location: OperatingArea?
     var pickupTime: Date?
+    var pickupLocation: PickupLocation?
     
 }
