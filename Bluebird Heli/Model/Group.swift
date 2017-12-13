@@ -15,6 +15,7 @@ struct Group {
     var email: String = ""
     var membershipPackage: Package
     var remainingTrips: Int = 0
+    var ref = DatabaseReference()
     
     enum Package: String {
         case gold = "gold"
@@ -27,6 +28,7 @@ struct Group {
         email = dict["email"] as? String ?? ""
         membershipPackage = Package(rawValue: dict["package"] as? String ?? "")!
         remainingTrips = dict["remainingTrips"] as? Int ?? remainingTrips(from: membershipPackage)
+        ref = FirebaseController().groupsURL.child(uid)
     }
     
     func save() {
@@ -34,7 +36,8 @@ struct Group {
             "uid": uid,
             "email": email,
             "package": membershipPackage.rawValue,
-            "remainingTrips": remainingTrips
+            "remainingTrips": remainingTrips,
+            "ref": "\(ref)"
         ]
         FirebaseController().save(dict: dict, ref: FirebaseController().groupsURL.child(uid))
     }

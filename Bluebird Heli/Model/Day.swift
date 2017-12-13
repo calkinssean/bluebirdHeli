@@ -26,6 +26,9 @@ struct Day {
         if reservationOne != nil && reservationTwo != nil {
             return false
         }
+        print(reservationOne?.operatingArea)
+        print(reservationTwo?.operatingArea)
+        print(location.operatingArea)
         if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
             return false
         }
@@ -48,10 +51,10 @@ struct Day {
         }
         ref = Database.database().reference(fromURL: dict["ref"] as? String ?? "")
         if let reservationOneDict = dict["reservationOne"] as? [String: Any] {
-            
+            reservationOne = Reservation(dict: reservationOneDict)
         }
         if let reservationTwoDict = dict["reservationTwo"] as? [String: Any] {
-            
+            reservationTwo = Reservation(dict: reservationTwoDict)
         }
     }
     
