@@ -9,12 +9,18 @@
 import Foundation
 import FirebaseDatabase
 
-struct Day {
+class Day {
     
     var date = Date()
     var reservationOne: Reservation?
     var reservationTwo: Reservation?
     var ref: DatabaseReference?
+    
+    init(){}
+    
+    init(dict: [String: Any]) {
+        parseData(dict: dict)
+    }
     
     func available(with location: Location) -> Bool {
         if reservationOne != nil && reservationTwo != nil {
@@ -33,13 +39,29 @@ struct Day {
         return true
     }
     
+    func parseData(dict: [String: Any]) {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        if let date = dateFormatter.date(from: dict["date"] as? String ?? "") {
+            self.date = date
+        }
+        ref = Database.database().reference(fromURL: dict["ref"] as? String ?? "")
+        if let reservationOneDict = dict["reservationOne"] as? [String: Any] {
+            reservationOne = Reservation(dict: reservationOneDict)
+        }
+        if let reservationTwoDict = dict["reservationTwo"] as? [String: Any] {
+            reservationTwo = Reservation(dict: reservationTwoDict)
+        }
+    }
+    
     func urlDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
     }
     
-    mutating func save() {
+    func save() {
         
         let ref = FirebaseController().daysURL.child(urlDateString())
         self.ref = ref
@@ -58,7 +80,7 @@ struct Day {
         }
     }
     
-    mutating func saveReservationOne() {
+    func saveReservationOne() {
         guard let ref = ref else {
             print("Reservation not saved, nil ref day model")
             return
@@ -67,7 +89,7 @@ struct Day {
         reservationOne?.save(ref: reservationOneRef)
     }
     
-    mutating func saveReservationTwo() {
+    func saveReservationTwo() {
         guard let ref = ref else {
             print("Reservation not saved, nil ref day model")
             return

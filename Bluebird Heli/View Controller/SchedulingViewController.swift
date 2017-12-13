@@ -22,7 +22,7 @@ class SchedulingViewController: UIViewController {
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
     
-    var selectedLocation = DataStore.shared.centralOperatingArea
+    var selectedLocation: Location?
     var selectedDay = Day()
     
     let numberFormatter = NumberFormatter()
@@ -46,20 +46,26 @@ class SchedulingViewController: UIViewController {
         super.viewDidLoad()
         
         formatter.locale = 🇺🇸
-        hourlyConditions = WeatherController().conditions(for: Date(), for: selectedLocation, conditionType: .hourly)
         setupCalendarView()
-        updateUIWeather(for: self.selectedLocation, for: Date())
-        
+        self.noDataLabel.isHidden = false
+    
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
-        
+    }
+ 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if selectedLocation != nil {
+            self.setReserveButtonEnabled(enabled: false)
+            self.calendarView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showReservationSegue" {
             let destination = segue.destination as! ReservationViewController
             destination.selectedDay = self.selectedDay
-            destination.reservation.operatingArea = selectedLocation.operatingArea
+            destination.reservation.operatingArea = selectedLocation?.operatingArea
         }
     }
     
@@ -117,8 +123,12 @@ extension SchedulingViewController: JTAppleCalendarViewDelegate {
         handleCellBorderColor(view: cell, cellState: cellState)
         updateUIWeather(for: selectedLocation, for: date)
         self.selectedDay = DateController().day(from: cellState.date)
-        self.setReserveButtonEnabled(enabled: selectedDay.available(with: selectedLocation))
         self.collectionView.reloadData()
+        if let location = selectedLocation {
+            self.setReserveButtonEnabled(enabled: selectedDay.available(with: location))
+        } else {
+            self.setReserveButtonEnabled(enabled: false)
+        }
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleCell?, cellState: CellState) {
@@ -292,18 +302,24 @@ extension SchedulingViewController {
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
+            self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let centralAreaAction = UIAlertAction(title: "Central Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.centralOperatingArea
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
+            self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let southernAreaAction = UIAlertAction(title: "Southern Operating Area", style: .default) { (action) in
             self.selectedLocation = DataStore.shared.southernOperatingArea
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
+            self.calendarView.reloadData()
+            self.updateReserveButton(with: self.selectedLocation)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(northernAreaAction)
@@ -313,10 +329,11 @@ extension SchedulingViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    func updateUIWeather(for location: Location, for date: Date) {
-        self.locationButton.setTitle(self.selectedLocation.operatingArea?.rawValue, for: .normal)
-        self.hourlyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .hourly)
-        if let dailyConditions = WeatherController().conditions(for: date, for: selectedLocation, conditionType: .daily).first {
+    func updateUIWeather(for location: Location?, for date: Date) {
+        guard let location = location else { return }
+        self.locationButton.setTitle(location.operatingArea?.rawValue, for: .normal)
+        self.hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
+        if let dailyConditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
             self.noDataLabel.isHidden = true
             self.dailyConditions = dailyConditions
         } else {
@@ -329,6 +346,8 @@ extension SchedulingViewController {
     
     func color(for day: Day, cellState: CellState) -> CGColor {
     
+        guard let location = self.selectedLocation else { return UIColor.clear.cgColor }
+        
         let calendar = Calendar.current
         
         if cellState.dateBelongsTo != .thisMonth {
@@ -347,14 +366,14 @@ extension SchedulingViewController {
             case .orderedAscending:
                 return UIColor.clear.cgColor
             case .orderedSame:
-                if day.available(with: selectedLocation) {
+                if day.available(with: location) {
                     return availableViewColor.cgColor
                 }
             case .orderedDescending:
                 guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
                     return UIColor.clear.cgColor
                 }
-                if day.available(with: selectedLocation) {
+                if day.available(with: location) {
                     if dayComp1 <= (dayComp2 + 3) {
                         return availableViewColor.cgColor
                     } else {
@@ -365,10 +384,16 @@ extension SchedulingViewController {
             return unavailableViewColor.cgColor
         case .orderedDescending:
             
-            if day.available(with: selectedLocation) {
+            if day.available(with: location) {
                 return standbyViewColor.cgColor
             }
             return unavailableViewColor.cgColor
+        }
+    }
+    
+    func updateReserveButton(with location: Location?) {
+        if let location = location {
+            self.setReserveButtonEnabled(enabled: selectedDay.available(with: location))
         }
     }
     
