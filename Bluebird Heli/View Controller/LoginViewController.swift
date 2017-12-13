@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
                     DataStore.shared.currentGroup = group
                     self.userSignedIn()
                     self.showDashboard()
+                    FirebaseController().observeDays()
                 })
             }
         }

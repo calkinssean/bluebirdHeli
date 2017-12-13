@@ -6,7 +6,7 @@
 //  Copyright © 2017 Sean Calkins. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Date {
     
@@ -31,3 +31,4 @@ extension Date {
     }
     
 }
+

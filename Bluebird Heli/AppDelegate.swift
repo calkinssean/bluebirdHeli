@@ -18,6 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
     
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         checkForAuth { (user) in
             guard let user = user else { return }
             FirebaseController().fetchGroup(with: user.uid, completion: { (group) in
@@ -26,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WeatherController().setUpLocations()
             WeatherController().fetchWeatherHourly()
             showDashboard()
+            FirebaseController().observeDays()
         }
         
         return true
@@ -66,6 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootViewController = storyboard.instantiateViewController(withIdentifier: "Dashboard") as! UINavigationController
             window?.rootViewController = rootViewController
     }
-   
+
 }
 

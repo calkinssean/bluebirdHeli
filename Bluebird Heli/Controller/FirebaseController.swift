@@ -21,6 +21,10 @@ class FirebaseController {
     var groupsURL: DatabaseReference {
         return baseURL.child("users")
     }
+    
+    var daysURL: DatabaseReference {
+        return baseURL.child("days")
+    }
 
     
     func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> ()) {
@@ -32,6 +36,29 @@ class FirebaseController {
     func save(dict: [String: Any], ref: DatabaseReference) {
         guard ref != baseURL else { return }
         ref.updateChildValues(dict)
+    }
+    
+    func observeDays() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let dateKey = dateFormatter.string(from: Date())
+
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
+            print("child added")
+            print(snapshot)
+        }
+        
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
+            print("child changed")
+            print(snapshot)
+        }
+        
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
+            print("child removed")
+            print(snapshot)
+        }
+   
     }
     
     func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
