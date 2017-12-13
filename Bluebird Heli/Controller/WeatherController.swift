@@ -45,8 +45,15 @@ class WeatherController {
     }
     
     func badWeather(conditions: [Conditions]) -> Bool {
-        // TODO:
-   //     print(conditions.count)
+        guard let dailyConditions = conditions.first else { return false }
+        if dailyConditions.windGust > Measurement<UnitSpeed>(value: 35, unit: .milesPerHour) {
+            return true
+        }
+        if let visibility = dailyConditions.visibility {
+            if visibility < Measurement<UnitLength>(value: 1, unit: .miles) {
+                return true
+            }
+        }
         return false
     }
     
