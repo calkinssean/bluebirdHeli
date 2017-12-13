@@ -69,6 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootViewController = storyboard.instantiateViewController(withIdentifier: "Dashboard") as! UINavigationController
             window?.rootViewController = rootViewController
     }
-   
+
 }
 

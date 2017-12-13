@@ -21,10 +21,33 @@ struct Day {
         return false
     }
     
-    func urlDate() -> String {
+    func urlDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
+    }
+    
+    func save() {
+        let dict: [String: Any] = [
+            "date": date.timeIntervalSince1970
+        ]
+        let ref = FirebaseController().daysURL.child(urlDateString())
+        FirebaseController().save(dict: dict, ref: ref)
+        
+        if reservationOne != nil {
+            saveReservationOne()
+        }
+        if reservationTwo != nil {
+            saveReservationTwo()
+        }
+    }
+    
+    func saveReservationOne() {
+        
+    }
+    
+    func saveReservationTwo() {
+        
     }
     
 }

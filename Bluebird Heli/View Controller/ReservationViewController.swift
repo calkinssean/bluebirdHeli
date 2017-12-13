@@ -20,6 +20,7 @@ class ReservationViewController: UIViewController {
     
     var selectedDay = Day()
     var reservation = Reservation()
+    var propertyBeingChanged = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +68,14 @@ extension ReservationViewController: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.currentTextField.text = pickerViewData[row]
+        switch propertyBeingChanged {
+        case "Pickup Location":
+            reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
+        case "Number Of People":
+            reservation.numberOfAttendees = Int(pickerViewData[row])
+        default:
+            break
+        }
     }
     
 }
@@ -80,6 +89,7 @@ extension ReservationViewController: UITextFieldDelegate {
             self.pickerView.reloadAllComponents()
             textField.inputView = pickerView
             currentTextField = textField
+            propertyBeingChanged = "Pickup Location"
         case pickupTimeTextField:
             let datePicker = UIDatePicker()
             datePicker.datePickerMode = .time
@@ -90,15 +100,13 @@ extension ReservationViewController: UITextFieldDelegate {
             self.pickerView.reloadAllComponents()
             textField.inputView = pickerView
             currentTextField = textField
+            propertyBeingChanged = "Number Of People"
         default:
             break
             
             
         }
     }
-    
-
-    
 }
 
 // MARK: - Helper
@@ -108,11 +116,25 @@ extension ReservationViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, MMM dd - hh:mm a"
         self.pickupTimeTextField.text = dateFormatter.string(from: sender.date)
+        self.reservation.pickupTime = sender.date
     }
     
     @objc func dismissKeyboard() {
         self.locationTextField.resignFirstResponder()
         self.pickupTimeTextField.resignFirstResponder()
         self.numberOfPeopleTextField.resignFirstResponder()
+    }
+    
+    func saveReservation() {
+        
+        guard reservation.initialized() else { return }
+        if selectedDay.reservationOne == nil {
+            selectedDay.reservationOne = reservation
+        } else if selectedDay.reservationTwo == nil {
+            selectedDay.reservationTwo = reservation
+        } else {
+            return
+        }
+        selectedDay.save()
     }
 }

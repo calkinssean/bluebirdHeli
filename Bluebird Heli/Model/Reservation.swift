@@ -14,5 +14,10 @@ struct Reservation {
     var location: OperatingArea?
     var pickupTime: Date?
     var pickupLocation: PickupLocation?
+    var numberOfAttendees: Int?
+    
+    func initialized() -> Bool {
+        return groupUID != nil && location != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
+    }
     
 }

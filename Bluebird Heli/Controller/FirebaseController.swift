@@ -22,7 +22,7 @@ class FirebaseController {
         return baseURL.child("users")
     }
     
-    var datesURL: DatabaseReference {
+    var daysURL: DatabaseReference {
         return baseURL.child("days")
     }
 
@@ -44,17 +44,17 @@ class FirebaseController {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let dateKey = dateFormatter.string(from: Date())
 
-        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
             print("child added")
             print(snapshot)
         }
         
-        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
             print("child changed")
             print(snapshot)
         }
         
-        datesURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
+        daysURL.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
             print("child removed")
             print(snapshot)
         }
