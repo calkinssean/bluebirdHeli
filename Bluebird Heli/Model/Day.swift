@@ -26,6 +26,8 @@ class Day {
         if reservationOne != nil && reservationTwo != nil {
             return false
         }
+        print(reservationOne?.operatingArea)
+        print(location.operatingArea)
         if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
             return false
         }

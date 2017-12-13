@@ -144,14 +144,13 @@ extension ReservationViewController {
         }
         if selectedDay.reservationOne == nil {
             selectedDay.reservationOne = reservation
-            print(reservation.operatingArea)
         } else if selectedDay.reservationTwo == nil {
             selectedDay.reservationTwo = reservation
-            print(reservation.operatingArea)
         } else {
             print("Reservation not saved, Selected Day full")
             return
         }
+        DataStore.shared.daysDict[selectedDay.urlDateString()] = selectedDay
         selectedDay.save()
         dismiss(animated: true, completion: nil)
     }

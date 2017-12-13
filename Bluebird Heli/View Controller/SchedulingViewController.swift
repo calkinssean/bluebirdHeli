@@ -55,8 +55,8 @@ class SchedulingViewController: UIViewController {
  
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateReserveButton(with: selectedLocation)
         if selectedLocation != nil {
+            self.setReserveButtonEnabled(enabled: false)
             self.calendarView.reloadData()
         }
     }
