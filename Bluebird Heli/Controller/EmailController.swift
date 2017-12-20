@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import SwiftMailgun
 
 class EmailController {
     
