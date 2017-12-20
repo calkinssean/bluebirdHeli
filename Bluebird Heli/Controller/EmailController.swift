@@ -7,21 +7,9 @@
 //
 
 import Foundation
-import SwiftMailgun
 
 
 class EmailController {
     
-    func testEmail() {
-        
-        let mailgun = MailgunAPI(apiKey: "YouAPIKey", clientDomain: "yourDomain.com")
-        
-        mailgun.sendEmail(to: "[email protected]", from: "Test User <[email protected]>", subject: "This is a test", bodyHTML: "<b>test<b>") { mailgunResult in
-            
-            if mailgunResult.success{
-                print("Email was sent")
-            }
-            
-        }
-    }
+
 }
