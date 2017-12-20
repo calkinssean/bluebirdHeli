@@ -33,6 +33,7 @@
 		1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BD1FCCEF8100959AC7 /* Group.swift */; };
 		14B3E7FB1FDF7A2300411AF8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B3E7FA1FDF7A2300411AF8 /* GradientView.swift */; };
 		14B3E7FD1FDF7A4900411AF8 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */; };
+		14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */; };
 		14BBC9E41FD08ACB0096BBF6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */; };
 		14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */; };
 		14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */; };
@@ -71,6 +72,7 @@
 		1481B9BD1FCCEF8100959AC7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		14B3E7FA1FDF7A2300411AF8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
+		14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
 		14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
@@ -151,12 +153,13 @@
 			isa = PBXGroup;
 			children = (
 				141062E51FCB805F0007CED0 /* APIController.swift */,
-				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				1406189B1FD7293C00BC8D58 /* Converter.swift */,
+				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				14341F071FDF51CE000D9E60 /* DateController.swift */,
+				14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */,
+				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
-				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -298,17 +301,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftMailgun/SwiftMailgun.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftMailgun.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -371,6 +380,7 @@
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
+				14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */,
 				1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */,
 				14B3E7FD1FDF7A4900411AF8 /* BorderView.swift in Sources */,
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
