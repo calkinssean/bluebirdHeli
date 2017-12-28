@@ -468,30 +468,42 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyb-bh-BcQ">
-                                <rect key="frame" x="0.0" y="86" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="104.5" width="375" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="aIG-kr-zj0"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Pickup Location">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MAt-vf-RV9">
-                                <rect key="frame" x="0.0" y="177" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="195.5" width="375" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="PHm-T5-Ebd"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Pickup Time">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFd-oL-De1">
-                                <rect key="frame" x="0.0" y="268" width="375" height="69"/>
+                                <rect key="frame" x="0.0" y="286.5" width="375" height="69"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="69" id="esZ-lU-9sC"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Group Size">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have 5 trips remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jis-Ne-Ogv">
+                                <rect key="frame" x="154" y="74" width="211" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Eyb-bh-BcQ" firstAttribute="top" secondItem="IpH-SN-JqJ" secondAttribute="top" constant="22" id="2L3-4R-80S"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="top" secondItem="Eyb-bh-BcQ" secondAttribute="bottom" constant="22" id="2w5-32-Y3h"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="58C-1e-7vn"/>
                             <constraint firstAttribute="trailing" secondItem="GS0-YU-hzt" secondAttribute="trailing" id="5jG-sW-7m8"/>
@@ -501,8 +513,11 @@
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="L1d-Bb-YRF"/>
                             <constraint firstAttribute="bottom" secondItem="GS0-YU-hzt" secondAttribute="bottom" id="NWk-qc-mKW"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="Vve-k1-Dyl"/>
+                            <constraint firstItem="IpH-SN-JqJ" firstAttribute="trailing" secondItem="jis-Ne-Ogv" secondAttribute="trailing" constant="10" id="XYq-0H-2FC"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="leading" secondItem="gW3-6w-V0x" secondAttribute="leading" id="YNx-Sx-yQv"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="top" secondItem="gW3-6w-V0x" secondAttribute="top" id="YgR-jK-DwE"/>
+                            <constraint firstItem="Eyb-bh-BcQ" firstAttribute="top" secondItem="jis-Ne-Ogv" secondAttribute="bottom" constant="10" id="ctb-ty-qRa"/>
+                            <constraint firstItem="jis-Ne-Ogv" firstAttribute="top" secondItem="IpH-SN-JqJ" secondAttribute="top" constant="10" id="fEo-Gr-rqT"/>
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="zkB-OI-7ni"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IpH-SN-JqJ"/>

@@ -25,6 +25,8 @@ class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setUpPickerView()
         setGradients()
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
+        navigationItem.rightBarButtonItem = saveButton
         reservation.groupUID = DataStore.shared.currentGroup?.uid
        
     }
@@ -96,7 +98,7 @@ extension ReservationViewController {
     }
     
     
-    func saveReservation() {
+    @objc func saveReservation() {
         guard reservation.initialized() else {
             print("Reservation not saved, Reservation not initialized RVC")
             return
