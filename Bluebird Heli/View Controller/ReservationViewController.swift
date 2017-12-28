@@ -13,7 +13,9 @@ class ReservationViewController: UIViewController {
     @IBOutlet var pickupLocationButton: UIButton!
     @IBOutlet var pickupTimeButton: UIButton!
     @IBOutlet var numberOfGuestsButton: UIButton!
-
+    @IBOutlet var pickerViewBackground: UIView!
+    @IBOutlet var datePickerBackground: UIView!
+    
     var pickerViewData: [String] = []
     var pickerView = UIPickerView()
     
@@ -40,7 +42,7 @@ class ReservationViewController: UIViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
     }
-   
+    
 }
 
 extension ReservationViewController: UIPickerViewDataSource {
@@ -116,6 +118,20 @@ extension ReservationViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
+}
+
+// MARK: - @IBAction
+extension ReservationViewController {
+    
+    @IBAction func pickupLocationTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func pickupTimeTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func groupSizeTapped(_ sender: UIButton) {
+    }
     
 }
 
