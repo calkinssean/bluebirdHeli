@@ -97,7 +97,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V3O-7c-FMZ" customClass="GradientView" customModule="Bluebird_Heli" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V3O-7c-FMZ">
                                 <rect key="frame" x="0.0" y="64" width="375" height="301.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Month" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIE-S3-G31">
@@ -235,12 +235,6 @@
                                     <constraint firstAttribute="bottom" secondItem="lRi-qN-oYu" secondAttribute="bottom" id="suX-Ry-zFJ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                                        <color key="value" red="0.35686274509803922" green="0.35686274509803922" blue="0.35686274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                                        <color key="value" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
@@ -447,6 +441,7 @@
                         <viewLayoutGuide key="safeArea" id="yv2-d7-moK"/>
                     </view>
                     <connections>
+                        <outlet property="calendarBackground" destination="V3O-7c-FMZ" id="4sB-u1-2jW"/>
                         <outlet property="calendarView" destination="5UX-TK-xPb" id="08p-so-Fln"/>
                         <outlet property="collectionView" destination="uC0-hN-uqn" id="PNW-Zq-UkG"/>
                         <outlet property="locationButton" destination="bQC-4Y-fvf" id="7Ww-9S-hOI"/>
@@ -499,18 +494,15 @@
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="top" secondItem="IpH-SN-JqJ" secondAttribute="top" constant="22" id="2L3-4R-80S"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="top" secondItem="Eyb-bh-BcQ" secondAttribute="bottom" constant="22" id="2w5-32-Y3h"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="width" secondItem="gW3-6w-V0x" secondAttribute="width" id="4fS-tx-LIZ"/>
-                            <constraint firstItem="MAt-vf-RV9" firstAttribute="leading" secondItem="IpH-SN-JqJ" secondAttribute="leading" id="9gu-bs-SaU"/>
-                            <constraint firstItem="IpH-SN-JqJ" firstAttribute="trailing" secondItem="ZFd-oL-De1" secondAttribute="trailing" id="B25-aq-Hss"/>
-                            <constraint firstItem="ZFd-oL-De1" firstAttribute="leading" secondItem="IpH-SN-JqJ" secondAttribute="leading" id="FKe-aZ-2zz"/>
+                            <constraint firstItem="ZFd-oL-De1" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="58C-1e-7vn"/>
+                            <constraint firstItem="Eyb-bh-BcQ" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="Fn4-BB-Vml"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="HcY-d9-Uqi"/>
-                            <constraint firstItem="IpH-SN-JqJ" firstAttribute="trailing" secondItem="Eyb-bh-BcQ" secondAttribute="trailing" id="IU3-da-9cx"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="centerY" secondItem="gW3-6w-V0x" secondAttribute="centerY" id="JtT-sZ-HaF"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="top" secondItem="MAt-vf-RV9" secondAttribute="bottom" constant="22" id="KHf-wO-mYN"/>
+                            <constraint firstItem="MAt-vf-RV9" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="L1d-Bb-YRF"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="NZ9-mx-wHK"/>
-                            <constraint firstItem="MAt-vf-RV9" firstAttribute="trailing" secondItem="IpH-SN-JqJ" secondAttribute="trailing" id="OhA-v9-PRj"/>
                             <constraint firstItem="GS0-YU-hzt" firstAttribute="height" secondItem="gW3-6w-V0x" secondAttribute="height" id="Uuu-yI-rGa"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="Vve-k1-Dyl"/>
-                            <constraint firstItem="Eyb-bh-BcQ" firstAttribute="leading" secondItem="IpH-SN-JqJ" secondAttribute="leading" id="mPv-lx-65W"/>
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="zkB-OI-7ni"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IpH-SN-JqJ"/>
