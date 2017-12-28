@@ -449,7 +449,7 @@
                         <outlet property="noDataLabel" destination="dBp-TJ-wUV" id="eiK-iA-lQ2"/>
                         <outlet property="tableView" destination="V5w-gn-ON8" id="79G-8O-flD"/>
                         <outlet property="yearLabel" destination="RNR-3T-bPv" id="0jb-DF-5ig"/>
-                        <segue destination="AJd-vL-7nX" kind="show" identifier="showReservationSegue" id="jiv-fC-3D2"/>
+                        <segue destination="AJd-vL-7nX" kind="show" identifier="showReservationSegue" id="aOL-gK-Qo7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xBe-DV-mqB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -493,20 +493,25 @@
                         <constraints>
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="top" secondItem="IpH-SN-JqJ" secondAttribute="top" constant="22" id="2L3-4R-80S"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="top" secondItem="Eyb-bh-BcQ" secondAttribute="bottom" constant="22" id="2w5-32-Y3h"/>
-                            <constraint firstItem="GS0-YU-hzt" firstAttribute="width" secondItem="gW3-6w-V0x" secondAttribute="width" id="4fS-tx-LIZ"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="58C-1e-7vn"/>
+                            <constraint firstAttribute="trailing" secondItem="GS0-YU-hzt" secondAttribute="trailing" id="5jG-sW-7m8"/>
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="Fn4-BB-Vml"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="HcY-d9-Uqi"/>
-                            <constraint firstItem="GS0-YU-hzt" firstAttribute="centerY" secondItem="gW3-6w-V0x" secondAttribute="centerY" id="JtT-sZ-HaF"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="top" secondItem="MAt-vf-RV9" secondAttribute="bottom" constant="22" id="KHf-wO-mYN"/>
                             <constraint firstItem="MAt-vf-RV9" firstAttribute="width" secondItem="GS0-YU-hzt" secondAttribute="width" id="L1d-Bb-YRF"/>
-                            <constraint firstItem="GS0-YU-hzt" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="NZ9-mx-wHK"/>
-                            <constraint firstItem="GS0-YU-hzt" firstAttribute="height" secondItem="gW3-6w-V0x" secondAttribute="height" id="Uuu-yI-rGa"/>
+                            <constraint firstAttribute="bottom" secondItem="GS0-YU-hzt" secondAttribute="bottom" id="NWk-qc-mKW"/>
                             <constraint firstItem="ZFd-oL-De1" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="Vve-k1-Dyl"/>
+                            <constraint firstItem="GS0-YU-hzt" firstAttribute="leading" secondItem="gW3-6w-V0x" secondAttribute="leading" id="YNx-Sx-yQv"/>
+                            <constraint firstItem="GS0-YU-hzt" firstAttribute="top" secondItem="gW3-6w-V0x" secondAttribute="top" id="YgR-jK-DwE"/>
                             <constraint firstItem="Eyb-bh-BcQ" firstAttribute="centerX" secondItem="gW3-6w-V0x" secondAttribute="centerX" id="zkB-OI-7ni"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IpH-SN-JqJ"/>
                     </view>
+                    <connections>
+                        <outlet property="numberOfGuestsButton" destination="ZFd-oL-De1" id="zOo-EQ-Nsi"/>
+                        <outlet property="pickupLocationButton" destination="Eyb-bh-BcQ" id="ctU-b7-l0l"/>
+                        <outlet property="pickupTimeButton" destination="MAt-vf-RV9" id="TFm-Fx-R0Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b8I-N5-KT9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -185,7 +185,7 @@ extension SchedulingViewController {
     
     func setBackgroundGradient() {
         calendarBackground.clipsToBounds = true
-        calendarBackground.setGradientBackground(colorOne: Colors.darkerGray, colorTwo: UIColor.darkGray)
+        calendarBackground.setGradientBackground(colors: [Colors.darkerGray.cgColor, UIColor.darkGray.cgColor])
     }
     
     func setupCalendarView() {

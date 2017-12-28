@@ -10,7 +10,10 @@ import UIKit
 
 class ReservationViewController: UIViewController {
 
-    var currentTextField = UITextField()
+    @IBOutlet var pickupLocationButton: UIButton!
+    @IBOutlet var pickupTimeButton: UIButton!
+    @IBOutlet var numberOfGuestsButton: UIButton!
+
     var pickerViewData: [String] = []
     var pickerView = UIPickerView()
     
@@ -21,7 +24,7 @@ class ReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpPickerView()
-        
+        setGradients()
         reservation.groupUID = DataStore.shared.currentGroup?.uid
        
     }
@@ -57,7 +60,7 @@ extension ReservationViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.currentTextField.text = pickerViewData[row]
+       
         switch propertyBeingChanged {
         case "Pickup Location":
             reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
@@ -111,5 +114,20 @@ extension ReservationViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    
+}
+
+// MARK: - Helper
+extension ReservationViewController {
+    
+    func setGradients() {
+        setGradient(for: pickupLocationButton)
+        setGradient(for: pickupTimeButton)
+        setGradient(for: numberOfGuestsButton)
+    }
+    
+    func setGradient(for button: UIButton) {
+        button.setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
+    }
     
 }

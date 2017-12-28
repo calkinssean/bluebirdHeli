@@ -9,6 +9,11 @@
 import UIKit
 
 struct Colors {
+    
+    static let translucentDarkGray = UIColor(red: 1/3, green: 1/3, blue: 1/3, alpha: 0.69)
+    static let translucentDarkerGray = UIColor(red: 0.15, green: 0.15, blue: 0.15, alpha: 0.69)
+    
+    static let darkGray = UIColor.darkGray
     static let darkerGray = UIColor(red:0.15, green:0.15, blue:0.15, alpha:1.00)
     static let outsideMonthTextColor = UIColor.clear
     static let selectedDayViewColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
