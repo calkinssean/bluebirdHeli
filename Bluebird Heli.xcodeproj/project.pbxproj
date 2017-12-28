@@ -37,6 +37,7 @@
 		14BBC9E41FD08ACB0096BBF6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */; };
 		14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */; };
 		14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */; };
+		14C6077C1FF5938E00A52F9B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */; };
 		14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989C41FD1E1B10024724A /* WeatherController.swift */; };
 		14C989CB1FD1F1C50024724A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989CA1FD1F1C50024724A /* Configuration.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
@@ -76,6 +77,7 @@
 		14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		14C989C41FD1E1B10024724A /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		14C989CA1FD1F1C50024724A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		50A0BF17C7AF70CB22677329 /* Pods-Bluebird Heli.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug (production).xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug (production).xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
 				14B3E7FA1FDF7A2300411AF8 /* GradientView.swift */,
+				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 			);
@@ -382,6 +385,7 @@
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
 				14341F081FDF51CE000D9E60 /* DateController.swift in Sources */,
 				140EAE991FD5E570003E8C41 /* Extensions.swift in Sources */,
+				14C6077C1FF5938E00A52F9B /* UIView+Extension.swift in Sources */,
 				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
 				1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */,
 				1406189C1FD7293C00BC8D58 /* Converter.swift in Sources */,

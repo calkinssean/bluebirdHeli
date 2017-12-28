@@ -10,10 +10,6 @@ import UIKit
 
 class ReservationViewController: UIViewController {
 
-    @IBOutlet var locationTextField: UITextField!
-    @IBOutlet var pickupTimeTextField: UITextField!
-    @IBOutlet var numberOfPeopleTextField: UITextField!
-    
     var currentTextField = UITextField()
     var pickerViewData: [String] = []
     var pickerView = UIPickerView()
@@ -27,10 +23,7 @@ class ReservationViewController: UIViewController {
         setUpPickerView()
         
         reservation.groupUID = DataStore.shared.currentGroup?.uid
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,37 +70,6 @@ extension ReservationViewController: UIPickerViewDelegate {
     
 }
 
-extension ReservationViewController: UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        switch textField {
-        case locationTextField:
-            self.pickerViewData = [PickupLocation.heber.rawValue, PickupLocation.northSaltLake.rawValue]
-            self.pickerView.reloadAllComponents()
-            textField.inputView = pickerView
-            currentTextField = textField
-            propertyBeingChanged = "Pickup Location"
-        case pickupTimeTextField:
-            let datePicker = UIDatePicker()
-            datePicker.setDate(selectedDay.date, animated: false)
-            datePicker.datePickerMode = .time
-            datePicker.minuteInterval = 15
-            textField.inputView = datePicker
-            datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
-        case numberOfPeopleTextField:
-            self.pickerViewData = ["1", "2", "3", "4", "5", "6", "7", "8"]
-            self.pickerView.reloadAllComponents()
-            textField.inputView = pickerView
-            currentTextField = textField
-            propertyBeingChanged = "Number Of People"
-        default:
-            break
-            
-            
-        }
-    }
-}
-
 // MARK: - @IBAction
 extension ReservationViewController {
     
@@ -127,15 +89,9 @@ extension ReservationViewController {
     @objc func datePickerChanged(sender: UIDatePicker) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, MMM dd - hh:mm a"
-        self.pickupTimeTextField.text = dateFormatter.string(from: sender.date)
         self.reservation.pickupTime = sender.date
     }
     
-    @objc func dismissKeyboard() {
-        self.locationTextField.resignFirstResponder()
-        self.pickupTimeTextField.resignFirstResponder()
-        self.numberOfPeopleTextField.resignFirstResponder()
-    }
     
     func saveReservation() {
         guard reservation.initialized() else {
