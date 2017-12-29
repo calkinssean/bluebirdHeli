@@ -40,5 +40,11 @@ extension Date {
         return calendar.date(bySettingHour: 23, minute: 59, second: 59, of: self)!.timeIntervalSince1970
     }
     
+    func timeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a"
+        return formatter.string(from: self)
+    }
+    
 }
 

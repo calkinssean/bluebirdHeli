@@ -27,7 +27,6 @@ class ReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUIWithExistingReservation()
-        setUpPickerView()
         setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
         navigationItem.rightBarButtonItem = saveButton
@@ -41,11 +40,6 @@ class ReservationViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setUpPickerView() {
-        pickerView.delegate = self
-        pickerView.dataSource = self
     }
     
 }
@@ -75,10 +69,10 @@ extension ReservationViewController: UIPickerViewDelegate {
             reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
             pickupLocationButton.setTitle(title, for: .normal)
         case "Pickup Time":
-            print(title)
-            formatter.dateFormat = "h:mm a"
-            guard let date = formatter.date(from: title) else { return }
-            reservation.pickupTime = formatter.date(from: pickerViewData[row])
+            print(selectedDay.urlDateString())
+            formatter.dateFormat = "yyyy-MM-dd h:mm a"
+            guard let date = formatter.date(from: "\(selectedDay.urlDateString()) \(title)") else { return }
+            reservation.pickupTime = date
             formatter.dateFormat = "EEEE, MMM d, h:mm a"
             pickupTimeButton.setTitle(formatter.string(from: date), for: .normal)
             switch segmentedControl.selectedSegmentIndex {
@@ -142,7 +136,7 @@ extension ReservationViewController {
         }
         DataStore.shared.daysDict[selectedDay.urlDateString()] = selectedDay
         selectedDay.save()
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     func setPickerViewData() {
@@ -191,21 +185,22 @@ extension ReservationViewController {
     
     func pmSlots() -> [String] {
         var retVal = [String]()
-        formatter.dateFormat = "h:mm a"
-        guard var startTime = formatter.date(from: "1:00 PM") else { return [] }
+        let urlDateString = selectedDay.urlDateString()
+        formatter.dateFormat = "yyyy-MM-dd h:mm a"
+        guard var startTime = formatter.date(from: "\(urlDateString) 1:00 PM") else { return [] }
         if let reservation = selectedDay.reservationOne, let pickupTime = reservation.pickupTime {
             if pickupTime.addingTimeInterval(60 * 60 * 2) >= startTime {
                 startTime = pickupTime.addingTimeInterval(60 * 60 * 2)
-                if let latestPickupTime = formatter.date(from: "3:00 PM") {
-                    while startTime < latestPickupTime {
-                        retVal.append(formatter.string(from: startTime))
+                if let latestPickupTime = formatter.date(from: "\(urlDateString) 3:00 PM") {
+                    while startTime <= latestPickupTime {
+                        retVal.append(startTime.timeString())
                         startTime = startTime.addingTimeInterval(900)
                     }
                 }
             }
         } else {
             for _ in 0...8 {
-                retVal.append(formatter.string(from: startTime))
+                retVal.append(startTime.timeString())
                 // add 15 minutes
                 startTime = startTime.addingTimeInterval(900)
             }
