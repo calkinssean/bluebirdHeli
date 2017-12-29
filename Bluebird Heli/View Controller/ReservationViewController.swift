@@ -166,11 +166,12 @@ extension ReservationViewController {
   
     func amSlots() -> [String] {
         var retVal = [String]()
-        formatter.dateFormat = "h:mm a"
-        guard var startTime = formatter.date(from: "9:00 AM") else { return [] }
+        let urlDateString = selectedDay.urlDateString()
+        formatter.dateFormat = "yyyy-MM-dd h:mm a"
+        guard var startTime = formatter.date(from: "\(urlDateString) 9:00 AM") else { return [] }
         if let reservation = selectedDay.reservationOne, let pickupTime = reservation.pickupTime {
             while startTime.addingTimeInterval(60 * 60 * 2) <= pickupTime {
-                retVal.append(formatter.string(from: startTime))
+                retVal.append(startTime.timeString())
                 startTime = startTime.addingTimeInterval(900)
             }
         } else {
@@ -212,10 +213,10 @@ extension ReservationViewController {
         guard let reservation = selectedDay.reservationOne else { return }
         if reservation.timeSlot == .AM {
             segmentedControl.selectedSegmentIndex = 1
-            segmentedControl.isUserInteractionEnabled = false
+            segmentedControl.isHidden = true
         } else {
             segmentedControl.selectedSegmentIndex = 0
-            segmentedControl.isUserInteractionEnabled = false
+            segmentedControl.isHidden = true
         }
     }
     
