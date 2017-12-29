@@ -14,14 +14,15 @@ class ReservationViewController: UIViewController {
     @IBOutlet var pickupTimeButton: UIButton!
     @IBOutlet var numberOfGuestsButton: UIButton!
     @IBOutlet var pickerViewBackground: UIView!
-    @IBOutlet var datePickerBackground: UIView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBOutlet var pickerView: UIPickerView!
     
     var pickerViewData: [String] = []
-    var pickerView = UIPickerView()
-    
     var selectedDay = Day()
     var reservation = Reservation()
     var propertyBeingChanged = ""
+    
+    let formatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,9 @@ class ReservationViewController: UIViewController {
         setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
         navigationItem.rightBarButtonItem = saveButton
+        formatter.dateFormat = "h:mm a"
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hidePickerView))
+        self.view.addGestureRecognizer(tap)
         reservation.groupUID = DataStore.shared.currentGroup?.uid
        
     }
@@ -64,12 +68,19 @@ extension ReservationViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       
+        let title = pickerViewData[row]
         switch propertyBeingChanged {
         case "Pickup Location":
             reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
-        case "Number Of People":
+            pickupLocationButton.setTitle(title, for: .normal)
+        case "Pickup Time":
+            guard let date = formatter.date(from: title) else { return }
+            formatter.dateFormat = "EEEE, MMM d h:mm a"
+            reservation.pickupTime = formatter.date(from: pickerViewData[row])
+            pickupTimeButton.setTitle(formatter.string(from: date), for: .normal)
+        case "Group Size":
             reservation.numberOfAttendees = Int(pickerViewData[row])
+            numberOfGuestsButton.setTitle(title, for: .normal)
         default:
             break
         }
@@ -93,12 +104,20 @@ extension ReservationViewController {
 // MARK: - Helper
 extension ReservationViewController {
     
-    @objc func datePickerChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE, MMM dd - hh:mm a"
-        self.reservation.pickupTime = sender.date
+    @objc func hidePickerView() {
+        pickerViewBackground.isHidden = true
+        segmentedControl.isHidden = true
     }
     
+    func setGradients() {
+        setGradient(for: pickupLocationButton)
+        setGradient(for: pickupTimeButton)
+        setGradient(for: numberOfGuestsButton)
+    }
+    
+    func setGradient(for button: UIButton) {
+        button.setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
+    }
     
     @objc func saveReservation() {
         guard reservation.initialized() else {
@@ -118,34 +137,98 @@ extension ReservationViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func setPickerViewData() {
+        switch propertyBeingChanged {
+        case "Pickup Location":
+            pickerViewData = [PickupLocation.northSaltLake.rawValue, PickupLocation.heber.rawValue]
+        case "Pickup Time":
+            pickerViewData = availablePickupTimes()
+        case "Group Size":
+            pickerViewData = ["1", "2", "3", "4", "5", "6", "7", "8"]
+        default:
+            break
+        }
+    }
+    
+    func availablePickupTimes() -> [String] {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            return amSlots()
+        case 1:
+            return pmSlots()
+        default:
+            break
+        }
+        return [""]
+    }
+    
+    func startTime(for timeSlot: TimeSlot) -> Date {
+        switch timeSlot {
+        case TimeSlot.AM:
+            break
+        case TimeSlot.PM:
+            break
+        default: return Date()
+        }
+    }
+    
+    func amSlots() -> [String] {
+        var retVal = [String]()
+        formatter.dateFormat = "h:mm a"
+        guard var startTime = formatter.date(from: "9:00 AM") else { return [] }
+        for _ in 0...12 {
+            retVal.append(formatter.string(from: startTime))
+            // add 15 minutes
+            startTime = startTime.addingTimeInterval(900)
+        }
+        return retVal
+    }
+    
+    func pmSlots() -> [String] {
+        var retVal = [String]()
+        formatter.dateFormat = "h:mm a"
+        guard var startTime = formatter.date(from: "1:00 PM") else { return [] }
+        for _ in 0...8 {
+            retVal.append(formatter.string(from: startTime))
+            // add 15 minutes
+            startTime = startTime.addingTimeInterval(900)
+        }
+        return retVal
+    }
     
 }
 
 // MARK: - @IBAction
 extension ReservationViewController {
     
+    @IBAction func segmentedControlTapped(_ sender: UISegmentedControl) {
+        setPickerViewData()
+        pickerView.reloadAllComponents()
+    }
+    
     @IBAction func pickupLocationTapped(_ sender: UIButton) {
+        propertyBeingChanged = "Pickup Location"
+        setPickerViewData()
+        pickerView.reloadAllComponents()
+        pickerViewBackground.isHidden = false
+        segmentedControl.isHidden = true
     }
     
     @IBAction func pickupTimeTapped(_ sender: UIButton) {
+        propertyBeingChanged = "Pickup Time"
+        setPickerViewData()
+        pickerView.reloadAllComponents()
+        pickerViewBackground.isHidden = false
+        segmentedControl.isHidden = false
     }
     
     @IBAction func groupSizeTapped(_ sender: UIButton) {
+        propertyBeingChanged = "Group Size"
+        setPickerViewData()
+        pickerView.reloadAllComponents()
+        pickerViewBackground.isHidden = false
+        segmentedControl.isHidden = true
     }
     
 }
 
-// MARK: - Helper
-extension ReservationViewController {
-    
-    func setGradients() {
-        setGradient(for: pickupLocationButton)
-        setGradient(for: pickupTimeButton)
-        setGradient(for: numberOfGuestsButton)
-    }
-    
-    func setGradient(for button: UIButton) {
-        button.setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
-    }
-    
-}
