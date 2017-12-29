@@ -70,7 +70,10 @@ class FirebaseController {
     func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
         guard uid != "" else { return }
         groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String: Any] else { return }
+            guard let dict = snapshot.value as? [String: Any] else {
+                // TODO: - Log out
+                
+                return }
             completion(Group(dict: dict))
         }
     }

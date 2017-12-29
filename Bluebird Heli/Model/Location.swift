@@ -26,6 +26,6 @@ enum OperatingArea: String {
 
 enum PickupLocation: String {
     case heber = "Heber Hangar"
-    case northSaltLake = "North Salt Lake Hanger"
+    case northSaltLake = "North Salt Lake Hangar"
 }
 

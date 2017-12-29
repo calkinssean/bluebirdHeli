@@ -26,6 +26,7 @@ class ReservationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpUIWithExistingReservation()
         setUpPickerView()
         setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
@@ -74,10 +75,17 @@ extension ReservationViewController: UIPickerViewDelegate {
             reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
             pickupLocationButton.setTitle(title, for: .normal)
         case "Pickup Time":
+            print(title)
+            formatter.dateFormat = "h:mm a"
             guard let date = formatter.date(from: title) else { return }
-            formatter.dateFormat = "EEEE, MMM d h:mm a"
             reservation.pickupTime = formatter.date(from: pickerViewData[row])
+            formatter.dateFormat = "EEEE, MMM d, h:mm a"
             pickupTimeButton.setTitle(formatter.string(from: date), for: .normal)
+            switch segmentedControl.selectedSegmentIndex {
+            case 0: reservation.timeSlot = .AM
+            case 1: reservation.timeSlot = .PM
+            default: break
+            }
         case "Group Size":
             reservation.numberOfAttendees = Int(pickerViewData[row])
             numberOfGuestsButton.setTitle(title, for: .normal)
@@ -161,25 +169,22 @@ extension ReservationViewController {
         }
         return [""]
     }
-    
-    func startTime(for timeSlot: TimeSlot) -> Date {
-        switch timeSlot {
-        case TimeSlot.AM:
-            break
-        case TimeSlot.PM:
-            break
-        default: return Date()
-        }
-    }
-    
+  
     func amSlots() -> [String] {
         var retVal = [String]()
         formatter.dateFormat = "h:mm a"
         guard var startTime = formatter.date(from: "9:00 AM") else { return [] }
-        for _ in 0...12 {
-            retVal.append(formatter.string(from: startTime))
-            // add 15 minutes
-            startTime = startTime.addingTimeInterval(900)
+        if let reservation = selectedDay.reservationOne, let pickupTime = reservation.pickupTime {
+            while startTime.addingTimeInterval(60 * 60 * 2) <= pickupTime {
+                retVal.append(formatter.string(from: startTime))
+                startTime = startTime.addingTimeInterval(900)
+            }
+        } else {
+            for _ in 0...12 {
+                retVal.append(formatter.string(from: startTime))
+                // add 15 minutes
+                startTime = startTime.addingTimeInterval(900)
+            }
         }
         return retVal
     }
@@ -188,12 +193,35 @@ extension ReservationViewController {
         var retVal = [String]()
         formatter.dateFormat = "h:mm a"
         guard var startTime = formatter.date(from: "1:00 PM") else { return [] }
-        for _ in 0...8 {
-            retVal.append(formatter.string(from: startTime))
-            // add 15 minutes
-            startTime = startTime.addingTimeInterval(900)
+        if let reservation = selectedDay.reservationOne, let pickupTime = reservation.pickupTime {
+            if pickupTime.addingTimeInterval(60 * 60 * 2) >= startTime {
+                startTime = pickupTime.addingTimeInterval(60 * 60 * 2)
+                if let latestPickupTime = formatter.date(from: "3:00 PM") {
+                    while startTime < latestPickupTime {
+                        retVal.append(formatter.string(from: startTime))
+                        startTime = startTime.addingTimeInterval(900)
+                    }
+                }
+            }
+        } else {
+            for _ in 0...8 {
+                retVal.append(formatter.string(from: startTime))
+                // add 15 minutes
+                startTime = startTime.addingTimeInterval(900)
+            }
         }
         return retVal
+    }
+    
+    func setUpUIWithExistingReservation() {
+        guard let reservation = selectedDay.reservationOne else { return }
+        if reservation.timeSlot == .AM {
+            segmentedControl.selectedSegmentIndex = 1
+            segmentedControl.isUserInteractionEnabled = false
+        } else {
+            segmentedControl.selectedSegmentIndex = 0
+            segmentedControl.isUserInteractionEnabled = false
+        }
     }
     
 }
