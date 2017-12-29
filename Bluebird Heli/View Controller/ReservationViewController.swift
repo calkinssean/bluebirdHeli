@@ -175,6 +175,7 @@ extension ReservationViewController {
                 startTime = startTime.addingTimeInterval(900)
             }
         } else {
+            formatter.dateFormat = "h:mm a"
             for _ in 0...12 {
                 retVal.append(formatter.string(from: startTime))
                 // add 15 minutes
@@ -200,6 +201,7 @@ extension ReservationViewController {
                 }
             }
         } else {
+            formatter.dateFormat = "h:mm a"
             for _ in 0...8 {
                 retVal.append(startTime.timeString())
                 // add 15 minutes
