@@ -21,6 +21,7 @@ class ReservationViewController: UIViewController {
     var selectedDay = Day()
     var reservation = Reservation()
     var propertyBeingChanged = ""
+    var shouldShowSegmentedControl = true
     
     let formatter = DateFormatter()
     
@@ -30,6 +31,7 @@ class ReservationViewController: UIViewController {
         setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
         navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
         formatter.dateFormat = "h:mm a"
         let tap = UITapGestureRecognizer(target: self, action: #selector(hidePickerView))
         self.view.addGestureRecognizer(tap)
@@ -85,6 +87,9 @@ extension ReservationViewController: UIPickerViewDelegate {
             numberOfGuestsButton.setTitle(title, for: .normal)
         default:
             break
+        }
+        if reservation.initialized() {
+            navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     
@@ -215,10 +220,10 @@ extension ReservationViewController {
         guard let reservation = selectedDay.reservationOne else { return }
         if reservation.timeSlot == .AM {
             segmentedControl.selectedSegmentIndex = 1
-            segmentedControl.isHidden = true
+            shouldShowSegmentedControl = false
         } else {
             segmentedControl.selectedSegmentIndex = 0
-            segmentedControl.isHidden = true
+            shouldShowSegmentedControl = false
         }
     }
     
@@ -245,7 +250,9 @@ extension ReservationViewController {
         setPickerViewData()
         pickerView.reloadAllComponents()
         pickerViewBackground.isHidden = false
-        segmentedControl.isHidden = false
+        if shouldShowSegmentedControl {
+            segmentedControl.isHidden = false
+        }
     }
     
     @IBAction func groupSizeTapped(_ sender: UIButton) {
