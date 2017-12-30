@@ -11,6 +11,7 @@ import JTAppleCalendar
 
 class SchedulingViewController: UIViewController {
     
+    @IBOutlet var calendarBackground: UIView!
     @IBOutlet var locationButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var monthLabel: UILabel!
@@ -33,13 +34,6 @@ class SchedulingViewController: UIViewController {
     let weekendTextColor = UIColor.gray
     let weekdayTextColor = UIColor.white
     
-    let outsideMonthTextColor = UIColor.clear
-    let selectedDayViewColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5)
-
-    let availableViewColor = UIColor(red:0.51, green:0.62, blue:0.39, alpha:1.00)
-    let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
-    let standbyViewColor = UIColor(red:0.76, green:0.72, blue:0.12, alpha:1.00)
-    
     let weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
     
     override func viewDidLoad() {
@@ -47,6 +41,7 @@ class SchedulingViewController: UIViewController {
         
         formatter.locale = 🇺🇸
         setupCalendarView()
+        setBackgroundGradient()
         self.noDataLabel.isHidden = false
     
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
@@ -188,6 +183,11 @@ extension SchedulingViewController: UITableViewDelegate {
 // MARK: - Helper
 extension SchedulingViewController {
     
+    func setBackgroundGradient() {
+        calendarBackground.clipsToBounds = true
+        calendarBackground.setGradientBackground(colors: [Colors.darkerGray.cgColor, UIColor.darkGray.cgColor])
+    }
+    
     func setupCalendarView() {
         
         // Scroll to current date and select it
@@ -213,14 +213,14 @@ extension SchedulingViewController {
                 validCell.dateLabel.textColor = weekdayTextColor
             }
         } else {
-            validCell.dateLabel.textColor = outsideMonthTextColor
+            validCell.dateLabel.textColor = Colors.outsideMonthTextColor
         }
     }
     
     func handleCellBorderColor(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
         formatter.dateFormat = "yyyy-MM-dd"
-        validCell.availabilityView.layer.borderColor = outsideMonthTextColor.cgColor
+        validCell.availabilityView.layer.borderColor = Colors.outsideMonthTextColor.cgColor
         let day = DateController().day(from: cellState.date)
         if cellState.dateBelongsTo == .thisMonth {
             validCell.availabilityView.layer.borderWidth = 2
@@ -231,7 +231,7 @@ extension SchedulingViewController {
     func handleCellSelected(view: JTAppleCell?, cellState: CellState) {
         guard let validCell = view as? DateCell else { return }
         if validCell.isSelected {
-            validCell.availabilityView.backgroundColor = selectedDayViewColor
+            validCell.availabilityView.backgroundColor = Colors.selectedDayViewColor
         } else {
             validCell.availabilityView.backgroundColor = UIColor.clear
         }
@@ -355,7 +355,7 @@ extension SchedulingViewController {
         }
         
         if cellState.date.isToday() {
-            return unavailableViewColor.cgColor
+            return Colors.unavailableViewColor.cgColor
         }
         
         switch calendar.compare(day.date, to: Date(), toGranularity: .month) {
@@ -367,7 +367,7 @@ extension SchedulingViewController {
                 return UIColor.clear.cgColor
             case .orderedSame:
                 if day.available(with: location) {
-                    return availableViewColor.cgColor
+                    return Colors.availableViewColor.cgColor
                 }
             case .orderedDescending:
                 guard let dayComp1 = calendar.dateComponents([.day], from: day.date).day, let dayComp2 = calendar.dateComponents([.day], from: Date()).day else {
@@ -375,19 +375,19 @@ extension SchedulingViewController {
                 }
                 if day.available(with: location) {
                     if dayComp1 <= (dayComp2 + 3) {
-                        return availableViewColor.cgColor
+                        return Colors.availableViewColor.cgColor
                     } else {
-                        return standbyViewColor.cgColor
+                        return Colors.standbyViewColor.cgColor
                     }
                 }
             }
-            return unavailableViewColor.cgColor
+            return Colors.unavailableViewColor.cgColor
         case .orderedDescending:
             
             if day.available(with: location) {
-                return standbyViewColor.cgColor
+                return Colors.standbyViewColor.cgColor
             }
-            return unavailableViewColor.cgColor
+            return Colors.unavailableViewColor.cgColor
         }
     }
     

@@ -18,7 +18,7 @@ class DateController {
         if let day = DataStore.shared.daysDict[dateString] {
             return day
         }
-        var day = Day()
+        let day = Day()
         day.date = date
         return day
     }

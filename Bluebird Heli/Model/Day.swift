@@ -94,8 +94,8 @@ class Day {
             print("Reservation not saved, nil ref day model")
             return
         }
-        let reservationOneRef = ref.child("reservationTwo")
-        reservationOne?.save(ref: reservationOneRef)
+        let reservationTwoRef = ref.child("reservationTwo")
+        reservationTwo?.save(ref: reservationTwoRef)
     }
     
 }

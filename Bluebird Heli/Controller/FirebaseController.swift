@@ -70,13 +70,22 @@ class FirebaseController {
     func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
         guard uid != "" else { return }
         groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
-            guard let dict = snapshot.value as? [String: Any] else { return }
+            guard let dict = snapshot.value as? [String: Any] else {
+                // TODO: - Log out
+                
+                return }
             completion(Group(dict: dict))
         }
     }
     
     func reference(for group: Group) -> DatabaseReference {
         return groupsURL.child(group.uid)
+    }
+    
+    func reduceRemainingTripsForCurrentGroup() {
+        guard let remainingTrips = DataStore.shared.currentGroup?.remainingTrips, let uid = DataStore.shared.currentGroup?.uid else { return }
+        DataStore.shared.currentGroup?.remainingTrips = remainingTrips - 1
+        groupsURL.child(uid).child("remainingTrips").setValue(remainingTrips - 1)
     }
     
 }

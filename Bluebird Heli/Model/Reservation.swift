@@ -15,6 +15,7 @@ struct Reservation {
     var operatingArea: OperatingArea?
     var pickupTime: Date?
     var pickupLocation: PickupLocation?
+    var timeSlot: TimeSlot?
     var numberOfAttendees: Int?
     var ref: DatabaseReference?
     
@@ -35,7 +36,11 @@ struct Reservation {
                 self.pickupLocation = pickupLocation
             }
         }
-        
+        if let timeSlotString = dict["timeSlot"] as? String {
+            if let timeSlot = TimeSlot(rawValue: timeSlotString) {
+                self.timeSlot = timeSlot
+            }
+        }
        
     }
     
@@ -55,25 +60,34 @@ struct Reservation {
         if numberOfAttendees == nil {
             print("nuber of attendees not initialized")
         }
-        return groupUID != nil && operatingArea != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil
+        if timeSlot == nil {
+            print("time slot is nil")
+        }
+        return groupUID != nil && operatingArea != nil && pickupTime != nil && pickupLocation != nil && numberOfAttendees != nil && timeSlot != nil
     }
     
     mutating func save(ref: DatabaseReference) {
         self.ref = ref
-        guard initialized() else {
+        guard let groupUID = groupUID, let operatingArea = operatingArea, let pickupTime = pickupTime, let pickupLocation = pickupLocation, let numberOfAttendees = numberOfAttendees, let timeSlot = timeSlot else {
             print("Reservation not saved, not initialized reservation model")
             return
         }
         let dict: [String: Any] = [
-            "groupUID": groupUID!,
-            "operatingArea": operatingArea!.rawValue,
-            "pickupTime": pickupTime!.timeIntervalSince1970,
-            "pickupLocation": pickupLocation!.rawValue,
-            "numberOfAttendees": numberOfAttendees!,
+            "groupUID": groupUID,
+            "operatingArea": operatingArea.rawValue,
+            "pickupTime": pickupTime.timeIntervalSince1970,
+            "pickupLocation": pickupLocation.rawValue,
+            "numberOfAttendees": numberOfAttendees,
+            "timeSlot": timeSlot.rawValue,
             "ref": "\(ref)"
         ]
         FirebaseController().save(dict: dict, ref: ref)
         
     }
     
+}
+
+enum TimeSlot: String {
+    case AM = "AM"
+    case PM = "PM"
 }
