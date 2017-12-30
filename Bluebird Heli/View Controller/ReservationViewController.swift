@@ -10,6 +10,7 @@ import UIKit
 
 class ReservationViewController: UIViewController {
 
+    @IBOutlet var remainingTripsLabel: UILabel!
     @IBOutlet var pickupLocationButton: UIButton!
     @IBOutlet var pickupTimeButton: UIButton!
     @IBOutlet var numberOfGuestsButton: UIButton!
@@ -22,12 +23,13 @@ class ReservationViewController: UIViewController {
     var reservation = Reservation()
     var propertyBeingChanged = ""
     var shouldShowSegmentedControl = true
+    var remainingTrips = 0
     
     let formatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpUIWithExistingReservation()
+        setUpUI()
         setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
         navigationItem.rightBarButtonItem = saveButton
@@ -88,22 +90,9 @@ extension ReservationViewController: UIPickerViewDelegate {
         default:
             break
         }
-        if reservation.initialized() {
+        if reservation.initialized() && remainingTrips > 0 {
             navigationItem.rightBarButtonItem?.isEnabled = true
         }
-    }
-    
-}
-
-// MARK: - @IBAction
-extension ReservationViewController {
-    
-    @IBAction func saveTapped(_ sender: UIButton) {
-        saveReservation()
-    }
-    
-    @IBAction func backTapped(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
     }
     
 }
@@ -141,6 +130,7 @@ extension ReservationViewController {
         }
         DataStore.shared.daysDict[selectedDay.urlDateString()] = selectedDay
         selectedDay.save()
+        FirebaseController().reduceRemainingTripsForCurrentGroup()
         navigationController?.popViewController(animated: true)
     }
     
@@ -214,6 +204,13 @@ extension ReservationViewController {
             }
         }
         return retVal
+    }
+    
+    func setUpUI() {
+        setUpUIWithExistingReservation()
+        guard let remainingTrips = DataStore.shared.currentGroup?.remainingTrips else { return }
+        self.remainingTrips = remainingTrips
+        self.remainingTripsLabel.text = "You have \(remainingTrips) trips remaining"
     }
     
     func setUpUIWithExistingReservation() {

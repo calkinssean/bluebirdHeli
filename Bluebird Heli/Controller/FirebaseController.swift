@@ -82,4 +82,10 @@ class FirebaseController {
         return groupsURL.child(group.uid)
     }
     
+    func reduceRemainingTripsForCurrentGroup() {
+        guard let remainingTrips = DataStore.shared.currentGroup?.remainingTrips, let uid = DataStore.shared.currentGroup?.uid else { return }
+        DataStore.shared.currentGroup?.remainingTrips = remainingTrips - 1
+        groupsURL.child(uid).child("remainingTrips").setValue(remainingTrips - 1)
+    }
+    
 }

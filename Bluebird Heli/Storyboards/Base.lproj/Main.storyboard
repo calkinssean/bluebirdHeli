@@ -578,6 +578,7 @@
                         <outlet property="pickerViewBackground" destination="h6e-ii-rTs" id="vKP-nK-5I3"/>
                         <outlet property="pickupLocationButton" destination="Eyb-bh-BcQ" id="ctU-b7-l0l"/>
                         <outlet property="pickupTimeButton" destination="MAt-vf-RV9" id="TFm-Fx-R0Q"/>
+                        <outlet property="remainingTripsLabel" destination="jis-Ne-Ogv" id="eVt-o4-iEi"/>
                         <outlet property="segmentedControl" destination="6dH-np-S21" id="QUC-Op-kOm"/>
                     </connections>
                 </viewController>
