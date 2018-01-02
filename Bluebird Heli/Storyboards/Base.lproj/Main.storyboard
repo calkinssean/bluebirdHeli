@@ -80,7 +80,7 @@
                     <navigationItem key="navigationItem" title="Home" id="qUq-OI-z0T"/>
                     <connections>
                         <outlet property="tableView" destination="wd8-Pb-yHF" id="zeH-9D-BV8"/>
-                        <segue destination="yy2-AE-Ldy" kind="show" identifier="Show Media Segue" id="OMQ-9I-TbG"/>
+                        <segue destination="yy2-AE-Ldy" kind="show" identifier="showMediaSegue" id="OMQ-9I-TbG"/>
                         <segue destination="nNq-db-Aor" kind="show" identifier="showSchedulingSegue" id="61y-Aq-dSM"/>
                         <segue destination="Xf4-lp-dXg" kind="show" identifier="upcomingTripsSegue" id="8vb-PB-xQy"/>
                     </connections>
@@ -612,6 +612,16 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bhs-pk-dfp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="tsW-cd-y4W">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tsW-cd-y4W" id="0m8-Lx-GGb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Xf4-lp-dXg" id="t7m-hP-ned"/>
                                     <outlet property="delegate" destination="Xf4-lp-dXg" id="mhX-WL-TUk"/>
@@ -634,7 +644,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pSk-ot-aTl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2614" y="842"/>
+            <point key="canvasLocation" x="2613.5999999999999" y="841.52923538230891"/>
         </scene>
         <!--Trip Details-->
         <scene sceneID="XnX-Sl-rid">
