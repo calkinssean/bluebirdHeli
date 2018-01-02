@@ -101,11 +101,10 @@ class FirebaseController {
         let url = reservationURL.child(uid)
         
         url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
-            print(snapshot)
             guard let dict = snapshot.value as? [String: Any] else { return }
             guard let ref = dict["ref"] as? String else { return }
             self.fetchReservation(by: ref, completion: { (reservation) in
-                print(reservation.groupUID)
+                DataStore.shared.upcomingTrips.append(reservation)
             })
         }
         
@@ -120,7 +119,7 @@ class FirebaseController {
     
     func fetchReservation(by ref: String, completion: @escaping (Reservation) -> ()) {
         let ref = Database.database().reference(fromURL: ref)
-        ref.observeSingleEvent(of: .childAdded) { (snapshot) in
+        ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Any] else { return }
             completion(Reservation(dict: dict))
         }
