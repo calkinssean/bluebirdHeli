@@ -58,7 +58,7 @@ struct Reservation {
             print("pickup location not initialized")
         }
         if numberOfAttendees == nil {
-            print("nuber of attendees not initialized")
+            print("number of attendees not initialized")
         }
         if timeSlot == nil {
             print("time slot is nil")
@@ -81,8 +81,12 @@ struct Reservation {
             "timeSlot": timeSlot.rawValue,
             "ref": "\(ref)"
         ]
+        let joinTableRef = FirebaseController().reservationURL.child(groupUID).child(pickupTime.timeString())
+        let joinTableDict: [String: Any] = [
+            "ref": "\(ref)"
+        ]
         FirebaseController().save(dict: dict, ref: ref)
-        
+        FirebaseController().save(dict: joinTableDict, ref: joinTableRef)
     }
     
 }

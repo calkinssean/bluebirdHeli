@@ -92,6 +92,7 @@ class FirebaseController {
     }
     
     func observeReservations() {
+        
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
