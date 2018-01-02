@@ -26,6 +26,9 @@ class FirebaseController {
         return baseURL.child("days")
     }
 
+    var reservationURL: DatabaseReference {
+        return baseURL.child("reservations")
+    }
     
     func signInUser(email: String, password: String, completion: @escaping (User?, Error?) -> ()) {
         Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
@@ -86,6 +89,27 @@ class FirebaseController {
         guard let remainingTrips = DataStore.shared.currentGroup?.remainingTrips, let uid = DataStore.shared.currentGroup?.uid else { return }
         DataStore.shared.currentGroup?.remainingTrips = remainingTrips - 1
         groupsURL.child(uid).child("remainingTrips").setValue(remainingTrips - 1)
+    }
+    
+    func observeReservations() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let dateKey = dateFormatter.string(from: Date())
+        let url = reservationURL.child(uid)
+        
+        url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
+            print(snapshot)
+        }
+        
+        url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
+            print(snapshot)
+        }
+        
+        url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
+            print(snapshot)
+        }
     }
     
 }

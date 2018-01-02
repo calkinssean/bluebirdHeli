@@ -25,6 +25,7 @@
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
+		147D285E1FFC11BB008A5545 /* User+Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285D1FFC11BB008A5545 /* User+Reservation.swift */; };
 		1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */; };
 		1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B31FCCAD5E00959AC7 /* Weather.swift */; };
 		1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B51FCCB3B500959AC7 /* Location.swift */; };
@@ -66,6 +67,7 @@
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
+		147D285D1FFC11BB008A5545 /* User+Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Reservation.swift"; sourceTree = "<group>"; };
 		1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		1481B9B31FCCAD5E00959AC7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		1481B9B51FCCB3B500959AC7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -173,12 +175,13 @@
 			isa = PBXGroup;
 			children = (
 				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
-				1481B9B51FCCB3B500959AC7 /* Location.swift */,
-				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
-				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
-				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
 				140EAE981FD5E570003E8C41 /* Date+Extension.swift */,
 				1481B9B91FCCE87700959AC7 /* Day.swift */,
+				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
+				1481B9B51FCCB3B500959AC7 /* Location.swift */,
+				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
+				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
+				147D285D1FFC11BB008A5545 /* User+Reservation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
 				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
+				147D285E1FFC11BB008A5545 /* User+Reservation.swift in Sources */,
 				14341F081FDF51CE000D9E60 /* DateController.swift in Sources */,
 				140EAE991FD5E570003E8C41 /* Date+Extension.swift in Sources */,
 				14C6077C1FF5938E00A52F9B /* UIView+Extension.swift in Sources */,
