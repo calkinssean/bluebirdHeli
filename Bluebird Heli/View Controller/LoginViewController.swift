@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
                     self.userSignedIn()
                     self.showDashboard()
                     FirebaseController().observeDays()
+                    FirebaseController().observeReservations()
                 })
             }
         }

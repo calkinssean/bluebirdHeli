@@ -102,6 +102,11 @@ class FirebaseController {
         
         url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childAdded) { (snapshot) in
             print(snapshot)
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            guard let ref = dict["ref"] as? String else { return }
+            self.fetchReservation(by: ref, completion: { (reservation) in
+                print(reservation.groupUID)
+            })
         }
         
         url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childChanged) { (snapshot) in
@@ -110,6 +115,14 @@ class FirebaseController {
         
         url.queryOrderedByKey().queryStarting(atValue: dateKey).observe(.childRemoved) { (snapshot) in
             print(snapshot)
+        }
+    }
+    
+    func fetchReservation(by ref: String, completion: @escaping (Reservation) -> ()) {
+        let ref = Database.database().reference(fromURL: ref)
+        ref.observeSingleEvent(of: .childAdded) { (snapshot) in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            completion(Reservation(dict: dict))
         }
     }
     

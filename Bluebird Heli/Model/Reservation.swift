@@ -81,7 +81,7 @@ struct Reservation {
             "timeSlot": timeSlot.rawValue,
             "ref": "\(ref)"
         ]
-        let joinTableRef = FirebaseController().reservationURL.child(groupUID).child(pickupTime.timeString())
+        let joinTableRef = FirebaseController().reservationURL.child(groupUID).child(pickupTime.dateString())
         let joinTableDict: [String: Any] = [
             "ref": "\(ref)"
         ]
