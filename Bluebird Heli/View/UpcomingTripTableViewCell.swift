@@ -14,7 +14,7 @@ class UpcomingTripTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
+        setGradientBackground(colors: [Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
