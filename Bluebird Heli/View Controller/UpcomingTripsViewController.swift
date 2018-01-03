@@ -209,12 +209,13 @@ extension UpcomingTripsViewController {
     }
     
     func tripDetails(for header: String, from reservation: Reservation?) -> String {
+        
         guard let pickupLocation = reservation?.pickupLocation, let  pickupTime = reservation?.pickupTime, let groupSize = reservation?.numberOfAttendees else { return  "" }
         switch header {
         case "Pickup Location":
             return pickupLocation.rawValue
         case "Pickup Time":
-            formatter.dateFormat = "hh:mm a"
+            formatter.dateFormat = "h:mm a"
             return formatter.string(from: pickupTime)
         case "Group Size":
             return "\(groupSize)"
@@ -222,4 +223,19 @@ extension UpcomingTripsViewController {
             return ""
         }
     }
+    
+    func updateUIWeather(for location: Location?, for date: Date) {
+        guard let location = location else { return }
+        self.hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
+        if let dailyConditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
+            //self.noDataLabel.isHidden = true
+            self.dailyConditions = dailyConditions
+        } else {
+           // self.noDataLabel.isHidden = false
+            self.dailyConditions = nil
+        }
+      //  self.collectionView.reloadData()
+     //   self.tableView.reloadData()
+    }
+    
 }
