@@ -11,16 +11,22 @@ import UIKit
 class UpcomingTripTableViewCell: UITableViewCell {
     
     @IBOutlet var dateLabel: UILabel!
+    @IBOutlet var selectedView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setGradientBackground(colors: [Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
+        selectedView.layer.borderColor = UIColor.white.cgColor
+        selectedView.layer.borderWidth = 2
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        if selected {
+            selectedView.isHidden = false
+        } else {
+            selectedView.isHidden = true
+        }
     }
     
     func setupCell(with reservation: Reservation) {
