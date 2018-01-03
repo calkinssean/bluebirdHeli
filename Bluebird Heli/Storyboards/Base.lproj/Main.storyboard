@@ -761,7 +761,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="MOL-Pe-6GQ"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ml6-aV-cvm">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ml6-aV-cvm">
                                     <size key="itemSize" width="50" height="98"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -769,7 +769,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="weatherCell" id="M7I-hd-xYL" customClass="WeatherCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="98"/>
+                                        <rect key="frame" x="0.0" y="1" width="50" height="98"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="98"/>
