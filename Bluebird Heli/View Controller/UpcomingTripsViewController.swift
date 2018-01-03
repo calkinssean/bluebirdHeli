@@ -10,12 +10,12 @@ import UIKit
 
 class UpcomingTripsViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tripDetailsTableView: UITableView!
+    @IBOutlet var upcomingTripsTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
 
 }
@@ -27,8 +27,8 @@ extension UpcomingTripsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = DataStore.shared.upcomingTrips[indexPath.row].pickupTime?.dateString()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingTripTableViewCell
+        cell.setupCell(with: DataStore.shared.upcomingTrips[indexPath.row])
         return cell
     }
     

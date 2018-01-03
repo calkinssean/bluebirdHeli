@@ -613,13 +613,28 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="267"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="tsW-cd-y4W">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="tsW-cd-y4W" customClass="UpcomingTripTableViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tsW-cd-y4W" id="0m8-Lx-GGb">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCc-Iw-9d5">
+                                                    <rect key="frame" x="166" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kCc-Iw-9d5" firstAttribute="centerY" secondItem="0m8-Lx-GGb" secondAttribute="centerY" id="Zfa-2j-8d2"/>
+                                                <constraint firstItem="kCc-Iw-9d5" firstAttribute="centerX" secondItem="0m8-Lx-GGb" secondAttribute="centerX" id="gvX-oO-kHc"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="kCc-Iw-9d5" id="iKP-tA-0cQ"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -673,7 +688,8 @@
                         <viewLayoutGuide key="safeArea" id="vAz-XJ-QV1"/>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="bhs-pk-dfp" id="PmF-Nq-DOc"/>
+                        <outlet property="tripDetailsTableView" destination="3JQ-AK-UuP" id="ySL-FL-SNR"/>
+                        <outlet property="upcomingTripsTableView" destination="bhs-pk-dfp" id="PAp-C0-flS"/>
                         <segue destination="J72-tI-nzP" kind="show" identifier="tripDetailsSegue" id="sEy-DE-esu"/>
                     </connections>
                 </viewController>

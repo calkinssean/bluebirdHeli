@@ -67,7 +67,7 @@ extension DashboardViewController: UITableViewDelegate {
         case 0:
             self.performSegue(withIdentifier: "showSchedulingSegue", sender: self)
         case 1:
-            self.performSegue(withIdentifier: "upcomingTripsSegue", sender: self)
+            break
         case 2:
             self.performSegue(withIdentifier: "upcomingTripsSegue", sender: self)
         default:
