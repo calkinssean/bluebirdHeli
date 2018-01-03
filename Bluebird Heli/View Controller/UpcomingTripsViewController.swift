@@ -10,6 +10,8 @@ import UIKit
 
 class UpcomingTripsViewController: UIViewController {
 
+    @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var noDataLabel: UILabel!
     @IBOutlet var upcomingTripsTableView: UITableView!
     @IBOutlet var tripDetailsTableView: UITableView!
     
@@ -166,6 +168,20 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     
 }
 
+// MARK: - UICollectionViewDataSource
+extension UpcomingTripsViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.hourlyConditions.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "weatherCell", for: indexPath) as! WeatherCollectionViewCell
+        let conditions = self.hourlyConditions[indexPath.item]
+        cell.configureCell(time: conditions.time, iconString: conditions.icon, temperature: conditions.temperature)
+        return cell
+    }
+}
+
 // MARK: - Helper
 extension UpcomingTripsViewController {
     
@@ -238,14 +254,14 @@ extension UpcomingTripsViewController {
         guard let location = location else { return }
         hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
         if let conditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
-            //self.noDataLabel.isHidden = true
+            self.noDataLabel.isHidden = true
             dailyConditions = conditions
         } else {
-           // self.noDataLabel.isHidden = false
+            self.noDataLabel.isHidden = false
             dailyConditions = nil
         }
-      //  self.collectionView.reloadData()
-       tripDetailsTableView.reloadData()
+        self.collectionView.reloadData()
+        tripDetailsTableView.reloadData()
     }
     
     func location(from operatingArea: OperatingArea) -> Location {
