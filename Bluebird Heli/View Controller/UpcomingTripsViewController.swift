@@ -23,6 +23,7 @@ class UpcomingTripsViewController: UIViewController {
     
     var hourlyConditions = [Conditions]()
     var dailyConditions: Conditions?
+    var selectedReservation: Reservation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             case 0:
                 return tripDetailsHeaders.count
             case 1:
-                return 1
+                return weatherDetailHeaders[section].count
             default:
                 return 0
             }
@@ -63,20 +64,20 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell")!
-                cell.textLabel?.text = tripDetailsHeaders[indexPath.row]
+                cell.textLabel?.text = "\(tripDetailsHeaders[indexPath.row]):"
+                cell.detailTextLabel?.text = tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation)
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
-                
                 let leftHeader = weatherDetailHeaders[0][indexPath.row]
                 let rightHeader = weatherDetailHeaders[1][indexPath.row]
                 let leftSubtext = weatherDetailString(from: leftHeader, using: dailyConditions)
                 let rightSubtext = weatherDetailString(from: rightHeader, using: dailyConditions)
                 cell.setUpCell(leftHeader: leftHeader, leftSubtext: leftSubtext, rightHeader: rightHeader, rightSubtext: rightSubtext)
+                return cell
             default:
-                break
+                return UITableViewCell()
             }
-            return UITableViewCell()
         default:
             return UITableViewCell()
         }
@@ -144,7 +145,8 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case upcomingTripsTableView:
-            break
+            self.selectedReservation = DataStore.shared.upcomingTrips[indexPath.row]
+            self.tripDetailsTableView.reloadData()
         case tripDetailsTableView:
             break
         default:
@@ -204,5 +206,20 @@ extension UpcomingTripsViewController {
     func formattedNumberString(from double: Double) -> String {
         guard let unwrappedFormattedNumberString = numberFormatter.string(from: NSNumber(value: double)) else { return "" }
         return unwrappedFormattedNumberString
+    }
+    
+    func tripDetails(for header: String, from reservation: Reservation?) -> String {
+        guard let pickupLocation = reservation?.pickupLocation, let  pickupTime = reservation?.pickupTime, let groupSize = reservation?.numberOfAttendees else { return  "" }
+        switch header {
+        case "Pickup Location":
+            return pickupLocation.rawValue
+        case "Pickup Time":
+            formatter.dateFormat = "hh:mm a"
+            return formatter.string(from: pickupTime)
+        case "Group Size":
+            return "\(groupSize)"
+        default:
+            return ""
+        }
     }
 }
