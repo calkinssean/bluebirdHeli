@@ -26,7 +26,7 @@ class UpcomingTripTableViewCell: UITableViewCell {
     func setupCell(with reservation: Reservation) {
         guard let date = reservation.pickupTime else { return }
         let formatter = DateFormatter()
-        formatter.dateFormat = "EEEE, MMM dd hh:mm a"
+        formatter.dateFormat = "EEEE, MMM dd h:mm a"
         self.dateLabel.text = formatter.string(from: date)
     }
     

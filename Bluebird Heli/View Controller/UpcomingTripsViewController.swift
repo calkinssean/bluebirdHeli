@@ -63,9 +63,8 @@ extension UpcomingTripsViewController: UITableViewDataSource {
         case tripDetailsTableView:
             switch indexPath.section {
             case 0:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell")!
-                cell.textLabel?.text = "\(tripDetailsHeaders[indexPath.row]):"
-                cell.detailTextLabel?.text = tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell") as! TripDetailsTableViewCell
+                cell.label.text = "\(tripDetailsHeaders[indexPath.row]): \(tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation))"
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
@@ -145,8 +144,9 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch tableView {
         case upcomingTripsTableView:
-            self.selectedReservation = DataStore.shared.upcomingTrips[indexPath.row]
-            self.tripDetailsTableView.reloadData()
+            selectedReservation = DataStore.shared.upcomingTrips[indexPath.row]
+            guard let operatingArea = selectedReservation?.operatingArea, let pickupTime = selectedReservation?.pickupTime else { return }
+            updateUIWeather(for: location(from: operatingArea), for: pickupTime)
         case tripDetailsTableView:
             break
         default:
@@ -226,16 +226,27 @@ extension UpcomingTripsViewController {
     
     func updateUIWeather(for location: Location?, for date: Date) {
         guard let location = location else { return }
-        self.hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
-        if let dailyConditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
+        hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
+        if let conditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
             //self.noDataLabel.isHidden = true
-            self.dailyConditions = dailyConditions
+            dailyConditions = conditions
         } else {
            // self.noDataLabel.isHidden = false
-            self.dailyConditions = nil
+            dailyConditions = nil
         }
       //  self.collectionView.reloadData()
-     //   self.tableView.reloadData()
+       tripDetailsTableView.reloadData()
+    }
+    
+    func location(from operatingArea: OperatingArea) -> Location {
+        switch operatingArea {
+        case .northern:
+            return DataStore.shared.northernOperatingArea
+        case .central:
+            return DataStore.shared.centralOperatingArea
+        case .southern:
+            return DataStore.shared.southernOperatingArea
+        }
     }
     
 }
