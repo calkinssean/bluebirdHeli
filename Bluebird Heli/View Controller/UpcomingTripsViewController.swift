@@ -34,6 +34,7 @@ class UpcomingTripsViewController: UIViewController {
 
 }
 
+// MARK: - UITableViewDataSource
 extension UpcomingTripsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,7 +65,9 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell") as! TripDetailsTableViewCell
-                cell.label.text = "\(tripDetailsHeaders[indexPath.row]): \(tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation))"
+                cell.label.text = "\(tripDetailsHeaders[indexPath.row]):"
+                cell.detailLabel.text = tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation)
+                
                 return cell
             case 1:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
@@ -96,6 +99,7 @@ extension UpcomingTripsViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITableViewDelegate
 extension UpcomingTripsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -152,6 +156,12 @@ extension UpcomingTripsViewController: UITableViewDelegate {
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        view.tintColor = Colors.darkerGray
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
     }
     
 }
