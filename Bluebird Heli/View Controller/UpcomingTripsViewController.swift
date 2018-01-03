@@ -13,10 +13,20 @@ class UpcomingTripsViewController: UIViewController {
     @IBOutlet var upcomingTripsTableView: UITableView!
     @IBOutlet var tripDetailsTableView: UITableView!
     
-    let tripDetails = [""]
+    let numberFormatter = NumberFormatter()
+    let formatter = DateFormatter()
+    let measurementFormatter = MeasurementFormatter()
+    let 🇺🇸 = Locale(identifier: "en_US")
+    
+    let tripDetailsHeaders = ["Pickup Location", "Pickup Time", "Group Size"]
+    let weatherDetailHeaders = [["SUMMARY", "SUNRISE", "TEMPERATURE HIGH", "CHANCE OF PRECIP", "PRECIPITATION", "WIND", "VISIBILITY"], ["", "SUNSET", "TEMPERATURE LOW", "TYPE", "HUMIDITY", "GUSTS", "UV INDEX"]]
+    
+    var hourlyConditions = [Conditions]()
+    var dailyConditions: Conditions?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         formatter.locale = 🇺🇸
         self.upcomingTripsTableView.tableFooterView = UIView()
         self.tripDetailsTableView.tableFooterView = UIView()
     }
@@ -30,7 +40,14 @@ extension UpcomingTripsViewController: UITableViewDataSource {
         case upcomingTripsTableView:
             return DataStore.shared.upcomingTrips.count
         case tripDetailsTableView:
-            return 2
+            switch section {
+            case 0:
+                return tripDetailsHeaders.count
+            case 1:
+                return 1
+            default:
+                return 0
+            }
         default:
             return 0
         }
@@ -46,10 +63,16 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell")!
+                cell.textLabel?.text = tripDetailsHeaders[indexPath.row]
                 return cell
             case 1:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell")!
-                return cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "weatherCell", for: indexPath) as! WeatherTableViewCell
+                
+                let leftHeader = weatherDetailHeaders[0][indexPath.row]
+                let rightHeader = weatherDetailHeaders[1][indexPath.row]
+                let leftSubtext = weatherDetailString(from: leftHeader, using: dailyConditions)
+                let rightSubtext = weatherDetailString(from: rightHeader, using: dailyConditions)
+                cell.setUpCell(leftHeader: leftHeader, leftSubtext: leftSubtext, rightHeader: rightHeader, rightSubtext: rightSubtext)
             default:
                 break
             }
@@ -129,4 +152,57 @@ extension UpcomingTripsViewController: UITableViewDelegate {
         }
     }
     
+}
+
+// MARK: - Helper
+extension UpcomingTripsViewController {
+    
+    func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
+        guard let conditions = conditions else { return "--" }
+        formatter.dateFormat = "h:mm a"
+        numberFormatter.maximumFractionDigits = 0
+        measurementFormatter.numberFormatter = numberFormatter
+        measurementFormatter.unitOptions = .providedUnit
+        switch header {
+        case "SUMMARY":
+            return conditions.summary
+        case "SUNRISE":
+            return formatter.string(from: conditions.sunriseTime)
+        case "SUNSET":
+            return formatter.string(from: conditions.sunsetTime)
+        case "TEMPERATURE HIGH":
+            return measurementFormatter.string(from: conditions.temperatureHigh)
+        case "TEMPERATURE LOW":
+            return measurementFormatter.string(from: conditions.temperatureLow)
+        case "CHANCE OF PRECIP":
+            return "\(formattedNumberString(from: conditions.precipProbability))%"
+        case "TYPE":
+            if conditions.precipType == "" {
+                return "--"
+            }
+            return conditions.precipType
+        case "PRECIPITATION":
+            return measurementFormatter.string(from: conditions.precipAccumulation)
+        case "HUMIDITY":
+            return "\(formattedNumberString(from: conditions.humidity))%"
+        case "WIND":
+            return "\(Converter().direction(from: conditions.windBearing)) \(measurementFormatter.string(from: conditions.windSpeed))"
+        case "GUSTS":
+            return measurementFormatter.string(from: conditions.windGust)
+        case "VISIBILITY":
+            if let visibility = conditions.visibility {
+                return measurementFormatter.string(from: visibility)
+            }
+            return "--"
+        case "UV INDEX":
+            return "\(formattedNumberString(from: conditions.uvIndex))"
+        default:
+            return ""
+        }
+    }
+    
+    func formattedNumberString(from double: Double) -> String {
+        guard let unwrappedFormattedNumberString = numberFormatter.string(from: NSNumber(value: double)) else { return "" }
+        return unwrappedFormattedNumberString
+    }
 }
