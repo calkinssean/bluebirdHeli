@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class DashboardViewController: UIViewController {
 
@@ -24,6 +25,9 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutAlert))
+        navigationItem.rightBarButtonItem = logoutButton
        
     }
 
@@ -39,6 +43,35 @@ class DashboardViewController: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         for cell in tableView.visibleCells as! [DashboardTableViewCell] {
             cell.imageTopConstraint.constant = self.parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
+        }
+    }
+    
+    @objc func logoutAlert() {
+        let alert = UIAlertController(title: "Logout?", message: nil, preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Yes", style: .destructive) { (action) in
+            self.logout()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(yesAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func logout() {
+        
+        do {
+            try Auth.auth().signOut()
+            DataStore.shared.currentGroup = nil
+            DataStore.shared.daysDict = [:]
+            DataStore.shared.upcomingTrips = []
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "Login") as! UINavigationController
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.window?.rootViewController = rootViewController
+            }
+            
+        } catch {
+            print("failed logout")
         }
     }
     

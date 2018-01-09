@@ -28,6 +28,13 @@ class LoginViewController: UIViewController {
     @IBAction func loginTapped(_ sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
         FirebaseController().signInUser(email: email, password: password) { (user, error) in
+            
+            if let error = error {
+                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                alert.addAction(okAction)
+                self.present(alert, animated: true, completion: nil)
+            }
             if let uid = user?.uid {
                 FirebaseController().fetchGroup(with: uid, completion: { (group) in
                     DataStore.shared.currentGroup = group
@@ -36,7 +43,7 @@ class LoginViewController: UIViewController {
                     FirebaseController().observeDays()
                     FirebaseController().observeReservations()
                 })
-            }
+            } 
         }
     }
     

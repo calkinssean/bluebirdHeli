@@ -22,7 +22,7 @@ struct Group {
         case silver = "silver"
         case none = ""
     }
-    
+   
     init(dict: [String: Any]) {
         uid = dict["uid"] as? String ?? ""
         email = dict["email"] as? String ?? ""
