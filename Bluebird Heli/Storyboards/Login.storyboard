@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,13 +23,72 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodge-winter" translatesAutoresizingMaskIntoConstraints="NO" id="zOa-Wi-QcG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cloudveil-Logo-White" translatesAutoresizingMaskIntoConstraints="NO" id="6AE-ht-HiI">
+                                <rect key="frame" x="44" y="42" width="287" height="287"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="6AE-ht-HiI" secondAttribute="height" id="PAu-WR-cQu"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-Yf-Dwp">
+                                <rect key="frame" x="22" y="340" width="331" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7NU-I7-QgI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v4W-WA-tEH">
+                                <rect key="frame" x="22" y="391" width="331" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3iQ-4S-9HU"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vms-ne-ebQ">
+                                <rect key="frame" x="93.5" y="453" width="187.5" height="40"/>
+                                <color key="backgroundColor" red="0.96470588235294119" green="0.73333333333333328" blue="0.36078431372549019" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="PgI-bh-zww"/>
+                                </constraints>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6AE-ht-HiI" firstAttribute="centerX" secondItem="QpY-ok-tmC" secondAttribute="centerX" id="1gu-Ti-EfF"/>
+                            <constraint firstItem="4tk-Yf-Dwp" firstAttribute="centerX" secondItem="QpY-ok-tmC" secondAttribute="centerX" id="23y-cy-PzP"/>
+                            <constraint firstItem="6AE-ht-HiI" firstAttribute="leading" secondItem="QpY-ok-tmC" secondAttribute="leading" constant="44" id="AM7-9a-sc4"/>
+                            <constraint firstItem="Vms-ne-ebQ" firstAttribute="width" secondItem="zOa-Wi-QcG" secondAttribute="width" multiplier="0.5" id="DfI-Ec-kIO"/>
                             <constraint firstItem="rNr-rx-X4f" firstAttribute="bottom" secondItem="zOa-Wi-QcG" secondAttribute="bottom" id="FeT-rW-53v"/>
+                            <constraint firstItem="rNr-rx-X4f" firstAttribute="trailing" secondItem="4tk-Yf-Dwp" secondAttribute="trailing" constant="22" id="NPk-I1-3o3"/>
+                            <constraint firstItem="v4W-WA-tEH" firstAttribute="leading" secondItem="rNr-rx-X4f" secondAttribute="leading" constant="22" id="PZa-wp-oD5"/>
+                            <constraint firstItem="rNr-rx-X4f" firstAttribute="trailing" secondItem="v4W-WA-tEH" secondAttribute="trailing" constant="22" id="RjJ-9q-RQf"/>
                             <constraint firstItem="zOa-Wi-QcG" firstAttribute="top" secondItem="QpY-ok-tmC" secondAttribute="top" id="XkF-au-4WP"/>
+                            <constraint firstAttribute="trailing" secondItem="6AE-ht-HiI" secondAttribute="trailing" constant="44" id="dSd-oo-Oqn"/>
+                            <constraint firstItem="Vms-ne-ebQ" firstAttribute="top" secondItem="v4W-WA-tEH" secondAttribute="bottom" constant="22" id="e3q-7G-mJC"/>
+                            <constraint firstItem="Vms-ne-ebQ" firstAttribute="centerX" secondItem="QpY-ok-tmC" secondAttribute="centerX" id="eoo-bL-9ey"/>
                             <constraint firstItem="zOa-Wi-QcG" firstAttribute="leading" secondItem="rNr-rx-X4f" secondAttribute="leading" id="gAT-8n-jk6"/>
                             <constraint firstItem="rNr-rx-X4f" firstAttribute="trailing" secondItem="zOa-Wi-QcG" secondAttribute="trailing" id="ms8-Zu-5Uu"/>
+                            <constraint firstItem="6AE-ht-HiI" firstAttribute="top" secondItem="rNr-rx-X4f" secondAttribute="top" constant="-22" id="nKj-Lh-bpp"/>
+                            <constraint firstItem="4tk-Yf-Dwp" firstAttribute="top" secondItem="6AE-ht-HiI" secondAttribute="bottom" constant="11" id="qrO-NZ-VRS"/>
+                            <constraint firstItem="v4W-WA-tEH" firstAttribute="top" secondItem="4tk-Yf-Dwp" secondAttribute="bottom" constant="11" id="xf6-X5-iux"/>
+                            <constraint firstItem="4tk-Yf-Dwp" firstAttribute="leading" secondItem="rNr-rx-X4f" secondAttribute="leading" constant="22" id="zCQ-tp-uIj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rNr-rx-X4f"/>
                     </view>
@@ -57,6 +118,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cloudveil-Logo-White" width="1062" height="741"/>
         <image name="lodge-winter" width="2327" height="2830"/>
     </resources>
 </document>
