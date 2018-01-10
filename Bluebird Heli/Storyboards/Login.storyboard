@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iVa-FJ-1ui">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iVa-FJ-1ui">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,37 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yf8-FL-E7B">
-                                <rect key="frame" x="139" y="312" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Login" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1B-Ft-j9F">
-                                <rect key="frame" x="139" y="274" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0L6-no-GMm">
-                                <rect key="frame" x="164" y="350" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="loginTapped:" destination="B5g-zc-kAj" eventType="touchUpInside" id="7I7-uj-Lqf"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lodge-winter" translatesAutoresizingMaskIntoConstraints="NO" id="zOa-Wi-QcG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rNr-rx-X4f" firstAttribute="bottom" secondItem="zOa-Wi-QcG" secondAttribute="bottom" id="FeT-rW-53v"/>
+                            <constraint firstItem="zOa-Wi-QcG" firstAttribute="top" secondItem="QpY-ok-tmC" secondAttribute="top" id="XkF-au-4WP"/>
+                            <constraint firstItem="zOa-Wi-QcG" firstAttribute="leading" secondItem="rNr-rx-X4f" secondAttribute="leading" id="gAT-8n-jk6"/>
+                            <constraint firstItem="rNr-rx-X4f" firstAttribute="trailing" secondItem="zOa-Wi-QcG" secondAttribute="trailing" id="ms8-Zu-5Uu"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rNr-rx-X4f"/>
                     </view>
                     <navigationItem key="navigationItem" id="q1u-Ng-DRE"/>
-                    <connections>
-                        <outlet property="emailTextField" destination="R1B-Ft-j9F" id="Z0k-7N-kgK"/>
-                        <outlet property="passwordTextField" destination="Yf8-FL-E7B" id="zec-G8-ALo"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zm7-9Q-Uiw" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,4 +56,7 @@
             <point key="canvasLocation" x="-644" y="133"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="lodge-winter" width="2327" height="2830"/>
+    </resources>
 </document>

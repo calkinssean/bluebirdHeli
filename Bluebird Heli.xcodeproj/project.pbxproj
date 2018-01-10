@@ -22,6 +22,7 @@
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
 		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
 		143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19841FC5123400488927 /* DashboardTableViewCell.swift */; };
+		145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B03E42006C4DF00910305 /* NavigationController+Extension.swift */; };
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
@@ -42,7 +43,6 @@
 		14C6077E1FF5972500A52F9B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6077D1FF5972500A52F9B /* Constants.swift */; };
 		14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989C41FD1E1B10024724A /* WeatherController.swift */; };
 		14C989CB1FD1F1C50024724A /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C989CA1FD1F1C50024724A /* Configuration.swift */; };
-		14F4E68F2004B30100DF3E4E /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F4E68E2004B30100DF3E4E /* API.swift */; };
 		B550D35E9D07FBAB89B9FC0A /* Pods_Bluebird_Heli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA89DBD487C3ABCD53A3230 /* Pods_Bluebird_Heli.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +65,7 @@
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		143A19841FC5123400488927 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		145B03E42006C4DF00910305 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
@@ -85,7 +86,6 @@
 		14C6077D1FF5972500A52F9B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		14C989C41FD1E1B10024724A /* WeatherController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherController.swift; sourceTree = "<group>"; };
 		14C989CA1FD1F1C50024724A /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		14F4E68E2004B30100DF3E4E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		50A0BF17C7AF70CB22677329 /* Pods-Bluebird Heli.debug (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug (production).xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug (production).xcconfig"; sourceTree = "<group>"; };
 		61855EC4DE4E7656B3AA8F1C /* Pods-Bluebird Heli.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug (staging).xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		C3EB7A26235281C5F12BC29A /* Pods-Bluebird Heli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bluebird Heli.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bluebird Heli/Pods-Bluebird Heli.debug.xcconfig"; sourceTree = "<group>"; };
@@ -128,7 +128,6 @@
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
 				14C6077D1FF5972500A52F9B /* Constants.swift */,
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
-				14F4E68E2004B30100DF3E4E /* API.swift */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
 				14C989CC1FD2621A0024724A /* Model */,
@@ -154,6 +153,7 @@
 		143A19831FC5106700488927 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
@@ -198,6 +198,7 @@
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
 				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
+				145B03E42006C4DF00910305 /* NavigationController+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,7 +206,6 @@
 		14C989CE1FD2628F0024724A /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
@@ -387,6 +387,7 @@
 				14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */,
 				147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */,
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
+				145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */,
@@ -395,7 +396,6 @@
 				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,
 				14341F081FDF51CE000D9E60 /* DateController.swift in Sources */,
-				14F4E68F2004B30100DF3E4E /* API.swift in Sources */,
 				140EAE991FD5E570003E8C41 /* Date+Extension.swift in Sources */,
 				14C6077C1FF5938E00A52F9B /* UIView+Extension.swift in Sources */,
 				1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */,
