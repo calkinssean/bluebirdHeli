@@ -155,8 +155,7 @@ extension UpcomingTripsViewController: UITableViewDelegate {
             selectedReservation = DataStore.shared.upcomingTrips[indexPath.row]
             guard let operatingArea = selectedReservation?.operatingArea, let pickupTime = selectedReservation?.pickupTime else { return }
             updateUIWeather(for: location(from: operatingArea), for: pickupTime)
-        case tripDetailsTableView:
-            break
+            tripDetailsTableView.isHidden = false
         default:
             break
         }
