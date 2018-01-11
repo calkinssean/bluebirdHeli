@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class ReservationViewController: UIViewController {
 
@@ -31,7 +32,7 @@ class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         setGradients()
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(confirmReservationAlert))
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
         formatter.dateFormat = "h:mm a"
@@ -100,6 +101,24 @@ extension ReservationViewController: UIPickerViewDelegate {
 // MARK: - Helper
 extension ReservationViewController {
     
+    @objc func confirmReservationAlert() {
+        let alert = UIAlertController(title: "Save Reservation?", message: "Please verify that all information is correct.", preferredStyle: .alert)
+        let reserveAction = UIAlertAction(title: "Reserve", style: .default) { (action) in
+            self.showEmail()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(reserveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func hidePickerView() {
         pickerViewBackground.isHidden = true
         segmentedControl.isHidden = true
@@ -115,7 +134,7 @@ extension ReservationViewController {
         button.setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
     }
     
-    @objc func saveReservation() {
+    func saveReservation() {
         guard reservation.initialized() else {
             print("Reservation not saved, Reservation not initialized RVC")
             return
@@ -265,6 +284,53 @@ extension ReservationViewController {
         pickerView.reloadAllComponents()
         pickerViewBackground.isHidden = false
         segmentedControl.isHidden = true
+    }
+    
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension ReservationViewController: MFMailComposeViewControllerDelegate {
+    
+    func showEmail() {
+        let title = "Trip Scheduled"
+        guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
+        formatter.dateFormat = "EEEE, MMM d, h:mm a"
+        var config = Configuration()
+        var messageBody = ""
+        switch config.environment {
+        case .Production:
+            messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
+        case .Staging:
+            messageBody = "<h1>This is a test reservation</h1><br>Trip Details<br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
+        }
+        
+        let toRecipients = ["info@cloudveilmountainheli.com"]
+        let mailController = MFMailComposeViewController()
+        mailController.mailComposeDelegate = self
+        mailController.setSubject(title)
+        mailController.setMessageBody(messageBody, isHTML: true)
+        mailController.setToRecipients(toRecipients)
+        present(mailController, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        }
+        switch result {
+        case .cancelled:
+            dismiss(animated: true, completion: nil)
+            alert(title: "Reservation Not Saved", message: "An email needs to be sent to Cloud Veil in order for reservation to be saved")
+        case .failed:
+            dismiss(animated: true, completion: nil)
+            alert(title: "Reservation Not Saved", message: "Email failed to send")
+        case .saved:
+            dismiss(animated: true, completion: nil)
+            alert(title: "Reservation Not Saved", message: "An email needs to be sent to Cloud Veil in order for reservation to be saved")
+        case .sent:
+            dismiss(animated: true, completion: nil)
+            saveReservation()
+        }
     }
     
 }

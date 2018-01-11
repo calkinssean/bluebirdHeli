@@ -17,7 +17,7 @@ class DashboardViewController: UIViewController {
     let imageNames = ["helicopter", "media", "upcomingTrips"]
     
     var parallaxOffsetSpeed: CGFloat = 200
-    var cellHeight: CGFloat = 575
+    var cellHeight: CGFloat = 420
     var parallaxImageHeight: CGFloat {
         let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.tableView.frame.height) - cellHeight) / 2
         return maxOffset + cellHeight
@@ -27,7 +27,7 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         
         let logoutButton = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutAlert))
-        navigationItem.rightBarButtonItem = logoutButton
+        navigationItem.leftBarButtonItem = logoutButton
        
     }
 
