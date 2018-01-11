@@ -32,7 +32,7 @@ class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         setGradients()
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveReservation))
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(showEmail))
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
         formatter.dateFormat = "h:mm a"
@@ -116,7 +116,7 @@ extension ReservationViewController {
         button.setGradientBackground(colors: [Colors.translucentDarkerGray.cgColor, Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
     }
     
-    @objc func saveReservation() {
+    func saveReservation() {
         guard reservation.initialized() else {
             print("Reservation not saved, Reservation not initialized RVC")
             return
@@ -272,7 +272,7 @@ extension ReservationViewController {
 
 extension ReservationViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     
-    func showEmail() {
+    @objc func showEmail() {
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         let messageBody = "Trip Details: Location: \(operatingArea), Pickup Location: \(pickupLocation), Pickup time: \(pickupTime), Group Size: \(groupSize). Group Server ID: \(uid)"
@@ -288,10 +288,15 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate, UINavi
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         switch result {
         case .cancelled:
+            print("cancelled")
         case .failed:
-            case .saved:
+            print("failed")
+        case .saved:
+            print("saved")
         case .sent:
+            print("sent")
         }
+        dismiss(animated: true, completion: nil)
     }
     
 }
