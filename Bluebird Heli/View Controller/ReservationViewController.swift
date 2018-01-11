@@ -270,22 +270,25 @@ extension ReservationViewController {
     
 }
 
-extension ReservationViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
     @objc func showEmail() {
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
-        let messageBody = "Trip Details: Location: \(operatingArea), Pickup Location: \(pickupLocation), Pickup time: \(pickupTime), Group Size: \(groupSize). Group Server ID: \(uid)"
+        let messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(pickupTime.dateString())<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
         let toRecipients = ["calkins.sean@gmail.com"]
         let mailController = MFMailComposeViewController()
-        mailController.delegate = self
+        mailController.mailComposeDelegate = self
         mailController.setSubject(title)
-        mailController.setMessageBody(messageBody, isHTML: false)
+        mailController.setMessageBody(messageBody, isHTML: true)
         mailController.setToRecipients(toRecipients)
         present(mailController, animated: true, completion: nil)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+        }
         switch result {
         case .cancelled:
             print("cancelled")
