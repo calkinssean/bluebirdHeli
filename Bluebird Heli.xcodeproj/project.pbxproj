@@ -22,8 +22,12 @@
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
 		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
 		143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19841FC5123400488927 /* DashboardTableViewCell.swift */; };
+		145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B03E42006C4DF00910305 /* NavigationController+Extension.swift */; };
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
+		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
+		147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */; };
+		147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */; };
 		1481B9B21FCCAC4800959AC7 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */; };
 		1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B31FCCAD5E00959AC7 /* Weather.swift */; };
 		1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B51FCCB3B500959AC7 /* Location.swift */; };
@@ -31,7 +35,6 @@
 		1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9B91FCCE87700959AC7 /* Day.swift */; };
 		1481B9BC1FCCEE2000959AC7 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BB1FCCEE2000959AC7 /* Reservation.swift */; };
 		1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1481B9BD1FCCEF8100959AC7 /* Group.swift */; };
-		14B3E7FD1FDF7A4900411AF8 /* BorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */; };
 		14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */; };
 		14BBC9E41FD08ACB0096BBF6 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */; };
 		14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */; };
@@ -62,8 +65,12 @@
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		143A19841FC5123400488927 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		145B03E42006C4DF00910305 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
+		147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripTableViewCell.swift; sourceTree = "<group>"; };
+		147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripDetailsTableViewCell.swift; path = "Bluebird Heli/View/TripDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
 		1481B9B31FCCAD5E00959AC7 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		1481B9B51FCCB3B500959AC7 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -71,7 +78,6 @@
 		1481B9B91FCCE87700959AC7 /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		1481B9BB1FCCEE2000959AC7 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		1481B9BD1FCCEF8100959AC7 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
-		14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderView.swift; sourceTree = "<group>"; };
 		14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailController.swift; sourceTree = "<group>"; };
 		14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -124,6 +130,7 @@
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
+				1464C04E2007F31A005BA4ED /* Extensions */,
 				14C989CC1FD2621A0024724A /* Model */,
 				14C989CD1FD262770024724A /* View */,
 				14BBC9E71FD1D9DF0096BBF6 /* Controller */,
@@ -152,6 +159,16 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1464C04E2007F31A005BA4ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				140EAE981FD5E570003E8C41 /* Date+Extension.swift */,
+				145B03E42006C4DF00910305 /* NavigationController+Extension.swift */,
+				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		14BBC9E71FD1D9DF0096BBF6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,12 +188,11 @@
 			isa = PBXGroup;
 			children = (
 				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
-				1481B9B51FCCB3B500959AC7 /* Location.swift */,
-				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
-				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
-				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
-				140EAE981FD5E570003E8C41 /* Date+Extension.swift */,
 				1481B9B91FCCE87700959AC7 /* Day.swift */,
+				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
+				1481B9B51FCCB3B500959AC7 /* Location.swift */,
+				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
+				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,12 +200,12 @@
 		14C989CD1FD262770024724A /* View */ = {
 			isa = PBXGroup;
 			children = (
-				14B3E7FC1FDF7A4900411AF8 /* BorderView.swift */,
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
+				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
-				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
+				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +217,7 @@
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
+				147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -363,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */,
 				140CA4181FD0877F00B52AE9 /* FirebaseController.swift in Sources */,
 				14BBC9E41FD08ACB0096BBF6 /* DataStore.swift in Sources */,
 				141062E61FCB805F0007CED0 /* APIController.swift in Sources */,
@@ -370,16 +388,18 @@
 				143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */,
 				14C6077E1FF5972500A52F9B /* Constants.swift in Sources */,
 				1481B9B81FCCC17600959AC7 /* Conditions.swift in Sources */,
+				147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */,
 				1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */,
 				14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
 				14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */,
+				147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */,
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
+				145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */,
 				1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */,
-				14B3E7FD1FDF7A4900411AF8 /* BorderView.swift in Sources */,
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
 				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
 				142347111FC4CA8200A129B0 /* AppDelegate.swift in Sources */,

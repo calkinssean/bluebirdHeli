@@ -298,7 +298,7 @@ extension SchedulingViewController {
     func selectLocationAlert() {
         let alert = UIAlertController(title: "Select Location", message: nil, preferredStyle: .actionSheet)
         let northernAreaAction = UIAlertAction(title: "Northern Operating Area", style: .default) { (action) in
-            self.selectedLocation = DataStore.shared.northerOperatingArea
+            self.selectedLocation = DataStore.shared.northernOperatingArea
             if let date = self.calendarView.selectedDates.first {
                 self.updateUIWeather(for: self.selectedLocation, for: date)
             }
@@ -333,12 +333,12 @@ extension SchedulingViewController {
         guard let location = location else { return }
         self.locationButton.setTitle(location.operatingArea?.rawValue, for: .normal)
         self.hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
-        if let dailyConditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
+        if let conditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
             self.noDataLabel.isHidden = true
-            self.dailyConditions = dailyConditions
+            dailyConditions = conditions
         } else {
             self.noDataLabel.isHidden = false
-            self.dailyConditions = nil
+            dailyConditions = nil
         }
         self.collectionView.reloadData()
         self.tableView.reloadData()

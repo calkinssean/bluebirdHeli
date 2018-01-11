@@ -14,9 +14,11 @@ class DataStore {
     
     var currentGroup: Group?
     
+    var upcomingTrips: [Reservation] = []
+    
     var daysDict: [String: Day] = [:]
     
-    var northerOperatingArea: Location = Location()
+    var northernOperatingArea: Location = Location()
     var centralOperatingArea: Location = Location()
     var southernOperatingArea: Location = Location()
     

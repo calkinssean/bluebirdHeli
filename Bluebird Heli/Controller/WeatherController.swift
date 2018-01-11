@@ -16,7 +16,7 @@ class WeatherController {
         northernLocation.latitude = 41.07786
         northernLocation.longitude = -111.82708
         northernLocation.operatingArea = .northern
-        DataStore.shared.northerOperatingArea = northernLocation
+        DataStore.shared.northernOperatingArea = northernLocation
         
         let centralLocation = Location()
         centralLocation.latitude = 40.85764
@@ -33,7 +33,7 @@ class WeatherController {
     }
     
     func fetchWeather() {
-        WeatherAPI().fetchWeather(for: DataStore.shared.northerOperatingArea)
+        WeatherAPI().fetchWeather(for: DataStore.shared.northernOperatingArea)
         WeatherAPI().fetchWeather(for: DataStore.shared.centralOperatingArea)
         WeatherAPI().fetchWeather(for: DataStore.shared.southernOperatingArea)
     }
@@ -69,6 +69,5 @@ class WeatherController {
         }
         return conditionsToFilter.filter({$0.time.timeIntervalSince1970 >= date.startInterval() && $0.time.timeIntervalSince1970 <= date.endInterval()})
     }
-    
     
 }
