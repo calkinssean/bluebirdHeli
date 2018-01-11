@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class ReservationViewController: UIViewController {
 
@@ -265,6 +266,32 @@ extension ReservationViewController {
         pickerView.reloadAllComponents()
         pickerViewBackground.isHidden = false
         segmentedControl.isHidden = true
+    }
+    
+}
+
+extension ReservationViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+    
+    func showEmail() {
+        let title = "Trip Scheduled"
+        guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
+        let messageBody = "Trip Details: Location: \(operatingArea), Pickup Location: \(pickupLocation), Pickup time: \(pickupTime), Group Size: \(groupSize). Group Server ID: \(uid)"
+        let toRecipients = ["calkins.sean@gmail.com"]
+        let mailController = MFMailComposeViewController()
+        mailController.delegate = self
+        mailController.setSubject(title)
+        mailController.setMessageBody(messageBody, isHTML: false)
+        mailController.setToRecipients(toRecipients)
+        present(mailController, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        switch result {
+        case .cancelled:
+        case .failed:
+            case .saved:
+        case .sent:
+        }
     }
     
 }

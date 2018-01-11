@@ -127,9 +127,9 @@
 			children = (
 				142347101FC4CA8200A129B0 /* AppDelegate.swift */,
 				14C6077D1FF5972500A52F9B /* Constants.swift */,
-				1423471C1FC4CA8200A129B0 /* Info.plist */,
-				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
+				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
+				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				1464C04E2007F31A005BA4ED /* Extensions */,
 				14C989CC1FD2621A0024724A /* Model */,
 				14C989CD1FD262770024724A /* View */,
