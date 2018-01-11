@@ -101,6 +101,13 @@ extension ReservationViewController: UIPickerViewDelegate {
 // MARK: - Helper
 extension ReservationViewController {
     
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func hidePickerView() {
         pickerViewBackground.isHidden = true
         segmentedControl.isHidden = true
@@ -270,6 +277,7 @@ extension ReservationViewController {
     
 }
 
+// MARK: - MFMailComposeViewControllerDelegate
 extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
     @objc func showEmail() {
@@ -291,11 +299,11 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         }
         switch result {
         case .cancelled:
-            print("cancelled")
+            alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
         case .failed:
-            print("failed")
+            alert(title: "Reservation Not Saved", message: "Email failed to send.")
         case .saved:
-            print("saved")
+            alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
         case .sent:
             print("sent")
         }
