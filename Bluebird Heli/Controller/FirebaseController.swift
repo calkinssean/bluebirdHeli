@@ -125,4 +125,14 @@ class FirebaseController {
         }
     }
     
+    func resetPassword(email: String, completion: @escaping (Bool, String?) -> ()) {
+        Auth.auth().sendPasswordReset(withEmail: email) { (error) in
+            if let error = error {
+                completion(false, error.localizedDescription)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+    
 }

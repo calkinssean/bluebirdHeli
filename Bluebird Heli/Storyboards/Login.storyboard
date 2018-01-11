@@ -108,6 +108,15 @@
                                                     <action selector="loginTapped:" destination="B5g-zc-kAj" eventType="touchUpInside" id="AaH-PS-dZw"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dW-bE-Eg3">
+                                                <rect key="frame" x="115" y="453" width="144" height="30"/>
+                                                <state key="normal" title="I forgot my password">
+                                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="forgotPasswordTapped:" destination="B5g-zc-kAj" eventType="touchUpInside" id="IKF-FU-7ME"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -119,8 +128,10 @@
                                             <constraint firstItem="v4W-WA-tEH" firstAttribute="leading" secondItem="kAs-ZI-Mb6" secondAttribute="leading" constant="22" id="fP6-lf-3pf"/>
                                             <constraint firstItem="v4W-WA-tEH" firstAttribute="top" secondItem="4tk-Yf-Dwp" secondAttribute="bottom" constant="11" id="gmn-QW-0lK"/>
                                             <constraint firstItem="4tk-Yf-Dwp" firstAttribute="top" secondItem="6AE-ht-HiI" secondAttribute="bottom" constant="11" id="kaN-KJ-C4J"/>
+                                            <constraint firstItem="2dW-bE-Eg3" firstAttribute="top" secondItem="Vms-ne-ebQ" secondAttribute="bottom" constant="11" id="mFO-Vr-bgV"/>
                                             <constraint firstItem="6AE-ht-HiI" firstAttribute="centerX" secondItem="kAs-ZI-Mb6" secondAttribute="centerX" id="rnD-dk-Dza"/>
                                             <constraint firstItem="4tk-Yf-Dwp" firstAttribute="leading" secondItem="kAs-ZI-Mb6" secondAttribute="leading" constant="22" id="uFe-hN-1V1"/>
+                                            <constraint firstItem="2dW-bE-Eg3" firstAttribute="centerX" secondItem="kAs-ZI-Mb6" secondAttribute="centerX" id="x7K-h1-TM5"/>
                                             <constraint firstItem="Vms-ne-ebQ" firstAttribute="centerX" secondItem="kAs-ZI-Mb6" secondAttribute="centerX" id="xkY-tB-x9v"/>
                                             <constraint firstItem="Vms-ne-ebQ" firstAttribute="top" secondItem="v4W-WA-tEH" secondAttribute="bottom" constant="22" id="zpi-3J-UvZ"/>
                                         </constraints>

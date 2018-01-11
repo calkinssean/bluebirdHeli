@@ -57,6 +57,9 @@ class LoginViewController: UIViewController {
         }
     }
 
+    @IBAction func forgotPasswordTapped(_ sender: UIButton) {
+        
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -75,7 +78,6 @@ extension LoginViewController: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
-        print(textField.placeholder)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -90,6 +92,36 @@ extension LoginViewController {
     func userSignedIn() {
         WeatherController().setUpLocations()
         WeatherController().fetchWeatherHourly()
+    }
+    
+    func forgotPasswordAlert() {
+        let alert = UIAlertController(title: "Send password reset email", message: nil, preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Email Address"
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
+            if let emailAddress = alert.textFields?[0].text {
+                guard emailAddress != "" else { self.alert(title: "Error", message: "Please enter your email address"); return }
+                FirebaseController().resetPassword(email: emailAddress, completion: { (success, errorMessage) in
+                    if success {
+                        self.alert(title: "Success", message: "Your request was successful, please check your email")
+                    } else {
+                        self.alert(title: "Error", message: "Something went wrong, please try again")
+                    }
+                })
+            }
+        }
+        alert.addAction(cancelAction)
+        alert.addAction(sendAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func alert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func showDashboard() {
@@ -110,7 +142,6 @@ extension LoginViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
-    
     
     func deregisterFromKeyboardNotifications() {
         //Removing notifies on keyboard appearing

@@ -130,6 +130,7 @@
 				1423471C1FC4CA8200A129B0 /* Info.plist */,
 				143A19711FC4DAEF00488927 /* GoogleService-Info.plist */,
 				14C989CA1FD1F1C50024724A /* Configuration.swift */,
+				1464C04E2007F31A005BA4ED /* Extensions */,
 				14C989CC1FD2621A0024724A /* Model */,
 				14C989CD1FD262770024724A /* View */,
 				14BBC9E71FD1D9DF0096BBF6 /* Controller */,
@@ -153,10 +154,19 @@
 		143A19831FC5106700488927 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1464C04E2007F31A005BA4ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				140EAE981FD5E570003E8C41 /* Date+Extension.swift */,
+				145B03E42006C4DF00910305 /* NavigationController+Extension.swift */,
+				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		14BBC9E71FD1D9DF0096BBF6 /* Controller */ = {
@@ -178,7 +188,6 @@
 			isa = PBXGroup;
 			children = (
 				1481B9B71FCCC17600959AC7 /* Conditions.swift */,
-				140EAE981FD5E570003E8C41 /* Date+Extension.swift */,
 				1481B9B91FCCE87700959AC7 /* Day.swift */,
 				1481B9BD1FCCEF8100959AC7 /* Group.swift */,
 				1481B9B51FCCB3B500959AC7 /* Location.swift */,
@@ -196,9 +205,7 @@
 				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
-				14C6077B1FF5938E00A52F9B /* UIView+Extension.swift */,
 				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
-				145B03E42006C4DF00910305 /* NavigationController+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 		14C989CE1FD2628F0024724A /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
