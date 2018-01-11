@@ -299,15 +299,18 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         }
         switch result {
         case .cancelled:
+            dismiss(animated: true, completion: nil)
             alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
         case .failed:
+            dismiss(animated: true, completion: nil)
             alert(title: "Reservation Not Saved", message: "Email failed to send.")
         case .saved:
+            dismiss(animated: true, completion: nil)
             alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
         case .sent:
-            print("sent")
+            dismiss(animated: true, completion: nil)
+            saveReservation()
         }
-        dismiss(animated: true, completion: nil)
     }
     
 }
