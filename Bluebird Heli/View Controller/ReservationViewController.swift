@@ -304,7 +304,7 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
             messageBody = "<h1>This is a test reservation</h1><br>Trip Details<br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
         }
         
-        let toRecipients = ["calkins.sean@gmail.com"]
+        let toRecipients = ["info@cloudveilmountainheli.com"]
         let mailController = MFMailComposeViewController()
         mailController.mailComposeDelegate = self
         mailController.setSubject(title)
