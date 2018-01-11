@@ -326,7 +326,9 @@ extension SchedulingViewController {
         alert.addAction(centralAreaAction)
         alert.addAction(southernAreaAction)
         alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: {
+            self.tableView.isHidden = false
+        })
     }
     
     func updateUIWeather(for location: Location?, for date: Date) {
