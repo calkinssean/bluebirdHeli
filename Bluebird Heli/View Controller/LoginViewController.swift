@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func forgotPasswordTapped(_ sender: UIButton) {
-        
+        forgotPasswordAlert()
     }
 }
 
@@ -95,9 +95,10 @@ extension LoginViewController {
     }
     
     func forgotPasswordAlert() {
-        let alert = UIAlertController(title: "Send password reset email", message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Reset Password", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
             textField.placeholder = "Email Address"
+            textField.keyboardType = .emailAddress
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let sendAction = UIAlertAction(title: "Send", style: .default) { (action) in
@@ -107,7 +108,9 @@ extension LoginViewController {
                     if success {
                         self.alert(title: "Success", message: "Your request was successful, please check your email")
                     } else {
-                        self.alert(title: "Error", message: "Something went wrong, please try again")
+                        if let message = errorMessage {
+                            self.alert(title: "Error", message: message)
+                        }
                     }
                 })
             }
