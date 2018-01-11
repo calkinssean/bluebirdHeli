@@ -103,7 +103,7 @@ extension ReservationViewController {
     
     @objc func confirmReservationAlert() {
         let alert = UIAlertController(title: "Save Reservation?", message: "Please verify that all information is correct.", preferredStyle: .alert)
-        let reserveAction = UIAlertAction(title: "Reserver", style: .default) { (action) in
+        let reserveAction = UIAlertAction(title: "Reserve", style: .default) { (action) in
             self.showEmail()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -294,7 +294,8 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
     func showEmail() {
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
-        let messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(pickupTime.dateString())<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
+        formatter.dateFormat = "EEEE, MMM d, h:mm a"
+        let messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
         let toRecipients = ["calkins.sean@gmail.com"]
         let mailController = MFMailComposeViewController()
         mailController.mailComposeDelegate = self
@@ -311,13 +312,13 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         switch result {
         case .cancelled:
             dismiss(animated: true, completion: nil)
-            alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
+            alert(title: "Reservation Not Saved", message: "An email needs to be sent to Cloud Veil in order for reservation to be saved")
         case .failed:
             dismiss(animated: true, completion: nil)
-            alert(title: "Reservation Not Saved", message: "Email failed to send.")
+            alert(title: "Reservation Not Saved", message: "Email failed to send")
         case .saved:
             dismiss(animated: true, completion: nil)
-            alert(title: "Reservation Not Saved", message: "Reservation will not be saved without email being sent.")
+            alert(title: "Reservation Not Saved", message: "An email needs to be sent to Cloud Veil in order for reservation to be saved")
         case .sent:
             dismiss(animated: true, completion: nil)
             saveReservation()
