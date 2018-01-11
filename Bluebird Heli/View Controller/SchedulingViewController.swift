@@ -42,7 +42,6 @@ class SchedulingViewController: UIViewController {
         formatter.locale = 🇺🇸
         setupCalendarView()
         setBackgroundGradient()
-        self.noDataLabel.isHidden = false
     
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton

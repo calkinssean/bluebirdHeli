@@ -257,6 +257,7 @@ extension UpcomingTripsViewController {
         hourlyConditions = WeatherController().conditions(for: date, for: location, conditionType: .hourly)
         if let conditions = WeatherController().conditions(for: date, for: location, conditionType: .daily).first {
             self.noDataLabel.isHidden = true
+            self.tripDetailsTableView.isHidden = false
             dailyConditions = conditions
         } else {
             self.noDataLabel.isHidden = false
