@@ -32,7 +32,7 @@ class ReservationViewController: UIViewController {
         super.viewDidLoad()
         setUpUI()
         setGradients()
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(showEmail))
+        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(confirmReservationAlert))
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
         formatter.dateFormat = "h:mm a"
@@ -100,6 +100,17 @@ extension ReservationViewController: UIPickerViewDelegate {
 
 // MARK: - Helper
 extension ReservationViewController {
+    
+    @objc func confirmReservationAlert() {
+        let alert = UIAlertController(title: "Save Reservation?", message: "Please verify that all information is correct.", preferredStyle: .alert)
+        let reserveAction = UIAlertAction(title: "Reserver", style: .default) { (action) in
+            self.showEmail()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(reserveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     func alert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -280,7 +291,7 @@ extension ReservationViewController {
 // MARK: - MFMailComposeViewControllerDelegate
 extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
-    @objc func showEmail() {
+    func showEmail() {
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         let messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(pickupTime.dateString())<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
