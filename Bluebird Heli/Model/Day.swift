@@ -26,6 +26,9 @@ class Day {
         if reservationOne != nil && reservationTwo != nil {
             return false
         }
+        if reservationOne?.groupUID == DataStore.shared.currentGroup?.uid || reservationTwo?.groupUID == DataStore.shared.currentGroup?.uid {
+            return false
+        }
         if reservationOne?.operatingArea == location.operatingArea || reservationTwo?.operatingArea == location.operatingArea {
             return false
         }
