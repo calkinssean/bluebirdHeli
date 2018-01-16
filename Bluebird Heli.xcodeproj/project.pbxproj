@@ -22,6 +22,7 @@
 		143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19771FC4E68E00488927 /* DashboardViewController.swift */; };
 		143A197A1FC4E7A400488927 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 143A19791FC4E7A400488927 /* Login.storyboard */; };
 		143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A19841FC5123400488927 /* DashboardTableViewCell.swift */; };
+		1444D04E200E8FE000A6158F /* MediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1444D04D200E8FE000A6158F /* MediaViewController.swift */; };
 		145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B03E42006C4DF00910305 /* NavigationController+Extension.swift */; };
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
@@ -65,6 +66,7 @@
 		143A19771FC4E68E00488927 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		143A19791FC4E7A400488927 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		143A19841FC5123400488927 /* DashboardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardTableViewCell.swift; sourceTree = "<group>"; };
+		1444D04D200E8FE000A6158F /* MediaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewController.swift; sourceTree = "<group>"; };
 		145B03E42006C4DF00910305 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
 				147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */,
+				1444D04D200E8FE000A6158F /* MediaViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */,
+				1444D04E200E8FE000A6158F /* MediaViewController.swift in Sources */,
 				1481B9B41FCCAD5E00959AC7 /* Weather.swift in Sources */,
 				1481B9BA1FCCE87700959AC7 /* Day.swift in Sources */,
 				1429FFF51FD899BD00C2BBBD /* ReservationViewController.swift in Sources */,
