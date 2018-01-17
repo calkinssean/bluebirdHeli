@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 class FirebaseController {
    
@@ -133,6 +134,14 @@ class FirebaseController {
                 completion(true, nil)
             }
         }
+    }
+    
+    func downloadImage(ref: StorageReference) {
+        
+    }
+    
+    func downloadVideo(ref: StorageReference) {
+        
     }
     
 }
