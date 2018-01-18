@@ -10,14 +10,16 @@ import Foundation
 
 struct Media {
     
-    init(url: String, date: Double, type: MediaType, data: Data) {
+    init(url: String, dateString: String, date: Double, type: MediaType, data: Data) {
         self.url = url
+        self.dateString = dateString
         self.date = date
         self.mediaType = type
         self.data = data
     }
     
     var url: String
+    var dateString: String
     var date: Double
     var mediaType: MediaType
     var data: Data
