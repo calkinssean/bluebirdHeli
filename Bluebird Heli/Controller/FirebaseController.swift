@@ -140,7 +140,17 @@ class FirebaseController {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
         baseURL.child("images").child(uid).observe(.value) { (snapshot) in
             if let datesDict = snapshot.value as? [String: Any] {
-                print(datesDict)
+                for key in datesDict.keys {
+                    if let dateDict = datesDict[key] as? [String: Any] {
+                        for value in dateDict.values {
+                            if let imageDict = value as? [String: Any] {
+                                if let url = imageDict["url"] as? String {
+                                    print(url)
+                                }
+                            }
+                        }
+                    }
+                }
             }
             
         }

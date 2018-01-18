@@ -29,6 +29,7 @@
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
 		147BA20C2011224A007B88D8 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */; };
 		147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20D201122AC007B88D8 /* SectionHeader.swift */; };
+		147BA210201146FF007B88D8 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20F201146FF007B88D8 /* Media.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
 		147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */; };
 		147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */; };
@@ -76,6 +77,7 @@
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
 		147BA20D201122AC007B88D8 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		147BA20F201146FF007B88D8 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
 		147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripTableViewCell.swift; sourceTree = "<group>"; };
 		147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripDetailsTableViewCell.swift; path = "Bluebird Heli/View/TripDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -202,6 +204,7 @@
 				1481B9B51FCCB3B500959AC7 /* Location.swift */,
 				1481B9BB1FCCEE2000959AC7 /* Reservation.swift */,
 				1481B9B31FCCAD5E00959AC7 /* Weather.swift */,
+				147BA20F201146FF007B88D8 /* Media.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				1481B9B61FCCB3B500959AC7 /* Location.swift in Sources */,
 				14BBC9E61FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift in Sources */,
 				143A19781FC4E68E00488927 /* DashboardViewController.swift in Sources */,
+				147BA210201146FF007B88D8 /* Media.swift in Sources */,
 				14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */,
 				147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */,
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
