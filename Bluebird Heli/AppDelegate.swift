@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             showDashboard()
             FirebaseController().observeDays()
             FirebaseController().observeReservations()
+            FirebaseController().observeImages()
         }
         
         return true

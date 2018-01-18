@@ -136,6 +136,16 @@ class FirebaseController {
         }
     }
     
+    func observeImages() {
+        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
+            if let datesDict = snapshot.value as? [String: Any] {
+                print(datesDict)
+            }
+            
+        }
+    }
+    
     func downloadImage(ref: StorageReference) {
         
     }
