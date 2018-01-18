@@ -28,6 +28,7 @@
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
 		147BA20C2011224A007B88D8 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */; };
+		147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20D201122AC007B88D8 /* SectionHeader.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
 		147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */; };
 		147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */; };
@@ -74,6 +75,7 @@
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
+		147BA20D201122AC007B88D8 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
 		147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripTableViewCell.swift; sourceTree = "<group>"; };
 		147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripDetailsTableViewCell.swift; path = "Bluebird Heli/View/TripDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -210,6 +212,7 @@
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
 				147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */,
+				147BA20D201122AC007B88D8 /* SectionHeader.swift */,
 				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
@@ -406,6 +409,7 @@
 				14C055AF1FD6353B0075947F /* WeatherTableViewCell.swift in Sources */,
 				147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */,
 				14C989C51FD1E1B10024724A /* WeatherController.swift in Sources */,
+				147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */,
 				145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
