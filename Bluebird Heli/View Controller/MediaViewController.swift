@@ -19,7 +19,7 @@ class MediaViewController: UIViewController {
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
-        navigationController?.isToolbarHidden = true
+        setUpToolBar()
         let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
         self.navigationItem.rightBarButtonItem = selectButton
         // Do any additional setup after loading the view.
@@ -68,6 +68,15 @@ class MediaViewController: UIViewController {
         }
         let controller = UIActivityViewController(activityItems: images, applicationActivities: nil)
         present(controller, animated: true, completion: nil)
+    }
+    
+    func setUpToolBar() {
+        navigationController?.isToolbarHidden = true
+        if let toolBar = navigationController?.toolbar {
+            toolBar.tintColor = UIColor.white
+            toolBar.barTintColor = UIColor.black
+            toolBar.sizeToFit()
+        }
     }
     
     @objc func selectTapped() {
