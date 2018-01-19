@@ -26,6 +26,15 @@ class MediaViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowMediaDetailSegue" {
+            let indexPath = sender as! IndexPath
+            let media = mediaArray(for: indexPath.section)
+            let destination = segue.destination as! MediaDetailViewController
+            destination.mediaArray = media
+        }
+    }
 }
 
 // MARK: - Data Source Helper Methods
@@ -78,7 +87,7 @@ extension MediaViewController: UICollectionViewDataSource {
 extension MediaViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let media = mediaArray(for: indexPath.section)
+        performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

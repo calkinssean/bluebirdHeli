@@ -666,7 +666,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="12v-94-QHM" id="jvE-nr-vg7"/>
-                        <segue destination="glJ-F1-js5" kind="show" id="ZTm-Dw-nzB"/>
+                        <segue destination="glJ-F1-js5" kind="show" identifier="ShowMediaDetailSegue" id="ZTm-Dw-nzB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZW-Af-q40" userLabel="First Responder" sceneMemberID="firstResponder"/>
