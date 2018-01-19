@@ -27,38 +27,46 @@ class MediaViewController: UIViewController {
 
 // MARK: - Data Source Helper Methods
 extension MediaViewController {
+    
     func numberOfSections() -> Int {
         return DataStore.shared.mediaSectionHeaders.count
     }
     
-    func mediaArray(for indexPath: IndexPath) -> [Media] {
-        let sectionHeader = self.sectionHeader(for: indexPath)
-        return DataStore.shared.media.filter{ $0.dateString == sectionHeader }
+    func mediaArray(for section: Int) -> [Media] {
+        let sectionHeader = self.sectionHeader(for: section)
+        if let mediaArray = DataStore.shared.mediaDict[sectionHeader] {
+            return mediaArray
+        }
+        return []
     }
     
     func mediaItem(for indexPath: IndexPath) -> Media {
-        
+        return mediaArray(for: indexPath.section)[indexPath.item]
     }
     
-    func numberOfItems(for indexPath: IndexPath) -> Int {
-        return media(for: indexPath).count
+    func numberOfItems(for section: Int) -> Int {
+        return mediaArray(for: section).count
     }
     
-    func sectionHeader(for indexPath: IndexPath) -> String {
-        return DataStore.shared.mediaSectionHeaders[indexPath.section]
+    func sectionHeader(for section: Int) -> String {
+        return DataStore.shared.mediaSectionHeaders[section]
     }
 }
 
 extension MediaViewController: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return numberOfSections()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return numberOfItems(for: section)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
-        let mediaItem = media(for: indexPath)
-        cell.imageView.image = UIImage(data: mediaItem)
+        let media = mediaItem(for: indexPath)
+        cell.imageView.image = UIImage(data: media.data)
         return cell
     }
     
