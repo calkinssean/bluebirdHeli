@@ -19,6 +19,9 @@ class MediaViewController: UIViewController {
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
+        
+        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
+        self.navigationItem.rightBarButtonItem = selectButton
         // Do any additional setup after loading the view.
     }
 
@@ -36,6 +39,25 @@ class MediaViewController: UIViewController {
             destination.item = indexPath.item
             destination.title = sectionHeader(for: indexPath.section)
         }
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView?.allowsMultipleSelection = editing
+        if !editing {
+            navigationController?.isToolbarHidden = true
+        }
+        guard let indexes = collectionView?.indexPathsForVisibleItems else {
+            return
+        }
+        for index in indexes {
+            let cell = collectionView?.cellForItem(at: index) as! MediaCollectionViewCell
+            cell.isEditing = editing
+        }
+    }
+    
+    @objc func selectTapped() {
+        self.isEditing = !isEditing
     }
 }
 

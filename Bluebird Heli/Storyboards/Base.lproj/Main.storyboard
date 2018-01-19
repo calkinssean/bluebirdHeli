@@ -615,6 +615,9 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aQH-oc-7bW">
                                                     <rect key="frame" x="0.0" y="0.0" width="162" height="166"/>
                                                 </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="8HX-Ej-CYG">
+                                                    <rect key="frame" x="132" y="136" width="22" height="22"/>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -622,10 +625,13 @@
                                             <constraint firstAttribute="bottom" secondItem="aQH-oc-7bW" secondAttribute="bottom" id="7S6-JX-wul"/>
                                             <constraint firstItem="aQH-oc-7bW" firstAttribute="top" secondItem="pbe-Hv-bJP" secondAttribute="top" id="Kg6-ro-2bP"/>
                                             <constraint firstAttribute="trailing" secondItem="aQH-oc-7bW" secondAttribute="trailing" id="Kwo-GT-TEu"/>
+                                            <constraint firstAttribute="trailing" secondItem="8HX-Ej-CYG" secondAttribute="trailing" constant="8" id="PSg-dF-x49"/>
+                                            <constraint firstAttribute="bottom" secondItem="8HX-Ej-CYG" secondAttribute="bottom" constant="8" id="oVe-GC-P2b"/>
                                             <constraint firstItem="aQH-oc-7bW" firstAttribute="leading" secondItem="pbe-Hv-bJP" secondAttribute="leading" id="svL-RI-e3u"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="aQH-oc-7bW" id="VIk-Dl-c27"/>
+                                            <outlet property="selectionImage" destination="8HX-Ej-CYG" id="GIq-3C-oNO"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1051,6 +1057,7 @@
     </scenes>
     <resources>
         <image name="Backyard Bowl" width="2100" height="1400"/>
+        <image name="Unchecked" width="22" height="22"/>
         <image name="helicopter" width="3762" height="2116"/>
     </resources>
 </document>

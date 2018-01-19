@@ -150,7 +150,7 @@
 				14C989CD1FD262770024724A /* View */,
 				14BBC9E71FD1D9DF0096BBF6 /* Controller */,
 				14C989CE1FD2628F0024724A /* View Controller */,
-				143A19831FC5106700488927 /* Supporting Files */,
+				143A19831FC5106700488927 /* Resources */,
 				143A19821FC5105600488927 /* Storyboards */,
 			);
 			path = "Bluebird Heli";
@@ -166,12 +166,12 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		143A19831FC5106700488927 /* Supporting Files */ = {
+		143A19831FC5106700488927 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				142347171FC4CA8200A129B0 /* Assets.xcassets */,
 			);
-			path = "Supporting Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1464C04E2007F31A005BA4ED /* Extensions */ = {
