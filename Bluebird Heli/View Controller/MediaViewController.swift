@@ -13,13 +13,15 @@ class MediaViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     
+    var images: [UIImage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = view.frame.size.width / 3
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
-        
+        navigationController?.isToolbarHidden = true
         let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
         self.navigationItem.rightBarButtonItem = selectButton
         // Do any additional setup after loading the view.
@@ -56,7 +58,13 @@ class MediaViewController: UIViewController {
         }
     }
     
+    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        let controller = UIActivityViewController(activityItems: images, applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
+    }
+    
     @objc func selectTapped() {
+        images = []
         self.isEditing = !isEditing
     }
 }
