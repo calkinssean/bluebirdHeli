@@ -17,13 +17,13 @@ class MediaDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let indexPath = IndexPath(item: item, section: 0)
         let width = view.frame.size.width
-        let height = view.frame.size.height
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
         collectionView.isPagingEnabled = true
-        // Do any additional setup after loading the view.
+        collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
