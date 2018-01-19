@@ -9,5 +9,5 @@
 import UIKit
 
 class MediaCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet var imageView: UIImageView!
 }

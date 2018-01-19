@@ -11,6 +11,8 @@ import FirebaseStorage
 
 class MediaViewController: UIViewController {
 
+    @IBOutlet var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,11 +23,18 @@ class MediaViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension MediaViewController: UICollectionViewDataSource {
     
-    func downloadImage() {
-        let ref = Storage().reference()
-        ref.getData(maxSize: 1000 * 1000) { (data, error) in
-            print(data)
-        }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath)
+        
+        return cell
+    }
+    
 }
