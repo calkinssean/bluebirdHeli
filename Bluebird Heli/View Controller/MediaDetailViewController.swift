@@ -19,6 +19,7 @@ class MediaDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCollectionView()
+        setUpTapGesture()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +38,7 @@ class MediaDetailViewController: UIViewController {
     }
     
     func setUpTapGesture() {
+        navigationController?.isToolbarHidden = true
         let tap = UITapGestureRecognizer(target: self, action: #selector(toggleToolBar))
         self.view.addGestureRecognizer(tap)
     }

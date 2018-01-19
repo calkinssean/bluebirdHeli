@@ -682,7 +682,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aMQ-Ce-3Hb">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BNX-hW-b0h">
                                     <size key="itemSize" width="367" height="277"/>
@@ -718,25 +718,17 @@
                                     <outlet property="dataSource" destination="glJ-F1-js5" id="5px-h1-nr2"/>
                                 </connections>
                             </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CzX-Du-jyh">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <items>
-                                    <barButtonItem systemItem="action" id="L7B-aK-UEV"/>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Qy8-C1-qh1"/>
-                                    <barButtonItem systemItem="save" id="pvC-qp-8dw"/>
-                                </items>
-                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="aMQ-Ce-3Hb" secondAttribute="bottom" constant="49" id="0IM-3R-CYs"/>
                             <constraint firstItem="aMQ-Ce-3Hb" firstAttribute="top" secondItem="LgP-Qk-dXy" secondAttribute="top" id="MER-F3-lvo"/>
                             <constraint firstItem="aMQ-Ce-3Hb" firstAttribute="leading" secondItem="LgP-Qk-dXy" secondAttribute="leading" id="SzP-Gb-44z"/>
-                            <constraint firstItem="LgP-Qk-dXy" firstAttribute="bottom" secondItem="aMQ-Ce-3Hb" secondAttribute="bottom" id="e58-lg-Lyp"/>
                             <constraint firstItem="LgP-Qk-dXy" firstAttribute="trailing" secondItem="aMQ-Ce-3Hb" secondAttribute="trailing" id="tOJ-qF-Qok"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LgP-Qk-dXy"/>
                     </view>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="aMQ-Ce-3Hb" id="N2W-7W-jds"/>
                     </connections>
