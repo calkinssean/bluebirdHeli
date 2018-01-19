@@ -666,11 +666,72 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="12v-94-QHM" id="jvE-nr-vg7"/>
+                        <segue destination="glJ-F1-js5" kind="show" id="ZTm-Dw-nzB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZW-Af-q40" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2613.5999999999999" y="132.68365817091455"/>
+        </scene>
+        <!--Media Detail View Controller-->
+        <scene sceneID="FdY-yx-WV4">
+            <objects>
+                <viewController id="glJ-F1-js5" customClass="MediaDetailViewController" customModule="Bluebird_Heli" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="73U-Z4-qli">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aMQ-Ce-3Hb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BNX-hW-b0h">
+                                    <size key="itemSize" width="264" height="272"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="h1o-pO-NCz" customClass="MediaCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="55.5" y="0.0" width="264" height="272"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="264" height="272"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="upg-uK-xcK">
+                                                    <rect key="frame" x="0.0" y="0.0" width="264" height="272"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="upg-uK-xcK" firstAttribute="top" secondItem="h1o-pO-NCz" secondAttribute="top" id="2DE-g1-Z0N"/>
+                                            <constraint firstAttribute="trailing" secondItem="upg-uK-xcK" secondAttribute="trailing" id="E3L-Wo-UK5"/>
+                                            <constraint firstAttribute="bottom" secondItem="upg-uK-xcK" secondAttribute="bottom" id="Zp1-9b-SJx"/>
+                                            <constraint firstItem="upg-uK-xcK" firstAttribute="leading" secondItem="h1o-pO-NCz" secondAttribute="leading" id="mtH-o5-8wx"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="glJ-F1-js5" id="5px-h1-nr2"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aMQ-Ce-3Hb" firstAttribute="top" secondItem="LgP-Qk-dXy" secondAttribute="top" id="MER-F3-lvo"/>
+                            <constraint firstItem="aMQ-Ce-3Hb" firstAttribute="leading" secondItem="LgP-Qk-dXy" secondAttribute="leading" id="SzP-Gb-44z"/>
+                            <constraint firstItem="LgP-Qk-dXy" firstAttribute="bottom" secondItem="aMQ-Ce-3Hb" secondAttribute="bottom" id="e58-lg-Lyp"/>
+                            <constraint firstItem="LgP-Qk-dXy" firstAttribute="trailing" secondItem="aMQ-Ce-3Hb" secondAttribute="trailing" id="tOJ-qF-Qok"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LgP-Qk-dXy"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="aMQ-Ce-3Hb" id="N2W-7W-jds"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5el-UL-dnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3368.8000000000002" y="132.68365817091455"/>
         </scene>
         <!--Upcoming Trips-->
         <scene sceneID="p1m-ks-d9b">

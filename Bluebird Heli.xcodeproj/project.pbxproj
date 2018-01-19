@@ -31,6 +31,7 @@
 		147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20D201122AC007B88D8 /* SectionHeader.swift */; };
 		147BA210201146FF007B88D8 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20F201146FF007B88D8 /* Media.swift */; };
 		147BA21220117DAD007B88D8 /* CollectionViewDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */; };
+		147BA2142011881A007B88D8 /* MediaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA2132011881A007B88D8 /* MediaDetailViewController.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
 		147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */; };
 		147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */; };
@@ -80,6 +81,7 @@
 		147BA20D201122AC007B88D8 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		147BA20F201146FF007B88D8 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceController.swift; sourceTree = "<group>"; };
+		147BA2132011881A007B88D8 /* MediaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailViewController.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
 		147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripTableViewCell.swift; sourceTree = "<group>"; };
 		147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripDetailsTableViewCell.swift; path = "Bluebird Heli/View/TripDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -233,6 +235,7 @@
 				143A19771FC4E68E00488927 /* DashboardViewController.swift */,
 				143A19751FC4E67700488927 /* LoginViewController.swift */,
 				1444D04D200E8FE000A6158F /* MediaViewController.swift */,
+				147BA2132011881A007B88D8 /* MediaDetailViewController.swift */,
 				1429FFF41FD899BD00C2BBBD /* ReservationViewController.swift */,
 				147087B71FC5269F00B13273 /* SchedulingViewController.swift */,
 				147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */,
@@ -404,6 +407,7 @@
 				141062E61FCB805F0007CED0 /* APIController.swift in Sources */,
 				1444D050200E91FA00A6158F /* TripsLayout.swift in Sources */,
 				14C989CB1FD1F1C50024724A /* Configuration.swift in Sources */,
+				147BA2142011881A007B88D8 /* MediaDetailViewController.swift in Sources */,
 				143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */,
 				147BA20C2011224A007B88D8 /* MediaCollectionViewCell.swift in Sources */,
 				14C6077E1FF5972500A52F9B /* Constants.swift in Sources */,
