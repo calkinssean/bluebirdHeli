@@ -13,8 +13,6 @@ class MediaViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     
-    var images: [UIImage] = []
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let width = view.frame.size.width / 3
@@ -59,12 +57,20 @@ class MediaViewController: UIViewController {
     }
     
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        var images: [UIImage] = []
+        if let indexPaths = collectionView.indexPathsForSelectedItems {
+            for indexPath in indexPaths {
+                let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+                if let image = cell.imageView.image {
+                    images.append(image)
+                }
+            }
+        }
         let controller = UIActivityViewController(activityItems: images, applicationActivities: nil)
         present(controller, animated: true, completion: nil)
     }
     
     @objc func selectTapped() {
-        images = []
         self.isEditing = !isEditing
     }
 }
