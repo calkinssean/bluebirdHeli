@@ -597,7 +597,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="12v-94-QHM">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="atw-B8-yd1">
                                     <size key="itemSize" width="162" height="166"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
@@ -617,6 +617,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="aQH-oc-7bW" secondAttribute="bottom" id="7S6-JX-wul"/>
                                             <constraint firstItem="aQH-oc-7bW" firstAttribute="top" secondItem="pbe-Hv-bJP" secondAttribute="top" id="Kg6-ro-2bP"/>
@@ -654,7 +655,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="12v-94-QHM" firstAttribute="leading" secondItem="fvO-Rg-dqj" secondAttribute="leading" id="1sb-5x-BHS"/>
                             <constraint firstItem="fvO-Rg-dqj" firstAttribute="trailing" secondItem="12v-94-QHM" secondAttribute="trailing" id="GgN-tV-fBg"/>

@@ -71,3 +71,13 @@ extension MediaViewController: UICollectionViewDataSource {
     }
     
 }
+
+extension MediaViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as! SectionHeader
+        header.titleLabel.text = sectionHeader(for: indexPath.section)
+        return header
+    }
+    
+}
