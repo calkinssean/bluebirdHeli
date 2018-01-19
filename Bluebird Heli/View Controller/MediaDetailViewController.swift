@@ -21,7 +21,7 @@ class MediaDetailViewController: UIViewController {
         let height = view.frame.size.height
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
-        layout.itemSize = CGSize(width: width, height: height)
+        layout.itemSize = CGSize(width: width, height: width)
         collectionView.isPagingEnabled = true
         // Do any additional setup after loading the view.
     }

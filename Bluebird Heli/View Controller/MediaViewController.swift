@@ -33,6 +33,7 @@ class MediaViewController: UIViewController {
             let media = mediaArray(for: indexPath.section)
             let destination = segue.destination as! MediaDetailViewController
             destination.mediaArray = media
+            destination.title = sectionHeader(for: indexPath.section)
         }
     }
 }

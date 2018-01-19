@@ -709,6 +709,9 @@
                                             <constraint firstAttribute="bottom" secondItem="upg-uK-xcK" secondAttribute="bottom" id="Zp1-9b-SJx"/>
                                             <constraint firstItem="upg-uK-xcK" firstAttribute="leading" secondItem="h1o-pO-NCz" secondAttribute="leading" id="mtH-o5-8wx"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="upg-uK-xcK" id="eUE-4v-3Hb"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
