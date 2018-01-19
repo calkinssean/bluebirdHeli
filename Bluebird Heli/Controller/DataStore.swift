@@ -16,6 +16,9 @@ class DataStore {
     
     var upcomingTrips: [Reservation] = []
     
+    var mediaSectionHeaders: [String] = []
+    var mediaDict: [String: [Media]] = [:]
+    
     var daysDict: [String: Day] = [:]
     
     var northernOperatingArea: Location = Location()

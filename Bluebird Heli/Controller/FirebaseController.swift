@@ -10,6 +10,7 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseAuth
+import FirebaseStorage
 
 class FirebaseController {
    
@@ -131,6 +132,88 @@ class FirebaseController {
                 completion(false, error.localizedDescription)
             } else {
                 completion(true, nil)
+            }
+        }
+    }
+    
+    func observeImages() {
+        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
+            if let datesDict = snapshot.value as? [String: Any] {
+                for dateKey in datesDict.keys {
+                    if let dateDict = datesDict[dateKey] as? [String: Any] {
+                        for timeStamp in dateDict.keys {
+                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
+                                if let url = imageDict["url"] as? String {
+                                    let storageURL = Storage.storage().reference(forURL: url)
+                                    self.downloadImage(ref: storageURL, completion: { (data) in
+                                        if let timeStampDouble = Double(timeStamp) {
+                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Image, data: data)
+                                            var mediaArray: [Media] = []
+                                            if let array = DataStore.shared.mediaDict[dateKey] {
+                                                mediaArray = array
+                                            }
+                                            mediaArray.append(mediaItem)
+                                            DataStore.shared.mediaDict[dateKey] = mediaArray
+                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                            }
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func observeVideos() {
+        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+        baseURL.child("videos").child(uid).observe(.value) { (snapshot) in
+            if let datesDict = snapshot.value as? [String: Any] {
+                for dateKey in datesDict.keys {
+                    if let dateDict = datesDict[dateKey] as? [String: Any] {
+                        for timeStamp in dateDict.keys {
+                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
+                                if let url = imageDict["url"] as? String {
+                                    let storageURL = Storage.storage().reference(forURL: url)
+                                    self.downloadVideo(ref: storageURL, completion: { (data) in
+                                        if let timeStampDouble = Double(timeStamp) {
+                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
+                                   //         DataStore.shared.media.append(mediaItem)
+                                        }
+                                    })
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func downloadImage(ref: StorageReference, completion: @escaping (Data) -> ()) {
+        ref.getData(maxSize: 10000 * 10000) { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Image download error")
+            } else {
+                if let data = data {
+                    completion(data)
+                }
+            }
+        }
+    }
+    
+    func downloadVideo(ref: StorageReference, completion: @escaping (Data) -> ()) {
+        ref.getData(maxSize: 100000 * 100000) { (data, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Video download error")
+            } else {
+                if let data = data {
+                    completion(data)
+                }
             }
         }
     }
