@@ -12,11 +12,21 @@ class MediaDetailViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     
+    var toolbarIsShown = false
     var item = 0
     var mediaArray: [Media] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func configureCollectionView() {
         let indexPath = IndexPath(item: item, section: 0)
         let width = view.frame.size.width
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
@@ -25,15 +35,16 @@ class MediaDetailViewController: UIViewController {
         collectionView.isPagingEnabled = true
         collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func setUpTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toggleToolBar))
+        self.view.addGestureRecognizer(tap)
     }
     
-
-
-
+    @objc func toggleToolBar() {
+        
+    }
+    
 }
 
 extension MediaDetailViewController: UICollectionViewDataSource {
