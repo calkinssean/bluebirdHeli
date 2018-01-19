@@ -111,7 +111,9 @@ extension MediaViewController: UICollectionViewDataSource {
 extension MediaViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
+        if !isEditing {
+            performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
