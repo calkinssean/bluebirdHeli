@@ -728,7 +728,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LgP-Qk-dXy"/>
                     </view>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <toolbarItems>
+                        <barButtonItem systemItem="action" id="6Cn-6z-fKc"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="AOl-eZ-9bZ"/>
+                        <barButtonItem systemItem="save" id="yOK-Al-zAM"/>
+                    </toolbarItems>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="aMQ-Ce-3Hb" id="N2W-7W-jds"/>
                     </connections>
