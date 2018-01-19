@@ -50,11 +50,7 @@ class MediaDetailViewController: UIViewController {
     }
     
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
-        print("Share")
-    }
-    
-    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
-        print("Save")
+        sharePhoto()
     }
     
 }
@@ -76,4 +72,18 @@ extension MediaDetailViewController: UICollectionViewDataSource {
         return cell
     }
     
+}
+
+// MARK: - UIActivityViewController
+extension MediaDetailViewController {
+    func sharePhoto() {
+        if let cell = collectionView.visibleCells.first as? MediaCollectionViewCell {
+            
+            if let image = cell.imageView.image {
+                
+                let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                present(controller, animated: true , completion: nil)
+            }
+        }
+    }
 }

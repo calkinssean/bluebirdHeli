@@ -729,17 +729,13 @@
                         <viewLayoutGuide key="safeArea" id="LgP-Qk-dXy"/>
                     </view>
                     <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="ZDy-Qv-AuS"/>
                         <barButtonItem systemItem="action" id="6Cn-6z-fKc">
                             <connections>
                                 <action selector="shareTapped:" destination="glJ-F1-js5" id="JsG-W5-SfL"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="AOl-eZ-9bZ"/>
-                        <barButtonItem systemItem="save" id="yOK-Al-zAM">
-                            <connections>
-                                <action selector="saveTapped:" destination="glJ-F1-js5" id="EhK-aC-Fgt"/>
-                            </connections>
-                        </barButtonItem>
                     </toolbarItems>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
