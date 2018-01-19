@@ -49,6 +49,14 @@ class MediaDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        print("Share")
+    }
+    
+    @IBAction func saveTapped(_ sender: UIBarButtonItem) {
+        print("Save")
+    }
+    
 }
 
 extension MediaDetailViewController: UICollectionViewDataSource {
