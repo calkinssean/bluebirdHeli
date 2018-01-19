@@ -684,22 +684,22 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aMQ-Ce-3Hb">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BNX-hW-b0h">
-                                    <size key="itemSize" width="264" height="272"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BNX-hW-b0h">
+                                    <size key="itemSize" width="367" height="277"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="h1o-pO-NCz" customClass="MediaCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
-                                        <rect key="frame" x="55.5" y="0.0" width="264" height="272"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="264" height="272"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="upg-uK-xcK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="264" height="272"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
                                                 </imageView>
                                             </subviews>
                                         </view>

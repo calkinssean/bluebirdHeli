@@ -18,7 +18,7 @@ class MediaViewController: UIViewController {
         let width = view.frame.size.width / 3
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
-        layout.itemSize = CGSize(width:width, height:width)
+        layout.itemSize = CGSize(width: width, height: width)
         // Do any additional setup after loading the view.
     }
 

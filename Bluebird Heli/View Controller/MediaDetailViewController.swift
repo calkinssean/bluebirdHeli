@@ -17,7 +17,12 @@ class MediaDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let width = view.frame.size.width
+        let height = view.frame.size.height
+        let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionHeadersPinToVisibleBounds = true
+        layout.itemSize = CGSize(width: width, height: height)
+        collectionView.isPagingEnabled = true
         // Do any additional setup after loading the view.
     }
 
@@ -43,7 +48,8 @@ extension MediaDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
-        
+        let mediaItem = mediaArray[indexPath.item]
+        cell.imageView.image = UIImage(data: mediaItem.data)
         return cell
     }
     
