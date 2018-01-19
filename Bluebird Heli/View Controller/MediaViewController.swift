@@ -113,6 +113,16 @@ extension MediaViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if !isEditing {
             performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
+        } else {
+            navigationController?.isToolbarHidden = false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if isEditing {
+            if collectionView.indexPathsForSelectedItems == nil {
+                navigationController?.isToolbarHidden = true
+            }
         }
     }
     
