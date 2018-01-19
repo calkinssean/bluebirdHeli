@@ -718,6 +718,15 @@
                                     <outlet property="dataSource" destination="glJ-F1-js5" id="5px-h1-nr2"/>
                                 </connections>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CzX-Du-jyh">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="L7B-aK-UEV"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Qy8-C1-qh1"/>
+                                    <barButtonItem systemItem="save" id="pvC-qp-8dw"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

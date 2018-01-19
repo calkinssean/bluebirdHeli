@@ -42,7 +42,9 @@ class MediaDetailViewController: UIViewController {
     }
     
     @objc func toggleToolBar() {
-        
+        if let hidden = navigationController?.isToolbarHidden {
+            navigationController?.isToolbarHidden = !hidden
+        }
     }
     
 }
