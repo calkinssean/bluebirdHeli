@@ -186,12 +186,12 @@
 			isa = PBXGroup;
 			children = (
 				141062E51FCB805F0007CED0 /* APIController.swift */,
+				147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */,
 				1406189B1FD7293C00BC8D58 /* Converter.swift */,
 				14BBC9E31FD08ACB0096BBF6 /* DataStore.swift */,
 				14341F071FDF51CE000D9E60 /* DateController.swift */,
 				14B3E7FE1FE1EF6900411AF8 /* EmailController.swift */,
 				140CA4171FD0877F00B52AE9 /* FirebaseController.swift */,
-				147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */,
 				1481B9B11FCCAC4800959AC7 /* WeatherAPI.swift */,
 				14C989C41FD1E1B10024724A /* WeatherController.swift */,
 			);

@@ -17,7 +17,7 @@ class DataStore {
     var upcomingTrips: [Reservation] = []
     
     var mediaSectionHeaders: [String] = []
-    var media: [Media] = []
+    var mediaDict: [String: [Media]] = [:]
     
     var daysDict: [String: Day] = [:]
     

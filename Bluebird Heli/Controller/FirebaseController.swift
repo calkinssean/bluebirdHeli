@@ -149,7 +149,12 @@ class FirebaseController {
                                     self.downloadImage(ref: storageURL, completion: { (data) in
                                         if let timeStampDouble = Double(timeStamp) {
                                             let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Image, data: data)
-                                            DataStore.shared.media.append(mediaItem)
+                                            var mediaArray: [Media] = []
+                                            if let array = DataStore.shared.mediaDict[dateKey] {
+                                                mediaArray = array
+                                            }
+                                            mediaArray.append(mediaItem)
+                                            DataStore.shared.mediaDict[dateKey] = mediaArray
                                             DataStore.shared.mediaSectionHeaders.append(dateKey)
                                         }
                                     })
