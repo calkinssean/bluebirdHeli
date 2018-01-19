@@ -19,6 +19,9 @@ class MediaViewController: UIViewController {
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
+        navigationController?.isToolbarHidden = true
+        let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
+        self.navigationItem.rightBarButtonItem = selectButton
         // Do any additional setup after loading the view.
     }
 
@@ -37,6 +40,39 @@ class MediaViewController: UIViewController {
             destination.title = sectionHeader(for: indexPath.section)
         }
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView?.allowsMultipleSelection = editing
+        if !editing {
+            navigationController?.isToolbarHidden = true
+        }
+        guard let indexes = collectionView?.indexPathsForVisibleItems else {
+            return
+        }
+        for index in indexes {
+            let cell = collectionView?.cellForItem(at: index) as! MediaCollectionViewCell
+            cell.isEditing = editing
+        }
+    }
+    
+    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        var images: [UIImage] = []
+        if let indexPaths = collectionView.indexPathsForSelectedItems {
+            for indexPath in indexPaths {
+                let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+                if let image = cell.imageView.image {
+                    images.append(image)
+                }
+            }
+        }
+        let controller = UIActivityViewController(activityItems: images, applicationActivities: nil)
+        present(controller, animated: true, completion: nil)
+    }
+    
+    @objc func selectTapped() {
+        self.isEditing = !isEditing
+    }
 }
 
 // MARK: - Data Source Helper Methods
@@ -52,6 +88,13 @@ extension MediaViewController {
             return mediaArray
         }
         return []
+    }
+    
+    func image(for indexPath: IndexPath, completion: (UIImage) -> ()){
+        let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+        if let image = cell.imageView.image {
+            completion(image)
+        }
     }
     
     func mediaItem(for indexPath: IndexPath) -> Media {
@@ -89,7 +132,19 @@ extension MediaViewController: UICollectionViewDataSource {
 extension MediaViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
+        if !isEditing {
+            performSegue(withIdentifier: "ShowMediaDetailSegue", sender: indexPath)
+        } else {
+            navigationController?.isToolbarHidden = false
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if isEditing {
+            if collectionView.indexPathsForSelectedItems?.count == 0 {
+                navigationController?.isToolbarHidden = true
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
