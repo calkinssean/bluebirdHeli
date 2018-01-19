@@ -32,6 +32,7 @@
 		147BA210201146FF007B88D8 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20F201146FF007B88D8 /* Media.swift */; };
 		147BA21220117DAD007B88D8 /* CollectionViewDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */; };
 		147BA2142011881A007B88D8 /* MediaDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA2132011881A007B88D8 /* MediaDetailViewController.swift */; };
+		147BA21620119DAF007B88D8 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA21520119DAF007B88D8 /* GradientView.swift */; };
 		147D285C1FFC0C87008A5545 /* UpcomingTripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */; };
 		147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */; };
 		147D28641FFD7A91008A5545 /* TripDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */; };
@@ -82,6 +83,7 @@
 		147BA20F201146FF007B88D8 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceController.swift; sourceTree = "<group>"; };
 		147BA2132011881A007B88D8 /* MediaDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailViewController.swift; sourceTree = "<group>"; };
+		147BA21520119DAF007B88D8 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		147D285B1FFC0C87008A5545 /* UpcomingTripsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripsViewController.swift; sourceTree = "<group>"; };
 		147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingTripTableViewCell.swift; sourceTree = "<group>"; };
 		147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TripDetailsTableViewCell.swift; path = "Bluebird Heli/View/TripDetailsTableViewCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -224,6 +226,7 @@
 				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
+				147BA21520119DAF007B88D8 /* GradientView.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 			);
 			path = View;
@@ -424,6 +427,7 @@
 				147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */,
 				145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */,
 				147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */,
+				147BA21620119DAF007B88D8 /* GradientView.swift in Sources */,
 				1481B9BE1FCCEF8100959AC7 /* Group.swift in Sources */,
 				14B3E7FF1FE1EF6900411AF8 /* EmailController.swift in Sources */,
 				1444D04E200E8FE000A6158F /* MediaViewController.swift in Sources */,
