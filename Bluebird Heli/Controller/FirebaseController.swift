@@ -155,7 +155,9 @@ class FirebaseController {
                                             }
                                             mediaArray.append(mediaItem)
                                             DataStore.shared.mediaDict[dateKey] = mediaArray
-                                            DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                            }
                                         }
                                     })
                                 }
