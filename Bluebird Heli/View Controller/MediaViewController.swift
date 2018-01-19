@@ -84,6 +84,13 @@ extension MediaViewController {
         return []
     }
     
+    func image(for indexPath: IndexPath, completion: (UIImage) -> ()){
+        let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+        if let image = cell.imageView.image {
+            completion(image)
+        }
+    }
+    
     func mediaItem(for indexPath: IndexPath) -> Media {
         return mediaArray(for: indexPath.section)[indexPath.item]
     }
