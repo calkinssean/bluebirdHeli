@@ -150,7 +150,7 @@ class FirebaseController {
                                         if let timeStampDouble = Double(timeStamp) {
                                             let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Image, data: data)
                                             DataStore.shared.media.append(mediaItem)
-                                            print(DataStore.shared.media.count)
+                                            DataStore.shared.mediaSectionHeaders.append(dateKey)
                                         }
                                     })
                                 }
@@ -175,7 +175,7 @@ class FirebaseController {
                                     self.downloadVideo(ref: storageURL, completion: { (data) in
                                         if let timeStampDouble = Double(timeStamp) {
                                             let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
-                                            DataStore.shared.media.append(mediaItem)
+                                   //         DataStore.shared.media.append(mediaItem)
                                         }
                                     })
                                 }
