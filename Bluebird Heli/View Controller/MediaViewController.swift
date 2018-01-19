@@ -120,7 +120,7 @@ extension MediaViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if isEditing {
-            if collectionView.indexPathsForSelectedItems == nil {
+            if collectionView.indexPathsForSelectedItems?.count == 0 {
                 navigationController?.isToolbarHidden = true
             }
         }
