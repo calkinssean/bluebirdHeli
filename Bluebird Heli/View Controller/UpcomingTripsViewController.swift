@@ -29,13 +29,11 @@ class UpcomingTripsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         formatter.locale = 🇺🇸
-        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editReservationAlert))
-        navigationItem.rightBarButtonItem = editButton
+        formatter.locale = 🇺🇸
         self.upcomingTripsTableView.tableFooterView = UIView()
         self.tripDetailsTableView.tableFooterView = UIView()
     }
-
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -291,21 +289,5 @@ extension UpcomingTripsViewController {
             return DataStore.shared.southernOperatingArea
         }
     }
-   
-    @objc func editReservationAlert() {
-        let alert = UIAlertController(title: "Edit Trip", message: "What would you like to do?", preferredStyle: .actionSheet)
-        let editPickupLocationAction = UIAlertAction(title: "Edit Pickup Location", style: .default, handler: nil)
-        let editPickupTimeAction = UIAlertAction(title: "Edit Pickup Time", style: .default, handler: nil)
-        let editGroupSizeAction = UIAlertAction(title: "Edit Group Size", style: .default, handler: nil)
-        let cancelReservationAction = UIAlertAction(title: "Cancel Reservation", style: .destructive, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(editPickupLocationAction)
-        alert.addAction(editPickupTimeAction)
-        alert.addAction(editGroupSizeAction)
-        alert.addAction(cancelReservationAction)
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
+ 
 }
