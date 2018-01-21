@@ -126,14 +126,7 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch tableView {
         case tripDetailsTableView:
-            switch section {
-            case 0:
-                return UITableViewAutomaticDimension
-            case 1:
-                return UITableViewAutomaticDimension
-            default:
-                return 0
-            }
+           return 30
         default:
             return 0
         }
@@ -163,15 +156,28 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = Colors.darkerGray
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white
-        let disclosureButton = UIButton(type: .detailDisclosure)
-        disclosureButton.tintColor = .white
-        header.addSubview(disclosureButton)
-       // header.inputAccessoryView = disclosureButton
+        if tableView == tripDetailsTableView {
+            view.tintColor = Colors.darkerGray
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.textColor = UIColor.white
+            if section == 0 {
+                if view.viewWithTag(222) == nil {
+                    let disclosureButton = UIButton(type: .detailDisclosure)
+                    disclosureButton.tag = 222
+                    disclosureButton.tintColor = .white
+                    let buttonHeight = disclosureButton.frame.height
+                    disclosureButton.frame = CGRect(x: (view.frame.width - (buttonHeight) - 4), y: view.frame.height/2 - buttonHeight/2, width: buttonHeight, height: buttonHeight)
+                    header.addSubview(disclosureButton)
+                }
+            } else {
+                if let disclosureButton = view.viewWithTag(222) {
+                    disclosureButton.removeFromSuperview()
+                }
+            }
+           
+        }
     }
- 
+    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -192,7 +198,7 @@ extension UpcomingTripsViewController: UICollectionViewDataSource {
 extension UpcomingTripsViewController {
     
     @objc func detailDisclosureTapped() {
-        
+        print("Detail Disclosure Tapped")
     }
     
     func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
@@ -301,5 +307,4 @@ extension UpcomingTripsViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-    
 }
