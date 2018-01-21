@@ -163,6 +163,7 @@ extension UpcomingTripsViewController: UITableViewDelegate {
             if section == 0 {
                 if view.viewWithTag(222) == nil {
                     let disclosureButton = UIButton(type: .detailDisclosure)
+                    disclosureButton.addTarget(self, action: #selector(detailDisclosureTapped), for: .touchUpInside)
                     disclosureButton.tag = 222
                     disclosureButton.tintColor = .white
                     let buttonHeight = disclosureButton.frame.height
