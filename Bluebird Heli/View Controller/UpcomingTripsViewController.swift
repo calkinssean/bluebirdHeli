@@ -105,6 +105,7 @@ extension UpcomingTripsViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension UpcomingTripsViewController: UITableViewDelegate {
+   
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
@@ -165,6 +166,10 @@ extension UpcomingTripsViewController: UITableViewDelegate {
         view.tintColor = Colors.darkerGray
         let header = view as! UITableViewHeaderFooterView
         header.textLabel?.textColor = UIColor.white
+        let disclosureButton = UIButton(type: .detailDisclosure)
+        disclosureButton.tintColor = .white
+        header.addSubview(disclosureButton)
+       // header.inputAccessoryView = disclosureButton
     }
  
 }
@@ -185,6 +190,10 @@ extension UpcomingTripsViewController: UICollectionViewDataSource {
 
 // MARK: - Helper
 extension UpcomingTripsViewController {
+    
+    @objc func detailDisclosureTapped() {
+        
+    }
     
     func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
         guard let conditions = conditions else { return "--" }
