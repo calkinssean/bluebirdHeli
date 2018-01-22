@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class UpcomingTripsViewController: UIViewController {
 
@@ -197,7 +198,16 @@ extension UpcomingTripsViewController: UICollectionViewDataSource {
 extension UpcomingTripsViewController {
     
     @objc func detailDisclosureTapped() {
-        print("Detail Disclosure Tapped")
+        let alert = UIAlertController(title: "Edit Trip", message: "In order to modify or cancel a reservation you must email customer support.", preferredStyle: .alert)
+        let openEmailControllerAction = UIAlertAction(title: "Open Email", style: .default) { (action) in
+            
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+  
+        alert.addAction(openEmailControllerAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
@@ -289,5 +299,25 @@ extension UpcomingTripsViewController {
             return DataStore.shared.southernOperatingArea
         }
     }
- 
 }
+
+extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
+    
+    func displayEmailController() {
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients(["info@cloudveilmountainheli.com"])
+        var config = Configuration()
+        if config.environment == .Staging {
+            let messageBody = "<h1>This is a test email</h1>"
+            controller.setMessageBody(messageBody, isHTML: true)
+        }
+        present(controller, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+}
+
