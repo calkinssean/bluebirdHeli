@@ -200,7 +200,7 @@ extension UpcomingTripsViewController {
     @objc func detailDisclosureTapped() {
         let alert = UIAlertController(title: "Edit Trip", message: "In order to modify or cancel a reservation you must email customer support.", preferredStyle: .alert)
         let openEmailControllerAction = UIAlertAction(title: "Open Email", style: .default) { (action) in
-            
+            self.displayEmailController()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
   
