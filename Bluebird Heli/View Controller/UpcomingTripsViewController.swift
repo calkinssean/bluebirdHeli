@@ -198,7 +198,7 @@ extension UpcomingTripsViewController: UICollectionViewDataSource {
 extension UpcomingTripsViewController {
     
     @objc func detailDisclosureTapped() {
-        let alert = UIAlertController(title: "Edit Trip", message: "In order to modify or cancel a reservation you must email customer support.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Edit Reservation", message: "In order to modify or cancel a reservation you must email customer support. Please include any details you would like changed or let us know if you would like to cancel.", preferredStyle: .alert)
         let openEmailControllerAction = UIAlertAction(title: "Open Email", style: .default) { (action) in
             self.displayEmailController()
         }
