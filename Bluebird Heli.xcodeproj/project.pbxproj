@@ -218,12 +218,12 @@
 			children = (
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
+				147BA21520119DAF007B88D8 /* GradientView.swift */,
 				147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */,
 				147BA20D201122AC007B88D8 /* SectionHeader.swift */,
 				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
 				14BBC9E51FD0A01B0096BBF6 /* WeatherCollectionViewCell.swift */,
-				147BA21520119DAF007B88D8 /* GradientView.swift */,
 				14C055AE1FD6353B0075947F /* WeatherTableViewCell.swift */,
 			);
 			path = View;

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class UpcomingTripsViewController: UIViewController {
 
@@ -29,13 +30,11 @@ class UpcomingTripsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         formatter.locale = 🇺🇸
-        let editButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editReservationAlert))
-        navigationItem.rightBarButtonItem = editButton
+        formatter.locale = 🇺🇸
         self.upcomingTripsTableView.tableFooterView = UIView()
         self.tripDetailsTableView.tableFooterView = UIView()
     }
-
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -105,6 +104,7 @@ extension UpcomingTripsViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension UpcomingTripsViewController: UITableViewDelegate {
+   
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch tableView {
@@ -125,14 +125,7 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch tableView {
         case tripDetailsTableView:
-            switch section {
-            case 0:
-                return UITableViewAutomaticDimension
-            case 1:
-                return UITableViewAutomaticDimension
-            default:
-                return 0
-            }
+           return 30
         default:
             return 0
         }
@@ -162,11 +155,29 @@ extension UpcomingTripsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = Colors.darkerGray
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white
+        if tableView == tripDetailsTableView {
+            view.tintColor = Colors.darkerGray
+            let header = view as! UITableViewHeaderFooterView
+            header.textLabel?.textColor = UIColor.white
+            if section == 0 {
+                if view.viewWithTag(222) == nil {
+                    let disclosureButton = UIButton(type: .detailDisclosure)
+                    disclosureButton.addTarget(self, action: #selector(detailDisclosureTapped), for: .touchUpInside)
+                    disclosureButton.tag = 222
+                    disclosureButton.tintColor = .white
+                    let buttonHeight = disclosureButton.frame.height
+                    disclosureButton.frame = CGRect(x: (view.frame.width - (buttonHeight) - 4), y: view.frame.height/2 - buttonHeight/2, width: buttonHeight, height: buttonHeight)
+                    header.addSubview(disclosureButton)
+                }
+            } else {
+                if let disclosureButton = view.viewWithTag(222) {
+                    disclosureButton.removeFromSuperview()
+                }
+            }
+           
+        }
     }
- 
+    
 }
 
 // MARK: - UICollectionViewDataSource
@@ -185,6 +196,19 @@ extension UpcomingTripsViewController: UICollectionViewDataSource {
 
 // MARK: - Helper
 extension UpcomingTripsViewController {
+    
+    @objc func detailDisclosureTapped() {
+        let alert = UIAlertController(title: "Edit Reservation", message: "In order to modify or cancel a reservation you must email customer support. Please include any details you would like changed or let us know if you would like to cancel.", preferredStyle: .alert)
+        let openEmailControllerAction = UIAlertAction(title: "Open Email", style: .default) { (action) in
+            self.displayEmailController()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+  
+        alert.addAction(openEmailControllerAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func weatherDetailString(from header: String, using conditions: Conditions?) -> String {
         guard let conditions = conditions else { return "--" }
@@ -275,22 +299,35 @@ extension UpcomingTripsViewController {
             return DataStore.shared.southernOperatingArea
         }
     }
-   
-    @objc func editReservationAlert() {
-        let alert = UIAlertController(title: "Edit Trip", message: "What would you like to do?", preferredStyle: .actionSheet)
-        let editPickupLocationAction = UIAlertAction(title: "Edit Pickup Location", style: .default, handler: nil)
-        let editPickupTimeAction = UIAlertAction(title: "Edit Pickup Time", style: .default, handler: nil)
-        let editGroupSizeAction = UIAlertAction(title: "Edit Group Size", style: .default, handler: nil)
-        let cancelReservationAction = UIAlertAction(title: "Cancel Reservation", style: .destructive, handler: nil)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(editPickupLocationAction)
-        alert.addAction(editPickupTimeAction)
-        alert.addAction(editGroupSizeAction)
-        alert.addAction(cancelReservationAction)
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)
+}
+
+extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
+    
+    func displayEmailController() {
+        if let pickupTime = selectedReservation?.pickupTime, let groupUID = selectedReservation?.groupUID {
+            formatter.dateFormat = "EEEE MMM dd, hh:mm a"
+            var config = Configuration()
+            var messageBody = ""
+            let controller = MFMailComposeViewController()
+            controller.mailComposeDelegate = self
+            controller.setToRecipients(["info@cloudveilmountainheli.com"])
+            switch config.environment {
+            case .Staging:
+                controller.setSubject("Reservation Change Test")
+                messageBody = "<h1>This is a test email</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
+            case .Production:
+                controller.setSubject("Reservation Change")
+                messageBody = "<h1>Info for reservation needing modification</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
+            }
+            
+            controller.setMessageBody(messageBody, isHTML: true)
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
     }
     
 }
+
