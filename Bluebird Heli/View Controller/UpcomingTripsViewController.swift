@@ -304,15 +304,21 @@ extension UpcomingTripsViewController {
 extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
     
     func displayEmailController() {
-        let controller = MFMailComposeViewController()
-        controller.mailComposeDelegate = self
-        controller.setToRecipients(["info@cloudveilmountainheli.com"])
-        var config = Configuration()
-        if config.environment == .Staging {
-            let messageBody = "<h1>This is a test email</h1>"
+        if let pickupTime = selectedReservation?.pickupTime, let groupUID = selectedReservation?.groupUID {
+            var config = Configuration()
+            var messageBody = ""
+            let controller = MFMailComposeViewController()
+            controller.mailComposeDelegate = self
+            controller.setToRecipients(["info@cloudveilmountainheli.com"])
+            switch config.environment {
+            case .Staging:
+                messageBody = "<h1>This is a test email</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
+            case .Production:
+                messageBody = "<h1>Info for reservation needing modification</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
+            }
             controller.setMessageBody(messageBody, isHTML: true)
+            present(controller, animated: true, completion: nil)
         }
-        present(controller, animated: true, completion: nil)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
