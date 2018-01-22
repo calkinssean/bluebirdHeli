@@ -21,6 +21,10 @@ class MediaDetailViewController: UIViewController {
         configureCollectionView()
         setUpTapGesture()
         setUpToolBar()
+        let indexPath = IndexPath(item: item, section: 0)
+        DispatchQueue.main.async {
+            self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,13 +33,11 @@ class MediaDetailViewController: UIViewController {
     }
     
     func configureCollectionView() {
-        let indexPath = IndexPath(item: item, section: 0)
         let width = view.frame.size.width
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: width)
         collectionView.isPagingEnabled = true
-        collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
     }
     
     func setUpTapGesture() {
