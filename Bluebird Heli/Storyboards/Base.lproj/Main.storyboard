@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -760,15 +760,37 @@
                                                         <wkPreferences key="preferences"/>
                                                     </wkWebViewConfiguration>
                                                 </wkWebView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-zL-RzX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ily-wQ-4hb">
+                                                    <rect key="frame" x="110.5" y="60" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Ily-wQ-4hb" secondAttribute="height" id="REV-fd-Jlb"/>
+                                                    </constraints>
+                                                    <state key="normal" image="playButton"/>
+                                                    <connections>
+                                                        <action selector="playTapped:" destination="KqJ-n7-dSr" eventType="touchUpInside" id="xeq-47-yMH"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="iWj-Ml-uBl" secondAttribute="bottom" id="0xX-Ml-F1f"/>
+                                            <constraint firstItem="Ily-wQ-4hb" firstAttribute="centerX" secondItem="KqJ-n7-dSr" secondAttribute="centerX" id="3nx-gN-R5O"/>
+                                            <constraint firstItem="Ily-wQ-4hb" firstAttribute="centerY" secondItem="KqJ-n7-dSr" secondAttribute="centerY" id="70L-3P-7VM"/>
                                             <constraint firstItem="iWj-Ml-uBl" firstAttribute="leading" secondItem="KqJ-n7-dSr" secondAttribute="leading" id="Gs6-fe-nMu"/>
+                                            <constraint firstAttribute="bottom" secondItem="PFY-zL-RzX" secondAttribute="bottom" id="USa-nB-MJV"/>
+                                            <constraint firstItem="Ily-wQ-4hb" firstAttribute="height" secondItem="PFY-zL-RzX" secondAttribute="height" multiplier="0.2" id="abW-BW-S7v"/>
                                             <constraint firstAttribute="trailing" secondItem="iWj-Ml-uBl" secondAttribute="trailing" id="hww-7R-OvX"/>
+                                            <constraint firstAttribute="trailing" secondItem="PFY-zL-RzX" secondAttribute="trailing" id="kjn-gW-OXZ"/>
                                             <constraint firstItem="iWj-Ml-uBl" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="lbW-WQ-G2k"/>
+                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="leading" secondItem="KqJ-n7-dSr" secondAttribute="leading" id="lez-sF-dPg"/>
+                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="wGQ-aI-Laz"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="imageView" destination="PFY-zL-RzX" id="by2-mi-DNH"/>
+                                            <outlet property="playButton" destination="Ily-wQ-4hb" id="Ysh-vR-6p1"/>
                                             <outlet property="webView" destination="iWj-Ml-uBl" id="SgS-Da-f0g"/>
                                         </connections>
                                     </collectionViewCell>

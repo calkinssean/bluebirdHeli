@@ -11,14 +11,39 @@ import WebKit
 
 class VideoCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet var imageView: UIImageView!
     @IBOutlet var webView: WKWebView!
+    @IBOutlet var playButton: UIButton!
     
-    func setupCell(with mediaItem: Media) {
-        guard mediaItem.mediaType == .Video else { return }
-        webView.allowsBackForwardNavigationGestures = false
-        webView.allowsLinkPreview = true
-        guard let youtubeURL = URL(string: mediaItem.url) else { return }
-        webView.load(URLRequest(url: youtubeURL) )
+    var mediaItem: Media? {
+        didSet {
+            if let mediaItem = mediaItem {
+                if let data = mediaItem.data {
+                    imageView.image = UIImage(data: data)
+                }
+            }
+        }
     }
     
+    @IBAction func playTapped(_ sender: UIButton) {
+        if let mediaItem = mediaItem {
+            imageView.isHidden = true
+            playButton.isHidden = true
+            webView.isHidden = false
+            webView.allowsBackForwardNavigationGestures = false
+            webView.allowsLinkPreview = true
+            guard let youtubeURL = URL(string: mediaItem.url) else { return }
+            webView.load(URLRequest(url: youtubeURL) )
+        }
+    }
+
 }
+
+extension VideoCollectionViewCell: WKUIDelegate {
+    func webViewDidClose(_ webView: WKWebView) {
+        imageView.isHidden = false
+        playButton.isHidden = false
+        webView.isHidden = true
+    }
+}
+
