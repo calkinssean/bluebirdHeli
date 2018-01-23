@@ -26,7 +26,7 @@
 		145B03E52006C4DF00910305 /* NavigationController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145B03E42006C4DF00910305 /* NavigationController+Extension.swift */; };
 		147087B81FC5269F00B13273 /* SchedulingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B71FC5269F00B13273 /* SchedulingViewController.swift */; };
 		147087BA1FC5276F00B13273 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147087B91FC5276F00B13273 /* DateCell.swift */; };
-		147BA20C2011224A007B88D8 /* MediaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */; };
+		147BA20C2011224A007B88D8 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20B2011224A007B88D8 /* ImageCollectionViewCell.swift */; };
 		147BA20E201122AC007B88D8 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20D201122AC007B88D8 /* SectionHeader.swift */; };
 		147BA210201146FF007B88D8 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA20F201146FF007B88D8 /* Media.swift */; };
 		147BA21220117DAD007B88D8 /* CollectionViewDataSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */; };
@@ -76,7 +76,7 @@
 		145B03E42006C4DF00910305 /* NavigationController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationController+Extension.swift"; sourceTree = "<group>"; };
 		147087B71FC5269F00B13273 /* SchedulingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulingViewController.swift; sourceTree = "<group>"; };
 		147087B91FC5276F00B13273 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
-		147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCollectionViewCell.swift; sourceTree = "<group>"; };
+		147BA20B2011224A007B88D8 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		147BA20D201122AC007B88D8 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		147BA20F201146FF007B88D8 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		147BA21120117DAD007B88D8 /* CollectionViewDataSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDataSourceController.swift; sourceTree = "<group>"; };
@@ -219,7 +219,7 @@
 				143A19841FC5123400488927 /* DashboardTableViewCell.swift */,
 				147087B91FC5276F00B13273 /* DateCell.swift */,
 				147BA21520119DAF007B88D8 /* GradientView.swift */,
-				147BA20B2011224A007B88D8 /* MediaCollectionViewCell.swift */,
+				147BA20B2011224A007B88D8 /* ImageCollectionViewCell.swift */,
 				147BA20D201122AC007B88D8 /* SectionHeader.swift */,
 				147D28631FFD7A91008A5545 /* TripDetailsTableViewCell.swift */,
 				147D28611FFD5824008A5545 /* UpcomingTripTableViewCell.swift */,
@@ -408,7 +408,7 @@
 				14C989CB1FD1F1C50024724A /* Configuration.swift in Sources */,
 				147BA2142011881A007B88D8 /* MediaDetailViewController.swift in Sources */,
 				143A19851FC5123400488927 /* DashboardTableViewCell.swift in Sources */,
-				147BA20C2011224A007B88D8 /* MediaCollectionViewCell.swift in Sources */,
+				147BA20C2011224A007B88D8 /* ImageCollectionViewCell.swift in Sources */,
 				14C6077E1FF5972500A52F9B /* Constants.swift in Sources */,
 				1481B9B81FCCC17600959AC7 /* Conditions.swift in Sources */,
 				147D28621FFD5824008A5545 /* UpcomingTripTableViewCell.swift in Sources */,

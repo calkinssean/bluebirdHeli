@@ -51,7 +51,7 @@ class MediaViewController: UIViewController {
             return
         }
         for index in indexes {
-            let cell = collectionView?.cellForItem(at: index) as! MediaCollectionViewCell
+            let cell = collectionView?.cellForItem(at: index) as! ImageCollectionViewCell
             cell.isEditing = editing
         }
     }
@@ -60,7 +60,7 @@ class MediaViewController: UIViewController {
         var images: [UIImage] = []
         if let indexPaths = collectionView.indexPathsForSelectedItems {
             for indexPath in indexPaths {
-                let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+                let cell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
                 if let image = cell.imageView.image {
                     images.append(image)
                 }
@@ -99,8 +99,8 @@ extension MediaViewController {
         return []
     }
     
-    func image(for indexPath: IndexPath, completion: (UIImage) -> ()){
-        let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+    func image(for indexPath: IndexPath, completion: (UIImage) -> ()) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
         if let image = cell.imageView.image {
             completion(image)
         }
@@ -133,7 +133,7 @@ extension MediaViewController: UICollectionViewDataSource {
         let mediaItem = getMediaItem(for: indexPath)
         switch mediaItem.mediaType {
         case .Image:
-            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! ImageCollectionViewCell
             if let data = mediaItem.data {
                 imageCell.imageView.image = UIImage(data: data)
             }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MediaCollectionViewCell: UICollectionViewCell {
+class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var selectionImage: UIImageView!
     
