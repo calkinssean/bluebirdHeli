@@ -182,23 +182,35 @@ class FirebaseController {
                         for timeStamp in dateDict.keys {
                             if let imageDict = dateDict[timeStamp] as? [String: Any] {
                                 if let url = imageDict["url"] as? String {
-                                    if let timeStampDouble = Double(timeStamp) {
-                                        let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video)
-                                        var mediaArray: [Media] = []
-                                        if let array = DataStore.shared.mediaDict[dateKey] {
-                                            mediaArray = array
+                                    self.downloadThumbnail(for: url, completion: { (data) in
+                                        if let timeStampDouble = Double(timeStamp) {
+                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video)
+                                            var mediaArray: [Media] = []
+                                            if let array = DataStore.shared.mediaDict[dateKey] {
+                                                mediaArray = array
+                                            }
+                                            mediaArray.append(mediaItem)
+                                            DataStore.shared.mediaDict[dateKey] = mediaArray
+                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                            }
                                         }
-                                        mediaArray.append(mediaItem)
-                                        DataStore.shared.mediaDict[dateKey] = mediaArray
-                                        if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
-                                            DataStore.shared.mediaSectionHeaders.append(dateKey)
-                                        }
-                                    }
+                                    })
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    func downloadThumbnail(for videoURL: String, completion: @escaping (Data) -> ()) {
+        let imageURLString = "\(videoURL.replacingOccurrences(of: "www", with: "img").replacingOccurrences(of: "watch?v=", with: "vi/"))/0.jpg"
+        guard let imageURL = URL(string: imageURLString) else { return }
+        URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            if let data = data {
+                completion(data)
             }
         }
     }
