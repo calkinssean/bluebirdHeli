@@ -45,7 +45,7 @@ class LoginViewController: UIViewController {
                 })
             }
             if let uid = user?.uid {
-                FirebaseController().fetchGroup(with: uid, completion: { (errorMessage) in
+                FirebaseController().fetchGroup(with: uid, sender: self, completion: { (errorMessage) in
                     if let errorMessage = errorMessage {
                         self.dismiss(animated: true, completion: {
                             self.alert(title: "Error", message: errorMessage)

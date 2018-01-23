@@ -17,20 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-    
         UIApplication.shared.statusBarStyle = .lightContent
-       
         checkForAuth { (user) in
             guard let user = user else { return }
-            FirebaseController().fetchGroup(with: user.uid, completion: { (errorMessage) in
+            self.showDashboard()
+            FirebaseController().fetchGroup(with: user.uid, sender: self, completion: { (errorMessage) in
                 if let errorMessage = errorMessage {
                     print(errorMessage)
-                } else {
-                    self.showDashboard()
                 }
             })
         }
-        
         return true
     }
 

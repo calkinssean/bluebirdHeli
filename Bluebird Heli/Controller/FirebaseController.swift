@@ -71,12 +71,14 @@ class FirebaseController {
    
     }
     
-    func fetchGroup(with uid: String, completion: @escaping (String?) -> ()) {
+    func fetchGroup(with uid: String, sender: Any, completion: @escaping (String?) -> ()) {
         guard uid != "" else { return }
         groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Any] else {
                 completion("There is no account attached to that authorization.")
-                // TODO: - Log out
+                if let _ = sender as? AppDelegate {
+                    self.logout()
+                }
                 return }
             DataStore.shared.currentGroup = Group(dict: dict)
             self.setUpObservers()
