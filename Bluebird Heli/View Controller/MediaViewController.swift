@@ -132,18 +132,23 @@ extension MediaViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let mediaItem = getMediaItem(for: indexPath)
-        switch mediaItem.mediaType {
-        case .Image:
-            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
-            if let data = mediaItem.data {
-                imageCell.imageView.image = UIImage(data: data)
-            }
-            return imageCell
-        case .Video:
-            let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCollectionViewCell
-            videoCell.setupCell(with: mediaItem)
-            return videoCell
+        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+        if let data = mediaItem.data {
+            imageCell.imageView.image = UIImage(data: data)
         }
+        return imageCell
+//        switch mediaItem.mediaType {
+//        case .Image:
+//            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+//            if let data = mediaItem.data {
+//                imageCell.imageView.image = UIImage(data: data)
+//            }
+//            return imageCell
+//        case .Video:
+//            let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCollectionViewCell
+//            videoCell.setupCell(with: mediaItem)
+//            return videoCell
+//        }
     }
     
 }

@@ -184,7 +184,7 @@ class FirebaseController {
                                 if let url = imageDict["url"] as? String {
                                     self.downloadThumbnail(for: url, completion: { (data) in
                                         if let timeStampDouble = Double(timeStamp) {
-                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video)
+                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
                                             var mediaArray: [Media] = []
                                             if let array = DataStore.shared.mediaDict[dateKey] {
                                                 mediaArray = array
@@ -209,10 +209,15 @@ class FirebaseController {
         let imageURLString = "\(videoURL.replacingOccurrences(of: "www", with: "img").replacingOccurrences(of: "watch?v=", with: "vi/"))/0.jpg"
         guard let imageURL = URL(string: imageURLString) else { return }
         URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
+            if let error = error {
+                print(error)
+                print(error.localizedDescription)
+            }
             if let data = data {
+                print(data)
                 completion(data)
             }
-        }
+        }.resume()
     }
     
     func downloadImage(ref: StorageReference, completion: @escaping (Data) -> ()) {

@@ -78,17 +78,11 @@ extension MediaDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let mediaItem = mediaArray[indexPath.item]
-        switch mediaItem.mediaType {
-        case .Image:
-            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
-            if let data = mediaItem.data {
-                imageCell.imageView.image = UIImage(data: data)
-            }
-            return imageCell
-        case .Video:
-            break
+        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+        if let data = mediaItem.data {
+            imageCell.imageView.image = UIImage(data: data)
         }
-        return UICollectionViewCell()
+        return imageCell
     }
     
 }
@@ -97,9 +91,7 @@ extension MediaDetailViewController: UICollectionViewDataSource {
 extension MediaDetailViewController {
     func sharePhoto() {
         if let cell = collectionView.visibleCells.first as? ImageCollectionViewCell {
-            
             if let image = cell.imageView.image {
-                
                 let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
                 present(controller, animated: true , completion: nil)
             }

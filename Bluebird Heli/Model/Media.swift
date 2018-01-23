@@ -10,12 +10,12 @@ import Foundation
 
 struct Media {
     
-    init(url: String, dateString: String, date: Double, type: MediaType, data: Data? = nil) {
+    init(url: String, dateString: String, date: Double, type: MediaType, data: Data) {
         self.url = url
         self.dateString = dateString
         self.date = date
         self.mediaType = type
-        self.data = data ?? nil
+        self.data = data
     }
     
     var url: String
