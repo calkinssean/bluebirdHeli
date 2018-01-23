@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import WebKit
 
 class VideoCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet var webView: WKWebView!
     
+    func setupCell(with mediaItem: Media) {
+        guard mediaItem.mediaType == .Video else { return }
+        guard let youtubeURL = URL(string: mediaItem.url) else { return }
+        webView.load(URLRequest(url: youtubeURL) )
+    }
     
 }

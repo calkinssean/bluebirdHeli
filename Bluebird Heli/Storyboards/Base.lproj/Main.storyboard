@@ -648,7 +648,26 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="162" height="166"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hC-jA-znP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="162" height="166"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                            </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="3hC-jA-znP" secondAttribute="trailing" id="1Qt-Bq-2v7"/>
+                                            <constraint firstItem="3hC-jA-znP" firstAttribute="top" secondItem="r0g-4a-bX0" secondAttribute="top" id="WsI-Z9-ZkV"/>
+                                            <constraint firstItem="3hC-jA-znP" firstAttribute="leading" secondItem="r0g-4a-bX0" secondAttribute="leading" id="bp2-qM-dds"/>
+                                            <constraint firstAttribute="bottom" secondItem="3hC-jA-znP" secondAttribute="bottom" id="t9k-9y-c95"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="webView" destination="3hC-jA-znP" id="pcn-Km-rxL"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionHeader" id="SNw-vZ-t57" customClass="SectionHeader" customModule="Bluebird_Heli" customModuleProvider="target">
@@ -717,21 +736,21 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BNX-hW-b0h">
-                                    <size key="itemSize" width="367" height="277"/>
+                                    <size key="itemSize" width="251" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="h1o-pO-NCz" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116.5" width="367" height="277"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="upg-uK-xcK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -743,6 +762,33 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="upg-uK-xcK" id="eUE-4v-3Hb"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="KqJ-n7-dSr" customClass="VideoCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="180" width="251" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iWj-Ml-uBl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
+                                                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <wkWebViewConfiguration key="configuration">
+                                                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                        <wkPreferences key="preferences"/>
+                                                    </wkWebViewConfiguration>
+                                                </wkWebView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="iWj-Ml-uBl" secondAttribute="bottom" id="0xX-Ml-F1f"/>
+                                            <constraint firstItem="iWj-Ml-uBl" firstAttribute="leading" secondItem="KqJ-n7-dSr" secondAttribute="leading" id="Gs6-fe-nMu"/>
+                                            <constraint firstAttribute="trailing" secondItem="iWj-Ml-uBl" secondAttribute="trailing" id="hww-7R-OvX"/>
+                                            <constraint firstItem="iWj-Ml-uBl" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="lbW-WQ-G2k"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="webView" destination="iWj-Ml-uBl" id="8Xn-5u-lhZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
