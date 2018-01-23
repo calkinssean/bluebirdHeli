@@ -217,4 +217,23 @@ class FirebaseController {
         FirebaseController().observeVideos()
     }
     
+    func logout() {
+        
+        do {
+            try Auth.auth().signOut()
+            DataStore.shared.currentGroup = nil
+            DataStore.shared.daysDict = [:]
+            DataStore.shared.upcomingTrips = []
+            // clear media dict
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "Login") as! UINavigationController
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.window?.rootViewController = rootViewController
+            }
+            
+        } catch {
+            print("failed logout")
+        }
+    }
+    
 }

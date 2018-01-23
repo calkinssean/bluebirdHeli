@@ -22,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         checkForAuth { (user) in
             guard let user = user else { return }
-            FirebaseController().fetchGroup(with: user.uid, completion: { (group, errorMessage) in
-                DataStore.shared.currentGroup = group
+            FirebaseController().fetchGroup(with: user.uid, completion: { (errorMessage) in
+                if let errorMessage = errorMessage {
+                    print(errorMessage)
+                } else {
+                    self.showDashboard()
+                }
             })
         }
         
