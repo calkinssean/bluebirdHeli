@@ -182,14 +182,18 @@ class FirebaseController {
                         for timeStamp in dateDict.keys {
                             if let imageDict = dateDict[timeStamp] as? [String: Any] {
                                 if let url = imageDict["url"] as? String {
-                                    let youtubeURL = URL(string: url)
-                                    
-//                                    self.downloadVideo(ref: storageURL, completion: { (data) in
-//                                        if let timeStampDouble = Double(timeStamp) {
-//                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
-//                                   //         DataStore.shared.media.append(mediaItem)
-//                                        }
-//                                    })
+                                    if let timeStampDouble = Double(timeStamp) {
+                                        let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video)
+                                        var mediaArray: [Media] = []
+                                        if let array = DataStore.shared.mediaDict[dateKey] {
+                                            mediaArray = array
+                                        }
+                                        mediaArray.append(mediaItem)
+                                        DataStore.shared.mediaDict[dateKey] = mediaArray
+                                        if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+                                            DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                        }
+                                    }
                                 }
                             }
                         }
