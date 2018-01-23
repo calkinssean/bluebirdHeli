@@ -80,7 +80,7 @@ extension MediaDetailViewController: UICollectionViewDataSource {
         let mediaItem = mediaArray[indexPath.item]
         switch mediaItem.mediaType {
         case .Image:
-            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! ImageCollectionViewCell
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
             if let data = mediaItem.data {
                 imageCell.imageView.image = UIImage(data: data)
             }

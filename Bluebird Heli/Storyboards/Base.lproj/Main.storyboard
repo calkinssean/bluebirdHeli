@@ -605,7 +605,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="pbe-Hv-bJP" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="pbe-Hv-bJP" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="162" height="166"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -641,6 +641,14 @@
                                             <outlet property="imageView" destination="aQH-oc-7bW" id="VIk-Dl-c27"/>
                                             <outlet property="selectionImage" destination="8HX-Ej-CYG" id="GIq-3C-oNO"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="r0g-4a-bX0" customClass="VideoCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="213" y="50" width="162" height="166"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="162" height="166"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SectionHeader" id="SNw-vZ-t57" customClass="SectionHeader" customModule="Bluebird_Heli" customModuleProvider="target">
@@ -715,7 +723,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="h1o-pO-NCz" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="h1o-pO-NCz" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116.5" width="367" height="277"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">

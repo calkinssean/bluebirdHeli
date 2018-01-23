@@ -133,7 +133,7 @@ extension MediaViewController: UICollectionViewDataSource {
         let mediaItem = getMediaItem(for: indexPath)
         switch mediaItem.mediaType {
         case .Image:
-            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! ImageCollectionViewCell
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
             if let data = mediaItem.data {
                 imageCell.imageView.image = UIImage(data: data)
             }
