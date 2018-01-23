@@ -77,10 +77,18 @@ extension MediaDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
         let mediaItem = mediaArray[indexPath.item]
-        cell.imageView.image = UIImage(data: mediaItem.data)
-        return cell
+        switch mediaItem.mediaType {
+        case .Image:
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
+            if let data = mediaItem.data {
+                imageCell.imageView.image = UIImage(data: data)
+            }
+            return imageCell
+        case .Video:
+            break
+        }
+        return UICollectionViewCell()
     }
     
 }

@@ -182,7 +182,8 @@ class FirebaseController {
                         for timeStamp in dateDict.keys {
                             if let imageDict = dateDict[timeStamp] as? [String: Any] {
                                 if let url = imageDict["url"] as? String {
-                                    let storageURL = Storage.storage().reference(forURL: url)
+                                    let youtubeURL = URL(string: url)
+                                    
 //                                    self.downloadVideo(ref: storageURL, completion: { (data) in
 //                                        if let timeStampDouble = Double(timeStamp) {
 //                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)

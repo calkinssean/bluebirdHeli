@@ -10,19 +10,19 @@ import Foundation
 
 struct Media {
     
-    init(url: String, dateString: String, date: Double, type: MediaType, data: Data) {
+    init(url: String, dateString: String, date: Double, type: MediaType, data: Data? = nil) {
         self.url = url
         self.dateString = dateString
         self.date = date
         self.mediaType = type
-        self.data = data
+        self.data = data ?? nil
     }
     
     var url: String
     var dateString: String
     var date: Double
     var mediaType: MediaType
-    var data: Data
+    var data: Data?
     
 }
 
