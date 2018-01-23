@@ -27,13 +27,10 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     @IBAction func playTapped(_ sender: UIButton) {
         if let mediaItem = mediaItem {
-            imageView.isHidden = true
-            playButton.isHidden = true
-            webView.isHidden = false
             webView.allowsBackForwardNavigationGestures = false
             webView.allowsLinkPreview = true
             guard let youtubeURL = URL(string: mediaItem.url) else { return }
-            webView.load(URLRequest(url: youtubeURL) )
+            webView.load(URLRequest(url: youtubeURL))
         }
     }
 
@@ -44,6 +41,18 @@ extension VideoCollectionViewCell: WKUIDelegate {
         imageView.isHidden = false
         playButton.isHidden = false
         webView.isHidden = true
+    }
+    
+    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+        return true
+    }
+}
+
+extension VideoCollectionViewCell: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        imageView.isHidden = true
+        playButton.isHidden = true
+        webView.isHidden = false
     }
 }
 
