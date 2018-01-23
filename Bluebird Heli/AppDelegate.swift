@@ -22,16 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         checkForAuth { (user) in
             guard let user = user else { return }
-            FirebaseController().fetchGroup(with: user.uid, completion: { (group) in
+            FirebaseController().fetchGroup(with: user.uid, completion: { (group, errorMessage) in
                 DataStore.shared.currentGroup = group
             })
-            WeatherController().setUpLocations()
-            WeatherController().fetchWeatherHourly()
-            showDashboard()
-            FirebaseController().observeDays()
-            FirebaseController().observeReservations()
-            FirebaseController().observeImages()
-          //  FirebaseController().observeVideos()
         }
         
         return true

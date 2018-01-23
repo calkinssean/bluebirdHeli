@@ -40,21 +40,17 @@ class LoginViewController: UIViewController {
         FirebaseController().signInUser(email: email, password: password) { (user, error) in
             
             if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
+                self.alert(title: "Error", message: error.localizedDescription)
             }
             if let uid = user?.uid {
-                FirebaseController().fetchGroup(with: uid, completion: { (group) in
-                    DataStore.shared.currentGroup = group
-                    self.userSignedIn()
-                    self.showDashboard()
-                    FirebaseController().observeDays()
-                    FirebaseController().observeReservations()
-                    FirebaseController().observeImages()
+                FirebaseController().fetchGroup(with: uid, completion: { (group, errorMessage) in
+                    if let group = group {
+                        self.showDashboard()
+                    } else if let errorMessage = errorMessage {
+                        self.alert(title: "Error", message: errorMessage)
+                    }
                 })
-            } 
+            }
         }
     }
 
@@ -89,11 +85,6 @@ extension LoginViewController: UITextFieldDelegate {
 
 // MARK: - Helper
 extension LoginViewController {
-    
-    func userSignedIn() {
-        WeatherController().setUpLocations()
-        WeatherController().fetchWeatherHourly()
-    }
     
     func forgotPasswordAlert() {
         let alert = UIAlertController(title: "Reset Password", message: nil, preferredStyle: .alert)
