@@ -37,24 +37,26 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginTapped(_ sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+         loadingAlert()
         FirebaseController().signInUser(email: email, password: password) { (user, error) in
-            
             if let error = error {
-                let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-                alert.addAction(okAction)
-                self.present(alert, animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.alert(title: "Error", message: error.localizedDescription)
+                })
             }
             if let uid = user?.uid {
-                FirebaseController().fetchGroup(with: uid, completion: { (group) in
-                    DataStore.shared.currentGroup = group
-                    self.userSignedIn()
-                    self.showDashboard()
-                    FirebaseController().observeDays()
-                    FirebaseController().observeReservations()
-                    FirebaseController().observeImages()
+                FirebaseController().fetchGroup(with: uid, sender: self, completion: { (errorMessage) in
+                    if let errorMessage = errorMessage {
+                        self.dismiss(animated: true, completion: {
+                            self.alert(title: "Error", message: errorMessage)
+                        })
+                    } else {
+                        self.dismiss(animated: true, completion: {
+                            self.showDashboard()
+                        })
+                    }
                 })
-            } 
+            }
         }
     }
 
@@ -90,11 +92,6 @@ extension LoginViewController: UITextFieldDelegate {
 // MARK: - Helper
 extension LoginViewController {
     
-    func userSignedIn() {
-        WeatherController().setUpLocations()
-        WeatherController().fetchWeatherHourly()
-    }
-    
     func forgotPasswordAlert() {
         let alert = UIAlertController(title: "Reset Password", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -125,6 +122,16 @@ extension LoginViewController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func loadingAlert() {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating();
+        alert.view.addSubview(loadingIndicator)
         present(alert, animated: true, completion: nil)
     }
     

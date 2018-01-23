@@ -71,14 +71,18 @@ class FirebaseController {
    
     }
     
-    func fetchGroup(with uid: String, completion: @escaping (Group) -> ()) {
+    func fetchGroup(with uid: String, sender: Any, completion: @escaping (String?) -> ()) {
         guard uid != "" else { return }
         groupsURL.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dict = snapshot.value as? [String: Any] else {
-                // TODO: - Log out
-                
+                completion("There is no account attached to that authorization.")
+                if let _ = sender as? AppDelegate {
+                    self.logout()
+                }
                 return }
-            completion(Group(dict: dict))
+            DataStore.shared.currentGroup = Group(dict: dict)
+            self.setUpObservers()
+            completion(nil)
         }
     }
     
@@ -169,30 +173,30 @@ class FirebaseController {
         }
     }
     
-//    func observeVideos() {
-//        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
-//        baseURL.child("videos").child(uid).observe(.value) { (snapshot) in
-//            if let datesDict = snapshot.value as? [String: Any] {
-//                for dateKey in datesDict.keys {
-//                    if let dateDict = datesDict[dateKey] as? [String: Any] {
-//                        for timeStamp in dateDict.keys {
-//                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
-//                                if let url = imageDict["url"] as? String {
-//                                    let storageURL = Storage.storage().reference(forURL: url)
+    func observeVideos() {
+        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+        baseURL.child("videos").child(uid).observe(.value) { (snapshot) in
+            if let datesDict = snapshot.value as? [String: Any] {
+                for dateKey in datesDict.keys {
+                    if let dateDict = datesDict[dateKey] as? [String: Any] {
+                        for timeStamp in dateDict.keys {
+                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
+                                if let url = imageDict["url"] as? String {
+                                    let storageURL = Storage.storage().reference(forURL: url)
 //                                    self.downloadVideo(ref: storageURL, completion: { (data) in
 //                                        if let timeStampDouble = Double(timeStamp) {
 //                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
 //                                   //         DataStore.shared.media.append(mediaItem)
 //                                        }
 //                                    })
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     func downloadImage(ref: StorageReference, completion: @escaping (Data) -> ()) {
         ref.getData(maxSize: 10000 * 10000) { (data, error) in
@@ -206,15 +210,31 @@ class FirebaseController {
         }
     }
     
-    func downloadVideo(ref: StorageReference, completion: @escaping (Data) -> ()) {
-        ref.getData(maxSize: 100000 * 100000) { (data, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Video download error")
-            } else {
-                if let data = data {
-                    completion(data)
-                }
+    func setUpObservers() {
+        WeatherController().setUpLocations()
+        WeatherController().fetchWeatherHourly()
+        FirebaseController().observeDays()
+        FirebaseController().observeReservations()
+        FirebaseController().observeImages()
+        FirebaseController().observeVideos()
+    }
+    
+    func logout() {
+        
+        do {
+            try Auth.auth().signOut()
+            DataStore.shared.currentGroup = nil
+            DataStore.shared.daysDict = [:]
+            DataStore.shared.upcomingTrips = []
+            // clear media dict
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let rootViewController = storyboard.instantiateViewController(withIdentifier: "Login") as! UINavigationController
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                appDelegate.window?.rootViewController = rootViewController
             }
+            
+        } catch {
+            print("failed logout")
         }
     }
     
