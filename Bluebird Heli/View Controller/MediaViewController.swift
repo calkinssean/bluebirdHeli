@@ -136,19 +136,10 @@ extension MediaViewController: UICollectionViewDataSource {
         if let data = mediaItem.data {
             imageCell.imageView.image = UIImage(data: data)
         }
+        if mediaItem.mediaType == .Video {
+            imageCell.playImage.isHidden = false
+        }
         return imageCell
-//        switch mediaItem.mediaType {
-//        case .Image:
-//            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
-//            if let data = mediaItem.data {
-//                imageCell.imageView.image = UIImage(data: data)
-//            }
-//            return imageCell
-//        case .Video:
-//            let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCollectionViewCell
-//            videoCell.setupCell(with: mediaItem)
-//            return videoCell
-//        }
     }
     
 }
