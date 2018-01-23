@@ -15,6 +15,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     
     func setupCell(with mediaItem: Media) {
         guard mediaItem.mediaType == .Video else { return }
+        webView.allowsBackForwardNavigationGestures = false
+        webView.allowsLinkPreview = true
         guard let youtubeURL = URL(string: mediaItem.url) else { return }
         webView.load(URLRequest(url: youtubeURL) )
     }

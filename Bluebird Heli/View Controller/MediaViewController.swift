@@ -51,8 +51,9 @@ class MediaViewController: UIViewController {
             return
         }
         for index in indexes {
-            let cell = collectionView?.cellForItem(at: index) as! ImageCollectionViewCell
-            cell.isEditing = editing
+            if let cell = collectionView?.cellForItem(at: index) as? ImageCollectionViewCell {
+                cell.isEditing = editing
+            }
         }
     }
     
