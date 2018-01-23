@@ -40,17 +40,20 @@ class LoginViewController: UIViewController {
          loadingAlert()
         FirebaseController().signInUser(email: email, password: password) { (user, error) in
             if let error = error {
-                self.dismiss(animated: true, completion: nil)
-                self.alert(title: "Error", message: error.localizedDescription)
+                self.dismiss(animated: true, completion: {
+                    self.alert(title: "Error", message: error.localizedDescription)
+                })
             }
             if let uid = user?.uid {
                 FirebaseController().fetchGroup(with: uid, completion: { (errorMessage) in
                     if let errorMessage = errorMessage {
-                        self.dismiss(animated: true, completion: nil)
-                        self.alert(title: "Error", message: errorMessage)
+                        self.dismiss(animated: true, completion: {
+                            self.alert(title: "Error", message: errorMessage)
+                        })
                     } else {
-                        self.dismiss(animated: true, completion: nil)
-                        self.showDashboard()
+                        self.dismiss(animated: true, completion: {
+                            self.showDashboard()
+                        })
                     }
                 })
             }
