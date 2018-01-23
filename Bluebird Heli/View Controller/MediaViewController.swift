@@ -139,9 +139,10 @@ extension MediaViewController: UICollectionViewDataSource {
             }
             return imageCell
         case .Video:
-            break
+            let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCollectionViewCell
+            videoCell.setupCell(with: mediaItem)
+            return videoCell
         }
-        return UICollectionViewCell()
     }
     
 }

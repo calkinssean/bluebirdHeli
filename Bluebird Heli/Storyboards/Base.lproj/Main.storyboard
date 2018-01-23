@@ -666,7 +666,7 @@
                                             <constraint firstAttribute="bottom" secondItem="3hC-jA-znP" secondAttribute="bottom" id="t9k-9y-c95"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="webView" destination="3hC-jA-znP" id="pcn-Km-rxL"/>
+                                            <outlet property="webView" destination="3hC-jA-znP" id="e0s-Vx-Pfk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -788,7 +788,7 @@
                                             <constraint firstItem="iWj-Ml-uBl" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="lbW-WQ-G2k"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="webView" destination="iWj-Ml-uBl" id="8Xn-5u-lhZ"/>
+                                            <outlet property="webView" destination="iWj-Ml-uBl" id="SgS-Da-f0g"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
