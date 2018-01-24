@@ -11,7 +11,6 @@ import WebKit
 
 class VideoCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet var imageView: UIImageView!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     var webView: WKWebView!
@@ -19,12 +18,8 @@ class VideoCollectionViewCell: UICollectionViewCell {
     var mediaItem: Media? {
         didSet {
             if let mediaItem = mediaItem {
-                if let data = mediaItem.data {
-                    imageView.image = UIImage(data: data)
-                    spinner.startAnimating()
-                }
+                spinner.startAnimating()
                 webView = createWebView()
-                print(mediaItem.url)
                 guard let youtubeURL = URL(string: mediaItem.url) else { return }
                 addSubview(webView)
                 webView.isHidden = true
@@ -49,7 +44,6 @@ class VideoCollectionViewCell: UICollectionViewCell {
 extension VideoCollectionViewCell: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         spinner.stopAnimating()
-        imageView.isHidden = true
         webView.isHidden = false
     }
     
