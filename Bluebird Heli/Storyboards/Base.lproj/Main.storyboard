@@ -751,9 +751,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-zL-RzX">
-                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
-                                                </imageView>
                                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HEX-Sd-bma">
                                                     <rect key="frame" x="107.5" y="57" width="37" height="37"/>
                                                 </activityIndicatorView>
@@ -761,14 +758,9 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="HEX-Sd-bma" firstAttribute="centerY" secondItem="KqJ-n7-dSr" secondAttribute="centerY" id="124-pG-AJu"/>
-                                            <constraint firstAttribute="bottom" secondItem="PFY-zL-RzX" secondAttribute="bottom" id="USa-nB-MJV"/>
-                                            <constraint firstAttribute="trailing" secondItem="PFY-zL-RzX" secondAttribute="trailing" id="kjn-gW-OXZ"/>
-                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="leading" secondItem="KqJ-n7-dSr" secondAttribute="leading" id="lez-sF-dPg"/>
                                             <constraint firstItem="HEX-Sd-bma" firstAttribute="centerX" secondItem="KqJ-n7-dSr" secondAttribute="centerX" id="sJE-I2-v07"/>
-                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="wGQ-aI-Laz"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="imageView" destination="PFY-zL-RzX" id="by2-mi-DNH"/>
                                             <outlet property="spinner" destination="HEX-Sd-bma" id="4mf-6b-pX5"/>
                                         </connections>
                                     </collectionViewCell>
