@@ -162,6 +162,12 @@ class FirebaseController {
                                             if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
                                                 DataStore.shared.mediaSectionHeaders.append(dateKey)
                                             }
+                                            let arrayForSection = DataStore.shared.mediaDict[dateKey]
+                                            if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
+                                                UserDefaults.standard.set(section, forKey: "sectionToUpdate")
+                                                UserDefaults.standard.set(item, forKey: "itemToUpdate")
+                                                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updatedMediaController")))
+                                            }
                                         }
                                     })
                                 }
