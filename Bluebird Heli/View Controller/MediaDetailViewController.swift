@@ -25,6 +25,16 @@ class MediaDetailViewController: UIViewController {
             self.collectionView.scrollToItem(at: indexPath, at: .left, animated: false)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: "updatedMediaController"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -74,6 +84,15 @@ class MediaDetailViewController: UIViewController {
     func hideToolBarAfterThreeSeconds() {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
             self.navigationController?.isToolbarHidden = true
+        }
+    }
+    
+    @objc func updateCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
+        let sectionIndex = UserDefaults.standard.integer(forKey: "sectionToUpdate")
+        if DataStore.shared.mediaSectionHeaders[sectionIndex] == self.title {
+            let indexPath = IndexPath(item: item, section: 0)
+            collectionView.insertItems(at: [indexPath])
         }
     }
     
