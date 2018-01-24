@@ -215,7 +215,6 @@ class FirebaseController {
                 print(error.localizedDescription)
             }
             if let data = data {
-                print(data)
                 completion(data)
             }
         }.resume()

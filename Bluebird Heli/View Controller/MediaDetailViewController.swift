@@ -72,10 +72,9 @@ class MediaDetailViewController: UIViewController {
     }
     
     func hideToolBarAfterThreeSeconds() {
-        let timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
             self.navigationController?.isToolbarHidden = true
         }
-        timer.fire()
     }
     
 }
