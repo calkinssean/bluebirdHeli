@@ -12,7 +12,6 @@ class MediaDetailViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
     
-    var toolbarIsShown = false
     var item = 0
     var mediaArray: [Media] = []
     
@@ -56,13 +55,26 @@ class MediaDetailViewController: UIViewController {
     }
     
     @objc func toggleToolBar() {
-        if let hidden = navigationController?.isToolbarHidden {
-            navigationController?.isToolbarHidden = !hidden
+        if let visibleIndexPath = collectionView.indexPathsForVisibleItems.first {
+            if let _ = collectionView.cellForItem(at: visibleIndexPath) as? ImageCollectionViewCell {
+                if let hidden = navigationController?.isToolbarHidden {
+                    navigationController?.isToolbarHidden = !hidden
+                    if hidden == true {
+                        hideToolBarAfterThreeSeconds()
+                    }
+                }
+            } 
         }
     }
     
     @IBAction func shareTapped(_ sender: UIBarButtonItem) {
         sharePhoto()
+    }
+    
+    func hideToolBarAfterThreeSeconds() {
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (timer) in
+            self.navigationController?.isToolbarHidden = true
+        }
     }
     
 }
@@ -106,3 +118,4 @@ extension MediaDetailViewController {
         }
     }
 }
+
