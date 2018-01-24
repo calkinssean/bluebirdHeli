@@ -34,7 +34,7 @@ class MediaDetailViewController: UIViewController {
     
     func configureCollectionView() {
         let width = view.frame.size.width
-        let height = view.frame.size.height * 0.6
+        let height = view.frame.size.height * 0.9
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
         layout.itemSize = CGSize(width: width, height: height)

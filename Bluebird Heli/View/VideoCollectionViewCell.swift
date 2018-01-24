@@ -12,7 +12,6 @@ import WebKit
 class VideoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var playButton: UIButton!
     @IBOutlet var spinner: UIActivityIndicatorView!
     
     var webView: WKWebView!
@@ -20,43 +19,29 @@ class VideoCollectionViewCell: UICollectionViewCell {
     var mediaItem: Media? {
         didSet {
             if let mediaItem = mediaItem {
-                
-                let configuration = WKWebViewConfiguration()
-                configuration.allowsInlineMediaPlayback = false
-                webView = WKWebView(frame: self.frame, configuration: configuration)
-                webView.translatesAutoresizingMaskIntoConstraints = false
-                playButton.isHidden = true
-                webView.uiDelegate = self
-                webView.navigationDelegate = self
-                webView.allowsBackForwardNavigationGestures = false
+                if let data = mediaItem.data {
+                    imageView.image = UIImage(data: data)
+                    spinner.startAnimating()
+                }
+                webView = createWebView()
+                print(mediaItem.url)
                 guard let youtubeURL = URL(string: mediaItem.url) else { return }
                 addSubview(webView)
                 webView.isHidden = true
                 webView.load(URLRequest(url: youtubeURL))
-
-               // if let data = mediaItem.data {
-           //         imageView.image = UIImage(data: data)
-                    
-              //  }
             }
         }
     }
     
-    @IBAction func playTapped(_ sender: UIButton) {
-        if let mediaItem = mediaItem {
-            spinner.startAnimating()
-         
-        }
-    }
-    
-}
-
-extension VideoCollectionViewCell: WKUIDelegate {
-    func webViewDidClose(_ webView: WKWebView) {
-        print("didClose")
-        imageView.isHidden = false
-        playButton.isHidden = false
-        webView.isHidden = true
+    func createWebView() -> WKWebView {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        let wkWebView = WKWebView(frame: self.frame, configuration: configuration)
+        wkWebView.translatesAutoresizingMaskIntoConstraints = false
+        wkWebView.contentMode = .scaleAspectFit
+        wkWebView.navigationDelegate = self
+        wkWebView.allowsBackForwardNavigationGestures = false
+        return wkWebView
     }
     
 }
