@@ -90,9 +90,13 @@ class MediaDetailViewController: UIViewController {
     @objc func updateCollectionView() {
         let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
         let sectionIndex = UserDefaults.standard.integer(forKey: "sectionToUpdate")
-        if DataStore.shared.mediaSectionHeaders[sectionIndex] == self.title {
-            let indexPath = IndexPath(item: item, section: 0)
-            collectionView.insertItems(at: [indexPath])
+        let sectionHeader = DataStore.shared.mediaSectionHeaders[sectionIndex]
+        if sectionHeader == self.title {
+            if let array = DataStore.shared.mediaDict[sectionHeader] {
+                mediaArray = array
+                let indexPath = IndexPath(item: item, section: 0)
+                collectionView.insertItems(at: [indexPath])
+            }
         }
     }
     
