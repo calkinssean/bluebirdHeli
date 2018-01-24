@@ -25,9 +25,14 @@ class MediaViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: "updatedMediaController"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,6 +89,21 @@ class MediaViewController: UIViewController {
     
     @objc func selectTapped() {
         self.isEditing = !isEditing
+    }
+    
+    @objc func updateCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
+        let sectionIndex = UserDefaults.standard.integer(forKey: "sectionToUpdate")
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+        if sectionIndex > collectionView.numberOfSections - 1 {
+            collectionView.performBatchUpdates({
+                let set = IndexSet(integer: sectionIndex)
+                collectionView.insertSections(set)
+                self.collectionView.insertItems(at: [indexPath])
+            }, completion: nil)
+        } else {
+            collectionView.insertItems(at: [indexPath])
+        }
     }
 }
 
