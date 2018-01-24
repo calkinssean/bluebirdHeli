@@ -22,7 +22,7 @@ struct Media {
     var dateString: String
     var date: Double
     var mediaType: MediaType
-    var data: Data
+    var data: Data?
     
 }
 

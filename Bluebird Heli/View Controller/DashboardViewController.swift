@@ -22,7 +22,7 @@ class DashboardViewController: UIViewController {
         let maxOffset = (sqrt(pow(cellHeight, 2) + 4 * parallaxOffsetSpeed * self.tableView.frame.height) - cellHeight) / 2
         return maxOffset + cellHeight
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

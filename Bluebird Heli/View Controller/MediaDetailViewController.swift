@@ -34,9 +34,10 @@ class MediaDetailViewController: UIViewController {
     
     func configureCollectionView() {
         let width = view.frame.size.width
+        let height = view.frame.size.height * 0.9
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
-        layout.itemSize = CGSize(width: width, height: width)
+        layout.itemSize = CGSize(width: width, height: height)
         collectionView.isPagingEnabled = true
     }
     
@@ -77,10 +78,19 @@ extension MediaDetailViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
         let mediaItem = mediaArray[indexPath.item]
-        cell.imageView.image = UIImage(data: mediaItem.data)
-        return cell
+        switch mediaItem.mediaType {
+        case .Image:
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+            if let data = mediaItem.data {
+                imageCell.imageView.image = UIImage(data: data)
+            }
+            return imageCell
+        case .Video:
+            let videoCell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCollectionViewCell
+            videoCell.mediaItem = mediaItem
+            return videoCell
+        }
     }
     
 }
@@ -88,10 +98,8 @@ extension MediaDetailViewController: UICollectionViewDataSource {
 // MARK: - UIActivityViewController
 extension MediaDetailViewController {
     func sharePhoto() {
-        if let cell = collectionView.visibleCells.first as? MediaCollectionViewCell {
-            
+        if let cell = collectionView.visibleCells.first as? ImageCollectionViewCell {
             if let image = cell.imageView.image {
-                
                 let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
                 present(controller, animated: true , completion: nil)
             }

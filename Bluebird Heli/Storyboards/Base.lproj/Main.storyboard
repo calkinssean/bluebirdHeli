@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -605,7 +604,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="pbe-Hv-bJP" customClass="MediaCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="pbe-Hv-bJP" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="162" height="166"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -622,23 +621,31 @@
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Unchecked" translatesAutoresizingMaskIntoConstraints="NO" id="8HX-Ej-CYG">
                                                     <rect key="frame" x="132" y="136" width="22" height="22"/>
                                                 </imageView>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="playButton" translatesAutoresizingMaskIntoConstraints="NO" id="OIN-BR-ewC">
+                                                    <rect key="frame" x="69" y="70.5" width="24" height="25"/>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="9N0-hc-BC5" secondAttribute="bottom" id="3V1-5O-gm7"/>
+                                            <constraint firstItem="OIN-BR-ewC" firstAttribute="width" secondItem="aQH-oc-7bW" secondAttribute="width" multiplier="0.15" id="5Qm-9u-kDh"/>
                                             <constraint firstAttribute="bottom" secondItem="aQH-oc-7bW" secondAttribute="bottom" id="7S6-JX-wul"/>
+                                            <constraint firstItem="OIN-BR-ewC" firstAttribute="height" secondItem="aQH-oc-7bW" secondAttribute="height" multiplier="0.15" id="H5r-GK-4XQ"/>
                                             <constraint firstItem="aQH-oc-7bW" firstAttribute="top" secondItem="pbe-Hv-bJP" secondAttribute="top" id="Kg6-ro-2bP"/>
                                             <constraint firstAttribute="trailing" secondItem="aQH-oc-7bW" secondAttribute="trailing" id="Kwo-GT-TEu"/>
                                             <constraint firstAttribute="trailing" secondItem="8HX-Ej-CYG" secondAttribute="trailing" constant="8" id="PSg-dF-x49"/>
                                             <constraint firstAttribute="trailing" secondItem="9N0-hc-BC5" secondAttribute="trailing" id="ahV-cm-YYM"/>
                                             <constraint firstItem="9N0-hc-BC5" firstAttribute="leading" secondItem="pbe-Hv-bJP" secondAttribute="leading" id="fzS-rw-soZ"/>
+                                            <constraint firstItem="OIN-BR-ewC" firstAttribute="centerY" secondItem="pbe-Hv-bJP" secondAttribute="centerY" id="gZt-Ce-Q18"/>
+                                            <constraint firstItem="OIN-BR-ewC" firstAttribute="centerX" secondItem="pbe-Hv-bJP" secondAttribute="centerX" id="hEg-wH-W7H"/>
                                             <constraint firstAttribute="bottom" secondItem="8HX-Ej-CYG" secondAttribute="bottom" constant="8" id="oVe-GC-P2b"/>
                                             <constraint firstItem="aQH-oc-7bW" firstAttribute="leading" secondItem="pbe-Hv-bJP" secondAttribute="leading" id="svL-RI-e3u"/>
                                             <constraint firstItem="9N0-hc-BC5" firstAttribute="top" secondItem="8HX-Ej-CYG" secondAttribute="top" constant="-8" id="wRd-Jn-dAd"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="aQH-oc-7bW" id="VIk-Dl-c27"/>
+                                            <outlet property="playImage" destination="OIN-BR-ewC" id="VOG-1z-XP3"/>
                                             <outlet property="selectionImage" destination="8HX-Ej-CYG" id="GIq-3C-oNO"/>
                                         </connections>
                                     </collectionViewCell>
@@ -709,21 +716,21 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="510"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="BNX-hW-b0h">
-                                    <size key="itemSize" width="367" height="277"/>
+                                    <size key="itemSize" width="251" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MediaCell" id="h1o-pO-NCz" customClass="MediaCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="116.5" width="367" height="277"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="h1o-pO-NCz" customClass="ImageCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="upg-uK-xcK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="367" height="277"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -735,6 +742,34 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="upg-uK-xcK" id="eUE-4v-3Hb"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="KqJ-n7-dSr" customClass="VideoCollectionViewCell" customModule="Bluebird_Heli" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="180" width="251" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PFY-zL-RzX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="251" height="150"/>
+                                                </imageView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HEX-Sd-bma">
+                                                    <rect key="frame" x="107.5" y="57" width="37" height="37"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="HEX-Sd-bma" firstAttribute="centerY" secondItem="KqJ-n7-dSr" secondAttribute="centerY" id="124-pG-AJu"/>
+                                            <constraint firstAttribute="bottom" secondItem="PFY-zL-RzX" secondAttribute="bottom" id="USa-nB-MJV"/>
+                                            <constraint firstAttribute="trailing" secondItem="PFY-zL-RzX" secondAttribute="trailing" id="kjn-gW-OXZ"/>
+                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="leading" secondItem="KqJ-n7-dSr" secondAttribute="leading" id="lez-sF-dPg"/>
+                                            <constraint firstItem="HEX-Sd-bma" firstAttribute="centerX" secondItem="KqJ-n7-dSr" secondAttribute="centerX" id="sJE-I2-v07"/>
+                                            <constraint firstItem="PFY-zL-RzX" firstAttribute="top" secondItem="KqJ-n7-dSr" secondAttribute="top" id="wGQ-aI-Laz"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="PFY-zL-RzX" id="by2-mi-DNH"/>
+                                            <outlet property="spinner" destination="HEX-Sd-bma" id="4mf-6b-pX5"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -1077,5 +1112,6 @@
         <image name="Backyard Bowl" width="2100" height="1400"/>
         <image name="Unchecked" width="22" height="22"/>
         <image name="helicopter" width="3762" height="2116"/>
+        <image name="playButton" width="50" height="50"/>
     </resources>
 </document>

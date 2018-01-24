@@ -51,8 +51,9 @@ class MediaViewController: UIViewController {
             return
         }
         for index in indexes {
-            let cell = collectionView?.cellForItem(at: index) as! MediaCollectionViewCell
-            cell.isEditing = editing
+            if let cell = collectionView?.cellForItem(at: index) as? ImageCollectionViewCell {
+                cell.isEditing = editing
+            }
         }
     }
     
@@ -60,7 +61,7 @@ class MediaViewController: UIViewController {
         var images: [UIImage] = []
         if let indexPaths = collectionView.indexPathsForSelectedItems {
             for indexPath in indexPaths {
-                let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+                let cell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
                 if let image = cell.imageView.image {
                     images.append(image)
                 }
@@ -99,14 +100,14 @@ extension MediaViewController {
         return []
     }
     
-    func image(for indexPath: IndexPath, completion: (UIImage) -> ()){
-        let cell = collectionView.cellForItem(at: indexPath) as! MediaCollectionViewCell
+    func image(for indexPath: IndexPath, completion: (UIImage) -> ()) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
         if let image = cell.imageView.image {
             completion(image)
         }
     }
     
-    func mediaItem(for indexPath: IndexPath) -> Media {
+    func getMediaItem(for indexPath: IndexPath) -> Media {
         return mediaArray(for: indexPath.section)[indexPath.item]
     }
     
@@ -130,10 +131,15 @@ extension MediaViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MediaCell", for: indexPath) as! MediaCollectionViewCell
-        let media = mediaItem(for: indexPath)
-        cell.imageView.image = UIImage(data: media.data)
-        return cell
+        let mediaItem = getMediaItem(for: indexPath)
+        let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath) as! ImageCollectionViewCell
+        if let data = mediaItem.data {
+            imageCell.imageView.image = UIImage(data: data)
+        }
+        if mediaItem.mediaType == .Video {
+            imageCell.playImage.isHidden = false
+        }
+        return imageCell
     }
     
 }
