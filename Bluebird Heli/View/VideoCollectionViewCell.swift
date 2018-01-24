@@ -12,47 +12,61 @@ import WebKit
 class VideoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var imageView: UIImageView!
-    @IBOutlet var webView: WKWebView!
     @IBOutlet var playButton: UIButton!
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
+    var webView: WKWebView!
     
     var mediaItem: Media? {
         didSet {
             if let mediaItem = mediaItem {
-                if let data = mediaItem.data {
-                    imageView.image = UIImage(data: data)
-                }
+                
+                let configuration = WKWebViewConfiguration()
+                configuration.allowsInlineMediaPlayback = false
+                webView = WKWebView(frame: self.frame, configuration: configuration)
+                webView.translatesAutoresizingMaskIntoConstraints = false
+                playButton.isHidden = true
+                webView.uiDelegate = self
+                webView.navigationDelegate = self
+                webView.allowsBackForwardNavigationGestures = false
+                guard let youtubeURL = URL(string: mediaItem.url) else { return }
+                addSubview(webView)
+                webView.isHidden = true
+                webView.load(URLRequest(url: youtubeURL))
+
+               // if let data = mediaItem.data {
+           //         imageView.image = UIImage(data: data)
+                    
+              //  }
             }
         }
     }
     
     @IBAction func playTapped(_ sender: UIButton) {
         if let mediaItem = mediaItem {
-            webView.allowsBackForwardNavigationGestures = false
-            webView.allowsLinkPreview = true
-            guard let youtubeURL = URL(string: mediaItem.url) else { return }
-            webView.load(URLRequest(url: youtubeURL))
+            spinner.startAnimating()
+         
         }
     }
-
+    
 }
 
 extension VideoCollectionViewCell: WKUIDelegate {
     func webViewDidClose(_ webView: WKWebView) {
+        print("didClose")
         imageView.isHidden = false
         playButton.isHidden = false
         webView.isHidden = true
     }
     
-    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
-        return true
-    }
 }
 
 extension VideoCollectionViewCell: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        spinner.stopAnimating()
         imageView.isHidden = true
-        playButton.isHidden = true
         webView.isHidden = false
     }
+    
 }
 

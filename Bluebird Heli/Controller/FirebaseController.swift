@@ -184,7 +184,8 @@ class FirebaseController {
                                 if let url = imageDict["url"] as? String {
                                     self.downloadThumbnail(for: url, completion: { (data) in
                                         if let timeStampDouble = Double(timeStamp) {
-                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
+                                            let embedURL = url.replacingOccurrences(of: "watch?v=", with: "embed/")
+                                            let mediaItem = Media(url: embedURL, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
                                             var mediaArray: [Media] = []
                                             if let array = DataStore.shared.mediaDict[dateKey] {
                                                 mediaArray = array
