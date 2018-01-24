@@ -62,8 +62,10 @@ class MediaViewController: UIViewController {
         if let indexPaths = collectionView.indexPathsForSelectedItems {
             for indexPath in indexPaths {
                 let cell = collectionView.cellForItem(at: indexPath) as! ImageCollectionViewCell
-                if let image = cell.imageView.image {
-                    images.append(image)
+                if cell.mediaType == .Image {
+                    if let image = cell.imageView.image {
+                        images.append(image)
+                    }
                 }
             }
         }
@@ -137,7 +139,10 @@ extension MediaViewController: UICollectionViewDataSource {
             imageCell.imageView.image = UIImage(data: data)
         }
         if mediaItem.mediaType == .Video {
+            imageCell.mediaType = .Video
             imageCell.playImage.isHidden = false
+        } else {
+            imageCell.mediaType = .Image
         }
         return imageCell
     }

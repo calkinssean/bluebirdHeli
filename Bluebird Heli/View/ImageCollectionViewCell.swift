@@ -13,16 +13,22 @@ class ImageCollectionViewCell: UICollectionViewCell {
     @IBOutlet var selectionImage: UIImageView!
     @IBOutlet var playImage: UIImageView!
     
+    var mediaType: MediaType!
+    
     var isEditing: Bool = false {
         didSet {
-            selectionImage.isHidden = !isEditing
+            if mediaType == .Image {
+                selectionImage.isHidden = !isEditing
+            }
         }
     }
     
     override var isSelected: Bool {
         didSet {
             if isEditing {
-                selectionImage.image = isSelected ? UIImage(named: "Checked") : UIImage(named: "Unchecked")
+                if mediaType == .Image {
+                    selectionImage.image = isSelected ? UIImage(named: "Checked") : UIImage(named: "Unchecked")
+                }
             }
         }
     }
