@@ -297,7 +297,7 @@ extension ReservationViewController {
     }
     
     @IBAction func pickupLocationTapped(_ sender: UIButton) {
-        pickerView.isHidden = true
+        pickerViewBackground.isHidden = true
         segmentedControl.isHidden = true
         pickupLocationAlert()
     }
