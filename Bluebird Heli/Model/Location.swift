@@ -24,8 +24,9 @@ enum OperatingArea: String {
     case southern = "Southern Operating Area"
 }
 
-enum PickupLocation: String {
-    case heber = "Heber Hangar"
-    case northSaltLake = "North Salt Lake Hangar"
+struct PickupLocation {
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
 }
-
