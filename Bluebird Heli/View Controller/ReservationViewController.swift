@@ -103,6 +103,7 @@ extension ReservationViewController {
         alert.addTextField { (textField) in
             textField.placeholder = "Address"
             textField.autocapitalizationType = .words
+            textField.autocorrectionType = .yes
             textField.keyboardType = .default
         }
         let saveAction = UIAlertAction(title: "Set", style: .default) { (action) in
@@ -296,6 +297,8 @@ extension ReservationViewController {
     }
     
     @IBAction func pickupLocationTapped(_ sender: UIButton) {
+        pickerView.isHidden = true
+        segmentedControl.isHidden = true
         pickupLocationAlert()
     }
     
