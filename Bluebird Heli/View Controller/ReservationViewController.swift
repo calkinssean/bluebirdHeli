@@ -70,9 +70,6 @@ extension ReservationViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let title = pickerViewData[row]
         switch propertyBeingChanged {
-        case "Pickup Location":
-            reservation.pickupLocation = PickupLocation(rawValue: pickerViewData[row])
-            pickupLocationButton.setTitle(title, for: .normal)
         case "Pickup Time":
             print(selectedDay.urlDateString())
             formatter.dateFormat = "yyyy-MM-dd h:mm a"
@@ -100,6 +97,47 @@ extension ReservationViewController: UIPickerViewDelegate {
 
 // MARK: - Helper
 extension ReservationViewController {
+    
+    func otherLocationAlert() {
+        let alert = UIAlertController(title: "Other Location", message: "Please enter the address", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.placeholder = "Address"
+            textField.autocapitalizationType = .words
+            textField.autocorrectionType = .yes
+            textField.keyboardType = .default
+        }
+        let saveAction = UIAlertAction(title: "Set", style: .default) { (action) in
+            if let text = alert.textFields?[0].text {
+                self.reservation.pickupLocation = PickupLocation(name: text)
+                self.pickupLocationButton.setTitle(text, for: .normal)
+            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func pickupLocationAlert() {
+        let alert = UIAlertController(title: "Select Pickup Location", message: nil, preferredStyle: .actionSheet)
+        let heberAction = UIAlertAction(title: "Heber Hangar", style: .default) { (action) in
+            self.reservation.pickupLocation = PickupLocation(name: "Heber Hangar")
+            self.pickupLocationButton.setTitle("Heber Hangar", for: .normal)
+        }
+        let northSaltLakeAction = UIAlertAction(title: "North Salt Lake Hangar", style: .default) { (action) in
+            self.reservation.pickupLocation = PickupLocation(name: "North Salt Lake Hangar")
+            self.pickupLocationButton.setTitle("North Salt Lake Hangar", for: .normal)
+        }
+        let otherAction = UIAlertAction(title: "Other", style: .default) { (action) in
+            self.otherLocationAlert()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(heberAction)
+        alert.addAction(northSaltLakeAction)
+        alert.addAction(otherAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     @objc func confirmReservationAlert() {
         let alert = UIAlertController(title: "Save Reservation?", message: "Please verify that all information is correct.", preferredStyle: .alert)
@@ -155,8 +193,6 @@ extension ReservationViewController {
     
     func setPickerViewData() {
         switch propertyBeingChanged {
-        case "Pickup Location":
-            pickerViewData = [PickupLocation.northSaltLake.rawValue, PickupLocation.heber.rawValue]
         case "Pickup Time":
             pickerViewData = availablePickupTimes()
         case "Group Size":
@@ -261,11 +297,9 @@ extension ReservationViewController {
     }
     
     @IBAction func pickupLocationTapped(_ sender: UIButton) {
-        propertyBeingChanged = "Pickup Location"
-        setPickerViewData()
-        pickerView.reloadAllComponents()
-        pickerViewBackground.isHidden = false
+        pickerViewBackground.isHidden = true
         segmentedControl.isHidden = true
+        pickupLocationAlert()
     }
     
     @IBAction func pickupTimeTapped(_ sender: UIButton) {
@@ -293,7 +327,7 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
     func showEmail() {
         let title = "Trip Scheduled"
-        guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.rawValue, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
+        guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.name, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         formatter.dateFormat = "EEEE, MMM d, h:mm a"
         var config = Configuration()
         var messageBody = ""

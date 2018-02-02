@@ -264,7 +264,7 @@ extension UpcomingTripsViewController {
         guard let pickupLocation = reservation?.pickupLocation, let  pickupTime = reservation?.pickupTime, let groupSize = reservation?.numberOfAttendees else { return  "" }
         switch header {
         case "Pickup Location":
-            return pickupLocation.rawValue
+            return pickupLocation.name
         case "Pickup Time":
             formatter.dateFormat = "h:mm a"
             return formatter.string(from: pickupTime)

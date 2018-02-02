@@ -32,9 +32,7 @@ struct Reservation {
             }
         }
         if let pickupLocationString = dict["pickupLocation"] as? String {
-            if let pickupLocation = PickupLocation(rawValue: pickupLocationString) {
-                self.pickupLocation = pickupLocation
-            }
+            self.pickupLocation = PickupLocation(name: pickupLocationString)
         }
         if let timeSlotString = dict["timeSlot"] as? String {
             if let timeSlot = TimeSlot(rawValue: timeSlotString) {
@@ -76,7 +74,7 @@ struct Reservation {
             "groupUID": groupUID,
             "operatingArea": operatingArea.rawValue,
             "pickupTime": pickupTime.timeIntervalSince1970,
-            "pickupLocation": pickupLocation.rawValue,
+            "pickupLocation": pickupLocation.name,
             "numberOfAttendees": numberOfAttendees,
             "timeSlot": timeSlot.rawValue,
             "ref": "\(ref)"
