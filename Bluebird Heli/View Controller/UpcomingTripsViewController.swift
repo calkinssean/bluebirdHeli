@@ -61,7 +61,8 @@ extension UpcomingTripsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case upcomingTripsTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingTripTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! 
+            UpcomingTripTableViewCell
             cell.setupCell(with: DataStore.shared.upcomingTrips[indexPath.row])
             return cell
         case tripDetailsTableView:

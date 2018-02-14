@@ -13,9 +13,13 @@ class UpcomingTripTableViewCell: UITableViewCell {
     @IBOutlet var dateLabel: UILabel!
     @IBOutlet var selectedView: UIView!
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setGradientBackground(colors: [Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setGradientBackground(colors: [Colors.translucentDarkGray.cgColor, Colors.translucentDarkerGray.cgColor])
         selectedView.layer.borderColor = UIColor.white.cgColor
         selectedView.layer.borderWidth = 2
     }
