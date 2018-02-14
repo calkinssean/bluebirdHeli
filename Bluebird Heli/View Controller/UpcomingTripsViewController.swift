@@ -61,13 +61,15 @@ extension UpcomingTripsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch tableView {
         case upcomingTripsTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! UpcomingTripTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! 
+            UpcomingTripTableViewCell
             cell.setupCell(with: DataStore.shared.upcomingTrips[indexPath.row])
             return cell
         case tripDetailsTableView:
             switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell") as! TripDetailsTableViewCell
+                cell.contentView.layoutIfNeeded()
                 cell.label.text = "\(tripDetailsHeaders[indexPath.row]):"
                 cell.detailLabel.text = tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation)
                 
