@@ -68,6 +68,7 @@ extension UpcomingTripsViewController: UITableViewDataSource {
             switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "tripDetailsCell") as! TripDetailsTableViewCell
+                cell.contentView.layoutIfNeeded()
                 cell.label.text = "\(tripDetailsHeaders[indexPath.row]):"
                 cell.detailLabel.text = tripDetails(for: tripDetailsHeaders[indexPath.row], from: selectedReservation)
                 

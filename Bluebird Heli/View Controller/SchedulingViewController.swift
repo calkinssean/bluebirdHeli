@@ -41,7 +41,6 @@ class SchedulingViewController: UIViewController {
         
         formatter.locale = 🇺🇸
         setupCalendarView()
-        setBackgroundGradient()
     
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
@@ -50,9 +49,14 @@ class SchedulingViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if selectedLocation != nil {
-            self.setReserveButtonEnabled(enabled: false)
-            self.calendarView.reloadData()
+            setReserveButtonEnabled(enabled: false)
+            calendarView.reloadData()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setBackgroundGradient()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
