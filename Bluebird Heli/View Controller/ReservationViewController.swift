@@ -142,7 +142,7 @@ extension ReservationViewController {
         alert.addAction(cancelAction)
         if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = view
-            popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+            popoverController.sourceRect = pickupLocationButton.frame
         }
         present(alert, animated: true, completion: nil)
     }
@@ -352,7 +352,11 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         mailController.setSubject(title)
         mailController.setMessageBody(messageBody, isHTML: true)
         mailController.setToRecipients(toRecipients)
-        present(mailController, animated: true, completion: nil)
+        if MFMailComposeViewController.canSendMail() {
+            present(mailController, animated: true, completion: nil)
+        } else {
+            alert(title: "Reservation Not Saved", message: "No Mail Accounts: Please set up a Mail account in order to send email and save reservation")
+        }
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
