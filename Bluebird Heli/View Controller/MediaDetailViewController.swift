@@ -11,6 +11,7 @@ import UIKit
 class MediaDetailViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var shareButton: UIBarButtonItem!
     
     var item = 0
     var mediaArray: [Media] = []
@@ -136,6 +137,9 @@ extension MediaDetailViewController {
         if let cell = collectionView.visibleCells.first as? ImageCollectionViewCell {
             if let image = cell.imageView.image {
                 let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                if let popoverController = controller.popoverPresentationController {
+                    popoverController.barButtonItem = shareButton
+                }
                 present(controller, animated: true , completion: nil)
             }
         }

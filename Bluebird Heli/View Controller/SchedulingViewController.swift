@@ -42,6 +42,8 @@ class SchedulingViewController: UIViewController {
         formatter.locale = 🇺🇸
         setupCalendarView()
     
+        tableView.tableFooterView = UIView()
+        
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
     }
@@ -329,6 +331,10 @@ extension SchedulingViewController {
         alert.addAction(centralAreaAction)
         alert.addAction(southernAreaAction)
         alert.addAction(cancelAction)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = view
+            popoverController.sourceRect = locationButton.frame
+        }
         self.present(alert, animated: true, completion: {
             self.tableView.isHidden = false
         })

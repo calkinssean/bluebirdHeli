@@ -31,7 +31,6 @@ class ReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(confirmReservationAlert))
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -40,6 +39,11 @@ class ReservationViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         reservation.groupUID = DataStore.shared.currentGroup?.uid
        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setGradients()
     }
 
     override func didReceiveMemoryWarning() {
@@ -136,6 +140,10 @@ extension ReservationViewController {
         alert.addAction(northSaltLakeAction)
         alert.addAction(otherAction)
         alert.addAction(cancelAction)
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = view
+            popoverController.sourceRect = pickupLocationButton.frame
+        }
         present(alert, animated: true, completion: nil)
     }
     
@@ -326,6 +334,10 @@ extension ReservationViewController {
 extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
     func showEmail() {
+        if !MFMailComposeViewController.canSendMail() {
+            alert(title: "Reservation Not Saved", message: "No Mail Accounts: Please set up a Mail account in order to send email and save reservation")
+            return
+        }
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.name, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         formatter.dateFormat = "EEEE, MMM d, h:mm a"

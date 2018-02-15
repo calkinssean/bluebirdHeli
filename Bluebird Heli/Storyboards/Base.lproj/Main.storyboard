@@ -698,6 +698,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
                     <connections>
                         <outlet property="collectionView" destination="12v-94-QHM" id="jvE-nr-vg7"/>
+                        <outlet property="shareButton" destination="Npi-qB-lMT" id="6s2-ym-jRa"/>
                         <segue destination="glJ-F1-js5" kind="show" identifier="ShowMediaDetailSegue" id="ZTm-Dw-nzB"/>
                     </connections>
                 </viewController>
@@ -792,6 +793,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics" barStyle="black" translucent="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="aMQ-Ce-3Hb" id="N2W-7W-jds"/>
+                        <outlet property="shareButton" destination="6Cn-6z-fKc" id="JJK-2z-0Pc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5el-UL-dnW" userLabel="First Responder" sceneMemberID="firstResponder"/>

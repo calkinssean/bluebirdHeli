@@ -12,6 +12,7 @@ import FirebaseStorage
 class MediaViewController: UIViewController {
 
     @IBOutlet var collectionView: UICollectionView!
+    @IBOutlet var shareButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +76,9 @@ class MediaViewController: UIViewController {
             }
         }
         let controller = UIActivityViewController(activityItems: images, applicationActivities: nil)
+        if let popoverController = controller.popoverPresentationController {
+            popoverController.barButtonItem = shareButton
+        }
         present(controller, animated: true, completion: nil)
     }
     
