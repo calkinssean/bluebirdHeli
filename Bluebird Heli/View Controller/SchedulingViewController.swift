@@ -331,7 +331,7 @@ extension SchedulingViewController {
         alert.addAction(centralAreaAction)
         alert.addAction(southernAreaAction)
         alert.addAction(cancelAction)
-             if let popoverController = alert.popoverPresentationController {
+        if let popoverController = alert.popoverPresentationController {
             popoverController.sourceView = view
             popoverController.sourceRect = locationButton.frame
         }
