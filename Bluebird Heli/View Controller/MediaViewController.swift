@@ -162,7 +162,7 @@ extension MediaViewController: UICollectionViewDataSource {
             imageCell.mediaType = .Video
             imageCell.playImage.isHidden = false
         } else {
-            imageCell.playImage.isHidden = false
+            imageCell.playImage.isHidden = true
             imageCell.mediaType = .Image
         }
         return imageCell
