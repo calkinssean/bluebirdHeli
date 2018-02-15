@@ -41,8 +41,10 @@ class DashboardViewController: UIViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        for cell in tableView.visibleCells as! [DashboardTableViewCell] {
-            cell.imageTopConstraint.constant = self.parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            for cell in tableView.visibleCells as! [DashboardTableViewCell] {
+                cell.imageTopConstraint.constant = self.parallaxOffset(newOffsetY: tableView.contentOffset.y, cell: cell)
+            }
         }
     }
     
