@@ -42,6 +42,8 @@ class SchedulingViewController: UIViewController {
         formatter.locale = 🇺🇸
         setupCalendarView()
     
+        tableView.tableFooterView = UIView()
+        
         let reserveButton = UIBarButtonItem(title: "Reserve", style: .plain, target: self, action: #selector(reserveTapped))
         self.navigationItem.rightBarButtonItem = reserveButton
     }
