@@ -53,7 +53,6 @@ class LoginViewController: UIViewController {
                     } else {
                         self.dismiss(animated: true, completion: {
                             self.showDashboard()
-                            FirebaseController().setUpObservers()
                         })
                     }
                 })

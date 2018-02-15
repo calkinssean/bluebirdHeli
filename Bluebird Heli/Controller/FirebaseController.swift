@@ -81,6 +81,7 @@ class FirebaseController {
                 }
                 return }
             DataStore.shared.currentGroup = Group(dict: dict)
+            FirebaseController().setUpObservers()
             completion(nil)
         }
     }
