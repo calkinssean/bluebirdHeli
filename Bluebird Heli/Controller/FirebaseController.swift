@@ -254,7 +254,7 @@ class FirebaseController {
             DataStore.shared.currentGroup = nil
             DataStore.shared.daysDict = [:]
             DataStore.shared.upcomingTrips = []
-            // clear media dict
+            DataStore.shared.mediaDict = [:]
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let rootViewController = storyboard.instantiateViewController(withIdentifier: "Login") as! UINavigationController
             if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
