@@ -208,7 +208,6 @@ extension UpcomingTripsViewController {
   
         alert.addAction(openEmailControllerAction)
         alert.addAction(cancelAction)
-        
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -323,7 +322,9 @@ extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
             }
             
             controller.setMessageBody(messageBody, isHTML: true)
-            present(controller, animated: true, completion: nil)
+            if MFMailComposeViewController.canSendMail() {
+                present(controller, animated: true, completion: nil)
+            }
         }
     }
     
