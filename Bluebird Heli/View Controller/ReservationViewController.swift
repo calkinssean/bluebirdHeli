@@ -31,7 +31,6 @@ class ReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        setGradients()
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(confirmReservationAlert))
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -40,6 +39,11 @@ class ReservationViewController: UIViewController {
         self.view.addGestureRecognizer(tap)
         reservation.groupUID = DataStore.shared.currentGroup?.uid
        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setGradients()
     }
 
     override func didReceiveMemoryWarning() {
