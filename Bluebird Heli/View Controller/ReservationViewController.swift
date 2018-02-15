@@ -334,6 +334,10 @@ extension ReservationViewController {
 extension ReservationViewController: MFMailComposeViewControllerDelegate {
     
     func showEmail() {
+        if !MFMailComposeViewController.canSendMail() {
+            alert(title: "Reservation Not Saved", message: "No Mail Accounts: Please set up a Mail account in order to send email and save reservation")
+            return
+        }
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.name, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         formatter.dateFormat = "EEEE, MMM d, h:mm a"
@@ -352,11 +356,7 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         mailController.setSubject(title)
         mailController.setMessageBody(messageBody, isHTML: true)
         mailController.setToRecipients(toRecipients)
-        if MFMailComposeViewController.canSendMail() {
-            present(mailController, animated: true, completion: nil)
-        } else {
-            alert(title: "Reservation Not Saved", message: "No Mail Accounts: Please set up a Mail account in order to send email and save reservation")
-        }
+        present(mailController, animated: true, completion: nil)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
