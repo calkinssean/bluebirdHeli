@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import FirebaseAuth
 
 enum Environment: String {
     
@@ -15,6 +16,9 @@ enum Environment: String {
     case Production = "production"
     
     var baseURL: DatabaseReference {
+        if Auth.auth().currentUser?.uid == "Lp1pRZPCY8QnRmpCKnPPAwslmE73" {
+            return Database.database().reference().child("staging")
+        }
         switch self {
         case .Staging: return Database.database().reference().child("staging")
         case .Production: return Database.database().reference().child("production")

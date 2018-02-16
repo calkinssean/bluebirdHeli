@@ -16,6 +16,7 @@ class MediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(DataStore.shared.mediaDict)
         let width = view.frame.size.width / 3
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
