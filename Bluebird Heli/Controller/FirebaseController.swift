@@ -13,6 +13,10 @@ import FirebaseAuth
 import FirebaseStorage
 
 class FirebaseController {
+    
+    let mediaItemChangedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemChanged"), object: nil)
+    let mediaItemRemovedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemRemoved"), object: nil)
+    let mediaItemAddedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemAdded"), object: nil)
    
     var baseURL: DatabaseReference {
         var configuration = Configuration()
