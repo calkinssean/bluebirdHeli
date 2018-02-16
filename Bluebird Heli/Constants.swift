@@ -28,3 +28,8 @@ let sectionToRemoveKey = "sectionToRemoveKey"
 let itemToRemoveKey = "itemToRemoveKey"
 let sectionToAddKey = "sectionToAddKey"
 let itemToAddKey = "itemToAddKey"
+
+let mediaItemChangedNotification = Notification(name: Notification.Name(rawValue: "mediaItemChanged"), object: nil)
+let mediaItemRemovedNotification = Notification(name: Notification.Name(rawValue: "mediaItemRemoved"), object: nil)
+let mediaItemAddedNotification = Notification(name: Notification.Name(rawValue: "mediaItemAdded"), object: nil)
+

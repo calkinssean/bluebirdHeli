@@ -14,10 +14,6 @@ import FirebaseStorage
 
 class FirebaseController {
     
-    let mediaItemChangedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemChanged"), object: nil)
-    let mediaItemRemovedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemRemoved"), object: nil)
-    let mediaItemAddedNotification = NSNotification(name: NSNotification.Name(rawValue: "mediaItemAdded"), object: nil)
-   
     var baseURL: DatabaseReference {
         var configuration = Configuration()
         return configuration.environment.baseURL
@@ -164,9 +160,10 @@ class FirebaseController {
                             DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
                             let arrayForSection = DataStore.shared.mediaDict[dateKey]
                             if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
-                                // object added notification
+                                UserDefaults.standard.set(section, forKey: sectionToAddKey)
+                                UserDefaults.standard.set(item, forKey: itemToAddKey)
+                                NotificationCenter.default.post(self.mediaItemAddedNotification)
                             }
-                            
                         })
                     }
                 }
@@ -216,28 +213,7 @@ class FirebaseController {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
         baseURL.child("images").child(uid).observe(.childAdded) { (snapshot) in
             self.observeImages(for: snapshot.key)
-        //    print(snapshot.key)
-        
-            if let datesDict = snapshot.value as? [String: Any] {
-                for dateKey in datesDict.keys {
-  //                  print(dateKey)
-                }
-            }
         }
-        baseURL.child("images").child(uid).observe(.childRemoved) { (snapshot) in
-            if let datesDict = snapshot.value as? [String: Any] {
-                for dateKey in datesDict.keys {
-   //                 print(dateKey)
-                }
-            }
-        }
-//        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
-//            if let datesDict = snapshot.value as? [String: Any] {
-//                for dateKey in datesDict.keys {
-//                    print(dateKey)
-//                }
-//            }
-//        }
     }
     
     func observeImages() {
