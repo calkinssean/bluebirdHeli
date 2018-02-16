@@ -140,43 +140,85 @@ class FirebaseController {
         }
     }
     
-    func observeImages() {
+    func observeImageDateKeys() {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
-        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
+        baseURL.child("images").child(uid).observe(.childAdded) { (snapshot) in
             if let datesDict = snapshot.value as? [String: Any] {
                 for dateKey in datesDict.keys {
-                    if let dateDict = datesDict[dateKey] as? [String: Any] {
-                        for timeStamp in dateDict.keys {
-                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
-                                if let url = imageDict["url"] as? String {
-                                    let storageURL = Storage.storage().reference(forURL: url)
-                                    self.downloadImage(ref: storageURL, completion: { (data) in
-                                        if let timeStampDouble = Double(timeStamp) {
-                                            let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Image, data: data)
-                                            var mediaArray: [Media] = []
-                                            if let array = DataStore.shared.mediaDict[dateKey] {
-                                                mediaArray = array
-                                            }
-                                            mediaArray.append(mediaItem)
-                                            DataStore.shared.mediaDict[dateKey] = mediaArray
-                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
-                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
-                                            }
-                                            let arrayForSection = DataStore.shared.mediaDict[dateKey]
-                                            if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
-                                                UserDefaults.standard.set(section, forKey: "sectionToUpdate")
-                                                UserDefaults.standard.set(item, forKey: "itemToUpdate")
-                                                NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updatedMediaController")))
-                                            }
-                                        }
-                                    })
-                                }
-                            }
-                        }
-                    }
+                    print(dateKey)
                 }
             }
         }
+        baseURL.child("images").child(uid).observe(.childRemoved) { (snapshot) in
+            if let datesDict = snapshot.value as? [String: Any] {
+                for dateKey in datesDict.keys {
+                    print(dateKey)
+                }
+            }
+        }
+//        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
+//            if let datesDict = snapshot.value as? [String: Any] {
+//                for dateKey in datesDict.keys {
+//                    print(dateKey)
+//                }
+//            }
+//        }
+    }
+    
+    func observeImages() {
+        observeImageDateKeys()
+       // guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+//        baseURL.child("images").child(uid).observe(.childAdded) { (snapshot) in
+//            print("added dict")
+//            print(snapshot)
+//        }
+//        baseURL.child("images").child(uid).observe(.childChanged) { (snapshot) in
+//            print("changed dict")
+//            print(snapshot)
+//        }
+//        baseURL.child("images").child(uid).observe(.childRemoved) { (snapshot) in
+//            print("removed dict")
+//            print(snapshot)
+//        }
+        
+        
+//        if let dateDict = datesDict[dateKey] as? [String: Any] {
+//            for timeStamp in dateDict.keys {
+//                if let imageDict = dateDict[timeStamp] as? [String: Any] {
+//                    if let url = imageDict["url"] as? String {
+//                        let storageURL = Storage.storage().reference(forURL: url)
+//                        self.downloadImage(ref: storageURL, completion: { (data) in
+//                            if let timeStampDouble = Double(timeStamp) {
+//                                let mediaItem = Media(url: url, dateString: dateKey, date: timeStampDouble, type: .Image, data: data)
+//                                var mediaArray: [Media] = []
+//                                if let array = DataStore.shared.mediaDict[dateKey] {
+//                                    mediaArray = array
+//                                }
+//                                mediaArray.append(mediaItem)
+//                                DataStore.shared.mediaDict[dateKey] = mediaArray
+//                                if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+//                                    DataStore.shared.mediaSectionHeaders.append(dateKey)
+//                                }
+//                                let arrayForSection = DataStore.shared.mediaDict[dateKey]
+//                                if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
+//                                    UserDefaults.standard.set(section, forKey: "sectionToUpdate")
+//                                    UserDefaults.standard.set(item, forKey: "itemToUpdate")
+//                                    NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "updatedMediaController")))
+//                                }
+//                            }
+//                        })
+//                    }
+//                }
+//            }
+//        }
+        
+//        baseURL.child("images").child(uid).observe(.value) { (snapshot) in
+//            if let datesDict = snapshot.value as? [String: Any] {
+//                for dateKey in datesDict.keys {
+//                    print(dateKey)
+//                }
+//            }
+//        }
     }
     
     func observeVideos() {
