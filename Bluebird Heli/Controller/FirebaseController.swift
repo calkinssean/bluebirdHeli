@@ -162,7 +162,7 @@ class FirebaseController {
                             if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
                                 UserDefaults.standard.set(section, forKey: sectionToAddKey)
                                 UserDefaults.standard.set(item, forKey: itemToAddKey)
-                                NotificationCenter.default.post(self.mediaItemAddedNotification)
+                                NotificationCenter.default.post(mediaItemAddedNotification)
                             }
                         })
                     }
@@ -178,7 +178,9 @@ class FirebaseController {
                         if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
                             mediaArray.remove(at: item)
                             DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
-                            // object removed notification
+                            UserDefaults.standard.set(section, forKey: sectionToRemoveKey)
+                            UserDefaults.standard.set(item, forKey: itemToRemoveKey)
+                            NotificationCenter.default.post(mediaItemRemovedNotification)
                         }
                     }
                 }
@@ -198,7 +200,9 @@ class FirebaseController {
                                     if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
                                         mediaArray[item] = mediaItem
                                         DataStore.shared.mediaDict[dateKey] = mediaArray
-                                        // object changed notification
+                                        UserDefaults.standard.set(section, forKey: sectionToReloadKey)
+                                        UserDefaults.standard.set(item, forKey: itemToReloadKey)
+                                        NotificationCenter.default.post(mediaItemChangedNotification)
                                     }
                                 })
                             }
