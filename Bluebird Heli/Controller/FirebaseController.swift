@@ -162,7 +162,7 @@ class FirebaseController {
                             if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
                                 UserDefaults.standard.set(section, forKey: sectionToAddKey)
                                 UserDefaults.standard.set(item, forKey: itemToAddKey)
-                                NotificationCenter.default.post(mediaItemAddedNotification)
+                                NotificationCenter.default.post(Notification(name: mediaItemAddedNotificationName))
                             }
                         })
                     }
@@ -180,7 +180,7 @@ class FirebaseController {
                             DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
                             UserDefaults.standard.set(section, forKey: sectionToRemoveKey)
                             UserDefaults.standard.set(item, forKey: itemToRemoveKey)
-                            NotificationCenter.default.post(mediaItemRemovedNotification)
+                            NotificationCenter.default.post(Notification(name: mediaItemRemovedNotificationName))
                         }
                     }
                 }
@@ -202,7 +202,7 @@ class FirebaseController {
                                         DataStore.shared.mediaDict[dateKey] = mediaArray
                                         UserDefaults.standard.set(section, forKey: sectionToReloadKey)
                                         UserDefaults.standard.set(item, forKey: itemToReloadKey)
-                                        NotificationCenter.default.post(mediaItemChangedNotification)
+                                        NotificationCenter.default.post(Notification(name: mediaItemChangedNotificationName))
                                     }
                                 })
                             }

@@ -16,7 +16,6 @@ class MediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(DataStore.shared.mediaDict)
         let width = view.frame.size.width / 3
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
@@ -29,7 +28,9 @@ class MediaViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: "updatedMediaController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeItemsFromCollectionView), name: mediaItemRemovedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -96,9 +97,9 @@ class MediaViewController: UIViewController {
         self.isEditing = !isEditing
     }
     
-    @objc func updateCollectionView() {
-        let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
-        let sectionIndex = UserDefaults.standard.integer(forKey: "sectionToUpdate")
+    @objc func addItemsToCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToAddKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToAddKey)
         let indexPath = IndexPath(item: item, section: sectionIndex)
         if sectionIndex > collectionView.numberOfSections - 1 {
             collectionView.performBatchUpdates({
@@ -110,6 +111,19 @@ class MediaViewController: UIViewController {
             collectionView.insertItems(at: [indexPath])
         }
     }
+    @objc func reloadItemsInCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToReloadKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToReloadKey)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+        collectionView.reloadItems(at: [indexPath])
+    }
+    @objc func removeItemsFromCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+        collectionView.reloadItems(at: [indexPath])
+    }
+
 }
 
 // MARK: - Data Source Helper Methods
