@@ -21,3 +21,15 @@ struct Colors {
     static let unavailableViewColor = UIColor(red:0.57, green:0.08, blue:0.14, alpha:1.00)
     static let standbyViewColor = UIColor(red:0.76, green:0.72, blue:0.12, alpha:1.00)
 }
+
+let sectionToReloadKey = "sectionToReloadKey"
+let itemToReloadKey = "itemToReloadKey"
+let sectionToRemoveKey = "sectionToRemoveKey"
+let itemToRemoveKey = "itemToRemoveKey"
+let sectionToAddKey = "sectionToAddKey"
+let itemToAddKey = "itemToAddKey"
+
+let mediaItemChangedNotificationName = Notification.Name(rawValue: "mediaItemChanged")
+let mediaItemRemovedNotificationName = Notification.Name(rawValue: "mediaItemRemoved")
+let mediaItemAddedNotificationName = Notification.Name(rawValue: "mediaItemAdded")
+
