@@ -140,6 +140,11 @@ class FirebaseController {
         }
     }
     
+    func removeImageObserver(for dateKey: String) {
+        guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
+        baseURL.child("images").child(uid).child(dateKey).removeAllObservers()
+    }
+    
     func observeImages(for dateKey: String) {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
         baseURL.child("images").child(uid).child(dateKey).observe(.childAdded) { (snapshot) in
@@ -154,6 +159,7 @@ class FirebaseController {
                                 mediaArray = array
                             }
                             mediaArray.append(mediaItem)
+                            print(mediaArray.count)
                             if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
                                 DataStore.shared.mediaSectionHeaders.append(dateKey)
                             }
@@ -179,9 +185,6 @@ class FirebaseController {
                             mediaArray.remove(at: item)
                             if mediaArray.isEmpty {
                                 DataStore.shared.mediaDict[dateKey] = nil
-                                if let dateKeyIndex = DataStore.shared.mediaSectionHeaders.index(of: dateKey) {
-                                    DataStore.shared.mediaSectionHeaders.remove(at: dateKeyIndex)
-                                }
                             } else {
                                 DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
                             }
@@ -224,6 +227,9 @@ class FirebaseController {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
         baseURL.child("images").child(uid).observe(.childAdded) { (snapshot) in
             self.observeImages(for: snapshot.key)
+        }
+        baseURL.child("images").child(uid).observe(.childRemoved) { (snapshot) in
+            self.removeImageObserver(for: snapshot.key)
         }
     }
     
