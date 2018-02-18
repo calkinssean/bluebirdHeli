@@ -121,18 +121,17 @@ class MediaViewController: UIViewController {
         let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
         let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)
         let indexPath = IndexPath(item: item, section: sectionIndex)
-        if sectionIndex == 1000 {
-            collectionView.deleteItems(at: [indexPath])
-        } else {
+        if mediaArray(for: sectionIndex).isEmpty {
             collectionView.performBatchUpdates({
                 let set = IndexSet(integer: sectionIndex)
                 collectionView.deleteSections(set)
                 self.collectionView.deleteItems(at: [indexPath])
             }, completion: nil)
+        } else {
+            collectionView.deleteItems(at: [indexPath])
         }
-        
     }
-
+    
 }
 
 // MARK: - Data Source Helper Methods
