@@ -177,7 +177,11 @@ class FirebaseController {
                         let arrayForSection = DataStore.shared.mediaDict[dateKey]
                         if let section = DataStore.shared.mediaSectionHeaders.index(of: dateKey), let item = arrayForSection?.index(where: {$0.date == mediaItem.date}) {
                             mediaArray.remove(at: item)
-                            DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
+                            if mediaArray.isEmpty {
+                                DataStore.shared.mediaDict[dateKey] = nil
+                            } else {
+                                DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
+                            }
                             UserDefaults.standard.set(section, forKey: sectionToRemoveKey)
                             UserDefaults.standard.set(item, forKey: itemToRemoveKey)
                             NotificationCenter.default.post(Notification(name: mediaItemRemovedNotificationName))
