@@ -121,7 +121,6 @@ class MediaViewController: UIViewController {
         let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
         let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)
         let indexPath = IndexPath(item: item, section: sectionIndex)
-        print(mediaArray(for: sectionIndex).count)
         if mediaArray(for: sectionIndex).isEmpty {
             collectionView.performBatchUpdates({
                 let set = IndexSet(integer: sectionIndex)
