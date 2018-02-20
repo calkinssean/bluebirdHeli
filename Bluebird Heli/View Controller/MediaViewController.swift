@@ -29,11 +29,6 @@ class MediaViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    //    NotificationCenter.default.removeObserver(self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMediaDetailSegue" {
             let indexPath = sender as! IndexPath

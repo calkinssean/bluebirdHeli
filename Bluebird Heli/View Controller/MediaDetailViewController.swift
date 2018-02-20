@@ -30,7 +30,6 @@ class MediaDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeItemsFromCollectionView), name: mediaItemRemovedNotificationName, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
     }
     
@@ -118,21 +117,7 @@ class MediaDetailViewController: UIViewController {
         }
     }
     
-    @objc func removeItemsFromCollectionView() {
-        let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
-        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)
-        let indexPath = IndexPath(item: item, section: sectionIndex)
-        if mediaArray.isEmpty {
-            collectionView.performBatchUpdates({
-                let set = IndexSet(integer: sectionIndex)
-                collectionView.deleteSections(set)
-                self.collectionView.deleteItems(at: [indexPath])
-                DataStore.shared.mediaSectionHeaders.remove(at: sectionIndex)
-            }, completion: nil)
-        } else {
-            collectionView.deleteItems(at: [indexPath])
-        }
-    }
+
     
     @objc func updateCollectionView() {
         let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
