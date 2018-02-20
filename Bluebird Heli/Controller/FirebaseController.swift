@@ -306,7 +306,7 @@ class FirebaseController {
                 }
             }
         }
-        baseURL.child("videos").child(uid).child(dateKey).observe(.childRemoved) { (snapshot) in
+        baseURL.child("videos").child(uid).child(dateKey).observe(.childChanged) { (snapshot) in
             if let timeStamp = Double(snapshot.key) {
                 if let changedDict = snapshot.value as? [String: Any] {
                     if let array = DataStore.shared.mediaDict[dateKey], let url = changedDict["url"] as? String {
