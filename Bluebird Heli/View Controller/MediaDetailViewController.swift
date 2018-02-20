@@ -29,7 +29,8 @@ class MediaDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: "updatedMediaController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -87,6 +88,34 @@ class MediaDetailViewController: UIViewController {
             self.navigationController?.isToolbarHidden = true
         }
     }
+    
+    @objc func addItemsToCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToAddKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToAddKey)
+        let sectionHeader = DataStore.shared.mediaSectionHeaders[sectionIndex]
+        if sectionHeader == self.title {
+            if let array = DataStore.shared.mediaDict[sectionHeader] {
+                mediaArray = array
+                let indexPath = IndexPath(item: item, section: 0)
+                collectionView.insertItems(at: [indexPath])
+            }
+        }
+    }
+    
+    @objc func reloadItemsInCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToReloadKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToReloadKey)
+        let sectionHeader = DataStore.shared.mediaSectionHeaders[sectionIndex]
+        if sectionHeader == self.title {
+            if let array = DataStore.shared.mediaDict[sectionHeader] {
+                mediaArray = array
+                let indexPath = IndexPath(item: item, section: 0)
+                collectionView.reloadItems(at: [indexPath])
+            }
+        }
+    }
+    
+
     
     @objc func updateCollectionView() {
         let item = UserDefaults.standard.integer(forKey: "itemToUpdate")

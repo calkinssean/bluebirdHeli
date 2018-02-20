@@ -16,6 +16,9 @@ class MediaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeItemsFromCollectionView), name: mediaItemRemovedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
         let width = view.frame.size.width / 3
         let layout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
         layout.sectionHeadersPinToVisibleBounds = true
@@ -24,18 +27,6 @@ class MediaViewController: UIViewController {
         let selectButton = UIBarButtonItem(title: "Select", style: .plain, target: self, action: #selector(selectTapped))
         self.navigationItem.rightBarButtonItem = selectButton
         // Do any additional setup after loading the view.
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(removeItemsFromCollectionView), name: mediaItemRemovedNotificationName, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
