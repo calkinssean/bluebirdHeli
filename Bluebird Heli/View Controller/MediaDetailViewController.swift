@@ -113,7 +113,7 @@ class MediaDetailViewController: UIViewController {
             if let array = DataStore.shared.mediaDict[sectionHeader] {
                 mediaArray = array
                 let indexPath = IndexPath(item: item, section: 0)
-                collectionView.insertItems(at: [indexPath])
+                collectionView.reloadItems(at: [indexPath])
             }
         }
     }
