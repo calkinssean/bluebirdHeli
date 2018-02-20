@@ -90,6 +90,50 @@ class MediaDetailViewController: UIViewController {
         }
     }
     
+    @objc func addItemsToCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToAddKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToAddKey)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+        if sectionIndex > collectionView.numberOfSections - 1 {
+            collectionView.performBatchUpdates({
+                let set = IndexSet(integer: sectionIndex)
+                collectionView.insertSections(set)
+                self.collectionView.insertItems(at: [indexPath])
+            }, completion: nil)
+        } else {
+            collectionView.insertItems(at: [indexPath])
+        }
+    }
+    
+    @objc func reloadItemsInCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToReloadKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToReloadKey)
+        let sectionHeader = DataStore.shared.mediaSectionHeaders[sectionIndex]
+        if sectionHeader == self.title {
+            if let array = DataStore.shared.mediaDict[sectionHeader] {
+                mediaArray = array
+                let indexPath = IndexPath(item: item, section: 0)
+                collectionView.insertItems(at: [indexPath])
+            }
+        }
+    }
+    
+    @objc func removeItemsFromCollectionView() {
+        let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
+        let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+        if mediaArray.isEmpty {
+            collectionView.performBatchUpdates({
+                let set = IndexSet(integer: sectionIndex)
+                collectionView.deleteSections(set)
+                self.collectionView.deleteItems(at: [indexPath])
+                DataStore.shared.mediaSectionHeaders.remove(at: sectionIndex)
+            }, completion: nil)
+        } else {
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
+    
     @objc func updateCollectionView() {
         let item = UserDefaults.standard.integer(forKey: "itemToUpdate")
         let sectionIndex = UserDefaults.standard.integer(forKey: "sectionToUpdate")
