@@ -107,8 +107,11 @@ class MediaViewController: UIViewController {
         let item = UserDefaults.standard.integer(forKey: itemToReloadKey)
         let sectionIndex = UserDefaults.standard.integer(forKey: sectionToReloadKey)
         let indexPath = IndexPath(item: item, section: sectionIndex)
-        collectionView.reloadItems(at: [indexPath])
+        DispatchQueue.main.async {
+            self.collectionView.reloadItems(at: [indexPath])
+        }
     }
+    
     @objc func removeItemsFromCollectionView() {
         let item = UserDefaults.standard.integer(forKey: itemToRemoveKey)
         let sectionIndex = UserDefaults.standard.integer(forKey: sectionToRemoveKey)

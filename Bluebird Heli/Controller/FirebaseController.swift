@@ -160,7 +160,9 @@ class FirebaseController {
                             }
                             mediaArray.append(mediaItem)
                             if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
-                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                var headers = DataStore.shared.mediaSectionHeaders
+                                headers.append(dateKey)
+                                DataStore.shared.mediaSectionHeaders = headers.sorted{$0 < $1}
                             }
                             DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
                             let arrayForSection = DataStore.shared.mediaDict[dateKey]
@@ -270,7 +272,9 @@ class FirebaseController {
                             }
                             mediaArray.append(mediaItem)
                             if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
-                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+                                var headers = DataStore.shared.mediaSectionHeaders
+                                headers.append(dateKey)
+                                DataStore.shared.mediaSectionHeaders = headers.sorted{ $0 < $1 }
                             }
                             DataStore.shared.mediaDict[dateKey] = mediaArray.sorted{ $0.date < $1.date }
                             let arrayForSection = DataStore.shared.mediaDict[dateKey]
