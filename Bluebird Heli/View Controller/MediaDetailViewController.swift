@@ -29,7 +29,9 @@ class MediaDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(updateCollectionView), name: NSNotification.Name(rawValue: "updatedMediaController"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addItemsToCollectionView), name: mediaItemAddedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removeItemsFromCollectionView), name: mediaItemRemovedNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadItemsInCollectionView), name: mediaItemChangedNotificationName, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
