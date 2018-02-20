@@ -33,6 +33,9 @@ struct Configuration {
                 return Environment.Staging
             }
         }
+        if Auth.auth().currentUser?.uid == "Lp1pRZPCY8QnRmpCKnPPAwslmE73" {
+            return Environment.Staging
+        }
         return Environment.Production
     }()
 }
