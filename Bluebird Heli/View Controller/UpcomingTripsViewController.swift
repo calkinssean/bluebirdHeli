@@ -311,12 +311,13 @@ extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
             var messageBody = ""
             let controller = MFMailComposeViewController()
             controller.mailComposeDelegate = self
-            controller.setToRecipients(["info@cloudveilmountainheli.com"])
             switch config.environment {
             case .Staging:
+                controller.setToRecipients(["calkins.sean@gmail.com"])
                 controller.setSubject("Reservation Change Test")
                 messageBody = "<h1>This is a test email</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
             case .Production:
+                controller.setToRecipients(["info@cloudveilmountainheli.com"])
                 controller.setSubject("Reservation Change")
                 messageBody = "<h1>Info for reservation needing modification</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
             }
