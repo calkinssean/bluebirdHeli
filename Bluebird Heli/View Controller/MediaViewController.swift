@@ -92,14 +92,16 @@ class MediaViewController: UIViewController {
         let item = UserDefaults.standard.integer(forKey: itemToAddKey)
         let sectionIndex = UserDefaults.standard.integer(forKey: sectionToAddKey)
         let indexPath = IndexPath(item: item, section: sectionIndex)
-        if sectionIndex > collectionView.numberOfSections - 1 {
-            collectionView.performBatchUpdates({
-                let set = IndexSet(integer: sectionIndex)
-                collectionView.insertSections(set)
+        DispatchQueue.main.async {
+            if sectionIndex > self.collectionView.numberOfSections - 1 {
+                self.collectionView.performBatchUpdates({
+                    let set = IndexSet(integer: sectionIndex)
+                    self.collectionView.insertSections(set)
+                    self.collectionView.insertItems(at: [indexPath])
+                }, completion: nil)
+            } else {
                 self.collectionView.insertItems(at: [indexPath])
-            }, completion: nil)
-        } else {
-            collectionView.insertItems(at: [indexPath])
+            }
         }
     }
     @objc func reloadItemsInCollectionView() {

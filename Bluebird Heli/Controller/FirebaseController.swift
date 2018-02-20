@@ -257,10 +257,10 @@ class FirebaseController {
     
     func observeVideos(for dateKey: String) {
         guard let uid = Auth.auth().currentUser?.uid else { print("No group uid"); return }
-        baseURL.child("videos").child(uid).observe(.childAdded) { (snapshot) in
+        baseURL.child("videos").child(uid).child(dateKey).observe(.childAdded) { (snapshot) in
             if let timeStamp = Double(snapshot.key) {
-                if let imageDict = snapshot.value as? [String: Any] {
-                    if let url = imageDict["url"] as? String {
+                if let videoDict = snapshot.value as? [String: Any] {
+                    if let url = videoDict["url"] as? String {
                         self.downloadThumbnail(for: url, completion: { (data) in
                             let embedURL = url.replacingOccurrences(of: "watch?v=", with: "embed/")
                             let mediaItem = Media(url: embedURL, dateString: dateKey, date: timeStamp, type: .Video, data: data)
@@ -285,41 +285,41 @@ class FirebaseController {
             }
         }
 
-        baseURL.child("videos").child(uid).observe(.childChanged) { (snapshot) in
+        baseURL.child("videos").child(uid).child(dateKey).observe(.childChanged) { (snapshot) in
             //
         }
-        baseURL.child("videos").child(uid).observe(.childRemoved) { (snapshot) in
+        baseURL.child("videos").child(uid).child(dateKey).observe(.childRemoved) { (snapshot) in
             //
         }
-        baseURL.child("videos").child(uid).observe(.value) { (snapshot) in
-            if let datesDict = snapshot.value as? [String: Any] {
-                for dateKey in datesDict.keys {
-                    if let dateDict = datesDict[dateKey] as? [String: Any] {
-                        for timeStamp in dateDict.keys {
-                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
-                                if let url = imageDict["url"] as? String {
-                                    self.downloadThumbnail(for: url, completion: { (data) in
-                                        if let timeStampDouble = Double(timeStamp) {
-                                            let embedURL = url.replacingOccurrences(of: "watch?v=", with: "embed/")
-                                            let mediaItem = Media(url: embedURL, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
-                                            var mediaArray: [Media] = []
-                                            if let array = DataStore.shared.mediaDict[dateKey] {
-                                                mediaArray = array
-                                            }
-                                            mediaArray.append(mediaItem)
-                                            DataStore.shared.mediaDict[dateKey] = mediaArray
-                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
-                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
-                                            }
-                                        }
-                                    })
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        baseURL.child("videos").child(uid).observe(.value) { (snapshot) in
+//            if let datesDict = snapshot.value as? [String: Any] {
+//                for dateKey in datesDict.keys {
+//                    if let dateDict = datesDict[dateKey] as? [String: Any] {
+//                        for timeStamp in dateDict.keys {
+//                            if let imageDict = dateDict[timeStamp] as? [String: Any] {
+//                                if let url = imageDict["url"] as? String {
+//                                    self.downloadThumbnail(for: url, completion: { (data) in
+//                                        if let timeStampDouble = Double(timeStamp) {
+//                                            let embedURL = url.replacingOccurrences(of: "watch?v=", with: "embed/")
+//                                            let mediaItem = Media(url: embedURL, dateString: dateKey, date: timeStampDouble, type: .Video, data: data)
+//                                            var mediaArray: [Media] = []
+//                                            if let array = DataStore.shared.mediaDict[dateKey] {
+//                                                mediaArray = array
+//                                            }
+//                                            mediaArray.append(mediaItem)
+//                                            DataStore.shared.mediaDict[dateKey] = mediaArray
+//                                            if !DataStore.shared.mediaSectionHeaders.contains(dateKey) {
+//                                                DataStore.shared.mediaSectionHeaders.append(dateKey)
+//                                            }
+//                                        }
+//                                    })
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     func downloadThumbnail(for videoURL: String, completion: @escaping (Data) -> ()) {
