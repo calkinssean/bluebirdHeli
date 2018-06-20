@@ -15,8 +15,10 @@ import FirebaseStorage
 class FirebaseController {
     
     var baseURL: DatabaseReference {
-        var configuration = Configuration()
-        return configuration.environment.baseURL
+        if UserDefaults.standard.bool(forKey: isStagingEnvironmentKey) {
+            return Database.database().reference().child("staging")
+        }
+        return Database.database().reference().child("production")
     }
     
     var groupsURL: DatabaseReference {

@@ -307,21 +307,19 @@ extension UpcomingTripsViewController: MFMailComposeViewControllerDelegate {
     func displayEmailController() {
         if let pickupTime = selectedReservation?.pickupTime, let groupUID = selectedReservation?.groupUID {
             formatter.dateFormat = "EEEE MMM dd, hh:mm a"
-            var config = Configuration()
+            let isStaging = UserDefaults.standard.bool(forKey: isStagingEnvironmentKey)
             var messageBody = ""
             let controller = MFMailComposeViewController()
             controller.mailComposeDelegate = self
-            switch config.environment {
-            case .Staging:
+            if isStaging {
                 controller.setToRecipients(["calkins.sean@gmail.com"])
                 controller.setSubject("Reservation Change Test")
                 messageBody = "<h1>This is a test email</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
-            case .Production:
+            } else {
                 controller.setToRecipients(["info@cloudveilmountainheli.com"])
                 controller.setSubject("Reservation Change")
                 messageBody = "<h1>Info for reservation needing modification</h1>Trip Date: \(formatter.string(from: pickupTime))<br>Server ID: \(groupUID)"
             }
-            
             controller.setMessageBody(messageBody, isHTML: true)
             if MFMailComposeViewController.canSendMail() {
                 present(controller, animated: true, completion: nil)

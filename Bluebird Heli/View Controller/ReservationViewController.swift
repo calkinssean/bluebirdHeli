@@ -341,15 +341,13 @@ extension ReservationViewController: MFMailComposeViewControllerDelegate {
         let title = "Trip Scheduled"
         guard let operatingArea = reservation.operatingArea?.rawValue, let pickupLocation = reservation.pickupLocation?.name, let pickupTime = reservation.pickupTime, let groupSize = reservation.numberOfAttendees, let uid = DataStore.shared.currentGroup?.uid else { return }
         formatter.dateFormat = "EEEE, MMM d, h:mm a"
-        var config = Configuration()
+        let isStaging = UserDefaults.standard.bool(forKey: isStagingEnvironmentKey)
         var messageBody = ""
-        switch config.environment {
-        case .Production:
+        if isStaging {
             messageBody = "<h1>Trip Details</h1><br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
-        case .Staging:
+        } else {
             messageBody = "<h1>This is a test reservation</h1><br>Trip Details<br>Location: \(operatingArea)<br>Pickup Location: \(pickupLocation)<br>Pickup time: \(formatter.string(from: pickupTime))<br>Group Size: \(groupSize)<br>Server ID: \(uid)"
         }
-        
         let toRecipients = ["calkins.sean@gmail.com"]
         let mailController = MFMailComposeViewController()
         mailController.mailComposeDelegate = self

@@ -33,3 +33,5 @@ let mediaItemChangedNotificationName = Notification.Name(rawValue: "mediaItemCha
 let mediaItemRemovedNotificationName = Notification.Name(rawValue: "mediaItemRemoved")
 let mediaItemAddedNotificationName = Notification.Name(rawValue: "mediaItemAdded")
 
+let isStagingEnvironmentKey = "isStagingEnvironmentKey"
+
