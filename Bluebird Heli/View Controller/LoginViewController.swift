@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    
+    @IBOutlet var logoImageView: UIImageView!
     @IBOutlet var emailTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var scrollView: UIScrollView!
@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         navigationController?.hideNavigationBar()
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+        setUpTap()
         // Do any additional setup after loading the view.
     }
     
@@ -91,6 +92,26 @@ extension LoginViewController: UITextFieldDelegate {
 
 // MARK: - Helper
 extension LoginViewController {
+    
+    func setUpTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(productionEnvironmentAlert))
+        tap.numberOfTapsRequired = 10
+        logoImageView.isUserInteractionEnabled = true
+        logoImageView.addGestureRecognizer(tap)
+    }
+    
+    @objc func productionEnvironmentAlert() {
+        let alert = UIAlertController(title: "Development Environment", message: "Change Database", preferredStyle: .alert)
+        let stagingAction = UIAlertAction(title: "Staging", style: .default) { (action) in
+            UserDefaults.standard.set(true, forKey: isStagingEnvironmentKey)
+        }
+        let productionAction = UIAlertAction(title: "Production", style: .default) { (action) in
+            UserDefaults.standard.set(false, forKey: isStagingEnvironmentKey)
+        }
+        alert.addAction(stagingAction)
+        alert.addAction(productionAction)
+        self.present(alert, animated: true, completion: nil)
+    }
     
     func forgotPasswordAlert() {
         let alert = UIAlertController(title: "Reset Password", message: nil, preferredStyle: .alert)
